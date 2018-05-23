@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+# Using shebang
+
+echo this is shebang
