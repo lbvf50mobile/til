@@ -12,6 +12,6 @@ system("touch " + file_path)
 if '.sh' == ext
     # Why? quotes
     #system("echo \"echo #{file_path} 2\" > #{file_path}")
-    File.open(file_path, 'w'){|f| f.write("echo #{file_path}") }
+    File.open(file_path, 'w'){|f| f.write("echo \"alias 'x=#{file_path}'\" ") }
     system("chmod u+x #{file_path}")
 end
