@@ -1,0 +1,1 @@
+echo "alias 'x=20180610_Sunday/20180610.sh'" 
