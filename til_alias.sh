@@ -1,0 +1,1 @@
+alias x='20180613_Wednesday/20180613.sh'

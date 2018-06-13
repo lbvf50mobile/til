@@ -10,8 +10,7 @@ file_path = t.strftime("%Y%m%d_%A") + "/" + t.strftime("%Y%m%d#{ext}")
 puts "Create file: %s" % file_path
 system("touch " + file_path)
 if '.sh' == ext
-    # Why? quotes
-    #system("echo \"echo #{file_path} 2\" > #{file_path}")
     File.open(file_path, 'w'){|f| f.write("echo \"alias x='#{file_path}'\" ") }
+    File.open('til_alias.sh', 'w'){|f| f.write("alias x='#{file_path}'") } # Create alias for TIL
     system("chmod u+x #{file_path}")
 end
