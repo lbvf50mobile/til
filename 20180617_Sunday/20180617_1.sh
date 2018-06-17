@@ -11,5 +11,9 @@ else
     echo "This is PIPE "
     cat "${1:-/dev/stdin}" # this Works
     echo "Var:"
-    cat $A # this dose not works
+    cat "$A" # this dose not works
+
+    echo "${1:-/dev/stdin}" # but they have the save value
+    echo "$A" 
+    [ "$A" = "${1:-/dev/stdin}" ] && echo "they are equal" || echo "they are different"
 fi
