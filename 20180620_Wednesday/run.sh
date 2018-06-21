@@ -3,7 +3,7 @@ red=`tput setaf 1`
 green=`tput setaf 2`
 reset=`tput sgr0`
 
-echo "${green}Parameters \$@:${reset}"
+echo "${green}1) Parameters \$@:${reset}"
 echo $@
 echo "${green}\$#:${reset}"
 echo $#
@@ -34,10 +34,17 @@ case "$1" in
     ;;
     esac
 done
+echo "${green}2) Parameters \$@:${reset}"
+echo $@
+
 # set positional arguments in their proper place
 echo "${red}eval set -- \"\$P1\"${reset}"
 
+
 eval set -- "$P1"
+
+echo "${green}3) Parameters \$@:${reset}"
+echo $@
 
 echo "${green}One:${reset} $one"
 echo "${green}Two:${reset} $two"
