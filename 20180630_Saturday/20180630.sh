@@ -1,3 +1,5 @@
+# Subshell have no influens on Shell variables. And on Envrionment vairalbes too.
+
 echo "alias x='bash 20180630_Saturday/20180630.sh'" 
 # https://goo.gl/mfssSv
 export TIMESTAMP_LAST=`date +"%s"`
