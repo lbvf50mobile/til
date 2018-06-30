@@ -1,0 +1,8 @@
+---
+test:
+  first_test:
+    do_a: PRINT A
+    do_b: PRINT B
+  second_test:
+    do_c: print c
+    do_e: print e

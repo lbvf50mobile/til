@@ -1,0 +1,7 @@
+test:
+  first_test:
+      do_a: "print a"
+      do_b: "print b"
+  second_test:
+      do_c: "print c"
+      do_e: "print e"
