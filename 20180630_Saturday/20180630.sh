@@ -11,5 +11,6 @@ time for i in {1..10}; do
       echo "LAST: $TIMESTAMP_LAST"
       echo "DIF : $((${TIMESTAMP_NOW}-${TIMESTAMP_LAST}))"
       TIMESTAMP_LAST=${TIMESTAMP_NOW}
+      echo "LAST: $TIMESTAMP_LAST"
     done
 done
