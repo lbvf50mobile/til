@@ -1,4 +1,5 @@
 echo "alias x='bash 20180630_Saturday/20180630.sh'" 
+# https://goo.gl/mfssSv
 export TIMESTAMP_LAST=`date +"%s"`
 export TIMESTAMP_NOW=`date +"%s"`
 
