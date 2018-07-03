@@ -9,5 +9,5 @@ echo "alias x='bash 20180703_Tuesday/20180703.sh'"
 echo "pid: $$" # pid 14504
 echo "option flags: $-" # hB
 ruby -e 'p `echo 123`' # 123\n
-ruby -e 'p `echo $$`' # $$\n
-ruby -e 'p `echo $-`' # $-\n
+ruby -e 'p `echo $$`' # Win: $$\n, Lin: 4841\n
+ruby -e 'p `echo $-`' # Win: $-\n, Lin: ""
