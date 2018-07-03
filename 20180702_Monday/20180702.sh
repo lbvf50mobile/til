@@ -1,4 +1,4 @@
-# ruby -e muntyline. 
+# 'ruby -e' multyline command. 
 
 #  http://tldp.org/LDP/abs/html/here-docs.html
 #  A here document is a special-purpose code block. It uses a form of I/O redirection to feed a command list to an interactive program or a command, such as ftp, cat, or the ex text editor.
