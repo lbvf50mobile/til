@@ -1,4 +1,4 @@
-# Evaluating searh time: 8m to search string at the bottom of 1GB using  2.20Ghz i3.
+# Practical searh time: "1.1G" 3 seconds (core i3 2x2.2Ghz SSD)
 p "alias x='ruby 20180707_Saturday/20180707.rb'" 
 require 'benchmark'
 require 'colorize'
@@ -40,7 +40,7 @@ drop
     i += 1
     puts i.to_s.green
     copy
-    multyply i*10
+    multyply i*500
     append_key
     size
     s_time
