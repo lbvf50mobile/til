@@ -4,5 +4,5 @@
 echo "alias x='bash 20180708_Sunday/20180708.sh'" 
 touch tmpfile ; ls -alF tmpfile; 
 chmod a-wxr tmpfile; ls -alF tmpfile; 
- rm -f tmpfile; 
- [ ! -e tmpfile ] && echo "there is no file"
+rm -f tmpfile; 
+[ ! -e tmpfile ] && echo "there is no file"
