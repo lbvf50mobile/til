@@ -7,9 +7,17 @@ reset=`tput sgr0`
 
 COMPILER=gcc
 COMPILER_PATH=the_path
-echo "${green}1) [[]] ${reset}"
-[[ COMPILER != "gcc" ]] && printf %s "COMPILER != gcc" || printf %s "COMPILER === gcc" 
+echo "${green}1) [[]] ${reset} gcc"
+[[ $COMPILER != "gcc" ]] && printf %s "COMPILER != gcc" || printf %s "COMPILER === gcc" 
 echo ""
-echo "${green}2) \$()${reset}"
+echo "${green}1) [[]] ${reset} notgcc"
 COMPILER=notgcc
-echo "$( [ ${COMPILER} != "gcc" ] && printf %s ". ${COMPILER_PATH}/compilervars.sh intel64" )"
+[[ $COMPILER != "gcc" ]] && printf %s "COMPILER != gcc" || printf %s "COMPILER === gcc" 
+echo ""
+echo "${green}2) \$()${reset} gcc"
+COMPILER=gcc
+echo "$( [ ${COMPILER} != "gcc" ] && printf %s ". ${COMPILER_PATH}/compilervars.sh intel64"  || echo -e "empty -e" )"
+echo ""
+echo "${green}2) \$()${reset} not gcc"
+COMPILER=notgcc
+echo "$( [ ${COMPILER} != "gcc" ] && printf %s ". ${COMPILER_PATH}/compilervars.sh intel64"  || echo -e "empty -e" )" 
