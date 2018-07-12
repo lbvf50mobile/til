@@ -1,5 +1,2 @@
-
-echo "the content" > cpfile1
-scp -i ~/.ssh/keyfile cpfile1 username@host:cpfile2
-scp -i ~/.ssh/keyfile username@host:cpfile2 cpfile3
-cat cpfile3
+# env HI="hi-why)" bash tmp.sh
+echo $HI
