@@ -9,6 +9,9 @@ time = Benchmark.measure {
     lines = %x{cat ~/Downloads/1/sha256sum.txt}.split
     sum = %x{sha256sum -b ~/Downloads/1/linuxmint-19-xfce-64bit.iso}.split
     p lines.include?(sum[0])
+    index = lines.index(sum[0])
+    puts lines[index].green
+    puts sum[0].yellow
 }
 
 puts  ("Time spend: %.2f" % time.real).magenta
