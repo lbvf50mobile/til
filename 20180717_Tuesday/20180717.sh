@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 # Bash Substring Replacement.
 
 # https://www.tldp.org/LDP/abs/html/string-manipulation.html
