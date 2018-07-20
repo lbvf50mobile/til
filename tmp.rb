@@ -1,17 +1,22 @@
-# check the LinuxMint sum.
-# https://stackoverflow.com/a/25168672
-# https://stackoverflow.com/questions/1734307/find-value-in-array
+# Count how many workds in GREP documentation
+# https://www.gnu.org/software/grep/manual/grep.html
 
 require 'benchmark'
 require 'colorize'
 
-time = Benchmark.measure {
-    lines = %x{cat ~/Downloads/1/sha256sum.txt}.split
-    sum = %x{sha256sum -b ~/Downloads/1/linuxmint-19-xfce-64bit.iso}.split
-    p lines.include?(sum[0])
-    index = lines.index(sum[0])
-    puts lines[index].green
-    puts sum[0].yellow
-}
+puts "Read lines.".green
 
-puts  ("Time spend: %.2f" % time.real).magenta
+lines = ""
+time = Benchmark.measure {
+    lines =  File.readlines('g.html')
+}
+puts lines.size
+puts  ("Read all lines: %.2f" % time.real).magenta
+
+words = lines.reduce(:+).split.select{|x| /^[a-zA-Z]+$/ === x}.map{|x| x.downcase}.uniq.sort
+puts "Total words:".green
+p words.size
+puts "First 10 words:".green
+p words[1..10]
+puts "Last 10 words:".green
+p words[-10..-1]
