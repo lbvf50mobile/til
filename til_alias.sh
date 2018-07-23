@@ -1,1 +1,1 @@
-alias x='20180613_Wednesday/20180613.sh'
+alias x='bash 20180723_Monday/20180723.sh'
