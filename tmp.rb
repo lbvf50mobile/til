@@ -1,11 +1,18 @@
-#  what is better cat or File.read
-# https://www.gnu.org/software/grep/manual/grep.html
+require 'pp'
+require 'colorize'
 
-require 'benchmark'
-repeat = 1000
-Benchmark.bm { |x|
+# Read file
+lines = File.readlines('tmp.html')
+puts "tmp.html lines:".green
+pp lines
 
-    x.report("cat"){ repeat.times{`cat g.html`}}
-    x.report("File.read"){ repeat.times{File.read('g.html')}}
+# Clear HTML
+clear_html = lines.map{|x| x.gsub(/<[^<>]+>/,"")}
+puts "tmp.html lines without html tags:".green
+pp clear_html
 
-}
+# Save output in file
+# https://stackoverflow.com/a/18900669/8574922
+File.open('tmp_out.html','w') do |f|
+    clear_html.each{ |l| f.write(l)}
+end
