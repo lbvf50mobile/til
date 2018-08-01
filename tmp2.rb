@@ -28,25 +28,20 @@ def segment_in_segment?(parent: , child:)
 end
 
 def interval_insert (myl, interval)
-    a = {myl: myl, intermal: interval}
-    p a
     cha = myl.chunk { |segment| 
        a =  point_in_segment?(point: interval[0],segment: segment)
        b = point_in_segment?(point:interval[1],segment: segment) 
        c =  segment_in_segment?(parent: interval , child:segment)
        a || b || c
     }
-    ch1 = []
-    flag = true
-    cha.each{|ch|
+    ch1 = cha.reduce([]){|sum,ch|
         if ch[0]
-             flag = false
-             ch1 << (ch[1]+interval).flatten.minmax
+             sum  << (ch[1]+interval).flatten.minmax
         else
-            ch1 += ch[1]
+            sum += ch[1]
         end
     }
-    if(flag)
+    if(cha.all?{|x| false == x[0]})
         ch1.push(interval)
     end
     ch1.sort{|x,y| x[1] <=> y[1]}
