@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
-#https://www.tldp.org/LDP/abs/html/string-manipulation.html
-STRING="heyWAYhey"
-echo $STRING
-echo ${STRING#hey} # WAYhey front SubstringRemoval
-echo ${STRING%hey} # heyWAY back SubstringRemoval
-hop="opHOPop"
-echo $hop
-echo ${hop#op}
-echo ${hop%op}
+# How to delete -r  file?
+# https://www.cyberciti.biz/faq/howto-linux-unix-delete-remove-file/
+
+# 1) Create -r and -f file
+touch -- -r
+echo 2 > -f
+[ -f -r ] && echo "File exists"
+# [-f -f ] && echo "And F exists" # how?
+# 2) delete this fis
+rm -- -r -f
