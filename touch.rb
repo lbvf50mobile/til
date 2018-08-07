@@ -18,6 +18,10 @@ if '.rb' == ext
     File.open(file_path, 'w'){|f| f.write("p \"alias x='ruby #{file_path}'\" ") }
     File.open('til_alias.sh', 'w'){|f| f.write("alias x='ruby #{file_path}'") } # Create alias for TIL
 end
+if '.js' == ext
+    File.open(file_path, 'w'){|f| f.write("console.log(\"alias x='node #{file_path}'\")") }
+    File.open('til_alias.sh', 'w'){|f| f.write("alias x='node #{file_path}'") } # Create alias for TIL
+end
 
 # Create Alias
 
