@@ -1,6 +1,6 @@
 #/usr/bin/env ruby
 
-# Ruby Array#Transpose
+# Ruby Array#Transpose. (Rows=>Cols, Cols=>Rows)
 
 p "alias x='ruby 20180809_Thursday/20180809.rb'" 
 
