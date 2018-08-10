@@ -9,7 +9,7 @@ require "minitest/autorun"
 module Cripta
     class String < ::String
         def self.set_map array
-            @@map = Hash[*array.flatten] 
+            @@map = array.to_h
         end
         def decr
             map = @@map
@@ -28,10 +28,9 @@ end
 def isCryptSolution(crypt, solution)
     tmp = crypt.map{|x| decript(x,solution)}
     return true if  tmp.all?{|x| x == "0"}
-    return false if ?0 == tmp[0][0] && ?0 == tmp[1][0]
+    return false if ?0 == tmp[0][0] || ?0 == tmp[1][0] || ?0 == tmp[2][0]
     tmp[2].to_i == tmp[0].to_i + tmp[1].to_i
 end
-
 describe "test" do
     before do
         @solution = [["O","0"], 
