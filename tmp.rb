@@ -25,12 +25,15 @@ def decript(str, solution)
     map = solution.to_h
     str.chars.map{|x| map[x]}.join
 end
+def pure_solution tmp
+    a,b,c = tmp.map(&:to_i)
+    c == a + b
+end
 def isCryptSolution(crypt, solution)
     tmp = crypt.map{|x| decript(x,solution)}
     return true if  tmp.all?{|x| x == "0"}
     return false if tmp.any?{|x| ?0 == x[0]}
-    a,b,c = tmp.map(&:to_i)
-    c == a + b
+    pure_solution tmp
 end
 describe "test" do
     before do
@@ -61,6 +64,14 @@ describe "test" do
     it "should return true" do
         assert isCryptSolution(@crypt, @solution)
     end
+    it "should return true" do
+        crypt =["A", 
+            "A", 
+            "A"]
+           solution = [["A","0"]]
+        assert isCryptSolution(crypt, solution)
+    end
+    
     it "shuold fail because of leading zeros" do
         crypt = ["TEN", "TWO", "ONE"] 
         solution = [['O', '1'],
