@@ -22,14 +22,15 @@ def convert_array (array,solution)
     array.map{|x| Cripta::String.new(x).decr}
 end
 def decript(str, solution)
-    map = Hash[*solution.flatten] 
+    map = solution.to_h
     str.chars.map{|x| map[x]}.join
 end
 def isCryptSolution(crypt, solution)
     tmp = crypt.map{|x| decript(x,solution)}
     return true if  tmp.all?{|x| x == "0"}
-    return false if ?0 == tmp[0][0] || ?0 == tmp[1][0] || ?0 == tmp[2][0]
-    tmp[2].to_i == tmp[0].to_i + tmp[1].to_i
+    return false if tmp.any?{|x| ?0 == x[0]}
+    a,b,c = tmp.map(&:to_i)
+    c == a + b
 end
 describe "test" do
     before do
