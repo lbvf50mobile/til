@@ -15,6 +15,7 @@ class ListNode
 end
 
 def removeKFromList(l,k)
+    return nil if l.nil?
     head = l
     prev = nil
     curr = l
