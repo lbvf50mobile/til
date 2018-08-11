@@ -2,83 +2,92 @@ require 'pp'
 require 'colorize'
 # https://app.codesignal.com/interview-practice/task/yM4uWYeQTHzYewW9H
 
-puts "This is Cript"
+puts "This is List"
 
 require "minitest/autorun"
 
-module Cripta
-    class String < ::String
-        def self.set_map array
-            @@map = array.to_h
+class ListNode
+   attr_accessor :value, :next
+   def initialize(val)
+     @value = val
+     @next = nil
+   end
+end
+
+def removeKFromList(l,k)
+    head = l
+    prev = nil
+    curr = l
+    nxt = l.next if l
+    begin
+        if k == curr.value
+            if curr == head
+                head = nxt
+            else
+                prev.next = nxt
+            end
+            curr.next = nil
+        else
+            prev = curr
         end
-        def decr
-            map = @@map
-            self.chars.map{|x| map[x]}.join
-        end
-    end
+        curr = nxt
+        nxt = nxt.next if nxt
+    end while curr
+    head
 end
-def convert_array (array,solution)
-    Cripta::String.set_map solution
-    array.map{|x| Cripta::String.new(x).decr}
-end
-def decript(str, solution)
-    map = solution.to_h
-    str.chars.map{|x| map[x]}.join
-end
-def pure_solution tmp
-    a,b,c = tmp.map(&:to_i)
-    c == a + b
-end
-def isCryptSolution(crypt, solution)
-    tmp = crypt.map{|x| decript(x,solution)}
-    return true if  tmp.all?{|x| x == "0"}
-    return false if tmp.any?{|x| ?0 == x[0]}
-    pure_solution tmp
-end
-describe "test" do
+
+describe "List" do
     before do
-        @solution = [["O","0"], 
-        ["M","1"], 
-        ["Y","2"], 
-        ["E","5"], 
-        ["N","6"], 
-        ["D","7"], 
-        ["R","8"], 
-        ["S","9"]]
-        @crypt = ["SEND", "MORE", "MONEY"] 
+        @first = ListNode.new(1)
+        @second = ListNode.new(2)
+        @first.next = @second
+        @third = ListNode.new(3)
+        @second.next = @third
     end
-    it "solution must me array" do
-        assert_kind_of Array, @solution
+    it "should remove head" do
+        ans = removeKFromList(@first,1)
+        assert_equal 2, ans.value
     end
-    it "string shuld be string" do
-        assert_equal "test", String.new("test")
+    it "should remove center" do
+        ans = removeKFromList(@first,2)
+        assert_equal 1, ans.value
+        assert_equal 3, ans.next.value
     end
-    it "Decript must wokr" do
-        Cripta::String.set_map @solution
-        assert_kind_of String, Cripta::String.new("M").decr
+    it "should remove end" do
+        ans = removeKFromList(@first,3)
+        assert_equal 1, ans.value
+        assert_equal 2, ans.next.value
     end
-    it "convert to digit" do
-        tmp = convert_array(@crypt,@solution)
-        assert_kind_of String, tmp[0]
+    it "should remove dobule head" do
+        @first = ListNode.new(1)
+        @second = ListNode.new(1)
+        @first.next = @second
+        @third = ListNode.new(3)
+        @second.next = @third
+        ans = removeKFromList(@first,1)
+        assert_equal 3, ans.value
+        assert_nil ans.next
     end
-    it "should return true" do
-        assert isCryptSolution(@crypt, @solution)
+    it "should remove dobule bottom" do
+        @first = ListNode.new(2)
+        @second = ListNode.new(1)
+        @first.next = @second
+        @third = ListNode.new(1)
+        @second.next = @third
+        ans = removeKFromList(@first,1)
+        assert_equal 2, ans.value
+        assert_nil ans.next
     end
-    it "should return true" do
-        crypt =["A", 
-            "A", 
-            "A"]
-           solution = [["A","0"]]
-        assert isCryptSolution(crypt, solution)
-    end
-    
-    it "shuold fail because of leading zeros" do
-        crypt = ["TEN", "TWO", "ONE"] 
-        solution = [['O', '1'],
-        ['T', '0'],
-        ['W', '9'],
-        ['E', '5'],
-        ['N', '4']]
-        refute isCryptSolution(crypt, solution)
+    it "should remove dobule center" do
+        @first = ListNode.new(1)
+        @second = ListNode.new(2)
+        @first.next = @second
+        @third = ListNode.new(2)
+        @second.next = @third
+        @fourth= ListNode.new(4)
+        @third.next = @fourth
+        ans = removeKFromList(@first,2)
+        assert_equal 1, ans.value
+        assert_equal 4, ans.next.value
     end
 end
