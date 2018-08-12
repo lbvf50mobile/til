@@ -1,6 +1,6 @@
 require 'pp'
 require 'colorize'
-# https://app.codesignal.com/interview-practice/task/yM4uWYeQTHzYewW9H
+# https://app.codesignal.com/interview-practice/task/HmNvEkfFShPhREMn4/solutions/sijCLcs7WKpt8nmFB
 
 puts "isListPalindrome"
 
