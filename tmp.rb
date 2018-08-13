@@ -1,8 +1,8 @@
 require 'pp'
 require 'colorize'
-# https://app.codesignal.com/interview-practice/task/HmNvEkfFShPhREMn4/solutions/sijCLcs7WKpt8nmFB
+# https://app.codesignal.com/interview-practice/task/RvDFbsNC3Xn7pnQfH
 
-puts "isListPalindrome"
+puts "addTwoHugeNumbers".green
 
 require "minitest/autorun"
 
@@ -71,19 +71,44 @@ def list_reverse list
     end while pointer
    prev
 end
-def isListPalindrome(l)
-    return true unless l
-    size = list_size(l)
-    return true if 1 == size
-    compare = (size/2).floor
-    head = l
-    reverse = pointer_to_index(l,compare)
-    first_end = size.even? ? pointer_to_index(l,compare-1) : pointer_to_index(l,compare-2)
-    first_end.next = nil
-    reverse = list_reverse(reverse)
-    return compare_lists(head, reverse)
+def addTwoHugeNumbers(a, b)
+    # http://e-maxx.ru/algo/big_integer
+    size_a = list_size a
+    size_b = list_size b
+    size_max = [size_a, size_b].max
+    i = 0
+    carry = 0
+    base = 10000
+    a = a_i = list_reverse(a)
+    b = b_i = list_reverse(b)
+    a_prev, b_prev = nil, nil
+    while i < size_max || 1 == carry
+        if(a_i.nil?)
+            a_prev.next = ListNode.new(0)
+            a_i = a_prev.next
+        end
+        
+        bval = b_i.nil? ? 0 : b_i.value
+
+        a_i.value += carry + bval
+        carry = a_i.value >= base ? 1 : 0
+        a_i.value -= base if 1 == carry
+
+        i += 1
+        a_prev = a_i
+        b_prev = b_i
+        a_i = a_i.next if a_i
+        b_i = b_i.next if b_i
+    end
+    list_reverse(a)
 end
 
+def add_test_function(qa)
+    a = list_from_array qa[0]
+    b = list_from_array qa[1]
+    c = array_from_list(addTwoHugeNumbers(a, b))
+    assert_equal qa[2], c
+end
 
 
 describe "List" do
@@ -151,44 +176,35 @@ describe "List" do
         reverse = list_reverse(list)
         assert_equal array.reverse,  array_from_list(reverse)
     end
-    it "it should be oke with one element length" do
-        l = list_from_array([0])
-        assert isListPalindrome(l)
+    it "should work with example from the url" do
+        a = list_from_array [9876, 5432, 1999]
+        b = list_from_array [1, 8001]
+        c = array_from_list(addTwoHugeNumbers(a, b))
+        assert_equal [9876,5434,0], c
     end
-    it "if sould return false of false" do
-        l = nil
-        assert isListPalindrome(l)
+    it "test function" do
+        qa = [
+            [9876, 5432, 1999],
+            [1, 8001],
+            [9876,5434,0],
+        ]
+        add_test_function(qa)
     end
-    it "shold work on 2 elements" do
-        l = list_from_array([0,0])
-        assert isListPalindrome(l)
-        l = list_from_array([0,1])
-        refute isListPalindrome(l)
+    it "test function1" do
+        qa = [
+            [123, 4, 5],
+            [100, 100, 100],
+            [223, 104, 105],
+        ]
+        add_test_function(qa)
     end
-    it "shold work on 3 elements" do
-        l = list_from_array([0,1,0])
-        assert isListPalindrome(l)
-        l = list_from_array([0,1,1])
-        refute isListPalindrome(l)
+    it "test function" do
+        qa = [
+            [0],
+            [0],
+            [0],
+        ]
+        add_test_function(qa)
     end
-    it "should work on random even value" do
-        left = Array.new(rand(560)+1){ rand(10)}
-        right = left.reverse
-        all = left + right
-        l = list_from_array(all)
-        assert isListPalindrome(l)
-        all = [1] + left + right + [2]
-        l = list_from_array(all)
-        refute isListPalindrome(l)
-    end
-    it "should work on random ODD value" do
-        left = Array.new(rand(560)+1){ rand(10)}
-        right = left.reverse
-        all = left + [rand(10)] + right
-        l = list_from_array(all)
-        assert isListPalindrome(l)
-        all = [1] + left  + [rand(10)] + right + [2]
-        l = list_from_array(all)
-        refute isListPalindrome(l)
-    end
+    
 end
