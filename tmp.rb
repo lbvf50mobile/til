@@ -1,8 +1,8 @@
 require 'pp'
 require 'colorize'
-# https://app.codesignal.com/interview-practice/task/RvDFbsNC3Xn7pnQfH
+# https://app.codesignal.com/interview-practice/task/6rE3maCQwrZS3Mm2H
 
-puts "addTwoHugeNumbers".green
+puts "mergeTwoLinkedLists".red
 
 require "minitest/autorun"
 
@@ -71,140 +71,133 @@ def list_reverse list
     end while pointer
    prev
 end
-def addTwoHugeNumbers(a, b)
-    # http://e-maxx.ru/algo/big_integer
-    size_a = list_size a
-    size_b = list_size b
-    size_max = [size_a, size_b].max
-    i = 0
-    carry = 0
-    base = 10000
-    a = a_i = list_reverse(a)
-    b = b_i = list_reverse(b)
-    a_prev, b_prev = nil, nil
-    while i < size_max || 1 == carry
-        if(a_i.nil?)
-            a_prev.next = ListNode.new(0)
-            a_i = a_prev.next
-        end
-        
-        bval = b_i.nil? ? 0 : b_i.value
 
-        a_i.value += carry + bval
-        carry = a_i.value >= base ? 1 : 0
-        a_i.value -= base if 1 == carry
+def cut_list list
+    return {cut: nil, list_head: nil} if list.nil?
+    cut = list
+    list_head = list.next
+    cut.next = nil
+    {cut: cut, list_head: list_head}
+end
 
-        i += 1
-        a_prev = a_i
-        b_prev = b_i
-        a_i = a_i.next if a_i
-        b_i = b_i.next if b_i
+def insert_list(list_element: nil, list_head: nil, list_last: nil)
+    return {list_head: list_head, list_last: list_last} if list_element.nil?
+    if (list_last)
+        list_last.next = list_element 
+    else
+        list_head = list_element
+        list_last = list_element
     end
-    list_reverse(a)
+    {list_head: list_head, list_last: list_element}
+end
+def mergeTwoLinkedLists(l1, l2)
+    head , last = nil, nil
+    begin
+        if( l1.nil? and l2.nil?)
+            break
+        end
+        if(l1.nil?)
+            cut = cut_list(l2)
+            l2 = cut[:list_head]
+            insert = insert_list(list_element: cut[:cut], list_head: head, list_last: last)
+            head, last = insert[:list_head],insert[:list_last]
+            next
+        end
+        if(l2.nil?)
+            cut = cut_list(l1)
+            l1 = cut[:list_head]
+            insert = insert_list(list_element: cut[:cut], list_head: head, list_last: last)
+            head, last = insert[:list_head],insert[:list_last]
+            next
+        end
+        if(l1.value <= l2.value)
+            cut = cut_list(l1)
+            l1 = cut[:list_head]
+            insert = insert_list(list_element: cut[:cut], list_head: head, list_last: last)
+            head, last = insert[:list_head],insert[:list_last]
+            next
+        else
+            cut = cut_list(l2)
+            l2 = cut[:list_head]
+            insert = insert_list(list_element: cut[:cut], list_head: head, list_last: last)
+            head, last = insert[:list_head],insert[:list_last]
+            next
+        end
+    end while l1 || l2
+    head
 end
 
-def add_test_function(qa)
-    a = list_from_array qa[0]
-    b = list_from_array qa[1]
-    c = array_from_list(addTwoHugeNumbers(a, b))
-    assert_equal qa[2], c
+def test_function qa
+    a = mergeTwoLinkedLists(list_from_array(qa[0]),list_from_array( qa[1]))
+    assert_equal qa[2],array_from_list(a)
 end
-
 
 describe "List" do
-    before do
-        @first = ListNode.new(1)
-        @second = ListNode.new(2)
-        @first.next = @second
-        @third = ListNode.new(3)
-        @second.next = @third
-    end
+  it "cut should able to work with nil" do
+    z = {cut: nil, list_head: nil}
+    assert_equal z, cut_list(nil)
+  end
+  it "shoult cat first element from the list" do
+    a = list_from_array([1,2,3,4,5])
+    hash = cut_list(a)
+    cut = array_from_list(hash[:cut])
+    head = array_from_list(hash[:list_head])
+    assert_equal [1],cut
+    assert_equal [2,3,4,5], head
+  end
+  it "shoult cat first element from the list (one elemnt)" do
+    a = list_from_array([1])
+    hash = cut_list(a)
+    cut = array_from_list(hash[:cut])
+    assert_equal [1],cut
+    assert_nil hash[:list_head]
+  end
 
-    it "generate lists from array" do
-        a = list_from_array([1,2,7])
-        assert_equal 1, a.value
-        assert_equal 2, a.next.value
-        assert_equal 7, a.next.next.value
-    end
-    it "generate array from list" do
-        a = list_from_array([10,11,12,42])
-        array = array_from_list(a)
-        assert_equal [10,11,12,42], array
-        a = list_from_array([10])
-        array = array_from_list(a)
-        assert_equal [10], array
-    end
-    it "should show me the size of the list" do
-        a = list_from_array([1,2,7])
-        assert_equal 3, list_size(a)
-    end
-    it "should set mov pointer on list index" do
-        a = list_from_array([0,10,200,3000])
-        assert_equal 0, pointer_to_index(a,0).value
-        assert_equal 10, pointer_to_index(a,1).value
-        assert_equal 200, pointer_to_index(a,2).value
-        assert_equal 3000, pointer_to_index(a,3).value
-    end
-    it "compare two lists" do
-        same0 = list_from_array([0,10,200,3000])
-        same1 = list_from_array([0,10,200,3000])
-        dif0 = list_from_array([0,11,211,3111])
-        dif1 = list_from_array([0,18,288,388])
-        one = list_from_array([0])
-        one1 = list_from_array([0])
-        x = list_from_array([9])
-        assert compare_lists(same0, same1)
-        assert compare_lists(one, one1)
-        refute compare_lists(dif0, dif1)
-        refute compare_lists(one,x) 
-    end
-    it "revert list" do
-        array =  [0]
-        list = list_from_array(array)
-        reverse = list_reverse(list)
-        assert_equal array.reverse,  array_from_list(reverse)
-    end
-    it "revert list 2" do
-        array =  [0, 1]
-        list = list_from_array(array)
-        reverse = list_reverse(list)
-        assert_equal array.reverse,  array_from_list(reverse)
-    end
-    it "revert list 2" do
-        array =  [0, 1,3,4,5,6]
-        list = list_from_array(array)
-        reverse = list_reverse(list)
-        assert_equal array.reverse,  array_from_list(reverse)
-    end
-    it "should work with example from the url" do
-        a = list_from_array [9876, 5432, 1999]
-        b = list_from_array [1, 8001]
-        c = array_from_list(addTwoHugeNumbers(a, b))
-        assert_equal [9876,5434,0], c
-    end
-    it "test function" do
-        qa = [
-            [9876, 5432, 1999],
-            [1, 8001],
-            [9876,5434,0],
-        ]
-        add_test_function(qa)
-    end
-    it "test function1" do
-        qa = [
-            [123, 4, 5],
-            [100, 100, 100],
-            [223, 104, 105],
-        ]
-        add_test_function(qa)
-    end
-    it "test function" do
-        qa = [
-            [0],
-            [0],
-            [0],
-        ]
-        add_test_function(qa)
-    end
+  it "should able to insert new nil element" do
+    z = {list_head: nil, list_last: nil}
+    assert_equal z, insert_list(list_element: nil, list_head: nil, list_last: nil)
+  end
+  it "should insert element" do
+    a = list_from_array([1,2,3,4,5])
+    b = pointer_to_index(a,4)
+    assert_equal [1,2,3,4,5], array_from_list(a)
+    c = list_from_array([6])
+    ans = insert_list(list_element: c, list_head: a, list_last: b)
+    assert_equal [1,2,3,4,5,6], array_from_list(ans[:list_head])
+    assert_equal [6], array_from_list(ans[:list_last])
+  end
+  it "should insert element1" do
+    c = list_from_array([7])
+    ans = insert_list(list_element: c, list_head: nil, list_last: nil)
+    assert_equal [7], array_from_list(ans[:list_head])
+    assert_equal [7], array_from_list(ans[:list_last])
+  end
+
+  it "should solve problems" do
+    qa = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [1, 2, 3, 4, 5, 6]
+    ]
+    a = mergeTwoLinkedLists(list_from_array(qa[0]),list_from_array( qa[1]))
+    assert_equal qa[2],array_from_list(a) 
+  end
+  it "should solve problems" do
+    qa = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [1, 2, 3, 4, 5, 6]
+    ]
+    test_function qa
+  end
+  it "should solve problems" do
+    qa = [
+        [1, 1, 2, 4],
+        [0, 3, 5],
+        [0, 1, 1, 2, 3, 4, 5]
+    ]
+    test_function qa
+  end
+  
     
 end
