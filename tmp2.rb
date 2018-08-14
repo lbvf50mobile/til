@@ -1,26 +1,24 @@
-# Left match general for all strings.
-
-def find_left_match (strings_array)
-    answer = nil
-    (strings_array.map{|string| string.size}.min).times do |index|
-        cat_strings = strings_array.map{|string| string[0..index]}
-        if cat_strings[1..-1].all? { |str| str == cat_strings[0]}
-            answer = cat_strings[0]
-        else
-            break
-        end
-    end
-    answer
-end
-
-
+require "colorize"
 require "minitest/autorun"
 
-describe "Left match general for all strings." do
-    it "find abc" do
-        assert_equal "abc",find_left_match(%w{abc1 abc2 abc3 abc4})
-        assert_equal "a",find_left_match(%w{a asdsdfsdf a234234 a23423432})
-        assert_equal "a",find_left_match(%w{a})
-        refute_equal "a",find_left_match(%w{b})
+
+describe "The Ruby Pointers" do
+    it "dose not change if reasign variable in method" do
+        a = [1,2]
+        def reasign array
+            array = [1]
+            array
+        end
+        assert_equal [1], reasign(a)
+        assert_equal [1,2], a
+    end
+    it "it change the data into the object" do
+        a = [1,2]
+        def change_object object
+            object.push 3
+            object
+        end
+        assert_equal [1,2,3], change_object(a)
+        assert_equal [1,2,3], a
     end
 end
