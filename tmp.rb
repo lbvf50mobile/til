@@ -1,8 +1,8 @@
 require 'pp'
 require 'colorize'
-# https://app.codesignal.com/interview-practice/task/6rE3maCQwrZS3Mm2H
+# https://app.codesignal.com/interview-practice/task/XP2Wn9pwZW6hvqH67
 
-puts "mergeTwoLinkedLists".red
+puts "reverseNodesInKGroups".cyan
 
 require "minitest/autorun"
 
@@ -72,131 +72,104 @@ def list_reverse list
    prev
 end
 
-def cut_list list
-    return {cut: nil, list_head: nil} if list.nil?
-    cut = list
-    list_head = list.next
-    cut.next = nil
-    {cut: cut, list_head: list_head}
+
+def reverse_chunk! hash
+    hash[:t].next = nil
+    list_reverse(hash[:h])
+    hash[:h],hash[:t] =  hash[:t],hash[:h]
+    hash
 end
 
-def insert_list(list_element: nil, list_head: nil, list_last: nil)
-    return {list_head: list_head, list_last: list_last} if list_element.nil?
-    if (list_last)
-        list_last.next = list_element 
-    else
-        list_head = list_element
-        list_last = list_element
+def reverseNodesInKGroups(l,k)
+    return l if 1 == k
+    size = list_size(l)
+    # first rotate
+    head = {h: l, t: pointer_to_index(l,k-1)}
+    tail = {h: head[:t].next}
+    reverse_chunk!(head)
+    head[:t].next = tail[:h]
+    size -= k
+    while ( size >= k)
+        center = {h: head[:t].next, t: pointer_to_index(head[:t].next, k-1)}
+        tail = {h: center[:t].next}
+        reverse_chunk!(center)
+        center[:t].next = tail[:h]
+        head[:t].next = center[:h]
+        head[:t] = center[:t]
+        size -= k
     end
-    {list_head: list_head, list_last: list_element}
+    head[:h]
 end
-def mergeTwoLinkedLists(l1, l2)
-    head , last = nil, nil
-    begin
-        if( l1.nil? and l2.nil?)
-            break
-        end
-        if(l1.nil?)
-            cut = cut_list(l2)
-            l2 = cut[:list_head]
-            insert = insert_list(list_element: cut[:cut], list_head: head, list_last: last)
-            head, last = insert[:list_head],insert[:list_last]
-            next
-        end
-        if(l2.nil?)
-            cut = cut_list(l1)
-            l1 = cut[:list_head]
-            insert = insert_list(list_element: cut[:cut], list_head: head, list_last: last)
-            head, last = insert[:list_head],insert[:list_last]
-            next
-        end
-        if(l1.value <= l2.value)
-            cut = cut_list(l1)
-            l1 = cut[:list_head]
-            insert = insert_list(list_element: cut[:cut], list_head: head, list_last: last)
-            head, last = insert[:list_head],insert[:list_last]
-            next
-        else
-            cut = cut_list(l2)
-            l2 = cut[:list_head]
-            insert = insert_list(list_element: cut[:cut], list_head: head, list_last: last)
-            head, last = insert[:list_head],insert[:list_last]
-            next
-        end
-    end while l1 || l2
-    head
-end
-
-def test_function qa
-    a = mergeTwoLinkedLists(list_from_array(qa[0]),list_from_array( qa[1]))
-    assert_equal qa[2],array_from_list(a)
-end
+ 
 
 describe "List" do
-  it "cut should able to work with nil" do
-    z = {cut: nil, list_head: nil}
-    assert_equal z, cut_list(nil)
-  end
-  it "shoult cat first element from the list" do
-    a = list_from_array([1,2,3,4,5])
-    hash = cut_list(a)
-    cut = array_from_list(hash[:cut])
-    head = array_from_list(hash[:list_head])
-    assert_equal [1],cut
-    assert_equal [2,3,4,5], head
-  end
-  it "shoult cat first element from the list (one elemnt)" do
-    a = list_from_array([1])
-    hash = cut_list(a)
-    cut = array_from_list(hash[:cut])
-    assert_equal [1],cut
-    assert_nil hash[:list_head]
+  it "should do noting when k = 1" do
+    l = list_from_array((1..5).to_a)
+    k = 1
+    a = reverseNodesInKGroups(l, k)
+    assert_equal (1..5).to_a, array_from_list(a)
   end
 
-  it "should able to insert new nil element" do
-    z = {list_head: nil, list_last: nil}
-    assert_equal z, insert_list(list_element: nil, list_head: nil, list_last: nil)
-  end
-  it "should insert element" do
-    a = list_from_array([1,2,3,4,5])
-    b = pointer_to_index(a,4)
-    assert_equal [1,2,3,4,5], array_from_list(a)
-    c = list_from_array([6])
-    ans = insert_list(list_element: c, list_head: a, list_last: b)
-    assert_equal [1,2,3,4,5,6], array_from_list(ans[:list_head])
-    assert_equal [6], array_from_list(ans[:list_last])
-  end
-  it "should insert element1" do
-    c = list_from_array([7])
-    ans = insert_list(list_element: c, list_head: nil, list_last: nil)
-    assert_equal [7], array_from_list(ans[:list_head])
-    assert_equal [7], array_from_list(ans[:list_last])
+  it "Need just rotate all array" do
+    l = list_from_array((1..5).to_a)
+    k = 5
+    a = reverseNodesInKGroups(l, k)
+    assert_equal (1..5).to_a.reverse, array_from_list(a)
   end
 
-  it "should solve problems" do
-    qa = [
-        [1, 2, 3],
-        [4, 5, 6],
-        [1, 2, 3, 4, 5, 6]
-    ]
-    a = mergeTwoLinkedLists(list_from_array(qa[0]),list_from_array( qa[1]))
-    assert_equal qa[2],array_from_list(a) 
+  it "Need just rotate all array size 2" do
+    l = list_from_array([1,2])
+    k = 2
+    a = reverseNodesInKGroups(l, k)
+    assert_equal [2,1], array_from_list(a)
   end
-  it "should solve problems" do
-    qa = [
-        [1, 2, 3],
-        [4, 5, 6],
-        [1, 2, 3, 4, 5, 6]
-    ]
-    test_function qa
+
+  it "Need to rotate one chunk" do
+    l = list_from_array([1,2,3])
+    k = 2
+    a = reverseNodesInKGroups(l, k)
+    assert_equal [2,1,3], array_from_list(a)
   end
-  it "should solve problems" do
-    qa = [
-        [1, 1, 2, 4],
-        [0, 3, 5],
-        [0, 1, 1, 2, 3, 4, 5]
-    ]
-    test_function qa
+
+  it "Need to rotate two chunks" do
+    l = list_from_array([1,2,3,4])
+    k = 2
+    a = reverseNodesInKGroups(l, k)
+    assert_equal [2,1,4,3], array_from_list(a)
+  end
+
+  it "Need to rotate two chunks and it has tail" do
+    l = list_from_array([1,2,3,4,5])
+    k = 2
+    a = reverseNodesInKGroups(l, k)
+    assert_equal [2,1,4,3,5], array_from_list(a)
+  end
+
+  it "Need to rotate 3 chunks " do
+    l = list_from_array([1,2,3,4,5,6])
+    k = 2
+    a = reverseNodesInKGroups(l, k)
+    assert_equal [2,1,4,3,6,5], array_from_list(a)
+  end
+  it "Need to rotate 4 chunks " do
+    l = list_from_array([1,2,3,4,5,6,7,8])
+    k = 2
+    a = reverseNodesInKGroups(l, k)
+    assert_equal [2,1,4,3,6,5,8,7], array_from_list(a)
+  end
+  it "Need to rotate 4 chunks and tail" do
+    l = list_from_array([1,2,3,4,5,6,7,8,9])
+    k = 2
+    a = reverseNodesInKGroups(l, k)
+    assert_equal [2,1,4,3,6,5,8,7,9], array_from_list(a)
+  end
+
+
+  it "solve frims example" do
+    l = list_from_array((1..5).to_a)
+    k = 2
+    a = reverseNodesInKGroups(l, k)
+    assert_equal [2, 1, 4, 3, 5], array_from_list(a)
   end
   
     
