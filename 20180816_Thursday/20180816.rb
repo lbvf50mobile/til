@@ -16,3 +16,15 @@ puts "but what if I want to delete element from hash and get the hash not elemen
 puts "Here how it works by tap method".gsub(/tap/,{'tap'=>"tap".red})
 puts "Delete element and retuns hash: #{hash1.tap{|x| x.delete(:a)}.inspect}"
 puts "And this is Hash: #{hash1.inspect}".green
+
+require 'minitest/autorun'
+
+describe "Tap hash" do
+    it "should return the hash" do
+        h = {a:1,b:2}
+        h1 = h.clone
+        b = {b:2}
+        assert_equal 1, h.delete(:a)
+        assert_equal b, h1.tap{|x| x.delete(:a)}
+    end
+end
