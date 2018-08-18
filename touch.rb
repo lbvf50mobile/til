@@ -22,6 +22,10 @@ if '.js' == ext
     File.open(file_path, 'w'){|f| f.write("console.log(\"alias x='node #{file_path}'\")") }
     File.open('til_alias.sh', 'w'){|f| f.write("alias x='node #{file_path}'") } # Create alias for TIL
 end
+if '.lua' == ext
+    File.open(file_path, 'w'){|f| f.write("print(\"alias x='lua #{file_path}'\")") }
+    File.open('til_alias.sh', 'w'){|f| f.write("alias x='lua #{file_path}'") } # Create alias for TIL
+end
 
 # Create Alias
 
