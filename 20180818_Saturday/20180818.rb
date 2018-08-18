@@ -11,6 +11,6 @@ end
 
 p fact(20)
 
-1000000.times do
+9000000.times do
     fact(20)
 end

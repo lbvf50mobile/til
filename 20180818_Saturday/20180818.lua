@@ -10,7 +10,7 @@ function fact (n)
 end
 print (fact(20))
 
-for i = 1000000,0,-1
+for i = 9000000,0,-1
 do
     fact(20)
 end
