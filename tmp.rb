@@ -1,55 +1,48 @@
 require 'pp'
 require 'colorize'
-# https://app.codesignal.com/interview-practice/task/xrFgR63cw7Nch4vXo
-
-puts "gropingDishes".cyan
+# https://app.codesignal.com/interview-practice/task/3PcnSKuRkqzp8F6BN/solutions
+puts "areFollowingPatterns".red
 
 require "minitest/autorun"
 
-
-
-def groupingDishes(dishes)
+require 'set'
+def areFollowingPatterns(strings, patterns)
+    return false if strings.size != patterns.size
     hash = {}
-    dishes.each do |array_row|
-        value = array_row.shift
-        array_row.each do |ingredient|
-            hash[ingredient] ||= []
-            hash[ingredient].push(value)  
-        end 
+    values = Set.new
+    patterns.zip(strings).each do |pattern,string|
+        if(hash[pattern])
+            return false if hash[pattern] != string
+        else
+            return false if values.include?(string)
+            hash[pattern] = string
+            values.add(string)
+        end
     end
-    hash.select!{|key,value| 2 <= value.sort!.size }
-    hash.sort.map(&:flatten)
-end
- 
-def testing(dishes,answer)
-    assert_equal answer, groupingDishes(dishes)
+    true
 end
 
 describe "Hash" do
-    it "solve first eaxmple" do
-        dishes = [["Salad", "Tomato", "Cucumber", "Salad", "Sauce"],
-            ["Pizza", "Tomato", "Sausage", "Sauce", "Dough"],
-            ["Quesadilla", "Chicken", "Cheese", "Sauce"],
-            ["Sandwich", "Salad", "Bread", "Tomato", "Cheese"]]
-
-
-        answer = [["Cheese", "Quesadilla", "Sandwich"],
-        ["Salad", "Salad", "Sandwich"],
-        ["Sauce", "Pizza", "Quesadilla", "Salad"],
-        ["Tomato", "Pizza", "Salad", "Sandwich"]]
-
-        assert_equal answer, groupingDishes(dishes)
+    it "true" do
+        assert true
     end
-    it "solve first eaxmple1" do
-        dishes = [["Salad", "Tomato", "Cucumber", "Salad", "Sauce"],
-            ["Pizza", "Tomato", "Sausage", "Sauce", "Dough"],
-            ["Quesadilla", "Chicken", "Cheese", "Sauce"],
-            ["Sandwich", "Salad", "Bread", "Tomato", "Cheese"]]
-        answer = [["Cheese", "Quesadilla", "Sandwich"],
-        ["Salad", "Salad", "Sandwich"],
-        ["Sauce", "Pizza", "Quesadilla", "Salad"],
-        ["Tomato", "Pizza", "Salad", "Sandwich"]]
-        testing(dishes,answer)
+    it "should work with first example" do
+        strings = ["cat", "dog", "dog"]
+        patterns = ["a", "b", "b"]
+        assert areFollowingPatterns(strings, patterns) 
     end
-   
+    it "should not work with second example" do
+        strings = ["cat", "dogggy", "dog"]
+        patterns = ["a", "b", "b"]
+        refute areFollowingPatterns(strings, patterns) 
+    end
+    it "should work with first example" do
+        strings = ["aaa", 
+            "aaa", 
+            "aaa"]
+        patterns = ["aaa", 
+            "bbb", 
+            "aaa"]
+        refute areFollowingPatterns(strings, patterns) 
+    end
 end
