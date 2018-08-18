@@ -1,6 +1,6 @@
 console.log("alias x='node 20180819_Sunday/20180819.js'")
 
-// ES6 Spread operator. Extended parameter handling.
+// ES6 Rest parameter. Extended parameter handling.
 // http://es6-features.org/#SpreadOperator
 
 var colors = require('colors');
