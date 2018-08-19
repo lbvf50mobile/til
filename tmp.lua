@@ -1,3 +1,2 @@
-function twice (a)
-    return 4.0 * a
-end
+print (arg[1])
+print (arg[0])
