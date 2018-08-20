@@ -11,12 +11,9 @@ def plain_array(coins: [], quantity: [])
 end
 
 def possibleSums(coins, quantity)
-    sums_hash = {}
-    plain_coins = plain_array(coins: coins, quantity: quantity)
-    (1..plain_coins.size).each do |length|
-        plain_coins.combination(length).each {|x| sums_hash[x.reduce(:+)] = 1 }
-    end
-    sums_hash.size
+    h = {}
+    coins.zip(quantity).each{|c,q| h[c] = h[c] ? h[c] + q : q }
+    h.to_a.map{|x| x[1]}.sort.each_with_index.map{|x,i| x * (i+1)}.reduce(:+)
 end
 
 
