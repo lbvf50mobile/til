@@ -74,6 +74,31 @@ Tests = [
     "acxrabdz",
     [[1,3], [6,8], [3,8], [2,7]],
     "zdxrabca",
+    #---------------
+    "z",
+    [],
+    "z",
+    #------------
+    "dznsxamwoj",
+    [[1,2], [3,4], [6,5], [8,10]],
+    "zdsnxamwoj",
+    #---
+=begin
+    "fixmfbhyutghwbyezkveyameoamqoi",
+    [[8,5], 
+ [10,8], 
+ [4,18], 
+ [20,12], 
+ [5,2], 
+ [17,2], 
+ [13,25], 
+ [29,12], 
+ [22,2], 
+ [17,11]],
+ "fzxmybhtuigowbyefkvhyameoamqei",
+=end
+
+
 ]
 
 describe "Hash" do
