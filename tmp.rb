@@ -27,8 +27,7 @@ def swapLexOrder(str, pairs)
     str_arr = str.chars
     swap_array = pairs
     rec_solve(str_arr:str_arr, swap_array: swap_array, max_lex: max_lex, history: history )
-    pp history
-    "dbca"
+    max_lex[0]
 end
 
 def rec_solve(str_arr:nil, swap_array: nil, max_lex: nil, history: nil )
@@ -42,10 +41,7 @@ def rec_solve(str_arr:nil, swap_array: nil, max_lex: nil, history: nil )
         end
     end
     swap_array.each do |swap_pair|
-        p "swap_pair: #{swap_pair}"
-        p "str_arr: #{str_arr}"
         tmp = swap(str_arr,swap_pair)
-        p tmp
         action = action_hash(str_arr: tmp, swap_pair: swap_pair, swap_array: swap_array)
         if history[action].nil?
             set_max(max_lex,tmp.join)
@@ -61,7 +57,16 @@ end
 Tests = [
     "abdc",
     [[1, 4], [3, 4]],
-    "dbca"
+    "dbca",
+    "abdc",
+    [[1,4], 
+    [3,4]],
+    "dbca",
+    "abcdefgh",
+    [[1,4], [7,8]],
+    "dbcaefhg",
+
+
 ]
 
 describe "Hash" do
