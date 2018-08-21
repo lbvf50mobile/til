@@ -10,7 +10,8 @@ require "minitest/autorun"
 
 def swap(arr,how)
     arr = arr.clone
-    arr[how[0]],arr[how[1]] = arr[how[1]],arr[how[0]]
+    arr[how[0]-1],arr[how[1]-1] = arr[how[1]-1],arr[how[0]-1]
+    arr
 end
 def action_hash(str_arr: nil, swap_pair: nil, swap_array: nil)
     "#{str_arr.inspect},#{swap_pair.inspect},#{swap_array.inspect}"
@@ -21,12 +22,46 @@ def set_max(max_lex,test)
 end
 
 def swapLexOrder(str, pairs)
+    history = {}
+    max_lex = [str]
+    str_arr = str.chars
+    swap_array = pairs
+    rec_solve(str_arr:str_arr, swap_array: swap_array, max_lex: max_lex, history: history )
+    pp history
     "dbca"
+end
+
+def rec_solve(str_arr:nil, swap_array: nil, max_lex: nil, history: nil )
+    # First check without any changes
+    action = action_hash(str_arr: str_arr, swap_pair: nil, swap_array: swap_array)
+    if history[action].nil?
+        set_max(max_lex,str_arr.join)
+        history[action] = 1
+        swap_array.size.times do |r|
+            rec_solve(str_arr:str_arr, swap_array: swap_array.rotate(r), max_lex: max_lex, history: history )
+        end
+    end
+    swap_array.each do |swap_pair|
+        p "swap_pair: #{swap_pair}"
+        p "str_arr: #{str_arr}"
+        tmp = swap(str_arr,swap_pair)
+        p tmp
+        action = action_hash(str_arr: tmp, swap_pair: swap_pair, swap_array: swap_array)
+        if history[action].nil?
+            set_max(max_lex,tmp.join)
+            history[action] = 1
+            swap_array.size.times do |r|
+                rec_solve(str_arr:tmp, swap_array: swap_array.rotate(r), max_lex: max_lex, history: history )
+            end
+        end
+    end
 end
 
 
 Tests = [
-
+    "abdc",
+    [[1, 4], [3, 4]],
+    "dbca"
 ]
 
 describe "Hash" do
@@ -54,5 +89,8 @@ describe "Hash" do
     test = ?2
     assert_equal [?2],set_max(max_lex,test)
     assert_equal [?2], max_lex
+ end
+ it "auto test" do
+    Tests.each_slice(3){|str,pairs,ans| assert_equal ans, swapLexOrder(str, pairs)}
  end
 end
