@@ -1,1 +1,1 @@
-alias x='node 20180819_Sunday/20180819.js'
+alias x='ruby 20180821_Tuesday/20180821.rb'
