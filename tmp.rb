@@ -29,6 +29,31 @@ def rec_solver(c,q,sum = 0,sum_hash)
         }
     end
 end
+def possibleSums_copy(coins, quantity)
+    set = Hash.new(false)
+    set[0] = true
+    coins.each_with_index do |var, idx|
+        set.keys.each do |key|
+            quantity[idx].times do |i|
+                set[key + var*(i+1)] = true
+            end
+        end
+    end
+    set.size - 1
+end
+
+def possibleSums_iterate(coins, quantity)
+    h = Hash.new(false)
+    h[0] = 1
+    coins.each_with_index do |value, index|
+        h.keys.each do |key|
+            quantity[index].times do |amount|
+                h[key + value*(amount+1)] = 1
+            end 
+        end
+    end
+    h.size - 1
+end
 
 def test_function (coins, quantity, answer)
     assert_equal answer, possibleSums(coins, quantity)
@@ -53,6 +78,17 @@ Tests = [
 ]
 
 describe "Hash" do
+ it "should work copypast edition" do
+    coins = [10, 50, 100] 
+    quantity = [1, 2, 1]
+    assert_equal possibleSums(coins, quantity), possibleSums_copy(coins, quantity)
+    assert_equal possibleSums_copy(coins, quantity), possibleSums_iterate(coins, quantity)
+ end
+ it "should use iterate solution" do
+    coins = [10, 50, 100] 
+    quantity = [1, 2, 1]
+    assert_equal possibleSums(coins, quantity), possibleSums_iterate(coins, quantity)
+ end
 
  it "should solve #1 example" do
     coins = [10, 50, 100] 
