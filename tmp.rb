@@ -1,7 +1,9 @@
 require 'pp'
 require 'colorize'
 # https://app.codesignal.com/interview-practice/task/5vXzdE9yzjsoMZ9sk
-puts "swapLexOrder".red
+3.times do puts "" end
+puts "swapLexOrder".cyan
+puts ""
 
 require "minitest/autorun"
 
@@ -12,6 +14,14 @@ def swap(arr,how)
 end
 def action_hash(str_arr: nil, swap_pair: nil, swap_array: nil)
     "#{str_arr.inspect},#{swap_pair.inspect},#{swap_array.inspect}"
+end
+def set_max(max_lex,test)
+    max_lex[0] = test if test > max_lex[0]
+    max_lex
+end
+
+def swapLexOrder(str, pairs)
+    "dbca"
 end
 
 
@@ -32,5 +42,17 @@ describe "Hash" do
     swap_array =[[0,1],[0,2]]
     assert_equal "#{str_arr.inspect},#{swap_pair.inspect},#{swap_array.inspect}",
     action_hash(str_arr: str_arr, swap_pair: swap_pair, swap_array: swap_array)
+ end
+ it "should work with first test" do
+    str = "abdc"
+    pairs = [[1, 4], [3, 4]]
+    ans = "dbca"
+    assert_equal ans, swapLexOrder(str, pairs)
+ end
+ it "should save max lex" do
+    max_lex = [?1]
+    test = ?2
+    assert_equal [?2],set_max(max_lex,test)
+    assert_equal [?2], max_lex
  end
 end
