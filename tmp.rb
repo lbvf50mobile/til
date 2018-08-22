@@ -27,16 +27,9 @@ end
 
 def dsu(u)
     nice_hash = {}
-    u.each{|x| make(x,nice_hash)}
-    (0..u.size-1).each do |i|
-        (0..u.size-1).each do |j|
-            x = u[i]
-            y = u[j]
-            a = find(x,nice_hash)
-            b = find(y,nice_hash)
-            next if a == b
-            union(x,y,nice_hash) if a.any?{|z| b.include?(z)}
-        end
+    u.flatten.each{|x| make([x],nice_hash)}
+    u.each do |x,y|
+        union([x],[y],nice_hash)
     end
     nice_hash.values.uniq.map{|x| x.sort}
 end
