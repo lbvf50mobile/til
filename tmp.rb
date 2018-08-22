@@ -38,9 +38,9 @@ def dsu(u)
             union(x,y,nice_hash) if a.any?{|z| b.include?(z)}
         end
     end
-    nice_hash.values.uniq
+    nice_hash.values.uniq.map{|x| x.sort}
 end
-def dsu1(u)
+def dsu_my(u)
     (0..u.size-1).each do |i|
         next if u[i].nil?
         (0..u.size-1).each do |j|
@@ -66,10 +66,10 @@ def sort_index(str,pairs)
 end
 def swapLexOrder(str, pairs)
     pairs1_2 = dsu(pairs.clone)
-    pairs = dsu1(pairs.clone)
+    pairs = dsu_my(pairs.clone)
     
-    puts "dsu: #{str} : #{pairs}".green
-    puts "dsu: #{str} : #{pairs1_2}".red
+    puts "ds0: #{str} : #{pairs}".green
+    puts "ds1: #{str} : #{pairs1_2}".red
     puts "#{pairs1_2 == pairs}"
     str = str.chars
     sort_index(str,pairs)
@@ -78,7 +78,7 @@ end
 def swapLexOrder_time(str, pairs)
     repeat = 1
     time_dsu = Benchmark.measure {
-        repeat.times{pairs = dsu(pairs)}
+        repeat.times{pairs = dsu_my(pairs)}
     }
     str = str.chars
     ans = ""
@@ -154,6 +154,7 @@ describe "Hash" do
     Tests.each_slice(3){|str,pairs,ans| assert_equal ans, swapLexOrder(str, pairs)}
  end
  it "auto test" do
+    skip
     Tests.each_slice(3){|str,pairs,ans| assert_equal ans, swapLexOrder_time(str, pairs)}
  end
 end
