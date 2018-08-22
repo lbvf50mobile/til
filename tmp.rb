@@ -20,24 +20,11 @@ def union(x,y,nice_hash)
     a = find(x,nice_hash)
     b = find(y,nice_hash)
     return if a == b
-    tmp = (a + b).uniq.sort
+    tmp = (a+b).sort.uniq
     nice_hash[x] = tmp
     nice_hash[y] = tmp
 end
-def dsu1(u)
-    (0..u.size-1).each do |i|
-        next if u[i].nil?
-        (0..u.size-1).each do |j|
-            next if i == j
-            next if u[j].nil?
-            if u[i].any?{|x| u[j].include?(x)}
-                u[i] = (u[i] + u[j]).uniq
-                u[j] = nil
-            end
-        end
-    end
-    u.compact.map{|x| x.sort}
-end
+
 def dsu(u)
     nice_hash = {}
     u.each{|x| make(x,nice_hash)}
@@ -52,6 +39,20 @@ def dsu(u)
         end
     end
     nice_hash.values.uniq
+end
+def dsu1(u)
+    (0..u.size-1).each do |i|
+        next if u[i].nil?
+        (0..u.size-1).each do |j|
+            next if i == j
+            next if u[j].nil?
+            if u[i].any?{|x| u[j].include?(x)}
+                u[i] = (u[i] + u[j]).uniq
+                u[j] = nil
+            end
+        end
+    end
+    u.compact.map{|x| x.sort}
 end
 def sort_index(str,pairs)
     # Save array of [indexes,char_by_these_indexes]
