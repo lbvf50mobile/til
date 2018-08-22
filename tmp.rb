@@ -7,102 +7,30 @@ puts ""
 
 require "minitest/autorun"
 
-
-def swap(arr,how)
-    arr = arr.clone
-    arr[how[0]-1],arr[how[1]-1] = arr[how[1]-1],arr[how[0]-1]
-    arr
-end
-def action_hash(array)
-    array
-end
-def set_max(max_lex,test)
-    max_lex[0] = test if test > max_lex[0]
-    max_lex
-end
-
-def swapLexOrder(str, pairs)
-    f_history = {}
-    history = {}
-    max_lex = [str]
-    str_arr = str.chars
-    swap_array = pairs
-    rec_solve(str_arr:str_arr, swap_array: swap_array, max_lex: max_lex, history: history, f_history: f_history )
-    max_lex[0]
-end
-
-def rec_solve(str_arr:nil, swap_array: nil, max_lex: nil, history: nil, f_history: f_history )
-    return if f_history[[str_arr,swap_array]]
-    f_history[[str_arr,swap_array]] = 1
-
-
-    # First check without any changes
-    action = action_hash([str_arr, nil, swap_array])
-    if history[action].nil?
-        set_max(max_lex,str_arr.join)
-        history[action] = 1
-        swap_array.size.times do |r|
-            rec_solve(str_arr:str_arr, swap_array: swap_array.rotate(r), max_lex: max_lex, history: history, f_history: f_history )
-        end
-    end
-    swap_array.each do |swap_pair|
-        tmp = swap(str_arr,swap_pair)
-        action = action_hash([str_arr, swap_pair, swap_array])
-        if history[action].nil?
-            set_max(max_lex,tmp.join)
-            history[action] = 1
-            swap_array.size.times do |r|
-                rec_solve(str_arr:tmp, swap_array: swap_array.rotate(r), max_lex: max_lex, history: history, f_history: f_history )
+def dsu(unions)
+    (0..unions.size-2).each do |i|
+        base = unions[i]
+        next if base.nil?
+        unions.each_with_index do |element, j|
+            next if i == j
+            next if element.nil?
+            if base.any?{|x| element.include?(x)}
+                unions[i] = (base + element).uniq
+                unions[j] = nil
             end
         end
     end
+    unions.compact.map{|x| x.sort}
 end
 
-
-Tests = [
-    "abdc",
-    [[1, 4], [3, 4]],
-    "dbca",
-    "abdc",
-    [[1,4], 
-    [3,4]],
-    "dbca",
-    "abcdefgh",
-    [[1,4], [7,8]],
-    "dbcaefhg",
-    #----------------
-    "acxrabdz",
-    [[1,3], [6,8], [3,8], [2,7]],
-    "zdxrabca",
-    #---------------
-    "z",
-    [],
-    "z",
-    #------------
-    "dznsxamwoj",
-    [[1,2], [3,4], [6,5], [8,10]],
-    "zdsnxamwoj",
-    #---
-=begin
-    "fixmfbhyutghwbyezkveyameoamqoi",
-    [[8,5], 
- [10,8], 
- [4,18], 
- [20,12], 
- [5,2], 
- [17,2], 
- [13,25], 
- [29,12], 
- [22,2], 
- [17,11]],
- "fzxmybhtuigowbyefkvhyameoamqei",
-=end
-
-
-]
-
 describe "Hash" do
- it "auto test" do
-    Tests.each_slice(3){|str,pairs,ans| assert_equal ans, swapLexOrder(str, pairs)}
- end
+    it "true" do
+        assert true
+    end
+    it "dsu" do
+        assert_equal [[1,2],[3,4]],dsu([[1,2],[3,4]])
+        assert_equal [[1,2,3]],dsu([[1,2],[2,3,]])
+        assert_equal [[1,2,4]],dsu([[1,2],[4,2]])
+        assert_equal  [[1,4,5,8]],dsu([[1,8],[4,5],[8,4]])
+    end
 end
