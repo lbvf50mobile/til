@@ -7,21 +7,23 @@ puts ""
 
 require "minitest/autorun"
 
-def dsu(unions)
-    (0..unions.size-2).each do |i|
-        base = unions[i]
-        next if base.nil?
-        unions.each_with_index do |element, j|
+def dsu(u)
+    (0..u.size-1).each do |i|
+        puts "#{i}  #{u}"
+        next if u[i].nil?
+        (0..u.size-1).each do |j|
             next if i == j
-            next if element.nil?
-            if base.any?{|x| element.include?(x)}
-                unions[i] = (base + element).uniq
-                unions[j] = nil
+            next if u[j].nil?
+            if u[i].any?{|x| u[j].include?(x)}
+                puts "i=#{i}: j=#{j}".red
+                u[i] = (u[i] + u[j]).uniq
+                u[j] = nil
             end
         end
     end
-    unions.compact.map{|x| x.sort}
+    p u.compact.map{|x| x.sort}
 end
+
 def swapLexOrder(str, pairs)
     pairs = dsu(pairs)
     str = str.chars
@@ -39,30 +41,6 @@ def swapLexOrder(str, pairs)
 end
 
 Tests = [
-    "abdc",
-    [[1, 4], [3, 4]],
-    "dbca",
-=begin   
-    "abdc",
-    [[1,4], 
-    [3,4]],
-    "dbca",
-    "abcdefgh",
-    [[1,4], [7,8]],
-    "dbcaefhg",
-    #----------------
-    "acxrabdz",
-    [[1,3], [6,8], [3,8], [2,7]],
-    "zdxrabca",
-    #---------------
-    "z",
-    [],
-    "z",
-    #------------
-    "dznsxamwoj",
-    [[1,2], [3,4], [6,5], [8,10]],
-    "zdsnxamwoj",
-    #---
 
     "fixmfbhyutghwbyezkveyameoamqoi",
     [[8,5], 
@@ -76,7 +54,7 @@ Tests = [
  [22,2], 
  [17,11]],
  "fzxmybhtuigowbyefkvhyameoamqei",
-=end
+
 ]
 
 describe "Hash" do
@@ -85,14 +63,3 @@ describe "Hash" do
  end
 end
 
-describe "Hash" do
-    it "true" do
-        assert true
-    end
-    it "dsu" do
-        assert_equal [[1,2],[3,4]],dsu([[1,2],[3,4]])
-        assert_equal [[1,2,3]],dsu([[1,2],[2,3,]])
-        assert_equal [[1,2,4]],dsu([[1,2],[4,2]])
-        assert_equal  [[1,4,5,8]],dsu([[1,8],[4,5],[8,4]])
-    end
-end
