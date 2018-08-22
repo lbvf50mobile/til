@@ -24,8 +24,21 @@ def union(x,y)
     Nice_hash[x] = tmp
     Nice_hash[y] = tmp
 end
-
 def dsu(u)
+    (0..u.size-1).each do |i|
+        next if u[i].nil?
+        (0..u.size-1).each do |j|
+            next if i == j
+            next if u[j].nil?
+            if u[i].any?{|x| u[j].include?(x)}
+                u[i] = (u[i] + u[j]).uniq
+                u[j] = nil
+            end
+        end
+    end
+    u.compact.map{|x| x.sort}
+end
+def dsu1(u)
     Nice_hash.clear
     u.each{|x| make(x)}
     (0..u.size-1).each do |i|
@@ -52,6 +65,10 @@ def sort_index(str,pairs)
 end
 def swapLexOrder(str, pairs)
     pairs = dsu(pairs)
+    pairs1 = dsu1(pairs)
+    puts "dsu: #{str} : #{pairs}".green
+    puts "dsu: #{str} : #{pairs1}".red
+    puts "#{pairs1 == pairs}"
     str = str.chars
     sort_index(str,pairs)
 end
