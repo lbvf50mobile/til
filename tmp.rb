@@ -8,19 +8,37 @@ puts ""
 require "minitest/autorun"
 require 'benchmark'
 
+
+Nice_hash = {}
+def find(x)
+    Nice_hash[x]
+end
+def make(x)
+    Nice_hash[x] = x
+end
+def union(x,y)
+    a = find(x)
+    b = find(y)
+    return if a == b
+    tmp = (a + b).uniq.sort
+    Nice_hash[x] = tmp
+    Nice_hash[y] = tmp
+end
+
 def dsu(u)
+    Nice_hash.clear
+    u.each{|x| make(x)}
     (0..u.size-1).each do |i|
-        next if u[i].nil?
         (0..u.size-1).each do |j|
-            next if i == j
-            next if u[j].nil?
-            if u[i].any?{|x| u[j].include?(x)}
-                u[i] = (u[i] + u[j]).uniq
-                u[j] = nil
-            end
+            x = u[i]
+            y = u[j]
+            a = find(x)
+            b = find(y)
+            next if a == b
+            union(x,y) if a.any?{|z| b.include?(z)}
         end
     end
-    u.compact.map{|x| x.sort}
+    Nice_hash.values.uniq
 end
 def sort_index(str,pairs)
     # Save array of [indexes,char_by_these_indexes]
@@ -39,7 +57,7 @@ def swapLexOrder(str, pairs)
 end
 
 def swapLexOrder_time(str, pairs)
-    repeat = 100_000
+    repeat = 1
     time_dsu = Benchmark.measure {
         repeat.times{pairs = dsu(pairs)}
     }
