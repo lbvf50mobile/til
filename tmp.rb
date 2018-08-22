@@ -9,19 +9,17 @@ require "minitest/autorun"
 
 def dsu(u)
     (0..u.size-1).each do |i|
-        puts "#{i}  #{u}"
         next if u[i].nil?
         (0..u.size-1).each do |j|
             next if i == j
             next if u[j].nil?
             if u[i].any?{|x| u[j].include?(x)}
-                puts "i=#{i}: j=#{j}".red
                 u[i] = (u[i] + u[j]).uniq
                 u[j] = nil
             end
         end
     end
-    p u.compact.map{|x| x.sort}
+    u.compact.map{|x| x.sort}
 end
 
 def swapLexOrder(str, pairs)
