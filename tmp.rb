@@ -38,7 +38,7 @@ def dsu(u)
     end
     u.compact.map{|x| x.sort}
 end
-def dsu1(u)
+def dsu1a(u)
     Nice_hash.clear
     u.each{|x| make(x)}
     (0..u.size-1).each do |i|
@@ -64,11 +64,12 @@ def sort_index(str,pairs)
     str.join
 end
 def swapLexOrder(str, pairs)
-    pairs = dsu(pairs)
-    pairs1 = dsu1(pairs)
+    pairs1_2 = dsu1a(pairs.clone)
+    pairs = dsu(pairs.clone)
+    
     puts "dsu: #{str} : #{pairs}".green
-    puts "dsu: #{str} : #{pairs1}".red
-    puts "#{pairs1 == pairs}"
+    puts "dsu: #{str} : #{pairs1_2}".red
+    puts "#{pairs1_2 == pairs}"
     str = str.chars
     sort_index(str,pairs)
 end
