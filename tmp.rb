@@ -21,10 +21,7 @@ def dsu(u)
     end
     u.compact.map{|x| x.sort}
 end
-
-def swapLexOrder(str, pairs)
-    pairs = dsu(pairs)
-    str = str.chars
+def sort_index(str,pairs)
     # Save array of [indexes,char_by_these_indexes]
     pairs = pairs.map do |ids|
         chars = ids.reduce([]){|s,i| s.push(str[i-1]); s}
@@ -36,6 +33,22 @@ def swapLexOrder(str, pairs)
         end
     end
     str.join
+end
+
+require 'benchmark'
+
+def swapLexOrder(str, pairs)
+    time_dsu = Benchmark.measure {
+        pairs = dsu(pairs)
+    }
+    str = str.chars
+    ans = ""
+    time_sort = Benchmark.measure{
+        ans = sort_index(str,pairs)
+    }
+    puts "dsu: #{time_dsu.real}".green
+    puts "sort: #{time_sort.real}".cyan
+    ans
 end
 
 Tests = [
