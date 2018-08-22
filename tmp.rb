@@ -9,22 +9,22 @@ require "minitest/autorun"
 require 'benchmark'
 
 
-Nice_hash = {}
-def find(x)
-    Nice_hash[x]
+
+def find(x,nice_hash)
+    nice_hash[x]
 end
-def make(x)
-    Nice_hash[x] = x
+def make(x,nice_hash)
+    nice_hash[x] = x
 end
-def union(x,y)
-    a = find(x)
-    b = find(y)
+def union(x,y,nice_hash)
+    a = find(x,nice_hash)
+    b = find(y,nice_hash)
     return if a == b
     tmp = (a + b).uniq.sort
-    Nice_hash[x] = tmp
-    Nice_hash[y] = tmp
+    nice_hash[x] = tmp
+    nice_hash[y] = tmp
 end
-def dsu(u)
+def dsu1(u)
     (0..u.size-1).each do |i|
         next if u[i].nil?
         (0..u.size-1).each do |j|
@@ -38,20 +38,20 @@ def dsu(u)
     end
     u.compact.map{|x| x.sort}
 end
-def dsu1a(u)
-    Nice_hash.clear
-    u.each{|x| make(x)}
+def dsu(u)
+    nice_hash = {}
+    u.each{|x| make(x,nice_hash)}
     (0..u.size-1).each do |i|
         (0..u.size-1).each do |j|
             x = u[i]
             y = u[j]
-            a = find(x)
-            b = find(y)
+            a = find(x,nice_hash)
+            b = find(y,nice_hash)
             next if a == b
-            union(x,y) if a.any?{|z| b.include?(z)}
+            union(x,y,nice_hash) if a.any?{|z| b.include?(z)}
         end
     end
-    Nice_hash.values.uniq
+    nice_hash.values.uniq
 end
 def sort_index(str,pairs)
     # Save array of [indexes,char_by_these_indexes]
@@ -64,8 +64,8 @@ def sort_index(str,pairs)
     str.join
 end
 def swapLexOrder(str, pairs)
-    pairs1_2 = dsu1a(pairs.clone)
-    pairs = dsu(pairs.clone)
+    pairs1_2 = dsu(pairs.clone)
+    pairs = dsu1(pairs.clone)
     
     puts "dsu: #{str} : #{pairs}".green
     puts "dsu: #{str} : #{pairs1_2}".red
