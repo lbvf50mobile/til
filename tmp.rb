@@ -6,6 +6,7 @@ puts "swapLexOrder".cyan
 puts ""
 
 require "minitest/autorun"
+require 'benchmark'
 
 def dsu(u)
     (0..u.size-1).each do |i|
@@ -24,19 +25,13 @@ end
 def sort_index(str,pairs)
     # Save array of [indexes,char_by_these_indexes]
     pairs = pairs.map do |ids|
-        chars = ids.reduce([]){|s,i| s.push(str[i-1]); s}
-        [ids.map{|x| x-1},chars.sort.reverse]
-    end
-    pairs.each do |x|
-        x[0].each_with_index do |pos,i|
-            str[pos] = x[1][i]
+        chars = ids.reduce([]){|s,i| s.push(str[i-1]); s}.sort.reverse
+        ids.each_with_index do |pos,i|
+            str[pos-1] = chars[i]
         end
     end
     str.join
 end
-
-require 'benchmark'
-
 def swapLexOrder(str, pairs)
     pairs = dsu(pairs)
     str = str.chars
@@ -44,7 +39,7 @@ def swapLexOrder(str, pairs)
 end
 
 def swapLexOrder_time(str, pairs)
-    repeat = 10_000
+    repeat = 100_000
     time_dsu = Benchmark.measure {
         repeat.times{pairs = dsu(pairs)}
     }
@@ -53,8 +48,8 @@ def swapLexOrder_time(str, pairs)
     time_sort = Benchmark.measure{
         repeat.times{ans = sort_index(str.clone,pairs)}
     }
-    puts "dsu: #{time_dsu.real}".green
-    puts "sort: #{time_sort.real}".cyan
+    puts "dsu: #{time_dsu.real.round(2)} ".green
+    puts "srt: #{time_sort.real.round(2)}".cyan
     ans
 end
 
