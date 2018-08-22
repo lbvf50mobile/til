@@ -38,13 +38,20 @@ end
 require 'benchmark'
 
 def swapLexOrder(str, pairs)
+    pairs = dsu(pairs)
+    str = str.chars
+    sort_index(str,pairs)
+end
+
+def swapLexOrder_time(str, pairs)
+    repeat = 10_000
     time_dsu = Benchmark.measure {
-        pairs = dsu(pairs)
+        repeat.times{pairs = dsu(pairs)}
     }
     str = str.chars
     ans = ""
     time_sort = Benchmark.measure{
-        ans = sort_index(str,pairs)
+        repeat.times{ans = sort_index(str.clone,pairs)}
     }
     puts "dsu: #{time_dsu.real}".green
     puts "sort: #{time_sort.real}".cyan
@@ -52,7 +59,29 @@ def swapLexOrder(str, pairs)
 end
 
 Tests = [
-
+    "abdc",
+    [[1, 4], [3, 4]],
+    "dbca",
+    "abdc",
+    [[1,4], 
+    [3,4]],
+    "dbca",
+    "abcdefgh",
+    [[1,4], [7,8]],
+    "dbcaefhg",
+    #----------------
+    "acxrabdz",
+    [[1,3], [6,8], [3,8], [2,7]],
+    "zdxrabca",
+    #---------------
+    "z",
+    [],
+    "z",
+    #------------
+    "dznsxamwoj",
+    [[1,2], [3,4], [6,5], [8,10]],
+    "zdsnxamwoj",
+    #---
     "fixmfbhyutghwbyezkveyameoamqoi",
     [[8,5], 
  [10,8], 
@@ -65,12 +94,35 @@ Tests = [
  [22,2], 
  [17,11]],
  "fzxmybhtuigowbyefkvhyameoamqei",
+ "lvvyfrbhgiyexoirhunnuejzhesylojwbyatfkrv",
+ [[13,23], 
+ [13,28], 
+ [15,20], 
+ [24,29], 
+ [6,7], 
+ [3,4], 
+ [21,30], 
+ [2,13], 
+ [12,15], 
+ [19,23], 
+ [10,19], 
+ [13,14], 
+ [6,16], 
+ [17,25], 
+ [6,21], 
+ [17,26], 
+ [5,6], 
+ [12,24]],
+ "lyyvurrhgxyzvonohunlfejihesiebjwbyatfkrv"
 
 ]
 
 describe "Hash" do
  it "auto test" do
     Tests.each_slice(3){|str,pairs,ans| assert_equal ans, swapLexOrder(str, pairs)}
+ end
+ it "auto test" do
+    Tests.each_slice(3){|str,pairs,ans| assert_equal ans, swapLexOrder_time(str, pairs)}
  end
 end
 
