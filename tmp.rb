@@ -5,10 +5,10 @@ require 'colorize'
 puts "swapLexOrder".cyan
 puts ""
 
-#require "minitest/autorun"
+require "minitest/autorun"
 require 'benchmark'
 
-
+# https://en.wikipedia.org/wiki/Adjacency_list
 def adjacency_list(u)
     aj = {}
     u.each do |x,y|
@@ -17,6 +17,7 @@ def adjacency_list(u)
     end
     aj
 end
+# https://en.wikipedia.org/wiki/Depth-first_search
 def dfs(v,used,comp,aj)
     used[v] = 1
     comp.push(v)
@@ -24,24 +25,22 @@ def dfs(v,used,comp,aj)
         dfs(to,used,comp,aj) if used[to].nil?
     end
 end
+# https://en.wikipedia.org/wiki/Connected_component_(graph_theory)
+# http://e-maxx.ru/algo/connected_components
 def dsu(u)
     aj = adjacency_list(u)
     vertex = aj.keys
     used = {}
     connected = []
-    puts "aj: #{aj}".cyan
     vertex.each do |v|
-        puts "v: #{v} used: #{used}"
         if used[v].nil?
             comp = []
             dfs(v,used,comp,aj)
             connected.push(comp.sort)
-            puts "comp: #{comp}".cyan
         end
     end
     connected
 end
-
 def sort_index(str,pairs)
     # Save array of [indexes,char_by_these_indexes]
     pairs = pairs.map do |ids|
@@ -52,6 +51,13 @@ def sort_index(str,pairs)
     end
     str.join
 end
+
+def swapLexOrder(str, pairs)
+    pairs = dsu(pairs.clone)
+    str = str.chars
+    sort_index(str,pairs)
+end
+
 def dsu_my(u)
     (0..u.size-1).each do |i|
         next if u[i].nil?
@@ -66,30 +72,21 @@ def dsu_my(u)
     end
     u.compact.map{|x| x.sort}
 end
-def swapLexOrder(str, pairs)
-    pairs1_2 = dsu(pairs.clone)
-    pairs = dsu_my(pairs.clone)
-    
-    puts "ds0: #{str} : #{pairs}".green
-    puts "ds1: #{str} : #{pairs1_2}".red
-    puts "#{pairs1_2.sort == pairs.sort}"
-    str = str.chars
-    sort_index(str,pairs)
-end
 
 def swapLexOrder_time(str, pairs)
-    repeat = 1
+    repeat = 1000_00
+    dfs_c = []
+    dsu_c = []
     time_dsu = Benchmark.measure {
-        repeat.times{pairs = dsu_my(pairs)}
+        repeat.times{dsu_c = dsu_my(pairs.clone)}
     }
-    str = str.chars
-    ans = ""
-    time_sort = Benchmark.measure{
-        repeat.times{ans = sort_index(str.clone,pairs)}
+    time_dfs = Benchmark.measure {
+        repeat.times{dfs_c = dsu(pairs.clone)}
     }
-    puts "dsu: #{time_dsu.real.round(2)} ".green
-    puts "srt: #{time_sort.real.round(2)}".cyan
-    ans
+    puts "dsu: #{time_dsu.real.round(2)}".red
+    puts "dfs: #{time_dfs.real.round(2)}".green
+    puts "dsu == dfs #{dsu_c.sort == dfs_c.sort}"
+    
 end
 
 Tests = [
@@ -151,5 +148,11 @@ Tests = [
 
 ]
 
-Tests.each_slice(3){|str,pairs,ans|  swapLexOrder(str, pairs)}
+Tests.each_slice(3){|str,pairs,ans|  swapLexOrder_time(str, pairs)}
+
+describe "Hash" do
+    it "auto test" do
+       Tests.each_slice(3){|str,pairs,ans| assert_equal ans, swapLexOrder(str, pairs)}
+    end
+end
 
