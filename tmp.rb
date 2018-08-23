@@ -5,7 +5,7 @@ require 'colorize'
 puts "swapLexOrder".cyan
 puts ""
 
-require "minitest/autorun"
+#require "minitest/autorun"
 require 'benchmark'
 
 
@@ -17,11 +17,11 @@ def adjacency_list(u)
     end
     aj
 end
-def dfs(v,used,comp,vertex,aj)
+def dfs(v,used,comp,aj)
     used[v] = 1
     comp.push(v)
-    vertex.each do |to|
-        dfs(to,used,comp,vertex,aj) if used[to].nil?
+    aj[v].each do |to|
+        dfs(to,used,comp,aj) if used[to].nil?
     end
 end
 def dsu(u)
@@ -34,7 +34,7 @@ def dsu(u)
         puts "v: #{v} used: #{used}"
         if used[v].nil?
             comp = []
-            dfs(v,used,comp,vertex,aj)
+            dfs(v,used,comp,aj)
             connected.push(comp.sort)
             puts "comp: #{comp}".cyan
         end
@@ -72,7 +72,7 @@ def swapLexOrder(str, pairs)
     
     puts "ds0: #{str} : #{pairs}".green
     puts "ds1: #{str} : #{pairs1_2}".red
-    puts "#{pairs1_2 == pairs}"
+    puts "#{pairs1_2.sort == pairs.sort}"
     str = str.chars
     sort_index(str,pairs)
 end
@@ -96,11 +96,60 @@ Tests = [
     "abdc",
     [[1, 4], [3, 4]],
     "dbca",
+    "abdc",
+    [[1,4], 
+    [3,4]],
+    "dbca",
+    "abcdefgh",
+    [[1,4], [7,8]],
+    "dbcaefhg",
+    #----------------
+    "acxrabdz",
+    [[1,3], [6,8], [3,8], [2,7]],
+    "zdxrabca",
+    #---------------
+    "z",
+    [],
+    "z",
+    #------------
+    "dznsxamwoj",
+    [[1,2], [3,4], [6,5], [8,10]],
+    "zdsnxamwoj",
+    #---
+    "fixmfbhyutghwbyezkveyameoamqoi",
+    [[8,5], 
+ [10,8], 
+ [4,18], 
+ [20,12], 
+ [5,2], 
+ [17,2], 
+ [13,25], 
+ [29,12], 
+ [22,2], 
+ [17,11]],
+ "fzxmybhtuigowbyefkvhyameoamqei",
+ "lvvyfrbhgiyexoirhunnuejzhesylojwbyatfkrv",
+ [[13,23], 
+ [13,28], 
+ [15,20], 
+ [24,29], 
+ [6,7], 
+ [3,4], 
+ [21,30], 
+ [2,13], 
+ [12,15], 
+ [19,23], 
+ [10,19], 
+ [13,14], 
+ [6,16], 
+ [17,25], 
+ [6,21], 
+ [17,26], 
+ [5,6], 
+ [12,24]],
+ "lyyvurrhgxyzvonohunlfejihesiebjwbyatfkrv"
+
 ]
 
-describe "Hash" do
- it "auto test" do
-    Tests.each_slice(3){|str,pairs,ans| assert_equal ans, swapLexOrder(str, pairs)}
- end
-end
+Tests.each_slice(3){|str,pairs,ans|  swapLexOrder(str, pairs)}
 
