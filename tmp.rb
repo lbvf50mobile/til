@@ -1,158 +1,118 @@
 require 'pp'
 require 'colorize'
-# https://app.codesignal.com/interview-practice/task/5vXzdE9yzjsoMZ9sk
+# https://app.codesignal.com/interview-practice/task/TG4tEMPnAc3PnzRCs
 3.times do puts "" end
-puts "swapLexOrder".cyan
+puts "HasPathWithGivenSum".green
 puts ""
 
 require "minitest/autorun"
 require 'benchmark'
+require 'json'
 
-# https://en.wikipedia.org/wiki/Adjacency_list
-def adjacency_list(u)
-    aj = {}
-    u.each do |x,y|
-        aj[x] = aj[x] ? aj[x].push(y) : [y]
-        aj[y] = aj[y] ? aj[y].push(x) : [x]
+def dfs(tree,sum,options)
+    return nil if options[:find]
+    return nil if tree.nil?
+    sum += tree.value
+    if tree.left.nil? && tree.right.nil? && sum == options[:sum] 
+        options[:find] = true
+        return nil
     end
-    aj
+    dfs(tree.left,sum,options)
+    dfs(tree.right,sum,options)
+
 end
-# https://en.wikipedia.org/wiki/Depth-first_search
-def dfs(v,used,comp,aj)
-    used[v] = 1
-    comp.push(v)
-    aj[v].each do |to|
-        dfs(to,used,comp,aj) if used[to].nil?
-    end
-end
-# https://en.wikipedia.org/wiki/Connected_component_(graph_theory)
-# http://e-maxx.ru/algo/connected_components
-def dsu(u)
-    aj = adjacency_list(u)
-    vertex = aj.keys
-    used = {}
-    connected = []
-    vertex.each do |v|
-        if used[v].nil?
-            comp = []
-            dfs(v,used,comp,aj)
-            connected.push(comp.sort)
-        end
-    end
-    connected
-end
-def sort_index(str,pairs)
-    # Save array of [indexes,char_by_these_indexes]
-    pairs = pairs.map do |ids|
-        chars = ids.reduce([]){|s,i| s.push(str[i-1]); s}.sort.reverse
-        ids.each_with_index do |pos,i|
-            str[pos-1] = chars[i]
-        end
-    end
-    str.join
+def hasPathWithGivenSum(tree,s)
+    options = {sum: s, find: false}
+    dfs(tree,0,options)
+    options[:find]
 end
 
-def swapLexOrder(str, pairs)
-    pairs = dsu(pairs.clone)
-    str = str.chars
-    sort_index(str,pairs)
+
+class Tree
+   attr_accessor :value, :left, :right
+  def initialize(val)
+    @value = val
+    @left = nil
+    @right = nil
+  end
 end
 
-def dsu_my(u)
-    (0..u.size-1).each do |i|
-        next if u[i].nil?
-        (0..u.size-1).each do |j|
-            next if i == j
-            next if u[j].nil?
-            if u[i].any?{|x| u[j].include?(x)}
-                u[i] = (u[i] + u[j]).uniq
-                u[j] = nil
-            end
-        end
-    end
-    u.compact.map{|x| x.sort}
+def hsh2tree(hsh)
+    return nil if hsh.nil?
+    obj = Tree.new(hsh["value"])
+    obj.left = hsh2tree(hsh["left"])
+    obj.right = hsh2tree(hsh["right"])
+    obj
 end
 
-def swapLexOrder_time(str, pairs)
-    repeat = 1000_00
-    dfs_c = []
-    dsu_c = []
-    time_dsu = Benchmark.measure {
-        repeat.times{dsu_c = dsu_my(pairs.clone)}
-    }
-    time_dfs = Benchmark.measure {
-        repeat.times{dfs_c = dsu(pairs.clone)}
-    }
-    puts "dsu: #{time_dsu.real.round(2)}".red
-    puts "dfs: #{time_dfs.real.round(2)}".green
-    puts "dsu == dfs #{dsu_c.sort == dfs_c.sort}"
-    
+def tree2hsh(tree)
+    return nil if tree.nil?
+    hsh = {"value" => tree.value}
+    hsh["left"] = tree2hsh(tree.left)
+    hsh["right"] = tree2hsh(tree.right)
+    hsh
 end
+
 
 Tests = [
-    "abdc",
-    [[1, 4], [3, 4]],
-    "dbca",
-    "abdc",
-    [[1,4], 
-    [3,4]],
-    "dbca",
-    "abcdefgh",
-    [[1,4], [7,8]],
-    "dbcaefhg",
-    #----------------
-    "acxrabdz",
-    [[1,3], [6,8], [3,8], [2,7]],
-    "zdxrabca",
-    #---------------
-    "z",
-    [],
-    "z",
-    #------------
-    "dznsxamwoj",
-    [[1,2], [3,4], [6,5], [8,10]],
-    "zdsnxamwoj",
-    #---
-    "fixmfbhyutghwbyezkveyameoamqoi",
-    [[8,5], 
- [10,8], 
- [4,18], 
- [20,12], 
- [5,2], 
- [17,2], 
- [13,25], 
- [29,12], 
- [22,2], 
- [17,11]],
- "fzxmybhtuigowbyefkvhyameoamqei",
- "lvvyfrbhgiyexoirhunnuejzhesylojwbyatfkrv",
- [[13,23], 
- [13,28], 
- [15,20], 
- [24,29], 
- [6,7], 
- [3,4], 
- [21,30], 
- [2,13], 
- [12,15], 
- [19,23], 
- [10,19], 
- [13,14], 
- [6,16], 
- [17,25], 
- [6,21], 
- [17,26], 
- [5,6], 
- [12,24]],
- "lyyvurrhgxyzvonohunlfejihesiebjwbyatfkrv"
+    '{
+        "value": 4,
+        "left": {
+            "value": 1,
+            "left": {
+                "value": -2,
+                "left": null,
+                "right": {
+                    "value": 3,
+                    "left": null,
+                    "right": null
+                }
+            },
+            "right": null
+        },
+        "right": {
+            "value": 3,
+            "left": {
+                "value": 1,
+                "left": null,
+                "right": null
+            },
+            "right": {
+                "value": 2,
+                "left": {
+                    "value": -2,
+                    "left": null,
+                    "right": null
+                },
+                "right": {
+                    "value": -3,
+                    "left": null,
+                    "right": null
+                }
+            }
+        }
+    }',
+    7,
+    true,
 
 ]
 
-Tests.each_slice(3){|str,pairs,ans|  swapLexOrder_time(str, pairs)}
 
-describe "Hash" do
+
+
+describe "Trees" do
+    it "true" do
+        assert true
+        refute false
+    end
+    it "confvert JSON to tree only head" do
+       hsh = JSON.parse(Tests[0])
+       tree = hsh2tree(hsh)
+       new_hsh = tree2hsh(tree)
+       assert_equal hsh, new_hsh
+    end
     it "auto test" do
-       Tests.each_slice(3){|str,pairs,ans| assert_equal ans, swapLexOrder(str, pairs)}
+       Tests.each_slice(3){|json, sum, ans| assert_equal ans,hasPathWithGivenSum(hsh2tree(JSON.parse(json)), sum)}
     end
 end
 
