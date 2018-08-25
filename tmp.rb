@@ -10,17 +10,14 @@ require 'benchmark'
 require 'json'
 
 def values(array)
-    array.reduce("") do |s,v| 
-        s << (v ? v.value.to_s : "nin") 
+    array.reduce([]) do |s,v| 
+        s << (v ? v.value.to_s : v) 
         s 
     end
 end
 def bfs(q)
     while !q.empty?
         str = values(q)
-        puts "#{str}".green
-        puts "#{str.reverse}".red
-        puts "#{str == str.reverse}"
         return false unless str == str.reverse
         children = q.reduce([]) do |s,v|
             if v
@@ -34,6 +31,7 @@ def bfs(q)
     true
 end
 def isTreeSymmetric(tree)
+    return true if tree.nil?
     q = []
     q.push tree
     bfs(q)
