@@ -1,30 +1,49 @@
 require 'pp'
 require 'colorize'
-# https://app.codesignal.com/interview-practice/task/TG4tEMPnAc3PnzRCs
+# https://app.codesignal.com/interview-practice/task/tXN6wQsTknDT6bNrf
 3.times do puts "" end
-puts "HasPathWithGivenSum".green
+puts "IsTreeSymetric".yellow
 puts ""
 
 require "minitest/autorun"
 require 'benchmark'
 require 'json'
 
-def dfs(tree,sum,options)
-    return nil if options[:find]
-    return nil if tree.nil?
-    sum += tree.value
-    if tree.left.nil? && tree.right.nil? && sum == options[:sum] 
-        options[:find] = true
-        return nil
-    end
-    dfs(tree.left,sum,options)
-    dfs(tree.right,sum,options)
-
+def valid_tree(tree)
+    return true if tree.nil?
+    return true if tree.left.nil? && tree.right.nil?
+    return true if !tree.left.nil? && !tree.right.nil?
+    return false
 end
-def hasPathWithGivenSum(tree,s)
-    options = {sum: s, find: false}
-    dfs(tree,0,options)
-    options[:find]
+
+def dfs(tree1,tree2, opt)
+    puts "***".cyan
+    puts "#{tree1.inspect}".red
+    puts "#{tree2.inspect}".green
+    puts "#{opt}"
+    if !opt[:sym]
+        puts "!opt[:sym]"
+        return opt[:sym]
+    end
+    if tree1.nil? && tree2.nil?
+        puts "tree1.nil? && tree2.nil?"
+        return true 
+    end
+    if tree1.nil? && tree2
+        puts "tree1.nil? && tree2"
+        return opt[:sym] = false 
+    end
+    return opt[:sym] = false if tree2.nil? && tree1
+    return opt[:sym] = false if tree2.value != tree1.value
+    dfs(tree1.left,tree1.right, opt)
+    dfs(tree2.left,tree2.right, opt)
+end
+def isTreeSymmetric(tree)
+    puts "------------------"
+    puts "#{tree.inspect}".cyan
+    opt = {sym: true}
+    dfs(tree.left,tree.right, opt) unless tree.nil?
+    opt[:sym]
 end
 
 
@@ -34,6 +53,9 @@ class Tree
     @value = val
     @left = nil
     @right = nil
+  end
+  def inspect
+    "#{@value} l:#{!@left.nil?} r:#{!@right.nil?}"
   end
 end
 
@@ -56,63 +78,66 @@ end
 
 Tests = [
     '{
-        "value": 4,
+        "value": 1,
         "left": {
-            "value": 1,
+            "value": 2,
             "left": {
-                "value": -2,
-                "left": null,
-                "right": {
-                    "value": 3,
-                    "left": null,
-                    "right": null
-                }
-            },
-            "right": null
-        },
-        "right": {
-            "value": 3,
-            "left": {
-                "value": 1,
+                "value": 3,
                 "left": null,
                 "right": null
             },
             "right": {
-                "value": 2,
-                "left": {
-                    "value": -2,
-                    "left": null,
-                    "right": null
-                },
-                "right": {
-                    "value": -3,
-                    "left": null,
-                    "right": null
-                }
+                "value": 4,
+                "left": null,
+                "right": null
+            }
+        },
+        "right": {
+            "value": 2,
+            "left": {
+                "value": 4,
+                "left": null,
+                "right": null
+            },
+            "right": {
+                "value": 3,
+                "left": null,
+                "right": null
             }
         }
     }',
-    7,
     true,
-
+    '{
+        "value": 1,
+        "left": {
+            "value": 2,
+            "left": null,
+            "right": {
+                "value": 3,
+                "left": null,
+                "right": null
+            }
+        },
+        "right": {
+            "value": 2,
+            "left": null,
+            "right": {
+                "value": 3,
+                "left": null,
+                "right": null
+            }
+        }
+    }',
+    false,
 ]
 
 
 
 
 describe "Trees" do
-    it "true" do
-        assert true
-        refute false
-    end
-    it "confvert JSON to tree only head" do
-       hsh = JSON.parse(Tests[0])
-       tree = hsh2tree(hsh)
-       new_hsh = tree2hsh(tree)
-       assert_equal hsh, new_hsh
-    end
+  
     it "auto test" do
-       Tests.each_slice(3){|json, sum, ans| assert_equal ans,hasPathWithGivenSum(hsh2tree(JSON.parse(json)), sum)}
+       Tests.each_slice(2){|json, ans| assert_equal ans,isTreeSymmetric(hsh2tree(JSON.parse(json)))}
     end
 end
 
