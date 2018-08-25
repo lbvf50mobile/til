@@ -54,6 +54,7 @@ class Tree
     @left = nil
     @right = nil
   end
+  # WHY inspect dose not works?
   def inspect
     "#{@value} l:#{!@left.nil?} r:#{!@right.nil?}"
   end
