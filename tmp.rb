@@ -9,22 +9,34 @@ require "minitest/autorun"
 require 'benchmark'
 require 'json'
 
-def bfs(q,result)
-    while !q.empty?
-        cur = q.shift
-        result << cur.value.to_s
-        q.push cur.left if cur.left
-        q.push cur.right if cur.right
-
+def values(array)
+    array.reduce("") do |s,v| 
+        s << (v ? v.value.to_s : "nin") 
+        s 
     end
+end
+def bfs(q)
+    while !q.empty?
+        str = values(q)
+        puts "#{str}".green
+        puts "#{str.reverse}".red
+        puts "#{str == str.reverse}"
+        return false unless str == str.reverse
+        children = q.reduce([]) do |s,v|
+            if v
+                s.push v.left
+                s.push v.right
+            end 
+            s
+        end
+        q = children
+    end
+    true
 end
 def isTreeSymmetric(tree)
     q = []
-    result = ""
     q.push tree
-    bfs(q,result)
-    puts result.green
-true
+    bfs(q)
 end
 
 
