@@ -9,41 +9,9 @@ require "minitest/autorun"
 require 'benchmark'
 require 'json'
 
-def valid_tree(tree)
-    return true if tree.nil?
-    return true if tree.left.nil? && tree.right.nil?
-    return true if !tree.left.nil? && !tree.right.nil?
-    return false
-end
 
-def dfs(tree1,tree2, opt)
-    puts "***".cyan
-    puts "#{tree1.inspect}".red
-    puts "#{tree2.inspect}".green
-    puts "#{opt}"
-    if !opt[:sym]
-        puts "!opt[:sym]"
-        return opt[:sym]
-    end
-    if tree1.nil? && tree2.nil?
-        puts "tree1.nil? && tree2.nil?"
-        return true 
-    end
-    if tree1.nil? && tree2
-        puts "tree1.nil? && tree2"
-        return opt[:sym] = false 
-    end
-    return opt[:sym] = false if tree2.nil? && tree1
-    return opt[:sym] = false if tree2.value != tree1.value
-    dfs(tree1.left,tree1.right, opt)
-    dfs(tree2.left,tree2.right, opt)
-end
 def isTreeSymmetric(tree)
-    puts "------------------"
-    puts "#{tree.inspect}".cyan
-    opt = {sym: true}
-    dfs(tree.left,tree.right, opt) unless tree.nil?
-    opt[:sym]
+true
 end
 
 
