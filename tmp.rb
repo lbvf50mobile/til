@@ -9,8 +9,21 @@ require "minitest/autorun"
 require 'benchmark'
 require 'json'
 
+def bfs(q,result)
+    while !q.empty?
+        cur = q.shift
+        result << cur.value.to_s
+        q.push cur.left if cur.left
+        q.push cur.right if cur.right
 
+    end
+end
 def isTreeSymmetric(tree)
+    q = []
+    result = ""
+    q.push tree
+    bfs(q,result)
+    puts result.green
 true
 end
 
