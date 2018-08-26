@@ -10,9 +10,6 @@ require 'benchmark'
 
 require 'ostruct'
 def bs(prof: nil, level: nil, bounds: nil, info: nil)
-    puts "level: #{level}".green
-    puts "bounds.left: #{bounds.left}"
-    puts "bounds.right: #{bounds.right}"
     if level == info.level - 1
         if info.pos <= bounds.left[1]
             return prof
@@ -66,7 +63,9 @@ def findProfession(level, pos)
 end
 
 Tests = [
-    3,3,"Doctor"
+    3,3,"Doctor",
+    4,2,"Doctor",
+    1,1,"Engineer"
 
 ]
 
