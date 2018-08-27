@@ -1,71 +1,82 @@
 require 'pp'
 require 'colorize'
-# https://app.codesignal.com/interview-practice/task/FwAR7koSB3uYYsqDp
+# https://app.codesignal.com/interview-practice/task/jAKLMWLu8ynBhYsv6
 3.times do puts "" end
-puts "FindProfesion".green
+puts "kthSmallestInBST".cyan
 puts ""
+
+
 
 require "minitest/autorun"
 require 'benchmark'
+require 'json'
 
-require 'ostruct'
-def bs(prof: nil, level: nil, bounds: nil, info: nil)
-    if level == info.level - 1
-        if info.pos <= bounds.left[1]
-            return prof
-        else
-            return !prof
-        end
-    end
-    if info.pos <= bounds.left[1]
-        tmp = bounds.clone
-        
-        min = tmp.left[0]
-        max = tmp.left[1]
-        wdt = tmp.width/2
-        
-        bounds.left = [min, min + wdt - 1]
-        bounds.right = [max - wdt + 1,max]
-        bounds.width = wdt
-
-        return bs(prof: prof, level:level+1, bounds: bounds, info: info)
-    else
-        tmp = bounds.clone
-
-        min = tmp.right[0]
-        max = tmp.right[1]
-        wdt = tmp.width/2
-        
-        bounds.left = [min, min + wdt - 1]
-        bounds.right = [max - wdt + 1,max]
-        bounds.width = wdt
-
-        return bs(prof: !prof, level: level+1, bounds: bounds, info: info)
-    end
+def dfs(t,a)
+    return a if t.nil?
+    dfs(t.left,a)
+    a.push t.value
+    dfs(t.right,a)
+    return a
 end
-def findProfession(level, pos)
-    return "Engineer" if 1 == level
-    info = OpenStruct.new
-    info.level = level
-    info.pos = pos
-    bounds = OpenStruct.new
-    
-    min = 1
-    max = 2**(level-1)
-    wdt = 2**(level-1)/2
-
-    bounds.left = [min, min + wdt - 1]
-    bounds.right = [max - wdt + 1,max]
-    bounds.width = wdt
-
-    # false - doctor, true - engineer
-    bs(prof: true, level: 1, bounds: bounds, info: info) ? "Engineer" : "Doctor"
+def kthSmallestInBST(t, k)
+    dfs(t,[])[k-1]
 end
+
+
+
+class Tree
+   attr_accessor :value, :left, :right
+  def initialize(val)
+    @value = val
+    @left = nil
+    @right = nil
+  end
+  # WHY inspect dose not works?
+  def inspect
+    "#{@value} l:#{!@left.nil?} r:#{!@right.nil?}"
+  end
+end
+
+def hsh2tree(hsh)
+    return nil if hsh.nil?
+    obj = Tree.new(hsh["value"])
+    obj.left = hsh2tree(hsh["left"])
+    obj.right = hsh2tree(hsh["right"])
+    obj
+end
+
+def tree2hsh(tree)
+    return nil if tree.nil?
+    hsh = {"value" => tree.value}
+    hsh["left"] = tree2hsh(tree.left)
+    hsh["right"] = tree2hsh(tree.right)
+    hsh
+end
+
 
 Tests = [
-    3,3,"Doctor",
-    4,2,"Doctor",
-    1,1,"Engineer"
+    '{
+        "value": 3,
+        "left": {
+            "value": 1,
+            "left": null,
+            "right": null
+        },
+        "right": {
+            "value": 5,
+            "left": {
+                "value": 4,
+                "left": null,
+                "right": null
+            },
+            "right": {
+                "value": 6,
+                "left": null,
+                "right": null
+            }
+        }
+    }',
+    4,5,
 
 ]
 
@@ -75,7 +86,9 @@ Tests = [
 describe "Trees" do
   
     it "auto test" do
-       Tests.each_slice(3){|level, pos, ans| assert_equal ans,findProfession(level, pos)}
+       Tests.each_slice(3)do |json, k, ans|
+            t = hsh2tree(JSON.parse(json)) 
+            assert_equal ans,kthSmallestInBST(t, k)
+        end
     end
 end
-
