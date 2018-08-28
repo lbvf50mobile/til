@@ -12,31 +12,22 @@ require 'benchmark'
 require 'json'
 
 
-def bfs_equal(t1, t2)
-    q1 = []
-    q2 = []
-    q1.push t1
-    q2.push t2
-    while (!q1.empty?) && (!q2.empty?)
-        c1 = q1.pop
-        c2 = q2.pop
-        return false if c1.value != c2.value
-        q1.push c1.left if ! c1.left.nil?
-        q1.push c1.right if ! c1.right.nil?
-        q2.push c2.left if ! c2.left.nil?
-        q2.push c2.right if ! c2.right.nil?
-    end
-    return false if (!q1.empty?) || (!q2.empty?)
-    true
+def equal(t1, t2)
+    return true if t1.nil? && t2.nil?
+    return false if t1.nil? || t2.nil?
+    return false if t1.value != t2.value
+    return equal(t1.left,t2.left) && equal(t1.right, t2.right)
 end
 
 
 def isSubtree(t1, t2)
+    return true if t2.nil?
+    return false if t1.nil?
     q = []
     q.push t1
     while !q.empty?
         current = q.pop
-        return true if (current.value == t2.value) && bfs_equal(current, t2) 
+        return true if (current.value == t2.value) && equal(current, t2) 
         q.push current.left if ! current.left.nil?
         q.push current.right if ! current.right.nil?
     end
