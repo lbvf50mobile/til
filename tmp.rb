@@ -1,6 +1,7 @@
 require 'pp'
 require 'colorize'
 # https://app.codesignal.com/interview-practice/task/AaWaYxi8gjtbqgp2M
+# https://www.youtube.com/watch?v=sx8i54fkyk8&t=425s
 3.times do puts "" end
 puts "restoreBinaryTree".green
 puts ""
@@ -36,10 +37,11 @@ def rbt(i,p)
     
     tree
 end
-
 def restoreBinaryTree(inorder, preorder)
     rbt(inorder, preorder)
 end
+
+
 def dump()
     j = '{
         "value": 1,
@@ -127,7 +129,23 @@ Tests = [
                 "right": null
             }
         }
-    }'
+    }',
+    [100000, 99999, 99998],
+    [99999, 100000, 99998],
+    '{
+        "value": 99999,
+        "left": {
+            "value": 100000,
+            "left": null,
+            "right": null
+        },
+        "right": {
+            "value": 99998,
+            "left": null,
+            "right": null
+        }
+    }',
+
 ]
 
 
