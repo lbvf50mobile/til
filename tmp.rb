@@ -1,8 +1,8 @@
 require 'pp'
 require 'colorize'
-# https://app.codesignal.com/interview-practice/task/mDpAJnDQkJqaYYsCg
+# https://app.codesignal.com/interview-practice/task/AaWaYxi8gjtbqgp2M
 3.times do puts "" end
-puts "isSubtree".yellow
+puts "restoreBinaryTree".green
 puts ""
 
 
@@ -12,29 +12,63 @@ require 'benchmark'
 require 'json'
 
 
-def equal(t1, t2)
-    return true if t1.nil? && t2.nil?
-    return false if t1.nil? || t2.nil?
-    return false if t1.value != t2.value
-    return equal(t1.left,t2.left) && equal(t1.right, t2.right)
+def rbt(i,p)
+    return nil if i.nil?
+    return nil if p.nil?
+    return nil if i.empty?
+    return nil if p.empty?
+
+    a = p[0]
+    tree = Tree.new(a)
+
+    return tree if p.size == 1
+
+
+    ai = i.find_index(a)
+    new_i_left = i[0..ai-1]
+    new_i_right = i[ai+1..-1]
+    d = i[0]
+    di = p.find_index(d)
+    new_p_left = p[1..di]
+    new_p_right = p[di+1..-1]
+    tree.left = rbt(new_i_left,new_p_left)
+    tree.right = rbt(new_i_right,new_p_right)
+    
+    tree
 end
 
-
-def isSubtree(t1, t2)
-    return true if t2.nil?
-    return false if t1.nil?
-    q = []
-    q.push t1
-    while !q.empty?
-        current = q.pop
-        return true if (current.value == t2.value) && equal(current, t2) 
-        q.push current.left if ! current.left.nil?
-        q.push current.right if ! current.right.nil?
-    end
-    false
+def restoreBinaryTree(inorder, preorder)
+    rbt(inorder, preorder)
 end
-
-
+def dump()
+    j = '{
+        "value": 1,
+        "left": {
+            "value": 2,
+            "left": {
+                "value": 4,
+                "left": null,
+                "right": null
+            },
+            "right": null
+        },
+        "right": {
+            "value": 3,
+            "left": {
+                "value": 5,
+                "left": null,
+                "right": null
+            },
+            "right": {
+                "value": 6,
+                "left": null,
+                "right": null
+            }
+        }
+    }'
+    h = JSON.parse(j)
+    hsh2tree(h)
+end
 
 class Tree
    attr_accessor :value, :left, :right
@@ -67,125 +101,33 @@ end
 
 
 Tests = [
-    '{
-        "value": 5,
+    [4, 2, 1, 5, 3, 6],
+    [1, 2, 4, 3, 5, 6],
+    ' {
+        "value": 1,
         "left": {
-            "value": 10,
+            "value": 2,
             "left": {
                 "value": 4,
-                "left": {
-                    "value": 1,
-                    "left": null,
-                    "right": null
-                },
-                "right": {
-                    "value": 2,
-                    "left": null,
-                    "right": null
-                }
+                "left": null,
+                "right": null
+            },
+            "right": null
+        },
+        "right": {
+            "value": 3,
+            "left": {
+                "value": 5,
+                "left": null,
+                "right": null
             },
             "right": {
                 "value": 6,
                 "left": null,
-                "right": {
-                    "value": -1,
-                    "left": null,
-                    "right": null
-                }
-            }
-        },
-        "right": {
-            "value": 7,
-            "left": null,
-            "right": null
-        }
-    }',
-    '{
-        "value": 10,
-        "left": {
-            "value": 4,
-            "left": {
-                "value": 1,
-                "left": null,
-                "right": null
-            },
-            "right": {
-                "value": 2,
-                "left": null,
-                "right": null
-            }
-        },
-        "right": {
-            "value": 6,
-            "left": null,
-            "right": {
-                "value": -1,
-                "left": null,
                 "right": null
             }
         }
-    }',
-    true,
-    '{
-        "value": 5,
-        "left": {
-            "value": 10,
-            "left": {
-                "value": 4,
-                "left": {
-                    "value": 1,
-                    "left": null,
-                    "right": null
-                },
-                "right": {
-                    "value": 2,
-                    "left": null,
-                    "right": null
-                }
-            },
-            "right": {
-                "value": 6,
-                "left": {
-                    "value": -1,
-                    "left": null,
-                    "right": null
-                },
-                "right": null
-            }
-        },
-        "right": {
-            "value": 7,
-            "left": null,
-            "right": null
-        }
-    }',
-    '{
-        "value": 10,
-        "left": {
-            "value": 4,
-            "left": {
-                "value": 1,
-                "left": null,
-                "right": null
-            },
-            "right": {
-                "value": 2,
-                "left": null,
-                "right": null
-            }
-        },
-        "right": {
-            "value": 6,
-            "left": null,
-            "right": {
-                "value": -1,
-                "left": null,
-                "right": null
-            }
-        }
-    }',
-    false
-
+    }'
 ]
 
 
@@ -194,10 +136,10 @@ Tests = [
 describe "Trees" do
   
     it "auto test" do
-       Tests.each_slice(3)do |json1, json2, ans|
-            t1 = hsh2tree(JSON.parse(json1))
-            t2 = hsh2tree(JSON.parse(json1)) 
-            assert_equal ans,isSubtree(t1, t2)
+       Tests.each_slice(3)do |inorder, preorder, ans|
+            tree = restoreBinaryTree(inorder, preorder)
+            r_hash = tree2hsh(tree)
+            assert_equal JSON.parse(ans),r_hash
         end
     end
 end
