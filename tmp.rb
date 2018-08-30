@@ -13,30 +13,6 @@ require 'benchmark'
 require 'json'
 
 
-def rbt1(i,p)
-    return nil if i.nil?
-    return nil if p.nil?
-    return nil if i.empty?
-    return nil if p.empty?
-
-    a = p[0]
-    tree = Tree.new(a)
-
-    return tree if p.size == 1
-
-
-    ai = i.find_index(a)
-    new_i_left = i[0..ai-1]
-    new_i_right = i[ai+1..-1]
-    d = i[0]
-    di = p.find_index(d)
-    new_p_left = p[1..di]
-    new_p_right = p[di+1..-1]
-    tree.left = rbt(new_i_left,new_p_left)
-    tree.right = rbt(new_i_right,new_p_right)
-    
-    tree
-end
 require 'ostruct'
 def rbt(element,arrays)
     queue = [element]
