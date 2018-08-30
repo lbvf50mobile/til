@@ -15,9 +15,16 @@ require 'json'
 
 require 'ostruct'
 def rbt(element,arrays)
-    queue = [element]
-    while !queue.empty?
-        current = queue.pop
+    queue = Array.new(arrays[:size])
+    
+    pointer = 0
+    queue[pointer] = element
+    pointer += 1 
+
+
+    while pointer != 0
+        current = queue[pointer - 1]
+        pointer -= 1
         head_value = current[:head].value
         inorder_head_index = arrays[:back_inorder][head_value]
         inorder_value = arrays[:inorder][current[:inorder_begin]]
@@ -31,7 +38,8 @@ def rbt(element,arrays)
         if(left[:inorder_begin] <= left[:inorder_end] && (left[:preorder_head_index] <= arrays[:size] - 1))
             current[:head].left = Tree.new(arrays[:preorder][left[:preorder_head_index]])
             left[:head] = current[:head].left
-            queue.push left
+            queue[pointer] = left
+            pointer += 1
         end
 
         #Right child
@@ -42,7 +50,8 @@ def rbt(element,arrays)
         if(right[:inorder_begin] <= right[:inorder_end] && (right[:preorder_head_index] <= arrays[:size] - 1))
             current[:head].right =  Tree.new(arrays[:preorder][right[:preorder_head_index]])
             right[:head] = current[:head].right
-            queue.push right
+            queue[pointer] = right
+            pointer += 1
         end
 
     end
