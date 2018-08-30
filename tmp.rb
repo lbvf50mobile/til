@@ -20,9 +20,11 @@ def rbt(element,arrays)
     pointer = 0
     queue[pointer] = element
     pointer += 1 
+    counter = 0
 
 
     while pointer != 0
+        counter += 1
         current = queue[pointer - 1]
         pointer -= 1
         head_value = current[:head].value
@@ -55,6 +57,8 @@ def rbt(element,arrays)
         end
 
     end
+    
+    p [counter,arrays[:size]]
 end
 def restoreBinaryTree(inorder, preorder)
     back_inorder = inorder.each_with_index.reduce({}){|mem,(val,index)| mem[val] = index; mem}
