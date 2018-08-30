@@ -14,60 +14,14 @@ require 'json'
 
 
 require 'ostruct'
-def rbt(element,arrays)
-    queue = Array.new(arrays[:size])
-    
-    pointer = 0
-    queue[pointer] = element
-    pointer += 1 
-    counter = 0
 
-
-    while pointer != 0
-        counter += 1
-        current = queue[pointer - 1]
-        pointer -= 1
-        head_value = current[:head].value
-        inorder_head_index = arrays[:back_inorder][head_value]
-        inorder_value = arrays[:inorder][current[:inorder_begin]]
-        preorder_end_index = arrays[:back_preorder][inorder_value]
-
-        #Left child
-        left = {}
-        left[:inorder_begin] = current[:inorder_begin]
-        left[:inorder_end] =  inorder_head_index - 1
-        left[:preorder_head_index] = current[:preorder_head_index] + 1
-        if(left[:inorder_begin] <= left[:inorder_end] && (left[:preorder_head_index] <= arrays[:size] - 1))
-            current[:head].left = Tree.new(arrays[:preorder][left[:preorder_head_index]])
-            left[:head] = current[:head].left
-            queue[pointer] = left
-            pointer += 1
-        end
-
-        #Right child
-        right = {}
-        right[:inorder_begin] = inorder_head_index + 1
-        right[:inorder_end] =  current[:inorder_end]
-        right[:preorder_head_index] = preorder_end_index + 1
-        if(right[:inorder_begin] <= right[:inorder_end] && (right[:preorder_head_index] <= arrays[:size] - 1))
-            current[:head].right =  Tree.new(arrays[:preorder][right[:preorder_head_index]])
-            right[:head] = current[:head].right
-            queue[pointer] = right
-            pointer += 1
-        end
-
-    end
-    
-    p [counter,arrays[:size]]
-end
-def restoreBinaryTree(inorder, preorder)
-    back_inorder = inorder.each_with_index.reduce({}){|mem,(val,index)| mem[val] = index; mem}
-    back_preorder = preorder.each_with_index.reduce({}){|mem,(val,index)| mem[val] = index; mem}
-    arrays = {inorder: inorder, back_inorder: back_inorder, back_preorder: back_preorder, preorder: preorder, size: preorder.size}
-    answer = Tree.new(arrays[:preorder][0])
-    element = {head: answer, preorder_head_index: 0, inorder_begin: 0, inorder_end: (inorder.size - 1)}
-    rbt(element, arrays)
-    answer
+def restoreBinaryTree(i, pr)
+    return nil if pr.empty?
+    tree = Tree.new(pr[0])
+    idx = i.index(pr[0])
+    tree.left = restoreBinaryTree(i[0...idx], pr[1..idx])
+    tree.right = restoreBinaryTree(i[idx+1..-1], pr[idx+1..-1])
+    tree
 end
 
 
