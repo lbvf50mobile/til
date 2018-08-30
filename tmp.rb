@@ -18,8 +18,10 @@ def rbt(element,arrays)
     queue = [element]
     while !queue.empty?
         current = queue.pop
-        inorder_head_index = arrays[:inorder].find_index(current[:head].value)
-        preorder_end_index = arrays[:preorder].find_index(arrays[:inorder][current[:inorder_begin]])
+        head_value = current[:head].value
+        inorder_head_index = arrays[:back_inorder][head_value]
+        inorder_value = arrays[:inorder][current[:inorder_begin]]
+        preorder_end_index = arrays[:back_preorder][inorder_value]
 
         #Left child
         left = {}
@@ -46,7 +48,9 @@ def rbt(element,arrays)
     end
 end
 def restoreBinaryTree(inorder, preorder)
-    arrays = {inorder: inorder, preorder: preorder, size: preorder.size}
+    back_inorder = inorder.each_with_index.reduce({}){|mem,(val,index)| mem[val] = index; mem}
+    back_preorder = preorder.each_with_index.reduce({}){|mem,(val,index)| mem[val] = index; mem}
+    arrays = {inorder: inorder, back_inorder: back_inorder, back_preorder: back_preorder, preorder: preorder, size: preorder.size}
     answer = Tree.new(arrays[:preorder][0])
     element = {head: answer, preorder_head_index: 0, inorder_begin: 0, inorder_end: (inorder.size - 1)}
     rbt(element, arrays)
