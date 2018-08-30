@@ -39,17 +39,10 @@ def rbt1(i,p)
 end
 require 'ostruct'
 def rbt(element,arrays)
-    puts ""
-    puts "-- Welcome to the RBT".green
-    puts "element class is #{element.class}".cyan
     queue = [element]
-    puts "queue class is #{queue.class}".cyan
     while !queue.empty?
         current = queue.pop
-        puts "I push data from the queue and its class is #{current.class}".cyan
-        puts "Now I wnt to get"
         inorder_head_index = arrays.inorder.find_index(current.head.value)
-        puts "I'm here"
         preorder_end_index = arrays.preorder.find_index(arrays.inorder[current.inorder_begin])
 
         #Left child
