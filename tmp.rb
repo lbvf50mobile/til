@@ -39,18 +39,16 @@ def rbt1(i,p)
 end
 require 'ostruct'
 def rbt(element,arrays)
+    puts ""
+    puts "-- Welcome to the RBT".green
+    puts "element class is #{element.class}".cyan
     queue = [element]
+    puts "queue class is #{queue.class}".cyan
     while !queue.empty?
         current = queue.pop
-
-        p current.class
-
-
-        head = current[:head]
-        puts "-----------------".green
-        p head.value
-        puts "--------------------".red
-        inorder_head_index = arrays.inorder.find_index(head.value)
+        puts "I push data from the queue and its class is #{current.class}".cyan
+        puts "Now I wnt to get"
+        inorder_head_index = arrays.inorder.find_index(current.head.value)
         puts "I'm here"
         preorder_end_index = arrays.preorder.find_index(arrays.inorder[current.inorder_begin])
 
@@ -62,7 +60,7 @@ def rbt(element,arrays)
         if(left.inorder_begin <= left.inorder_end && (left.preorder_head_index <= arrays.size - 1))
             current.head.left = Tree.new(arrays.preorder[left.preorder_head_index])
             left.head = current.head.left
-            queue.push left.head
+            queue.push left
         end
 
         #Right child
@@ -73,17 +71,17 @@ def rbt(element,arrays)
         if(right.inorder_begin <= right.inorder_end && (right.preorder_head_index <= arrays.size - 1))
             current.head.right =  Tree.new(arrays.preorder[right.preorder_head_index])
             right.head = current.head.right
-            queue.push right.head
+            queue.push right
         end
 
     end
 end
 def restoreBinaryTree(inorder, preorder)
     arrays = OpenStruct.new(inorder: inorder, preorder: preorder, size: preorder.size)
-    head = Tree.new(arrays.preorder[0])
-    element = OpenStruct.new(head: head, preorder_head_index: 0, inorder_begin: 0, inorder_end: (inorder.size - 1) )
+    answer = Tree.new(arrays.preorder[0])
+    element = OpenStruct.new(head: answer, preorder_head_index: 0, inorder_begin: 0, inorder_end: (inorder.size - 1) )
     rbt(element, arrays)
-    head
+    answer
 end
 
 
