@@ -13,7 +13,7 @@ require 'benchmark'
 require 'json'
 
 
-def rbt(i,p)
+def rbt1(i,p)
     return nil if i.nil?
     return nil if p.nil?
     return nil if i.empty?
@@ -37,8 +37,53 @@ def rbt(i,p)
     
     tree
 end
+require 'ostruct'
+def rbt(element,arrays)
+    queue = [element]
+    while !queue.empty?
+        current = queue.pop
+
+        p current.class
+
+
+        head = current[:head]
+        puts "-----------------".green
+        p head.value
+        puts "--------------------".red
+        inorder_head_index = arrays.inorder.find_index(head.value)
+        puts "I'm here"
+        preorder_end_index = arrays.preorder.find_index(arrays.inorder[current.inorder_begin])
+
+        #Left child
+        left = OpenStruct.new
+        left.inorder_begin = current.inorder_begin
+        left.inorder_end =  inorder_head_index - 1
+        left.preorder_head_index = current.preorder_head_index + 1
+        if(left.inorder_begin <= left.inorder_end && (left.preorder_head_index <= arrays.size - 1))
+            current.head.left = Tree.new(arrays.preorder[left.preorder_head_index])
+            left.head = current.head.left
+            queue.push left.head
+        end
+
+        #Right child
+        right = OpenStruct.new
+        right.inorder_begin = inorder_head_index + 1
+        right.inorder_end =  current.inorder_end
+        right.preorder_head_index = preorder_end_index + 1
+        if(right.inorder_begin <= right.inorder_end && (right.preorder_head_index <= arrays.size - 1))
+            current.head.right =  Tree.new(arrays.preorder[right.preorder_head_index])
+            right.head = current.head.right
+            queue.push right.head
+        end
+
+    end
+end
 def restoreBinaryTree(inorder, preorder)
-    rbt(inorder, preorder)
+    arrays = OpenStruct.new(inorder: inorder, preorder: preorder, size: preorder.size)
+    head = Tree.new(arrays.preorder[0])
+    element = OpenStruct.new(head: head, preorder_head_index: 0, inorder_begin: 0, inorder_end: (inorder.size - 1) )
+    rbt(element, arrays)
+    head
 end
 
 
@@ -79,10 +124,7 @@ class Tree
     @left = nil
     @right = nil
   end
-  # WHY inspect dose not works?
-  def inspect
-    "#{@value} l:#{!@left.nil?} r:#{!@right.nil?}"
-  end
+  
 end
 
 def hsh2tree(hsh)
