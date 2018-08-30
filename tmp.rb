@@ -18,37 +18,37 @@ def rbt(element,arrays)
     queue = [element]
     while !queue.empty?
         current = queue.pop
-        inorder_head_index = arrays.inorder.find_index(current.head.value)
-        preorder_end_index = arrays.preorder.find_index(arrays.inorder[current.inorder_begin])
+        inorder_head_index = arrays[:inorder].find_index(current[:head].value)
+        preorder_end_index = arrays[:preorder].find_index(arrays[:inorder][current[:inorder_begin]])
 
         #Left child
-        left = OpenStruct.new
-        left.inorder_begin = current.inorder_begin
-        left.inorder_end =  inorder_head_index - 1
-        left.preorder_head_index = current.preorder_head_index + 1
-        if(left.inorder_begin <= left.inorder_end && (left.preorder_head_index <= arrays.size - 1))
-            current.head.left = Tree.new(arrays.preorder[left.preorder_head_index])
-            left.head = current.head.left
+        left = {}
+        left[:inorder_begin] = current[:inorder_begin]
+        left[:inorder_end] =  inorder_head_index - 1
+        left[:preorder_head_index] = current[:preorder_head_index] + 1
+        if(left[:inorder_begin] <= left[:inorder_end] && (left[:preorder_head_index] <= arrays[:size] - 1))
+            current[:head].left = Tree.new(arrays[:preorder][left[:preorder_head_index]])
+            left[:head] = current[:head].left
             queue.push left
         end
 
         #Right child
-        right = OpenStruct.new
-        right.inorder_begin = inorder_head_index + 1
-        right.inorder_end =  current.inorder_end
-        right.preorder_head_index = preorder_end_index + 1
-        if(right.inorder_begin <= right.inorder_end && (right.preorder_head_index <= arrays.size - 1))
-            current.head.right =  Tree.new(arrays.preorder[right.preorder_head_index])
-            right.head = current.head.right
+        right = {}
+        right[:inorder_begin] = inorder_head_index + 1
+        right[:inorder_end] =  current[:inorder_end]
+        right[:preorder_head_index] = preorder_end_index + 1
+        if(right[:inorder_begin] <= right[:inorder_end] && (right[:preorder_head_index] <= arrays[:size] - 1))
+            current[:head].right =  Tree.new(arrays[:preorder][right[:preorder_head_index]])
+            right[:head] = current[:head].right
             queue.push right
         end
 
     end
 end
 def restoreBinaryTree(inorder, preorder)
-    arrays = OpenStruct.new(inorder: inorder, preorder: preorder, size: preorder.size)
-    answer = Tree.new(arrays.preorder[0])
-    element = OpenStruct.new(head: answer, preorder_head_index: 0, inorder_begin: 0, inorder_end: (inorder.size - 1) )
+    arrays = {inorder: inorder, preorder: preorder, size: preorder.size}
+    answer = Tree.new(arrays[:preorder][0])
+    element = {head: answer, preorder_head_index: 0, inorder_begin: 0, inorder_end: (inorder.size - 1)}
     rbt(element, arrays)
     answer
 end
