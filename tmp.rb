@@ -19,10 +19,17 @@ require 'ostruct'
 
 
 def findSubstrings(words,parts)
-    ["Apple", 
-        "Me[lon]", 
-        "Or[a]nge", 
-        "Water[mel]on"]
+    words.map do |w|
+        #find all part in current works
+        cur = parts.select{|part| w.include?(part)}
+        max = cur.max_by{|x| x.size}
+        cur = cur.select{|x| x.size == max.size}
+        if ! cur.empty?
+            w.gsub(cur[0],"["+cur[0]+"]")
+        else
+            w
+        end
+    end
 end
 
 
