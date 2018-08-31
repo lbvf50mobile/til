@@ -24,8 +24,9 @@ def findSubstrings(words,parts)
         cur = parts.select{|part| w.include?(part)}
         max = cur.max_by{|x| x.size}
         cur = cur.select{|x| x.size == max.size}
+        cur = cur.sort_by{|x| w.index(x)}
         if ! cur.empty?
-            w.gsub(cur[0],"["+cur[0]+"]")
+            w.sub(cur[0],"["+cur[0]+"]")
         else
             w
         end
@@ -50,6 +51,47 @@ Tests = [
     "Me[lon]", 
     "Or[a]nge", 
     "Water[mel]on"],
+    ["neuroses", 
+        "myopic", 
+        "sufficient", 
+        "televise", 
+        "coccidiosis", 
+        "gules", 
+        "during", 
+        "construe", 
+        "establish", 
+        "ethyl"],
+        ["aaaaa", 
+            "Aaaa", 
+            "E", 
+            "z", 
+            "Zzzzz", 
+            "a", 
+            "mel", 
+            "lon", 
+            "el", 
+            "An", 
+            "ise", 
+            "d", 
+            "g", 
+            "wnoVV", 
+            "i", 
+            "IUMc", 
+            "P", 
+            "KQ", 
+            "QfRz", 
+            "Xyj", 
+            "yiHS"],
+    ["neuroses", 
+                "myop[i]c", 
+                "suff[i]cient", 
+                "telev[ise]", 
+                "cocc[i]diosis", 
+                "[g]ules", 
+                "[d]uring", 
+                "construe", 
+                "est[a]blish", 
+                "ethyl"],
 ]
 
 
