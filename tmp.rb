@@ -16,8 +16,41 @@ require 'json'
 
 require 'ostruct'
 
-
-
+class Trie
+    attr_accessor :keys
+    def initialize
+        @keys = {}
+    end
+    def add node
+        keys[node.val] = node if keys[node.val].nil?
+    end
+    def to_s
+        ans = "keys:#{@keys.keys.to_s} "
+        @keys.reduce(ans){|m,(_,v)| m += v.to_s; m}
+        
+    end
+    def == o
+        self.to_s == o.to_s
+    end
+end
+class Node
+    attr_accessor :keys, :val
+    def initialize(val)
+        @keys = {}
+        @leaf = false
+        @val = val
+    end
+    def leaf!
+        @leaf = true
+    end
+    def add node
+        keys[node.val] = node if keys[node.val].nil?
+    end
+    def to_s
+        ans = "keys:#{@keys.keys.to_s} val:#{@val} leaf:#{@leaf} "
+        @keys.reduce(ans){|m,(_,v)| m += v.to_s; m}
+    end
+end
 def findSubstrings(words,parts)
     words.map do |w|
         #find all part in current works
@@ -34,6 +67,7 @@ def findSubstrings(words,parts)
 end
 
 
+
 require_relative 'tests/codesignal_tests.rb'
 Tests = CodeSignalTests.tests
 
@@ -46,6 +80,44 @@ describe "Trees" do
        Tests.each_slice(3)do |words, parts, ans|
             assert_equal ans, findSubstrings(words,parts)
         end
+    end
+
+    it "should create Trie." do
+        assert_instance_of Trie, Trie.new
+    end
+    it "Trie should use to_s" do
+        a = Trie.new
+        a.keys = {'a'=> 1, 'b'=>2}
+        assert_equal "keys:[\"a\", \"b\"] 12",a.to_s
+    end
+    it "Node should use to_s" do
+        a = Node.new(?z)
+        a.keys = {'a'=> 1, 'b'=>2}
+        assert_equal "keys:[\"a\", \"b\"] val:z leaf:false 12",a.to_s
+        a.leaf!
+        assert_equal "keys:[\"a\", \"b\"] val:z leaf:true 12",a.to_s
+        b = Node.new(?x)
+        assert_equal "keys:[] val:x leaf:false ",b.to_s
+    end
+    it "Should use the recursion" do
+        a = Node.new(?z)
+        a.add Node.new(?x)
+        assert_equal "keys:[\"x\"] val:z leaf:false keys:[] val:x leaf:false ",a.to_s
+    end
+    it "should use th recutifon for tire" do
+        a = Trie.new
+        a.add Node.new(?x)
+        assert_equal "keys:[\"x\"] keys:[] val:x leaf:false ",a.to_s
+    end
+    it "equal" do
+        a = Trie.new
+        a.add Node.new(?x)
+        b = Trie.new
+        b.add Node.new(?x)
+        puts "JSON".red
+        puts a.to_json.green
+        assert_equal a,b
+        
     end
 end
 
