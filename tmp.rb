@@ -15,86 +15,89 @@ require 'json'
 
 
 require 'ostruct'
-myText = <<DOC
-class Trie
-    attr_accessor :keys
-    def initialize
-        @keys = {}
-    end
-    def add node
-        keys[node.val] = node if keys[node.val].nil?
-    end
-    
-    def prefix(arr)
-        acc = ""
-        n = self
-        word = false
-        arr.each do |char|
-            if n.keys[char]
-                n = n.keys[char]
-                acc += n.val
-                word = acc if n.leaf?
-            else
-                return word
-            end
-        end
-        word
-    end
 
-    def insert(word)
-        n = self
-        word.chars.each do |char|
-            if n.keys[char]
-                n = n.keys[char]
-            else
-                n = n.add(Node.new(char))
-            end
-        end
-        n.leaf!
-        self
-    end
-end
-
-
-
-class Node
-    attr_accessor :keys, :val
-    def initialize(val)
-        @keys = {}
-        @leaf = false
-        @val = val
-    end
-    def leaf!
-        @leaf = true
-    end
-    def leaf?
-        @leaf
-    end
-    def add node
-        keys[node.val] = node if keys[node.val].nil?
-    end
-  
-end
-DOC
-eval(myText)
 
 def findSubstrings(words,parts)
-    # create Trie
-    trie = Trie.new
-    parts.each { |x| trie.insert(x)}
-    # find replasefor words
-    words.map{|w|
-        arr = w.chars
-        pat = false
-        max = ""
-        (0..arr.size-1).each do |x|
-            pat = trie.prefix(arr[x..-1])
-            max = pat if pat && max.size < pat.size
+   
+    z = "class Trie
+        attr_accessor :keys
+        def initialize
+            @keys = {}
         end
-        w.sub!(max,"[#{max}]") if !max.empty?
-        w
-    }
-end
+        def add node
+            keys[node.val] = node if keys[node.val].nil?
+        end
+        
+        def prefix(arr)
+            acc = ''
+            n = self
+            word = false
+            arr.each do |char|
+                if n.keys[char]
+                    n = n.keys[char]
+                    acc += n.val
+                    word = acc if n.leaf?
+                else
+                    return word
+                end
+            end
+            word
+        end
+    
+        def insert(word)
+            n = self
+            word.chars.each do |char|
+                if n.keys[char]
+                    n = n.keys[char]
+                else
+                    n = n.add(Node.new(char))
+                end
+            end
+            n.leaf!
+            self
+        end
+    end
+    
+    
+    
+    class Node
+        attr_accessor :keys, :val
+        def initialize(val)
+            @keys = {}
+            @leaf = false
+            @val = val
+        end
+        def leaf!
+            @leaf = true
+        end
+        def leaf?
+            @leaf
+        end
+        def add node
+            keys[node.val] = node if keys[node.val].nil?
+        end
+      
+    end"
+    eval(z)
+    
+    
+    
+        # create Trie
+        trie = Trie.new
+        parts.each { |x| trie.insert(x)}
+        # find replasefor words
+        words.map{|w|
+            arr = w.chars
+            pat = false
+            max = ""
+            (0..arr.size-1).each do |x|
+                pat = trie.prefix(arr[x..-1])
+                max = pat if pat && max.size < pat.size
+            end
+            w.sub!(max,"[#{max}]") if !max.empty?
+            w
+        }
+    end
 
 
 require_relative 'tests/codesignal_tests.rb'
