@@ -114,7 +114,7 @@ describe "Trees" do
         a.add Node.new(?x)
         b = Trie.new
         b.add Node.new(?x)
-        puts "JSON".red
+        puts "JSON".red # Json uses to_S!
         puts a.to_json.green
         assert_equal a,b
         
