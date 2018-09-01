@@ -24,6 +24,35 @@ class Trie
     def add node
         keys[node.val] = node if keys[node.val].nil?
     end
+    
+    def prefix(arr)
+        acc = ""
+        n = self
+        word = false
+        arr.each do |char|
+            if n.keys[char]
+                n = n.keys[char]
+                acc += n.val
+                word = acc if n.leaf?
+            else
+                return word
+            end
+        end
+        word
+    end
+
+    def insert(word)
+        n = self
+        word.chars.each do |char|
+            if n.keys[char]
+                n = n.keys[char]
+            else
+                n = n.add(Node.new(char))
+            end
+        end
+        n.leaf!
+        self
+    end
     def to_s
         ans = "keys:#{@keys.keys.to_s} "
         @keys.reduce(ans){|m,(_,v)| m += v.to_s; m}
@@ -33,6 +62,9 @@ class Trie
         self.to_s == o.to_s
     end
 end
+
+
+
 class Node
     attr_accessor :keys, :val
     def initialize(val)
@@ -42,6 +74,9 @@ class Node
     end
     def leaf!
         @leaf = true
+    end
+    def leaf?
+        @leaf
     end
     def add node
         keys[node.val] = node if keys[node.val].nil?
@@ -114,10 +149,22 @@ describe "Trees" do
         a.add Node.new(?x)
         b = Trie.new
         b.add Node.new(?x)
-        puts "JSON".red # Json uses to_S!
-        puts a.to_json.green
         assert_equal a,b
-        
+    end
+    it "insert word do" do
+        word = Trie.new
+        word.add(Node.new(?d)).add(Node.new(?o)).leaf!
+        auto = Trie.new.insert("do")
+        assert_equal word, auto
+    end
+    it "search do" do
+        auto = Trie.new.insert("123")
+        prefix = auto.prefix("12345678".chars)
+        assert "123", prefix
+        auto.insert("1234567")
+        prefix = auto.prefix("12345678".chars)
+        assert "1234567", prefix
+
     end
 end
 
