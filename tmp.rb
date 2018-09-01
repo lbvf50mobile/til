@@ -87,18 +87,21 @@ class Node
     end
 end
 def findSubstrings(words,parts)
-    words.map do |w|
-        #find all part in current works
-        cur = parts.select{|part| w.include?(part)}
-        max = cur.max_by{|x| x.size}
-        cur = cur.select{|x| x.size == max.size}
-        cur = cur.sort_by{|x| w.index(x)}
-        if ! cur.empty?
-            w.sub(cur[0],"["+cur[0]+"]")
-        else
-            w
+    # create Trie
+    trie = Trie.new
+    parts.each { |x| trie.insert(x)}
+    # find replasefor words
+    words.map{|w|
+        arr = w.chars
+        pat = false
+        max = ""
+        (0..arr.size-1).each do |x|
+            pat = trie.prefix(arr[x..-1])
+            max = pat if pat && max.size < pat.size
         end
-    end
+        w.sub!(max,"[#{max}]") if !max.empty?
+        w
+    }
 end
 
 
