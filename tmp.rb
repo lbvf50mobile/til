@@ -34,65 +34,8 @@ def findSubstrings(words,parts)
 end
 
 
-
-Tests = [
-    ["Apple", 
-    "Melon", 
-    "Orange", 
-    "Watermelon"],
-
-    ["a", 
-    "mel", 
-    "lon", 
-    "el", 
-    "An"],
-
-    ["Apple", 
-    "Me[lon]", 
-    "Or[a]nge", 
-    "Water[mel]on"],
-    ["neuroses", 
-        "myopic", 
-        "sufficient", 
-        "televise", 
-        "coccidiosis", 
-        "gules", 
-        "during", 
-        "construe", 
-        "establish", 
-        "ethyl"],
-        ["aaaaa", 
-            "Aaaa", 
-            "E", 
-            "z", 
-            "Zzzzz", 
-            "a", 
-            "mel", 
-            "lon", 
-            "el", 
-            "An", 
-            "ise", 
-            "d", 
-            "g", 
-            "wnoVV", 
-            "i", 
-            "IUMc", 
-            "P", 
-            "KQ", 
-            "QfRz", 
-            "Xyj", 
-            "yiHS"],
-    ["neuroses", 
-                "myop[i]c", 
-                "suff[i]cient", 
-                "telev[ise]", 
-                "cocc[i]diosis", 
-                "[g]ules", 
-                "[d]uring", 
-                "construe", 
-                "est[a]blish", 
-                "ethyl"],
-]
+require_relative 'tests/codesignal_tests.rb'
+Tests = CodeSignalTests.tests
 
 
 
