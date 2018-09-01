@@ -15,7 +15,7 @@ require 'json'
 
 
 require 'ostruct'
-
+myText = <<DOC
 class Trie
     attr_accessor :keys
     def initialize
@@ -53,14 +53,6 @@ class Trie
         n.leaf!
         self
     end
-    def to_s
-        ans = "keys:#{@keys.keys.to_s} "
-        @keys.reduce(ans){|m,(_,v)| m += v.to_s; m}
-        
-    end
-    def == o
-        self.to_s == o.to_s
-    end
 end
 
 
@@ -81,11 +73,11 @@ class Node
     def add node
         keys[node.val] = node if keys[node.val].nil?
     end
-    def to_s
-        ans = "keys:#{@keys.keys.to_s} val:#{@val} leaf:#{@leaf} "
-        @keys.reduce(ans){|m,(_,v)| m += v.to_s; m}
-    end
+  
 end
+DOC
+eval(myText)
+
 def findSubstrings(words,parts)
     # create Trie
     trie = Trie.new
@@ -105,7 +97,6 @@ def findSubstrings(words,parts)
 end
 
 
-
 require_relative 'tests/codesignal_tests.rb'
 Tests = CodeSignalTests.tests
 
@@ -120,55 +111,7 @@ describe "Trees" do
         end
     end
 
-    it "should create Trie." do
-        assert_instance_of Trie, Trie.new
-    end
-    it "Trie should use to_s" do
-        a = Trie.new
-        a.keys = {'a'=> 1, 'b'=>2}
-        assert_equal "keys:[\"a\", \"b\"] 12",a.to_s
-    end
-    it "Node should use to_s" do
-        a = Node.new(?z)
-        a.keys = {'a'=> 1, 'b'=>2}
-        assert_equal "keys:[\"a\", \"b\"] val:z leaf:false 12",a.to_s
-        a.leaf!
-        assert_equal "keys:[\"a\", \"b\"] val:z leaf:true 12",a.to_s
-        b = Node.new(?x)
-        assert_equal "keys:[] val:x leaf:false ",b.to_s
-    end
-    it "Should use the recursion" do
-        a = Node.new(?z)
-        a.add Node.new(?x)
-        assert_equal "keys:[\"x\"] val:z leaf:false keys:[] val:x leaf:false ",a.to_s
-    end
-    it "should use th recutifon for tire" do
-        a = Trie.new
-        a.add Node.new(?x)
-        assert_equal "keys:[\"x\"] keys:[] val:x leaf:false ",a.to_s
-    end
-    it "equal" do
-        a = Trie.new
-        a.add Node.new(?x)
-        b = Trie.new
-        b.add Node.new(?x)
-        assert_equal a,b
-    end
-    it "insert word do" do
-        word = Trie.new
-        word.add(Node.new(?d)).add(Node.new(?o)).leaf!
-        auto = Trie.new.insert("do")
-        assert_equal word, auto
-    end
-    it "search do" do
-        auto = Trie.new.insert("123")
-        prefix = auto.prefix("12345678".chars)
-        assert "123", prefix
-        auto.insert("1234567")
-        prefix = auto.prefix("12345678".chars)
-        assert "1234567", prefix
-
-    end
+  
 end
 
 # https://youtu.be/dUBkaqrcYT8
