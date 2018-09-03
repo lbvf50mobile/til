@@ -18,33 +18,29 @@ def find(t,x, parent, left)
     return [t,parent, left] if x == t.value
     x < t.value ? find(t.left,x,t,true) : find(t.right,x,t,false)
 end
+def leaf? node
+    (!node.left) && (!node.right)
+end
 
 
 
 
 def deleteFromBST(t,queries)
-    x = '{
-        "value": 5,
-        "left": {
-            "value": 2,
-            "left": null,
-            "right": {
-                "value": 3,
-                "left": null,
-                "right": null
-            }
-        },
-        "right": {
-            "value": 6,
-            "left": null,
-            "right": {
-                "value": 8,
-                "left":null,
-                "right": null
-            }
-        }
-    }'
-    hsh2tree(JSON.parse(x))
+    queries.each do |x|
+        node, parent, left = find(t,x,nil,nil)
+        if node
+            if leaf?(node)
+            end
+            if parent
+                if left
+                    parent.left = nil
+                else
+                    parent.right = nil
+                end
+            end
+        end
+    end
+    t
 end
 
 
