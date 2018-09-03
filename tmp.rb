@@ -196,6 +196,60 @@ describe "Trees" do
         assert_equal ans, tree2hsh(deleteFromBST(t,[3]))
     end
 
+    it "delete right leaf" do
+        t_json = '{
+            "value": 5,
+            "left": {
+                "value": 2,
+                "left": {
+                    "value": 1,
+                    "left": null,
+                    "right": null
+                },
+                "right": {
+                    "value": 3,
+                    "left": null,
+                    "right": null
+                }
+            },
+            "right": {
+                "value": 6,
+                "left": null,
+                "right": {
+                    "value": 8,
+                    "left": {
+                        "value": 7,
+                        "left": null,
+                        "right": null
+                    },
+                    "right": null
+                }
+            }
+        }'
+        ans_json = '{
+            "value": 5,
+            "left": {
+                "value": 2,
+                "left": null,
+                "right": null
+            },
+            "right": {
+                "value": 6,
+                "left": null,
+                "right": {
+                    "value": 8,
+                    "left": null,
+                    "right": null
+                }
+            }
+        }'
+        t = hsh2tree(JSON.parse(t_json))
+        ans = JSON.parse(ans_json)
+        [1,3,7].permutation do |z|
+            assert_equal ans, tree2hsh(deleteFromBST(t,z))
+        end
+    end
+
     it "delete leaf root" do
     end
   
