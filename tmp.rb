@@ -21,7 +21,9 @@ end
 def leaf? node
     (!node.left) && (!node.right)
 end
-
+def one_child? node
+    ((node.left) && (!node.right)) || ((!node.left) && (node.right)) 
+end
 def delete_leaf(t,parent,left)
     if parent
         if left
@@ -34,6 +36,19 @@ def delete_leaf(t,parent,left)
     end
     t
 end
+def delete_node_one(t,node,parent,left) 
+    child = node.left ? node.left : node.right
+    if parent
+        if left
+            parent.left = child
+        else
+            parent.right = child
+        end
+    else
+        t = child
+    end
+    t
+end
 
 def deleteFromBST(t,queries)
     return nil if t.nil?
@@ -42,6 +57,9 @@ def deleteFromBST(t,queries)
         if node
             if leaf?(node)
                 t = delete_leaf(t,parent,left)
+            end
+            if one_child?(node)
+                t = delete_node_one(t,node,parent,left)
             end
         end
     end
