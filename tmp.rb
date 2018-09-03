@@ -195,7 +195,6 @@ describe "Trees" do
   
     it "auto test" do
        Tests.each_slice(3)do |t_json, queries, ans_json|
-        skip
             t = hsh2tree(JSON.parse(t_json))
             ans = JSON.parse(ans_json)
             assert_equal ans, tree2hsh(deleteFromBST(t,queries))
