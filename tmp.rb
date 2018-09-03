@@ -26,6 +26,7 @@ end
 
 
 def deleteFromBST(t,queries)
+    return nil if t.nil?
     queries.each do |x|
         node, parent, left = find(t,x,nil,nil)
         if node
@@ -37,6 +38,8 @@ def deleteFromBST(t,queries)
                 else
                     parent.right = nil
                 end
+            else
+                t = nil
             end
         end
     end
@@ -251,6 +254,16 @@ describe "Trees" do
     end
 
     it "delete leaf root" do
+        t_json = '{
+            "value": 5,
+            "left": null,
+            "right": null
+        }'
+        t = hsh2tree(JSON.parse(t_json))
+        assert_nil  deleteFromBST(t,[5])
+        
+        t = hsh2tree(JSON.parse(t_json))
+        assert_equal JSON.parse(t_json), tree2hsh(deleteFromBST(t,[16]))
     end
   
     it "auto test" do
