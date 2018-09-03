@@ -18,6 +18,11 @@ def find(t,x, parent, left)
     return [t,parent, left] if x == t.value
     x < t.value ? find(t.left,x,t,true) : find(t.right,x,t,false)
 end
+def find_right(t, parent)
+    return [t,parent] if t.nil?
+    return [t,parent] if t.right.nil?
+    find_right(t.right,t)
+end
 def leaf? node
     (!node.left) && (!node.right)
 end
@@ -49,6 +54,26 @@ def delete_node_one(t,node,parent,left)
     end
     t
 end
+def delete_node_two(t,node,parent,left) 
+    right, right_parent = find_right(node.right, node)
+    if leaf?(right)
+        delete_leaf(node,right_parent,false)
+    else
+        delete_node_one(node,right,right_parent,false)
+    end
+    right.left = node.left
+    right.right = node.right
+    if parent
+        if left
+            parent.left = right
+        else
+            parent.right = right
+        end
+    else
+        t = right
+    end
+    t
+end
 
 def deleteFromBST(t,queries)
     return nil if t.nil?
@@ -57,10 +82,13 @@ def deleteFromBST(t,queries)
         if node
             if leaf?(node)
                 t = delete_leaf(t,parent,left)
+                next
             end
             if one_child?(node)
                 t = delete_node_one(t,node,parent,left)
+                next
             end
+            t = delete_node_two(t,node,parent,left)
         end
     end
     t
@@ -461,6 +489,66 @@ describe "Trees" do
         [6,8].permutation do |z|
             assert_equal ans, tree2hsh(deleteFromBST(t,z))
         end
+    end
+
+    it "delete leaf with 2 childs" do
+        t_json = '{
+            "value": 5,
+            "left": {
+                "value": 2,
+                "left": {
+                    "value": 1,
+                    "left": null,
+                    "right": null
+                },
+                "right": {
+                    "value": 3,
+                    "left": null,
+                    "right": null
+                }
+            },
+            "right": {
+                "value": 6,
+                "left": null,
+                "right": {
+                    "value": 8,
+                    "left": {
+                        "value": 7,
+                        "left": null,
+                        "right": null
+                    },
+                    "right": null
+                }
+            }
+        }'
+        ans_json = '{
+            "value": 5,
+            "left": {
+                "value": 3,
+                "left": {
+                    "value": 1,
+                    "left": null,
+                    "right": null
+                },
+                "right": null
+            },
+            "right": {
+                "value": 6,
+                "left": null,
+                "right": {
+                    "value": 8,
+                    "left": {
+                        "value": 7,
+                        "left": null,
+                        "right": null
+                    },
+                    "right": null
+                }
+            }
+        }'
+        t = hsh2tree(JSON.parse(t_json))
+        ans = JSON.parse(ans_json)
+        assert_equal ans, tree2hsh(deleteFromBST(t,[2]))
     end
   
     it "auto test" do
