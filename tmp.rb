@@ -55,11 +55,11 @@ def delete_node_one(t,node,parent,left)
     t
 end
 def delete_node_two(t,node,parent,left) 
-    right, right_parent = find_right(node.right, node)
+    right, right_parent = find_right(node.left, node)
     if leaf?(right)
-        delete_leaf(node,right_parent,false)
+        delete_leaf(node.left,right_parent,false)
     else
-        delete_node_one(node,right,right_parent,false)
+        delete_node_one(node.left,right,right_parent,false)
     end
     right.left = node.left
     right.right = node.right
@@ -129,367 +129,7 @@ Tests = CodeSignalTests.tests
 
 describe "Trees" do
 
-    it "delete left lef" do
-        t_json = '{
-            "value": 5,
-            "left": {
-                "value": 2,
-                "left": {
-                    "value": 1,
-                    "left": null,
-                    "right": null
-                },
-                "right": {
-                    "value": 3,
-                    "left": null,
-                    "right": null
-                }
-            },
-            "right": {
-                "value": 6,
-                "left": null,
-                "right": {
-                    "value": 8,
-                    "left": {
-                        "value": 7,
-                        "left": null,
-                        "right": null
-                    },
-                    "right": null
-                }
-            }
-        }'
-        ans_json = '{
-            "value": 5,
-            "left": {
-                "value": 2,
-                "left": null,
-                "right": {
-                    "value": 3,
-                    "left": null,
-                    "right": null
-                }
-            },
-            "right": {
-                "value": 6,
-                "left": null,
-                "right": {
-                    "value": 8,
-                    "left":null,
-                    "right": null
-                }
-            }
-        }'
-        t = hsh2tree(JSON.parse(t_json))
-        ans = JSON.parse(ans_json)
-        assert_equal ans, tree2hsh(deleteFromBST(t,[1,7]))
-        assert_equal ans, tree2hsh(deleteFromBST(t,[7,1]))
-
-    end
-
-    it "delete right leaf" do
-        t_json = '{
-            "value": 5,
-            "left": {
-                "value": 2,
-                "left": {
-                    "value": 1,
-                    "left": null,
-                    "right": null
-                },
-                "right": {
-                    "value": 3,
-                    "left": null,
-                    "right": null
-                }
-            },
-            "right": {
-                "value": 6,
-                "left": null,
-                "right": {
-                    "value": 8,
-                    "left": {
-                        "value": 7,
-                        "left": null,
-                        "right": null
-                    },
-                    "right": null
-                }
-            }
-        }'
-        ans_json = '{
-            "value": 5,
-            "left": {
-                "value": 2,
-                "left": {
-                    "value": 1,
-                    "left": null,
-                    "right": null
-                },
-                "right": null
-            },
-            "right": {
-                "value": 6,
-                "left": null,
-                "right": {
-                    "value": 8,
-                    "left": {
-                        "value": 7,
-                        "left": null,
-                        "right": null
-                    },
-                    "right": null
-                }
-            }
-        }'
-        t = hsh2tree(JSON.parse(t_json))
-        ans = JSON.parse(ans_json)
-        assert_equal ans, tree2hsh(deleteFromBST(t,[3]))
-    end
-
-    it "delete right leaf" do
-        t_json = '{
-            "value": 5,
-            "left": {
-                "value": 2,
-                "left": {
-                    "value": 1,
-                    "left": null,
-                    "right": null
-                },
-                "right": {
-                    "value": 3,
-                    "left": null,
-                    "right": null
-                }
-            },
-            "right": {
-                "value": 6,
-                "left": null,
-                "right": {
-                    "value": 8,
-                    "left": {
-                        "value": 7,
-                        "left": null,
-                        "right": null
-                    },
-                    "right": null
-                }
-            }
-        }'
-        ans_json = '{
-            "value": 5,
-            "left": {
-                "value": 2,
-                "left": null,
-                "right": null
-            },
-            "right": {
-                "value": 6,
-                "left": null,
-                "right": {
-                    "value": 8,
-                    "left": null,
-                    "right": null
-                }
-            }
-        }'
-        t = hsh2tree(JSON.parse(t_json))
-        ans = JSON.parse(ans_json)
-        [1,3,7].permutation do |z|
-            assert_equal ans, tree2hsh(deleteFromBST(t,z))
-        end
-    end
-
-    it "delete leaf root" do
-        t_json = '{
-            "value": 5,
-            "left": null,
-            "right": null
-        }'
-        t = hsh2tree(JSON.parse(t_json))
-        assert_nil  deleteFromBST(t,[5])
-
-        t = hsh2tree(JSON.parse(t_json))
-        assert_equal JSON.parse(t_json), tree2hsh(deleteFromBST(t,[16]))
-    end
-
-    it "delete leaf with left child" do
-        t_json = '{
-            "value": 5,
-            "left": {
-                "value": 2,
-                "left": {
-                    "value": 1,
-                    "left": null,
-                    "right": null
-                },
-                "right": {
-                    "value": 3,
-                    "left": null,
-                    "right": null
-                }
-            },
-            "right": {
-                "value": 6,
-                "left": null,
-                "right": {
-                    "value": 8,
-                    "left": {
-                        "value": 7,
-                        "left": null,
-                        "right": null
-                    },
-                    "right": null
-                }
-            }
-        }'
-        ans_json = '{
-            "value": 5,
-            "left": {
-                "value": 2,
-                "left": {
-                    "value": 1,
-                    "left": null,
-                    "right": null
-                },
-                "right": {
-                    "value": 3,
-                    "left": null,
-                    "right": null
-                }
-            },
-            "right": {
-                "value": 6,
-                "left": null,
-                "right": {
-                    "value": 7,
-                    "left": null,
-                    "right": null
-                }
-            }
-        }'
-        t = hsh2tree(JSON.parse(t_json))
-        ans = JSON.parse(ans_json)
-        assert_equal ans, tree2hsh(deleteFromBST(t,[8]))
-    end
-
-    it "delete leaf with right child" do
-        t_json = '{
-            "value": 5,
-            "left": {
-                "value": 2,
-                "left": {
-                    "value": 1,
-                    "left": null,
-                    "right": null
-                },
-                "right": {
-                    "value": 3,
-                    "left": null,
-                    "right": null
-                }
-            },
-            "right": {
-                "value": 6,
-                "left": null,
-                "right": {
-                    "value": 8,
-                    "left": {
-                        "value": 7,
-                        "left": null,
-                        "right": null
-                    },
-                    "right": null
-                }
-            }
-        }'
-        ans_json = '{
-            "value": 5,
-            "left": {
-                "value": 2,
-                "left": {
-                    "value": 1,
-                    "left": null,
-                    "right": null
-                },
-                "right": {
-                    "value": 3,
-                    "left": null,
-                    "right": null
-                }
-            },
-            "right": {
-                "value": 8,
-                "right": null,
-                "left": {
-                    "value": 7,
-                    "left":null,
-                    "right": null
-                }
-            }
-        }'
-        t = hsh2tree(JSON.parse(t_json))
-        ans = JSON.parse(ans_json)
-        assert_equal ans, tree2hsh(deleteFromBST(t,[6]))
-    end
-    it "delete leaf with right child" do
-        t_json = '{
-            "value": 5,
-            "left": {
-                "value": 2,
-                "left": {
-                    "value": 1,
-                    "left": null,
-                    "right": null
-                },
-                "right": {
-                    "value": 3,
-                    "left": null,
-                    "right": null
-                }
-            },
-            "right": {
-                "value": 6,
-                "left": null,
-                "right": {
-                    "value": 8,
-                    "left": {
-                        "value": 7,
-                        "left": null,
-                        "right": null
-                    },
-                    "right": null
-                }
-            }
-        }'
-        ans_json = '{
-            "value": 5,
-            "left": {
-                "value": 2,
-                "left": {
-                    "value": 1,
-                    "left": null,
-                    "right": null
-                },
-                "right": {
-                    "value": 3,
-                    "left": null,
-                    "right": null
-                }
-            },
-            "right": {
-                "value": 7,
-                "right": null,
-                "left": null
-            }
-        }'
-        t = hsh2tree(JSON.parse(t_json))
-        ans = JSON.parse(ans_json)
-        [6,8].permutation do |z|
-            assert_equal ans, tree2hsh(deleteFromBST(t,z))
-        end
-    end
+  
 
     it "delete leaf with 2 childs" do
         t_json = '{
@@ -522,9 +162,9 @@ describe "Trees" do
             }
         }'
         ans_json = '{
-            "value": 5,
+            "value": 3,
             "left": {
-                "value": 3,
+                "value": 2,
                 "left": {
                     "value": 1,
                     "left": null,
@@ -548,8 +188,10 @@ describe "Trees" do
         }'
         t = hsh2tree(JSON.parse(t_json))
         ans = JSON.parse(ans_json)
-        assert_equal ans, tree2hsh(deleteFromBST(t,[2]))
+        assert_equal ans, tree2hsh(deleteFromBST(t,[5]))
     end
+
+
   
     it "auto test" do
        Tests.each_slice(3)do |t_json, queries, ans_json|
