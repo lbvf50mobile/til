@@ -22,8 +22,18 @@ def leaf? node
     (!node.left) && (!node.right)
 end
 
-
-
+def delete_leaf(t,parent,left)
+    if parent
+        if left
+            parent.left = nil
+        else
+            parent.right = nil
+        end
+    else
+        t = nil
+    end
+    t
+end
 
 def deleteFromBST(t,queries)
     return nil if t.nil?
@@ -31,15 +41,7 @@ def deleteFromBST(t,queries)
         node, parent, left = find(t,x,nil,nil)
         if node
             if leaf?(node)
-            end
-            if parent
-                if left
-                    parent.left = nil
-                else
-                    parent.right = nil
-                end
-            else
-                t = nil
+                t = delete_leaf(t,parent,left)
             end
         end
     end
@@ -261,7 +263,7 @@ describe "Trees" do
         }'
         t = hsh2tree(JSON.parse(t_json))
         assert_nil  deleteFromBST(t,[5])
-        
+
         t = hsh2tree(JSON.parse(t_json))
         assert_equal JSON.parse(t_json), tree2hsh(deleteFromBST(t,[16]))
     end
