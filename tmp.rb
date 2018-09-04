@@ -37,7 +37,12 @@ def delete(root: nil, data: nil, parent: nil)
         elsif root.right.nil?
             root = root.left
         else
-            right = find_right(root.left)
+            right = root.left
+            loop do
+                break if right.right.nil?
+                right = right.right
+            end
+
             delete(root: root.left, data: right.value, parent: root)
             right.left = root.left
             right.right = root.right
