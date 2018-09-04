@@ -17,14 +17,12 @@ require 'ostruct'
 
 # https://gist.github.com/lbvf50mobile/911c879df1e5e2fef595076ac8efc0a0
 def delete(root: nil, data: nil, parent: nil)
-    p_left = parent && parent.left ? parent.left.value : false
-    p_right = parent && parent.right ? parent.right.value : false
     if root.nil?
         return nil
     elsif data < root.value
-        root.left = delete(root: root.left, data: data, parent: root)
+        root.left = delete(root: root.left, data: data)
     elsif data > root.value
-        root.right = delete(root: root.right, data: data, parent: root)
+        root.right = delete(root: root.right, data: data)
     else
         if (!root.left) && (!root.right)
             root = nil
@@ -57,25 +55,17 @@ def delete(root: nil, data: nil, parent: nil)
                     rp.right = right.left
                 end
             end
-
-            
             right.left = root.left
             right.right = root.right
             root = right
         end
-            if p_left == data
-                parent.left = root
-            end
-            if p_right == data
-                parent.right = root
-            end
     end
     root
 end
 def deleteFromBST(t,queries)
     return nil if t.nil?
     queries.each do |x|
-        t = delete(root:t,data:x,parent:nil)
+        t = delete(root:t,data:x)
     end
     t
 end
