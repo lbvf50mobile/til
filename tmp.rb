@@ -213,15 +213,16 @@ describe "Trees" do
         ans_json = '{
             "value": 5,
             "left": {
-                "value": 3,
-                "left": {
-                    "value": 1,
+                "value": 1,
+                "left": null,
+                "right": {
+                    "value": 3,
                     "left": null,
                     "right": null
-                },
-                "right": null
+                }
             },
             "right": null
+            
         }'
         t = hsh2tree(JSON.parse(t_json))
         ans = JSON.parse(ans_json)
