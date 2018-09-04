@@ -35,15 +35,15 @@ def delete(root: nil, data: nil, parent: nil)
         else
             rp = root
             right = root.left
-            i = 0
+            i = true
             loop do
                 break if right.right.nil?
                 rp = right
                 right = right.right
-                i += 1
+                i = false
             end
             # only left is biggets
-            if 0 == i
+            if i
                 if (!right.left) && (!right.right)
                     rp.left = nil
                 else
@@ -63,14 +63,12 @@ def delete(root: nil, data: nil, parent: nil)
             right.right = root.right
             root = right
         end
-        if parent
             if p_left == data
                 parent.left = root
             end
             if p_right == data
                 parent.right = root
             end
-        end
     end
     root
 end
