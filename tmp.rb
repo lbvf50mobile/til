@@ -15,6 +15,91 @@ require 'ostruct'
 
 
 
+def find(t,x, parent, left)
+    return [t,parent, left] if t.nil?
+    return [t,parent, left] if x == t.value
+    x < t.value ? find(t.left,x,t,true) : find(t.right,x,t,false)
+end
+def find_right(t, parent)
+    return [t,parent] if t.nil?
+    return [t,parent] if t.right.nil?
+    find_right(t.right,t)
+end
+def leaf? node
+    (!node.left) && (!node.right)
+end
+def one_child? node
+    ((node.left) && (!node.right)) || ((!node.left) && (node.right)) 
+end
+def delete_leaf(t,parent,left)
+    if parent
+        if left
+            parent.left = nil
+        else
+            parent.right = nil
+        end
+    else
+        t = nil
+    end
+    t
+end
+def delete_node_one(t,node,parent,left) 
+    child = node.left ? node.left : node.right
+    if parent
+        if left
+            parent.left = child
+        else
+            parent.right = child
+        end
+    else
+        t = child
+    end
+    t
+end
+def delete_node_two(t,node,parent,left) 
+    right, right_parent = find_right(node.left, node)
+    left = right_parent == node ? true : false
+    if leaf?(right)
+        delete_leaf(node.left,right_parent,left)
+    else
+        delete_node_one(node.left,right,right_parent,left)
+    end
+    right.left = node.left
+    right.right = node.right
+    if parent
+        if left
+            parent.left = right
+        else
+            parent.right = right
+        end
+    else
+        t = right
+    end
+    t
+end
+
+def deleteFromBST1(t,queries)
+    return nil if t.nil?
+    queries.each do |x|
+        node, parent, left = find(t,x,nil,nil)
+        if node
+            if leaf?(node)
+                t = delete_leaf(t,parent,left)
+                next
+            end
+            if one_child?(node)
+                t = delete_node_one(t,node,parent,left)
+                next
+            end
+            t = delete_node_two(t,node,parent,left)
+        end
+    end
+    t
+end
+
+
+
+
 # https://gist.github.com/lbvf50mobile/911c879df1e5e2fef595076ac8efc0a0
 def delete(root: nil, data: nil, parent: nil)
     if root.nil?
@@ -104,7 +189,7 @@ Tests = CodeSignalTests.tests
 
 describe "Trees" do
 
-  
+   
 
     it "delete leaf with 2 childs" do
         t_json = '{
@@ -122,24 +207,13 @@ describe "Trees" do
                     "right": null
                 }
             },
-            "right": {
-                "value": 6,
-                "left": null,
-                "right": {
-                    "value": 8,
-                    "left": {
-                        "value": 7,
-                        "left": null,
-                        "right": null
-                    },
-                    "right": null
-                }
-            }
+            "right": null
+            
         }'
         ans_json = '{
-            "value": 3,
+            "value": 5,
             "left": {
-                "value": 2,
+                "value": 3,
                 "left": {
                     "value": 1,
                     "left": null,
@@ -147,29 +221,28 @@ describe "Trees" do
                 },
                 "right": null
             },
-            "right": {
-                "value": 6,
-                "left": null,
-                "right": {
-                    "value": 8,
-                    "left": {
-                        "value": 7,
-                        "left": null,
-                        "right": null
-                    },
-                    "right": null
-                }
-            }
+            "right": null
         }'
         t = hsh2tree(JSON.parse(t_json))
         ans = JSON.parse(ans_json)
-        assert_equal ans, tree2hsh(deleteFromBST(t,[5]))
+        assert_equal ans, tree2hsh(deleteFromBST1(t,[2]))
+        t = hsh2tree(JSON.parse(t_json))
+        ans = JSON.parse(ans_json)
+        assert_equal ans, tree2hsh(deleteFromBST(t,[2]))
     end
+
+
+
+    
 
 
   
     it "auto test" do
+        skip
        Tests.each_slice(3)do |t_json, queries, ans_json|
+       t = hsh2tree(JSON.parse(t_json))
+       ans = JSON.parse(ans_json)
+       assert_equal ans, tree2hsh(deleteFromBST1(t,queries))
             t = hsh2tree(JSON.parse(t_json))
             ans = JSON.parse(ans_json)
             assert_equal ans, tree2hsh(deleteFromBST(t,queries))
