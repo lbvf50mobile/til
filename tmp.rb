@@ -14,14 +14,12 @@ require 'json'
 require 'ostruct'
 
 
-def find_right(t, parent)
-    return [t,parent] if t.nil?
-    return [t,parent] if t.right.nil?
-    find_right(t.right,t)
+def find_right(t)
+    return t if t.nil?
+    return t if t.right.nil?
+    find_right(t.right)
 end
-def leaf? node
-    (!node.left) && (!node.right)
-end
+
 # https://gist.github.com/lbvf50mobile/911c879df1e5e2fef595076ac8efc0a0
 def delete(root: nil, data: nil, parent: nil)
     p_left = parent && parent.left ? parent.left.value : false
@@ -33,14 +31,14 @@ def delete(root: nil, data: nil, parent: nil)
     elsif data > root.value
         root.right = delete(root: root.right, data: data, parent: root)
     else
-        if leaf?(root)
+        if (!root.left) && (!root.right)
             root = nil
         elsif root.left.nil?
             root = root.right
         elsif root.right.nil?
             root = root.left
         else
-            right, _  = find_right(root.left, root)
+            right = find_right(root.left)
             delete(root: root.left, data: right.value, parent: root)
             right.left = root.left
             right.right = root.right
