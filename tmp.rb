@@ -56,10 +56,11 @@ def delete_node_one(t,node,parent,left)
 end
 def delete_node_two(t,node,parent,left) 
     right, right_parent = find_right(node.left, node)
+    left = right_parent == node ? true : false
     if leaf?(right)
-        delete_leaf(node.left,right_parent,false)
+        delete_leaf(node.left,right_parent,left)
     else
-        delete_node_one(node.left,right,right_parent,false)
+        delete_node_one(node.left,right,right_parent,left)
     end
     right.left = node.left
     right.right = node.right
