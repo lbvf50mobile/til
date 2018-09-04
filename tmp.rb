@@ -19,7 +19,7 @@ require 'ostruct'
 
 # https://www.geeksforgeeks.org/binary-search-tree-set-2-delete/
 # https://gist.github.com/lbvf50mobile/911c879df1e5e2fef595076ac8efc0a0
-def delete(root: nil, data: nil, parent: nil)
+def delete(root: nil, data: nil)
     if root.nil?
         return nil
     elsif data < root.value
