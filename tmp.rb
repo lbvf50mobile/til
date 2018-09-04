@@ -19,7 +19,6 @@ def find_right(t)
     return t if t.right.nil?
     find_right(t.right)
 end
-
 # https://gist.github.com/lbvf50mobile/911c879df1e5e2fef595076ac8efc0a0
 def delete(root: nil, data: nil, parent: nil)
     p_left = parent && parent.left ? parent.left.value : false
