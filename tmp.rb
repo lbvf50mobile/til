@@ -17,7 +17,7 @@ require 'ostruct'
 
 
 
-
+# https://www.geeksforgeeks.org/binary-search-tree-set-2-delete/
 # https://gist.github.com/lbvf50mobile/911c879df1e5e2fef595076ac8efc0a0
 def delete(root: nil, data: nil, parent: nil)
     if root.nil?
@@ -34,33 +34,12 @@ def delete(root: nil, data: nil, parent: nil)
         elsif root.right.nil?
             root = root.left
         else
-            rp = root
             right = root.left
-            i = true
-            loop do
-                break if right.right.nil?
-                rp = right
+            while right.right
                 right = right.right
-                i = false
             end
-            # only left is biggets
-            if i
-                if (!right.left) && (!right.right)
-                    rp.left = nil
-                else
-                    rp.left = right.left
-                end
-            # left have a right child
-            else
-                if (!right.left) && (!right.right)
-                    rp.right = nil
-                else
-                    rp.right = right.left
-                end
-            end
-            right.left = root.left
-            right.right = root.right
-            root = right
+            root.value = right.value
+            root.left = delete(root: root.left, data: right.value)
         end
     end
     root
