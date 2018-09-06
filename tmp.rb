@@ -26,7 +26,7 @@ def delete(root: nil, data: nil)
         root.left = delete(root: root.left, data: data)
     elsif data > root.value
         root.right = delete(root: root.right, data: data)
-    elsif root.value = data
+    elsif root.value == data
         if (!root.left) && (!root.right)
             root = nil
         elsif root.right && root.left.nil?
