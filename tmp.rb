@@ -26,20 +26,18 @@ def delete(root: nil, data: nil)
         root.left = delete(root: root.left, data: data)
     elsif data > root.value
         root.right = delete(root: root.right, data: data)
-    else
+    elsif root.value = data
         if (!root.left) && (!root.right)
             root = nil
-        elsif root.left.nil?
+        elsif root.right && root.left.nil?
             root = root.right
-        elsif root.right.nil?
-            root = root.left
-        else
-            right = root.left
-            while right.right
-                right = right.right
+        elsif root.left 
+            tmp = root.left
+            while tmp.right
+                tmp = tmp.right
             end
-            root.value = right.value
-            root.left = delete(root: root.left, data: right.value)
+            root.value = tmp.value
+            root.left = delete(root: root.left, data: tmp.value)
         end
     end
     root
@@ -92,7 +90,7 @@ describe "Trees" do
 
   
     it "auto test" do
-       Tests.each_slice(3)do |t_json, queries, ans_json|
+       Tests[0..-4].each_slice(3)do |t_json, queries, ans_json|
             t = hsh2tree(Oj.load(t_json))
             ans = Oj.load(ans_json)
             assert_equal ans, tree2hsh(deleteFromBST(t,queries))
