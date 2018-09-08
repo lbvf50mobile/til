@@ -14,6 +14,9 @@ require 'oj'
 require 'ostruct'
 
 
+def kthLargestElement(nums, k)
+    nums.sort.reverse[k-1]
+end
 
 
 
@@ -22,28 +25,12 @@ require_relative 'tests/codesignal_tests.rb'
 Tests = CodeSignalTests.tests
 
 
-def count_dfs(t)
-    return 0 if t.nil?
-    ans = 1
-    ans += count_dfs(t.left)
-    ans += count_dfs(t.right)
-    ans
-end
-def count_bfs(a)
-    ans = 0
-    while !a.empty?
-        c = a.pop
-        ans += 1
-        a.push c.left if c.left
-        a.push c.right if c.right
-    end
-    ans
-end
+
 
 describe "Trees" do
     it "auto test" do
-       Tests.each_slice(3)do |t_json, queries, ans_json|
-            skip
+       Tests.each_slice(3)do |nums, k, a|
+            assert_equal a, kthLargestElement(nums, k)
         end
     end
   
