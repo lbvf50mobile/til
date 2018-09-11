@@ -2,7 +2,7 @@ require "colorize"
 require "pp"
 
 
-puts "Helping user Black Olieve".green
+puts "Helping user Black Olive".green
 
 =begin
 Допустим, есть хэш Product, и у него такие параметры:
