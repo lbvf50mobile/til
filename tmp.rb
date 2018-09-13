@@ -79,5 +79,7 @@ describe "Trees" do
         assert_equal 75, a.rigth!
         assert_equal 15, a.left!
         assert_equal 75, a.parent!
+        assert_equal 89, a.parent!
+        assert_equal 90, a.parent!
     end 
 end
