@@ -39,6 +39,24 @@ class Heap
     def current
         @arr[@i]
     end
+    def left_i
+        2*@i + 1
+    end
+    def right_i
+        2*@i + 2
+    end
+    def parent_i
+        (@i - 1) / 2
+    end
+    def left
+        @arr[left_i]
+    end
+    def right
+        @arr[right_i]
+    end
+    def parent
+        @arr[parent_i]
+    end
     def left!
         @i = 2*@i + 1
         @arr[@i]
@@ -73,7 +91,7 @@ describe "Trees" do
     it "Return currend " do
         assert_equal 2, Heap.new([2,1]).current
     end 
-    it "should understand left and right and parrent" do
+    it "should understand left! and right! and parrent" do
         a = Heap.new([90,89,70,36,75,63,65,21,18,15])
         assert_equal 89, a.left!
         assert_equal 75, a.rigth!
@@ -81,5 +99,26 @@ describe "Trees" do
         assert_equal 75, a.parent!
         assert_equal 89, a.parent!
         assert_equal 90, a.parent!
-    end 
+    end
+    it "should understand left! and right! and parrent" do
+        a = Heap.new([90,89,70,36,75,63,65,21,18,15])
+        assert_equal 89, a.left
+        assert_equal 70, a.right
+
+        assert_equal 89, a.left!
+
+        assert_equal 36, a.left
+        assert_equal 75, a.right
+        assert_equal 90, a.parent
+
+
+        assert_equal 75, a.rigth!
+        assert_equal 15, a.left!
+        assert_nil a.left
+        assert_nil a.right
+        
+        assert_equal 75, a.parent!
+        assert_equal 89, a.parent!
+        assert_equal 90, a.parent!
+    end  
 end
