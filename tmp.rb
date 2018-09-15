@@ -69,6 +69,24 @@ class Heap
         @i = (@i - 1) / 2
         @arr[@i]
     end
+    def valid_vertex_max i
+        head = @arr[i]
+        left = @arr[2*i + 1]
+        right = @arr[2*i + 2]
+        if left.nil? && right.nil?
+            return true
+        elsif right.nil? && head > left
+            return true
+        elsif left.nil? && head > right
+            return true
+        elsif head > right 
+            return true
+        end
+        false
+    end
+    def valid_max?
+        @arr.each_index.all?{|i| valid_vertex_max(i)}
+    end
 end
 
 
@@ -121,4 +139,8 @@ describe "Trees" do
         assert_equal 89, a.parent!
         assert_equal 90, a.parent!
     end  
+    it "should test vaild max heap" do
+        a = Heap.new([90,89,70,36,75,63,65,21,18,15])
+        assert a.valid_max?
+    end
 end
