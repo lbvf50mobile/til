@@ -75,11 +75,11 @@ class Heap
         right = @arr[2*i + 2]
         if left.nil? && right.nil?
             return true
-        elsif right.nil? && head > left
+        elsif right.nil? && head >= left
             return true
-        elsif left.nil? && head > right
+        elsif left.nil? && head >= right
             return true
-        elsif head > right && head > left
+        elsif head >= right && head >= left
             return true
         end
         false
