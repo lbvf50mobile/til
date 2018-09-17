@@ -160,6 +160,7 @@ describe "Trees" do
         1100.times do
             a.insert(rand(20000))
         end
+        puts "size of heap: #{a.arr.size}".cyan
         assert a.valid_max?
     end
 end
