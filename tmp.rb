@@ -84,6 +84,18 @@ class Heap
         end
         false
     end
+    def insert a
+        @arr.push a
+        compare_and_swap (@arr.size - 1)  
+    end
+    def compare_and_swap current_index
+        parrent_index = (current_index - 1) / 2
+        return if parrent_index < 0 
+        if @arr[current_index] >  @arr[parrent_index] 
+            @arr[current_index] , @arr[parrent_index] = @arr[parrent_index] ,  @arr[current_index] 
+        end
+        compare_and_swap (parrent_index)
+    end
     def valid_max?
         @arr.each_index.all?{|i| valid_vertex_max(i)}
     end
@@ -141,6 +153,13 @@ describe "Trees" do
     end  
     it "should test vaild max heap" do
         a = Heap.new([90,89,70,36,75,63,65,21,18,15])
+        assert a.valid_max?
+    end
+    it "should create valid tree" do
+        a = Heap.new
+        1100.times do
+            a.insert(rand(20000))
+        end
         assert a.valid_max?
     end
 end
