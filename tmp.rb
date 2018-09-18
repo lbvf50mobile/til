@@ -99,6 +99,48 @@ class Heap
     def valid_max?
         @arr.each_index.all?{|i| valid_vertex_max(i)}
     end
+    def delete_root
+        if @arr.empty?
+            return nil
+        end
+        if @arr.size == 1
+            return @arr.pop
+        end
+        if @arr.size > 1
+            @arr[0], @arr[-1] = @arr[-1], @arr[0]
+            ans = @arr.pop
+
+            goes_down(0)
+
+            return ans
+
+        end
+    end
+    def goes_down i
+        curr = @arr[i]
+        left = @arr[2*i + 1]
+        left_i = 2*i + 1
+        right = @arr[2*i + 2]
+        right_i = 2*i + 2
+        if left.nil? && right.nil?
+            return 
+        elsif right.nil?
+            if left > curr
+                @arr[i], @arr[left_i] = @arr[left_i], @arr[i]
+                goes_down left_i
+            end 
+        elsif right && left
+            if curr < [left,right].max
+                if left == [left,right].max
+                    @arr[i], @arr[left_i] = @arr[left_i], @arr[i]
+                    goes_down left_i
+                else
+                    @arr[i], @arr[right_i] = @arr[right_i], @arr[i]
+                    goes_down right_i
+                end
+            end
+        end
+    end
 end
 
 
@@ -159,6 +201,20 @@ describe "Trees" do
         a = Heap.new
         1100.times do
             a.insert(rand(20000))
+        end
+        puts "size of heap: #{a.arr.size}".cyan
+        assert a.valid_max?
+    end
+    it "should delete root" do
+        a = Heap.new
+        n = 500
+        n.times do
+            a.insert(rand(20000))
+        end
+        n.times do
+            puts "size of heap: #{a.arr.size}".green if 0 == a.arr.size % 100
+            max = a.arr.max
+            assert_equal max, a.delete_root
         end
         puts "size of heap: #{a.arr.size}".cyan
         assert a.valid_max?
