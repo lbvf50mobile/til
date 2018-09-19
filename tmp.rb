@@ -143,6 +143,25 @@ class Heap
     end
 end
 
+def generate n
+    ans = Array.new(n)
+    ans.map{|x| rand(20000)}
+end
+
+def kthLargestElementMaxHeap(nums, k)
+    a = Heap.new
+    nums.each do |x|
+        a.insert x
+    end
+    ans = a.arr[0]
+    (k-1).times do
+        a.delete_root
+        ans = a.arr[0]
+    end
+    ans
+end
+
+
 
 
 
@@ -218,5 +237,21 @@ describe "Trees" do
         end
         puts "size of heap: #{a.arr.size}".cyan
         assert a.valid_max?
+    end
+    it "Generate random array" do
+        z = generate(50)
+        assert_kind_of Array,z 
+        assert_equal 50, z.size
+        assert_kind_of 1.class, z[25]
+    end
+    it "find k tht largest in two ways" do
+        100.times do
+            size = 20 + rand(3000)
+            elem = 1 + rand(size/2)
+            array = generate(size)
+            max = kthLargestElement(array, elem)
+            assert_equal max, kthLargestElement(array, elem)
+            assert_equal max, kthLargestElementMaxHeap(array, elem)
+        end
     end
 end
