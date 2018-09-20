@@ -161,6 +161,29 @@ def kthLargestElementMaxHeap(nums, k)
     ans
 end
 
+class MinHeap
+    attr_reader :arr
+    def initialize 
+        @arr = []
+    end
+    def insert x
+        @arr.push x
+        up(@arr.size - 1)
+    end
+    def up i
+        parent_i = ((i-1)/2).abs
+        return if 0 == i
+        @arr[i], @arr[parent_i] = @arr[parent_i], @arr[i] if @arr[parent_i] > @arr[i]
+        up parent_i 
+    end
+end
+
+def min_heap_head(arr)
+    m = MinHeap.new
+    arr.each{|x| m.insert x}
+    m.arr[0]
+end
+
 
 
 
@@ -252,6 +275,13 @@ describe "Trees" do
             max = kthLargestElement(array, elem)
             assert_equal max, kthLargestElement(array, elem)
             assert_equal max, kthLargestElementMaxHeap(array, elem)
+        end
+    end
+    it "find min value by mean heap" do
+        10.times do
+            arr = generate(30_000)
+            min = arr.min
+            assert_equal min, min_heap_head(arr)
         end
     end
 end
