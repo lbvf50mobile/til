@@ -176,97 +176,50 @@ class MinHeap
         @arr[i], @arr[parent_i] = @arr[parent_i], @arr[i] if @arr[parent_i] > @arr[i]
         up parent_i 
     end
+    def swap(a,b)
+        @arr[a],@arr[b] = @arr[b], @arr[a]
+    end
+    def down i
+        i_left = 2 * i + 1
+        i_right = 2 * i + 2
+        v = @arr[i]
+        left = @arr[i_left]
+        right = @arr[i_right]
+        if left.nil? && right.nil?
+            return
+        elsif right.nil?
+            if left < v
+                swap(i,i_left)
+                down i_left
+            end
+        else
+            min = [[i_left, left],[i_right, right]].min_by{|x| x[1]}
+            if min[1] < v
+                swap(i,min[0])
+                down min[0]
+            end
+        end
+    end
 end
 
-def min_heap_head(arr)
-    m = MinHeap.new
-    arr.each{|x| m.insert x}
-    m.arr[0]
-end
 
+def kthLargestElementMinHeap(nums, k)
+   a = MinHeap.new
+   nums[0...k].each do |x|
+        a.insert x
+   end
+   nums[k+1..-1].each do |x|
+      a.arr[0] = x if x > a.arr[0]
+      a.down 0
+   end
+   a.arr[0]
+end
 
 
 
 
 describe "Trees" do
-    it "auto test" do
-       Tests.each_slice(3)do |nums, k, a|
-            assert_equal a, kthLargestElement(nums, k)
-        end
-    end
-
-    it "Heap able to create" do
-        assert_instance_of Heap, Heap.new([2,1])
-        assert_equal [2,1], Heap.new([2,1]).arr
-    end
-    it "Heap should return the head" do
-        assert_equal 2, Heap.new([2,1]).head
-    end
-    it "Return currend " do
-        assert_equal 2, Heap.new([2,1]).current
-    end 
-    it "should understand left! and right! and parrent" do
-        a = Heap.new([90,89,70,36,75,63,65,21,18,15])
-        assert_equal 89, a.left!
-        assert_equal 75, a.rigth!
-        assert_equal 15, a.left!
-        assert_equal 75, a.parent!
-        assert_equal 89, a.parent!
-        assert_equal 90, a.parent!
-    end
-    it "should understand left! and right! and parrent" do
-        a = Heap.new([90,89,70,36,75,63,65,21,18,15])
-        assert_equal 89, a.left
-        assert_equal 70, a.right
-
-        assert_equal 89, a.left!
-
-        assert_equal 36, a.left
-        assert_equal 75, a.right
-        assert_equal 90, a.parent
-
-
-        assert_equal 75, a.rigth!
-        assert_equal 15, a.left!
-        assert_nil a.left
-        assert_nil a.right
-        
-        assert_equal 75, a.parent!
-        assert_equal 89, a.parent!
-        assert_equal 90, a.parent!
-    end  
-    it "should test vaild max heap" do
-        a = Heap.new([90,89,70,36,75,63,65,21,18,15])
-        assert a.valid_max?
-    end
-    it "should create valid tree" do
-        a = Heap.new
-        1100.times do
-            a.insert(rand(20000))
-        end
-        puts "size of heap: #{a.arr.size}".cyan
-        assert a.valid_max?
-    end
-    it "should delete root" do
-        a = Heap.new
-        n = 500
-        n.times do
-            a.insert(rand(20000))
-        end
-        n.times do
-            puts "size of heap: #{a.arr.size}".green if 0 == a.arr.size % 100
-            max = a.arr.max
-            assert_equal max, a.delete_root
-        end
-        puts "size of heap: #{a.arr.size}".cyan
-        assert a.valid_max?
-    end
-    it "Generate random array" do
-        z = generate(50)
-        assert_kind_of Array,z 
-        assert_equal 50, z.size
-        assert_kind_of 1.class, z[25]
-    end
+   
     it "find k tht largest in two ways" do
         100.times do
             size = 20 + rand(3000)
@@ -275,13 +228,7 @@ describe "Trees" do
             max = kthLargestElement(array, elem)
             assert_equal max, kthLargestElement(array, elem)
             assert_equal max, kthLargestElementMaxHeap(array, elem)
-        end
-    end
-    it "find min value by mean heap" do
-        10.times do
-            arr = generate(30_000)
-            min = arr.min
-            assert_equal min, min_heap_head(arr)
+            assert_equal max, kthLargestElementMinHeap(array, elem)
         end
     end
 end
