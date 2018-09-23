@@ -168,37 +168,48 @@ class MinHeap
     end
     def insert x
         @arr.push x
-        up(@arr.size - 1)
-    end
-    def up i
-        parent_i = ((i-1)/2).abs
-        return if 0 == i
-        @arr[i], @arr[parent_i] = @arr[parent_i], @arr[i] if @arr[parent_i] > @arr[i]
-        up parent_i 
+        if @arr.size > 1
+            i = @arr.size - 1
+            loop do
+                break if 0 == i
+                pr = (i-1)/2
+                    if @arr[i] < @arr[pr]
+                        swap(i,pr)
+                        i = pr
+                    else
+                        break
+                    end
+            end
+        end
     end
     def swap(a,b)
-        @arr[a],@arr[b] = @arr[b], @arr[a]
+        @arr[a],@arr[b] = @arr[b],@arr[a]
     end
-    def down i
+
+    def valid?
+       return true if @arr.empty?
+       return true if 1 == @arr.size
+       return @arr.each_index.all?{|x| valid_vertex?(x) }
+    end
+    def valid_vertex? i
         i_left = 2 * i + 1
         i_right = 2 * i + 2
         v = @arr[i]
         left = @arr[i_left]
         right = @arr[i_right]
-        if left.nil? && right.nil?
-            return
-        elsif right.nil?
-            if left < v
-                swap(i,i_left)
-                down i_left
-            end
-        else
-            min = [[i_left, left],[i_right, right]].min_by{|x| x[1]}
-            if min[1] < v
-                swap(i,min[0])
-                down min[0]
-            end
+        if left && right
+            return true if v < left && v < right
+            return false
         end
+        if left && right.nil?
+            return true if v < left
+            return false
+        end
+        if right && left.nil?
+            return true if v < right
+            return false
+        end
+        true
     end
 end
 
@@ -222,6 +233,7 @@ describe "Trees" do
    
     it "find k tht largest in two ways" do
         100.times do
+            skip
             size = 20 + rand(3000)
             elem = 1 + rand(size/2)
             array = generate(size)
@@ -229,6 +241,19 @@ describe "Trees" do
             assert_equal max, kthLargestElement(array, elem)
             assert_equal max, kthLargestElementMaxHeap(array, elem)
             assert_equal max, kthLargestElementMinHeap(array, elem)
+        end
+    end
+
+    it "check to the min heap valid" do
+        1000.times do
+            size = rand(111)
+            array = generate(size)
+            a = MinHeap.new
+            array.each do |x|
+                a.insert x
+
+            end
+            assert a.valid?
         end
     end
 end
