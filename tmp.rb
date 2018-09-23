@@ -238,10 +238,44 @@ def kthLargestElementMinHeap(nums, k)
 end
 
 
+def  mhtest(nums, k)
+    a = MinHeap.new
+    (0...k).each do |x|
+      a.insert nums[x]
+    end
+    nums[k..-1].each do |x|
+      a.arr[0] = x if x > a.arr[0]
+      a.goes_down 0
+    end
+    puts "#{nums.sort.reverse[0..2].inspect}".green
+    puts "#{a.valid?.inspect}".yellow
+    puts "#{a.arr}".red
+    a.arr[0]
+end
+
+10.times do |x|
+    size = 40
+    elem = 3
+    array = generate(size)
+    mhtest(array,elem)
+end
+
 
 
 describe "Trees" do
    
+    it "find k tht largest in two ways" do
+        100.times do
+            size = 20 + rand(3000)
+            elem = 1 + rand(size/2)
+            array = generate(size)
+            max = kthLargestElement(array, elem)
+            assert_equal max, kthLargestElement(array, elem)
+            assert_equal max, kthLargestElementMaxHeap(array, elem)
+            assert_equal max, kthLargestElementMinHeap(array, elem)
+        end
+    end
+
     it "find k tht largest in two ways" do
         100.times do
             size = 20 + rand(3000)
