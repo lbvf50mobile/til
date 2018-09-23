@@ -166,63 +166,74 @@ class MinHeap
     def initialize 
         @arr = []
     end
-    def insert x
-        @arr.push x
-        if @arr.size > 1
-            i = @arr.size - 1
-            loop do
-                break if 0 == i
-                pr = (i-1)/2
-                    if @arr[i] < @arr[pr]
-                        swap(i,pr)
-                        i = pr
-                    else
-                        break
-                    end
+    def insert a
+        @arr.push a
+        compare_and_swap (@arr.size - 1)  
+    end
+    def compare_and_swap current_index
+        parrent_index = (current_index - 1) / 2
+        return if parrent_index < 0 
+        if @arr[current_index] <  @arr[parrent_index] 
+            @arr[current_index] , @arr[parrent_index] = @arr[parrent_index] ,  @arr[current_index] 
+        end
+        compare_and_swap (parrent_index)
+    end
+    def valid?
+        @arr.each_index.all?{|i| valid_vertex(i)}
+    end
+    def valid_vertex i
+        head = @arr[i]
+        left = @arr[2*i + 1]
+        right = @arr[2*i + 2]
+        if left.nil? && right.nil?
+            return true
+        elsif right.nil? && head <= left
+            return true
+        elsif left.nil? && head <= right
+            return true
+        elsif head <= right && head <= left
+            return true
+        end
+        false
+    end
+    def goes_down i
+        curr = @arr[i]
+        left = @arr[2*i + 1]
+        left_i = 2*i + 1
+        right = @arr[2*i + 2]
+        right_i = 2*i + 2
+        if left.nil? && right.nil?
+            return 
+        elsif right.nil?
+            if left < curr
+                @arr[i], @arr[left_i] = @arr[left_i], @arr[i]
+                goes_down left_i
+            end 
+        elsif right && left
+            if curr > [left,right].max
+                if left == [left,right].max
+                    @arr[i], @arr[left_i] = @arr[left_i], @arr[i]
+                    goes_down left_i
+                else
+                    @arr[i], @arr[right_i] = @arr[right_i], @arr[i]
+                    goes_down right_i
+                end
             end
         end
-    end
-    def swap(a,b)
-        @arr[a],@arr[b] = @arr[b],@arr[a]
-    end
-
-    def valid?
-       return true if @arr.empty?
-       return true if 1 == @arr.size
-       return @arr.each_index.all?{|x| valid_vertex?(x) }
-    end
-    def valid_vertex? i
-        i_left = 2 * i + 1
-        i_right = 2 * i + 2
-        v = @arr[i]
-        left = @arr[i_left]
-        right = @arr[i_right]
-        if left && right
-            return true if v < left && v < right
-            return false
-        end
-        if left && right.nil?
-            return true if v < left
-            return false
-        end
-        if right && left.nil?
-            return true if v < right
-            return false
-        end
-        true
     end
 end
 
 
 def kthLargestElementMinHeap(nums, k)
    a = MinHeap.new
-   nums[0...k].each do |x|
-        a.insert x
+   (0...k).each do |x|
+     a.insert nums[x]
    end
-   nums[k+1..-1].each do |x|
-      a.arr[0] = x if x > a.arr[0]
-      a.down 0
+   nums[k..-1].each do |x|
+     a.arr[0] = x if x > a.arr[0]
+     a.goes_down 0
    end
+
    a.arr[0]
 end
 
@@ -233,7 +244,6 @@ describe "Trees" do
    
     it "find k tht largest in two ways" do
         100.times do
-            skip
             size = 20 + rand(3000)
             elem = 1 + rand(size/2)
             array = generate(size)
@@ -246,7 +256,7 @@ describe "Trees" do
 
     it "check to the min heap valid" do
         1000.times do
-            size = rand(111)
+            size = rand(1111)
             array = generate(size)
             a = MinHeap.new
             array.each do |x|
