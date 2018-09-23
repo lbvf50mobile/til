@@ -210,8 +210,8 @@ class MinHeap
                 goes_down left_i
             end 
         elsif right && left
-            if curr > [left,right].max
-                if left == [left,right].max
+            if curr > [left,right].min
+                if left == [left,right].min
                     @arr[i], @arr[left_i] = @arr[left_i], @arr[i]
                     goes_down left_i
                 else
@@ -243,6 +243,7 @@ def  mhtest(nums, k)
     (0...k).each do |x|
       a.insert nums[x]
     end
+    puts "#{a.valid?.inspect}".yellow
     nums[k..-1].each do |x|
       a.arr[0] = x if x > a.arr[0]
       a.goes_down 0
@@ -250,6 +251,7 @@ def  mhtest(nums, k)
     puts "#{nums.sort.reverse[0..2].inspect}".green
     puts "#{a.valid?.inspect}".yellow
     puts "#{a.arr}".red
+    puts "---"
     a.arr[0]
 end
 
