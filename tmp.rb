@@ -19,9 +19,11 @@ def simplifyPath(x)
     x.each do |dir|
         if dir.empty?
             next
+        elsif /^\.$/ === dir
+            next
         elsif /\.\./ === dir
             s.pop
-        elsif /^[[:alnum:]]+$/ === dir
+        elsif /^[.[[:alnum:]]]+$/ === dir
             s.push dir
         end
     end
@@ -33,5 +35,7 @@ describe "simplifyPath" do
     it "shold works" do
         assert_equal "/home/a/b/c", simplifyPath("/home/a/./x/../b//c/")
         assert_equal "/", simplifyPath("/")
+        assert_equal "/path/d", simplifyPath("path/d")
+        assert_equal "/pa.th/d", simplifyPath("pa.th/d")
     end
 end
