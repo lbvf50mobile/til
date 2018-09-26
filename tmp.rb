@@ -47,7 +47,7 @@ def convert(x)
                 end
             end
             tmp = x[0...counter]
-            ans.push tmp
+            ans.push [tmp[1..-2]]
             x = x[counter..-1]
         else
             counter = 0 
