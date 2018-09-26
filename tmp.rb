@@ -33,10 +33,26 @@ def convert(x)
             tmp = x[0...counter]
             ans.push tmp.to_i
             x = x[counter..-1]
+        elsif ?[ == x[0]
+            counter = 0 
+            level = 0
+            x.chars.each do |z|
+                counter += 1
+                if ?[ == z
+                    level += 1
+                end
+                if ?] == z
+                    level -= 1
+                    break if 0 == level
+                end
+            end
+            tmp = x[0...counter]
+            ans.push tmp
+            x = x[counter..-1]
         else
             counter = 0 
             x.chars.each do |z|
-                if /[^[[:digit:]]]/ === z
+                if /[^[[:digit:]]\[]/ === z
                     counter += 1
                 else
                     break
@@ -58,6 +74,7 @@ describe "decodeString" do
     end
     it "work with splitter" do
         assert_equal [44,"zzz",88], convert('44zzz88')
+        assert_equal [44,"zzz",['sdf[]ss[]'],88], convert('44zzz[sdf[]ss[]]88')
         # assert_equal [[4,"zz"],"8dd5aa",[7,"[]"]], convert("4[zz]8dd5aa7[[]]")
     end
 end
