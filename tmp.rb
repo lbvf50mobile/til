@@ -16,7 +16,18 @@ require 'ostruct'
 
 
 def decodeString(s)
-    "abababab"
+    repeat(s,1)
+end
+def repeat(s,n)
+    s = convert(s)
+    s.map! do |x| 
+        if Array == x.class
+            repeat(x[0],x[1])
+        else
+            x.to_s
+        end
+    end
+    s.join * n
 end
 def convert(x)
     ans = []
@@ -80,6 +91,6 @@ describe "decodeString" do
         assert_equal "abababab", decodeString("4[ab]")
     end
     it "work with splitter" do
-        assert_equal [["zz", 4], 8, "dd", 5, "aa", ["[]", 7]], convert("4[zz]8dd5aa7[[]]")
+        assert_equal [["z", 4], 8, "dd", 5, "aa", ["q", 7]], convert("4[z]8dd5aa7[q]")
     end
 end
