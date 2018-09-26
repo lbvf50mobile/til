@@ -64,7 +64,14 @@ def convert(x)
 
         end
     end
+    ans.each_index do |i|
+        if Array == ans[i].class
+            ans[i].push ans[i-1]
+        end
+    end
+    ans = ans.reject.with_index{|x,i| x.class == Fixnum && ans[i+1].class == Array  }
     ans
+  
 end
 
 
@@ -73,8 +80,6 @@ describe "decodeString" do
         assert_equal "abababab", decodeString("4[ab]")
     end
     it "work with splitter" do
-        assert_equal [44,"zzz",88], convert('44zzz88')
-        assert_equal [44,"zzz",['sdf[]ss[]'],88], convert('44zzz[sdf[]ss[]]88')
-        # assert_equal [[4,"zz"],"8dd5aa",[7,"[]"]], convert("4[zz]8dd5aa7[[]]")
+        assert_equal [["zz", 4], 8, "dd", 5, "aa", ["[]", 7]], convert("4[zz]8dd5aa7[[]]")
     end
 end
