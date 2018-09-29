@@ -16,7 +16,15 @@ require 'ostruct'
 
 
 def nextLarger(s)
-    [7, 8, 8, -1]
+    ans = []
+    s.each_index do |i|
+        tmp = s[i..-1]
+        element = s[i]
+        x = tmp.find{|e| e > element} || -1
+        ans.push x
+
+    end
+    ans
 end
 
 
