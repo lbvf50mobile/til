@@ -27,23 +27,22 @@ def nextLarger(s)
     ans
 end
 # https://app.codesignal.com/interview-practice/task/MdHZFgZFERPPagfdD/solutions/9e3ENgdQQnB7kxTLN
-def nextLargerStack(a)
-    stack = [] 
-    result = []
-    i = 0
-    while i < a.length 
-        while !stack.empty? && a[i] > stack[-1][0]
-            result[stack.pop[1]] = a[i]
-        end 
-        stack.push([a[i],i])
-        i += 1
-    end 
+def nextLargerStack(input)
+    r = []
+    s = []
+    input.each_with_index do |value, index|
+        while !s.empty? && value > s[-1][:value] do
+            tmp = s.pop
+            r[tmp[:index]] = value
+        end
+        s.push Hash.new({value: value, index: index})
+    end
 
-    while !stack.empty? 
-        val = stack.pop
-        result[val[1]] = -1
-    end 
-    result
+    s.each do |x|
+        r[x[:index]] = -1
+    end
+    
+    r
 end
 
 
