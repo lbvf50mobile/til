@@ -24,7 +24,7 @@ def minimumOnStack(s)
             num = word.split(" ")[1].to_i
             stack.push num
         when /pop/
-            ret.push(stack.pop)
+            stack.pop
         else
             ret.push(stack.min)
         end
