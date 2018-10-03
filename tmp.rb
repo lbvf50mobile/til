@@ -16,7 +16,20 @@ require 'ostruct'
 
 
 def minimumOnStack(s)
-    [10, 5, 5, 5, 10]
+    stack = []
+    ret = []
+    s.each do |word|
+        case word
+        when /push/
+            num = word.split(" ")[1].to_i
+            stack.push num
+        when /pop/
+            ret.push(stack.pop)
+        else
+            ret.push(stack.min)
+        end
+    end
+    ret
 end
 
 
