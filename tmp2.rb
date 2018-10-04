@@ -2,8 +2,50 @@ require "colorize"
 require "pp"
 
 
-def t *a
-    p a
+require 'pp'
+require 'colorize'
+
+require "minitest/autorun"
+require 'benchmark'
+require 'oj'
+require 'ostruct'
+
+class Short
+    attr_reader :x
+    def initialize(x: nil)
+        @x ||= x
+    end
+end
+class Long
+    attr_reader :x
+    def initialize(x: nil)
+        @x = x unless x
+    end
 end
 
-t "hi"
+def short_test(type)
+    tmp = [nil,rand(5000)].sample
+        if tmp
+            assert tmp, type.new(x:tmp).x
+        else
+            refute type.new(x:tmp).x
+        end
+end
+
+describe "what faster" do
+    it "short and long" do
+        7.times{
+            n = 10_000_000
+            time = Benchmark.measure{
+                n.times{ short_test(Short)}
+            }
+            puts "%02f Short Using ||=".red % time.real
+            n = 1000_000
+            time = Benchmark.measure{
+                n.times{ short_test(Long)}
+            }
+            puts "%02f Long Using unless".green % time.real
+        }
+    end
+end
+
