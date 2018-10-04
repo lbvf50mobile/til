@@ -32,15 +32,16 @@ def short_test(type)
         end
 end
 
+
+
 describe "what faster" do
     it "short and long" do
         7.times{
-            n = 10_000_000
+            n = 1000000
             time = Benchmark.measure{
                 n.times{ short_test(Short)}
             }
             puts "%02f Short Using ||=".red % time.real
-            n = 1000_000
             time = Benchmark.measure{
                 n.times{ short_test(Long)}
             }
