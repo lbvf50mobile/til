@@ -37,7 +37,7 @@ end
 describe "what faster" do
     it "short and long" do
         7.times{
-            n = 1000000
+            n = 10000000
             time = Benchmark.measure{
                 n.times{ short_test(Short)}
             }
