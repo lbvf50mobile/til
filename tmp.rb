@@ -27,15 +27,14 @@ end
 
 def countClouds(s)
     check_map = [
-        [-1,-1],[0,-1],[+1,-1],
+        [0,-1],
         [-1,0],[+1,0],
-        [-1,+1],[0,+1],[+1,+1]
+        [0,+1]
     ]
     adjacency_list = {}
     s.each_with_index do |ar,i|
         ar.each_with_index do |val, j|
             if "1" == val
-                puts "#{[i,j]}".green
                 adjacency_list[[i,j]] = check_map.reduce([]){|sum, pos|
                     x = i+pos[0]
                     y = j+pos[1]
@@ -47,8 +46,6 @@ def countClouds(s)
             end
         end
     end
-
-    pp adjacency_list
     n = 0
     used = {}
     adjacency_list.each_key do |v|
@@ -57,8 +54,6 @@ def countClouds(s)
             dfs(v,used,adjacency_list)
         end
     end
-
-    
     n
 end
 
