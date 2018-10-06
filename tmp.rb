@@ -1,8 +1,8 @@
 require 'pp'
 require 'colorize'
-# https://app.codesignal.com/interview-practice/task/gnZYGn367s4yaHvRr
+# https://app.codesignal.com/interview-practice/task/HdgqPhHqs3NciAHqH
 3.times do puts "" end
-puts "minimumOnStack".green
+puts "countClouds".green
 puts ""
 
 
@@ -15,21 +15,8 @@ require 'ostruct'
 
 
 
-def minimumOnStack(s)
-    stack = []
-    ret = []
-    s.each do |word|
-        case word
-        when /push/
-            num = word.split(" ")[1].to_i
-            stack.push num
-        when /pop/
-            stack.pop
-        else
-            ret.push(stack.min)
-        end
-    end
-    ret
+def countClouds(s)
+    2
 end
 
 
@@ -37,9 +24,13 @@ end
 
 
 
-describe "minimumOnStack" do
+describe "countClouds" do
     it "shold works" do
-        assert_equal [10, 5, 5, 5, 10], minimumOnStack(["push 10", "min", "push 5", "min", "push 8", "min", "pop", "min", "pop", "min"])
+        a = [['0', '1', '1', '0', '1'],
+        ['0', '1', '1', '1', '1'],
+        ['0', '0', '0', '0', '1'],
+        ['1', '0', '0', '1', '1']]
+        assert_equal 2, countClouds(2)
     end
   
 end
