@@ -27,6 +27,7 @@ def nearestGreater(s)
         left_index = left.rindex{|x| x > s[i]}
         ret = -1
         puts "#{i}:#{s[i]} left=#{left_index.inspect} right=#{right_index.inspect}".green
+        left_comp = left_index ? left.size - 1 - left_index : 0
         if right_index.nil? && left_index.nil?
             puts "-1".red
             ret = -1
@@ -36,10 +37,10 @@ def nearestGreater(s)
         elsif right_index.nil? && left_index
             puts "left".red
             ret = left_index
-        elsif right_index < left_index
+        elsif right_index < left_comp
             puts "right".green
             ret = right_index + i + 1
-        elsif right_index > left_index
+        elsif right_index > left_comp
             puts "left".red
             ret = left_index
         else
