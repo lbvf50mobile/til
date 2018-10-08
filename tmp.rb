@@ -18,7 +18,38 @@ require 'ostruct'
 
 
 def nearestGreater(s)
-    [1, 4, 1, 2, -1, 4]
+    ans = []
+    puts "#{s.inspect}".green
+    s.each_index do |i|
+        left = s[0...i]
+        right = s[i+1..-1]
+        right_index = right.index{|x| x > s[i]}
+        left_index = left.rindex{|x| x > s[i]}
+        ret = -1
+        puts "#{i}:#{s[i]} left=#{left_index.inspect} right=#{right_index.inspect}".green
+        if right_index.nil? && left_index.nil?
+            puts "-1".red
+            ret = -1
+        elsif right_index && left_index.nil?
+            puts "right".green
+            ret = right_index + i + 1
+        elsif right_index.nil? && left_index
+            puts "left".red
+            ret = left_index
+        elsif right_index < left_index
+            puts "right".green
+            ret = right_index + i + 1
+        elsif right_index > left_index
+            puts "left".red
+            ret = left_index
+        else
+            puts "left".red
+            ret = left_index
+        end
+        ans.push ret
+    end
+    
+    ans
 end
 
 
