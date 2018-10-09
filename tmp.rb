@@ -33,7 +33,9 @@ end
 def nearestGreater(s)
     answer = []
     right = find_neares_right_max_index(s)
-    left =  find_neares_right_max_index(s.reverse).reverse.map{|x| s.size - 1 - x}
+    puts "r: #{right}".green
+    left =  find_neares_right_max_index(s.reverse).reverse.map{|x| -1 == x ? -1 : s.size - 1 - x}
+    puts "l: #{left}".green
     s.each_index do |i|
         ri = right[i]
         li = left[i]
