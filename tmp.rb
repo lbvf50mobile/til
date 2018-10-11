@@ -14,26 +14,27 @@ require 'oj'
 require 'ostruct'
 
 # https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
-def is_cycled(i,visited,recStack,s)
+def is_cycled(i,visited,s)
     visited[i] = true
-    recStack[i] = true
     s[i].each do |neighbour|
         if visited[neighbour].nil?
-            return true if is_cycled(neighbour,visited,recStack,s)
+            if is_cycled(neighbour,visited,s)
+                p "1"
+                return true
+            end 
         else
-            recStack[neighbour] = true
+            p "2"
             return true
         end
     end
-    recStack[i] = nil
     false 
 end
 def hasDeadlock(s)
-    visited = []
-    recStack = []
+    visited = {}
+    
     s.each_index do |node|
         if visited[node].nil?
-            return true if is_cycled(node,visited,recStack,s)
+            return true if is_cycled(node,visited,s)
         end
     end
     false
