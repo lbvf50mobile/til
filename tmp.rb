@@ -33,7 +33,7 @@ def hasDeadlock(s)
     recStack = []
     s.each_index do |node|
         if visited[node].nil?
-            return true if is_cycled(i,visited,recStack,s)
+            return true if is_cycled(node,visited,recStack,s)
         end
     end
     false
