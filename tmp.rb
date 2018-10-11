@@ -47,6 +47,11 @@ describe "countClouds" do
         [4], 
         [0]]
         assert hasDeadlock(a)
+        b = [[1,2,3], 
+        [2,3], 
+        [3], 
+        []]
+        refute hasDeadlock(b)
     end
   
 end
