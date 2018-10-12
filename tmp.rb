@@ -15,15 +15,15 @@ require 'ostruct'
 
 # https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
 def is_cycled(i,visited,s)
+    puts "#{i} - i #{visited} - v"
     visited[i] = true
     s[i].each do |neighbour|
+        puts "#{i} hi I'm 4 ".red if i == 4
+        puts "#{neighbour} and i'm pointed to #{visited[neighbour].nil?.inspect}".green if 4 == i
         if visited[neighbour].nil?
-            if is_cycled(neighbour,visited,s)
-                p "1"
-                return true
-            end 
+            return true if is_cycled(neighbour,visited.clone,s)
         else
-            p "2"
+            puts "And i going to retun true #{i} #{neighbour}"
             return true
         end
     end
@@ -31,11 +31,9 @@ def is_cycled(i,visited,s)
 end
 def hasDeadlock(s)
     visited = {}
-    
     s.each_index do |node|
-        if visited[node].nil?
-            return true if is_cycled(node,visited,s)
-        end
+        visited = {}
+        return true if is_cycled(node,visited,s)
     end
     false
 end
