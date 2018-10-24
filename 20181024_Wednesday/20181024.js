@@ -17,6 +17,6 @@ Promise.all(all_ok).then(console.log).catch(console.log)
 let several_ok = [
     new Promise((o,f)=>f("Number 0 - fails")),
     new Promise((o,f)=>f("Number 1 - fails")),
-    new Promise((o,f)=>f("Number 2 - ok"))
+    new Promise((o,f)=>o("Number 2 - ok"))
 ]
 Promise.all(several_ok).then(console.log).catch(console.log)
