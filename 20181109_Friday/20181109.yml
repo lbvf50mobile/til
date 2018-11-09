@@ -1,0 +1,19 @@
+# YAML formating and alias.
+---
+# https://gist.github.com/lbvf50mobile/90d0fe3e774a73a644d7994e2dba1f36
+# http://yaml.org/spec/1.2/spec.html#id2786196
+# https://github.com/cyklo/Bukkit-OtherBlocks/wiki/Aliases-(advanced-YAML-usage)
+- 
+  name: 'One'
+  url: '/one'
+  type : 'type-one'
+  text : 'One'
+  class: ''
+  title_area: <h1>One</h1>
+- 
+  name: &two-name 'Two'
+  url: '/two'
+  type : 'Two type'
+  text : *two-name
+  class: ''
+  title_area: <h1>Two</h1><h2>This is Two <br/> and this is cool!</h2>
