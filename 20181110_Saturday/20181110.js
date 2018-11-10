@@ -9,5 +9,5 @@ var a, b, rest;
 [a,b] = [10,20]
 console.log(a)
 console.log(b)
-//[a,b,...rest] = [10,20,30,40,50]
+//[a,b,...rest] = [10,20,30,40,50] // dose not works in node v.8.12.0
 //console.log(rest)
