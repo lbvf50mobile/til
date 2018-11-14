@@ -36,3 +36,9 @@ console.log("Assigning to new variables names and providing default values:")
 var {a: aa = "The default aa value", b: bb = "The default bb value"} = {a: "The super puper a value."}; 
 console.log(aa); // The super puper a value
 console.log(bb); // The default bb value
+
+// Example for Vyacheslav
+console.log("Example for Vyacheslav:")
+var {kivi: boom = "125"} = {}; 
+// console.log(kivi); // kimi is not defined
+console.log(boom) // 125
