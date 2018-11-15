@@ -19,3 +19,16 @@ let methadata = {
 let {title: title, translation: [{loc: l}]} = methadata;
 console.log(title);
 console.log(l);
+
+console.log("My own example");
+let super_obj = {
+    name: "The Example",
+    arr: [
+        1,20,300,4000,50000
+    ]
+};
+let {name: the_name, arr: [one, two, ...rest]} = super_obj;
+console.log(the_name);
+console.log(one);
+console.log(two);
+console.log(rest);
