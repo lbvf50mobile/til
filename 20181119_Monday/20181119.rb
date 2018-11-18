@@ -14,3 +14,6 @@ def z(&x)
 end
 
 z{ p "this is me"}
+o = ->(){p "It's so quite.  This is me too."}
+z(&o)
+o.call
