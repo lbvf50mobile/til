@@ -15,5 +15,8 @@ end
 
 z{ p "this is me"}
 o = ->(){p "It's so quite.  This is me too."}
+i = Proc.new{ p "Hey and me too!"}
 z(&o)
+z(&i)
+z(&Proc.new{puts "Hew, you. Do not forget about me. Cuz I'm too cool".green})
 o.call
