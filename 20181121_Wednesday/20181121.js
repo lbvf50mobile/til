@@ -1,4 +1,4 @@
-// JS Destructuring: Unpacking fields form objects passes as function parameter;
+// JS Destructuring: Unpacking fields form objects passed as function parameter;
 console.log("alias x='node 20181121_Wednesday/20181121.js'");
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Unpacking_fields_from_objects_passed_as_function_parameter
