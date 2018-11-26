@@ -1,0 +1,1 @@
+console.log("alias x='node 20181126_Monday/20181126.js'");
