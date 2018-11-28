@@ -14,8 +14,11 @@ let myFirstPromise = new Promise((resolve, reject)=>{
     }, 250);
 });
 
-myFirstPromise.then((successMessage)=>{
+let ans = myFirstPromise.then((successMessage)=>{
     // successMessage is whatever we passed in the resolve(...) function above.
     // It dosen't have to me a string, but if it is only a succeed message, it probably will be.
-    console.log(`Yay! ${successMessage}`)
+    console.log(`Yay! ${successMessage}`);
+    return 125
 });
+
+console.log(`this is ans = ${ans}`);
