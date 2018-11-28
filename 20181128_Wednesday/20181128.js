@@ -18,7 +18,7 @@ let ans = myFirstPromise.then((successMessage)=>{
     // successMessage is whatever we passed in the resolve(...) function above.
     // It dosen't have to me a string, but if it is only a succeed message, it probably will be.
     console.log(`Yay! ${successMessage}`);
-    return 125
-});
+    return 125;
+}).then().then().then();
 
-console.log(`this is ans = ${ans}`);
+console.log(`this is ans (4 then) = ${ans}`);
