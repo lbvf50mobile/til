@@ -1,4 +1,4 @@
-// JS Using the 'then' method
+// JS Using the 'then' method.
 console.log("alias x='node 20181130_Friday/20181130.js'");
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then#Using_the_then_method
