@@ -13,3 +13,14 @@ console.log("alias x='node 20181203_Monday/20181203.js'");
 // When a value is simply returned from within a "than" handler,
 // it will effectively return
 // Priomise.resolve(<value returned by whichever handler was called>)
+
+var p2 = new Promise((resolve,reject)=>resolve(1));
+
+p2.then((value)=>{
+    console.log(value); // 1
+    return value + 1;
+}).then((value)=>{
+    console.log(`${value} - A synchronous value works`);
+});
+
+p2.then(v=>console.log(v));
