@@ -15,7 +15,7 @@ const fetch = x =>{
         json: () => "hi"
     };
     return Promise.resolve(o)
-    return new Promise((ok,err) => ok(o));
+    // return new Promise((ok,err) => ok(o));
 }
 
 function fetch_current_data(){
