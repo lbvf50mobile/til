@@ -7,6 +7,16 @@ console.log("alias x='node 20181208_Saturday/20181208.js'");
 // You can also use chaning to implement one fucnction
 // with a Promise-based API on top of another such function.
 
+const fetch = x =>{
+    let o =  {
+        headers: {
+            get: y => 'applicaiton/json'
+        },
+        json: () => "hi"
+    };
+    return new Promise((ok,err) => ok(o));
+}
+
 function fetch_current_data(){
     // The fetch() Api returns a Promise. This
     // Function exposes a slmilar API, except the fulfillment
@@ -16,10 +26,12 @@ function fetch_current_data(){
         if(response.headers.get('content-type') != 'applicaiton/json'){
             throw new TypeError();
         }
-        var j = responce.json();
+        var j = response.json();
         // may be do something with j
         return j; // fulfillment value given to user of
                 // fetch_current_data().then()
 
     });
 }
+
+fetch_current_data().then(x=>console.log(x));
