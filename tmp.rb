@@ -1,27 +1,5 @@
-require 'pp'
-require 'colorize'
-# https://app.codesignal.com/interview-practice/task/qmKLsQcqeEBckLx2q
-3.times do puts "" end
-puts "singlePointOfFailure".cyan
-puts ""
-
-
-
-
-require "minitest/autorun"
-require 'benchmark'
-require 'oj'
-require 'ostruct'
-
-# https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
-
-def singlePointOfFailure(connections)
- 1
-end
-
-describe "countClouds" do
-    it "shold works" do
-        a = [[0, 1], [1, 0]]
-        assert_equal 1,singlePointOfFailure(a)
-    end
-end
+x_array = [1,4,3,4,5]
+p  x_array.each_cons(2).map{|x0,x1| (x0-x1).abs}.to_a
+p x_array.each_slice(2).map{|x0,x1| (x0-x1).abs}.to_a
+p x_array.combination(2).map{|x0,x1| (x0-x1).abs}.to_a
+p x_array.permutation(2).map{|x0,x1| (x0-x1).abs}.to_a
