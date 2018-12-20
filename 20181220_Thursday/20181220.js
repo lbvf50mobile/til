@@ -10,4 +10,4 @@ console.log("alias x='node 20181220_Thursday/20181220.js'");
 // - multiple callbacks may be adde by calling 'then()' several times. Each callback is executed one after another, in the order
 // in which they were inserted.
 
-// One of hte gret things aobut using promises is chaning.
+// One of the great things aobut using promises is chaning.
