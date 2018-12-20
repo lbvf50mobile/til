@@ -1,7 +1,7 @@
-# https://gist.github.com/lbvf50mobile/61d322dc9f1a764523d80090c8fa791b
-# https://stackoverflow.com/a/1217114/8574922
-p [[?a,?b],[?c,?d]].map(&:join)
-# &:join is a shortcut for :join.to_proc 
-p [[?a,?b],[?c,?d]].map(&:join.to_proc)
-# &:join.to_proc  equal to Proc.new{|o| o.send :join}
-p [[?a,?b],[?c,?d]].map(&Proc.new{|o| o.send :join})
+# help answering on @vladz quesiton
+def year_per_hour(array_salary_pey_year_in_dollars)
+    work_hours_in_year = 8*5*4*12;
+    p array_salary_pey_year_in_dollars.map{|x| x/work_hours_in_year}
+end
+
+year_per_hour([100_000, 160_000])
