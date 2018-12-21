@@ -1,5 +1,6 @@
-
+# Ruby Class.new {block}, fill array, recursion;
 p "alias x='ruby 20181221_Friday/20181221.rb'" 
+
 # @vladz
 export_class = Class.new do
     def export
@@ -9,6 +10,7 @@ export_class = Class.new do
   export_class.export
   instance = export_class
   instance.export
+
 # @IlyaOsotov
   p (1..8).map{|x| rand(9) + 1}.join
   p Array.new(8){ rand(9)+1 }.join
