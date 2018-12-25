@@ -1,4 +1,4 @@
-
+// JS Using promises >> Chaining after a catch
 console.log("alias x='node 20181224_Monday/20181224.js'");
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#Chaining_after_a_catch
 
