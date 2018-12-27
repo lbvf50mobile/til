@@ -49,3 +49,26 @@ try {
 }catch(e){
     syncFailureCallback(e)
 }
+
+// This symmetry with asynchonous code culmanates in the
+// asycn/await syntactic sugar in ECMAScript 2017
+
+async function foo(){
+    try{
+        let r1 = await doSomething(9);
+        let r2 = await doSomethingEalse(r1);
+        let r3 = await doThirdThing(r2);
+        console.log(`Got the final result: ${r3}`);
+
+    }catch (error){
+        failureCallback(error)
+    }
+}
+foo();
+
+// It boild on pmorises, e.g. doSomething() is the same function
+// as before. you ca read more about the syntax.
+
+// Prommises solve a fundamental flaw with the callback pyramid of doom
+// by catching all errors, even thrown exceptions and programming erros.
+// This is essential for functional composition of asynchronous operations.
