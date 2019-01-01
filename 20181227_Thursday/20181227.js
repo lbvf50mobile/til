@@ -15,3 +15,9 @@ let func3 = () => new Promise((resolve) => setTimeout(()=>resolve("30 ms"),30));
 
 Promise.all([func1(),func2(),func3()])
 .then(([r1, r2, r3]) => console.log(r1,r2,r3));
+
+// Sequential composition is possible using some clever JavaScript:
+[func1, func2, func3].reduce(
+    (p,f) => p.then(f),
+    Promise.resolve()
+).then(r3=>console.log(r3));
