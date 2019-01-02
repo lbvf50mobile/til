@@ -31,3 +31,16 @@ Promise.resolve()
 .then(func2)
 .then(func3)
 .then(r3=>console.log(r3));
+
+// This can be made into a reusable compose function, which is common
+// in functional programming
+
+const applyAsync = (acc,val) => acc.then(val);
+const complseAsync = (...functs) => x => functs.reduce(applyAsync,Promise.resolve(x));
+
+// The composeAsync() function will accept any number of functions as arguments,
+// and will return a new function that accepts an initial value to be passed though the 
+// compositoin pipeline:
+const transfomData = complseAsync(func1,func2,func3);
+const r3 = transfomData("travel input");
+r3.then(x => console.log(x));
