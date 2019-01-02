@@ -21,3 +21,13 @@ Promise.all([func1(),func2(),func3()])
     (p,f) => p.then(f),
     Promise.resolve()
 ).then(r3=>console.log(r3));
+
+// Basically, we reduce an arry of asynchronus functions down to a promise chain
+// equivalent to:
+
+
+Promise.resolve()
+.then(func1)
+.then(func2)
+.then(func3)
+.then(r3=>console.log(r3));
