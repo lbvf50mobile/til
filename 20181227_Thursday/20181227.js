@@ -44,3 +44,27 @@ const complseAsync = (...functs) => x => functs.reduce(applyAsync,Promise.resolv
 const transfomData = complseAsync(func1,func2,func3);
 const r3 = transfomData("travel input");
 r3.then(x => console.log(x));
+
+// IN ECMAScript 2017, secquential composition can be dome more simply with
+// async/await:
+async function afunc1(){
+ return new Promise(r => setTimeout(()=>r("==> a 10 ms"),11));
+}
+async function afunc2(){
+ return new Promise(r=>setTimeout(()=>r("==> a 22 ms"),22));
+}
+async function afunc3(){
+    return new Promise(r=>setTimeout(()=>r("==> a 33 ms"),33));
+}
+async function fire(){
+    console.log("this is fire Funct")
+    let result;
+    for (const f of [afunc1, afunc1, afunc2, afunc3]){
+        console.log(result, "(1)===> this is result")
+        result = await f(result);
+        console.log(result, "(2)===> this is result")
+    }
+    console.log("Boom")
+    console.log(result, "===> result")
+}
+fire();
