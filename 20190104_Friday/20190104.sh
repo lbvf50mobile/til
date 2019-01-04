@@ -5,6 +5,7 @@ echo "alias x='bash 20190104_Friday/20190104.sh'"
 
 # https://www.shellscript.sh/tips/cp-t/
 # https://www.computerhope.com/unix/ucp.htm 
+# git log -10 --oneline --grep="^2"
 
 git log -10 --oneline --grep="^2"
 echo "-- SORT --"
