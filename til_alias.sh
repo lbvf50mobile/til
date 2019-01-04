@@ -1,1 +1,1 @@
-alias x='node 20181231_Monday/20181231.js'
+alias x='bash 20190104_Friday/20190104.sh'
