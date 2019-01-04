@@ -12,3 +12,9 @@ echo "-- SORT --"
 git log -10 --oneline --grep="^2" | ruby -e '
 puts STDIN.read.split("\n").sort{|x,y| y[8..11].to_i <=> x[8..11].to_i}.join("\n")
 '
+
+red=`tput setaf 1`
+green=`tput setaf 2`
+reset=`tput sgr0`
+echo "${green}Hi${reset}"
+echo "${green}Hi${reset}" | ruby -e 'puts STDIN.read'
