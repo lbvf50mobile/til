@@ -22,5 +22,5 @@ p :itself.to_proc.object_id == :itself.to_proc.object_id
 def zet
     yield
 end
-zet{ p "this is block"}
-zet(&Proc.new{ p "and this is Proc"})
+zet{ p "this is the block"}
+zet(&Proc.new{ p "and this is the Proc"})
