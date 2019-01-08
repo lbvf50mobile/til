@@ -18,3 +18,8 @@ let x = [...test2];
     console.log(e.message)
 }
 console.log([..."ok"]);
+
+let f = (...z) => console.log(z);
+f([1,2]);
+f(1);
+f(1,2,3);
