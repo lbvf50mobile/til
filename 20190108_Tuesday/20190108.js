@@ -17,3 +17,4 @@ let x = [...test2];
 }catch(e){
     console.log(e.message)
 }
+console.log([..."ok"]);
