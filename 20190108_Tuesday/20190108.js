@@ -1,4 +1,4 @@
-// JS spread operator works only with iterable variables.
+// JS spread operator FOR ARRAYS works only with iterable variables.
 
 console.log("alias x='node 20190108_Tuesday/20190108.js'");
 
