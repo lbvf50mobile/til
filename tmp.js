@@ -1,4 +1,12 @@
-let music = new Promise((ok,error)=>ok("op!"));
-music.then(n=>{console.log(n + 11); return n + " ca!"}).then(n=>console.log(n+4));
-music.then(n=>console.log(n+ 21));
-music.then(n=>console.log(n+31));
+let test = "hi";
+let z = [...test];
+console.log(z);
+let west = ["west"];
+let y = [...west];
+console.log(y)
+let test2 = 22;
+try{
+let x = [...test2];
+}catch(e){
+    console.log(e.message)
+}

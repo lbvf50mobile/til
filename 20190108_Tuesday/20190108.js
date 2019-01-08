@@ -1,0 +1,19 @@
+// JS spread operator works only with iterable variables.
+
+console.log("alias x='node 20190108_Tuesday/20190108.js'");
+
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators
+// https://codeburst.io/javascript-es6-the-spread-syntax-f5c35525f754
+
+let test = "hi";
+let z = [...test];
+console.log(z);
+let west = ["west"];
+let y = [...west];
+console.log(y)
+let test2 = 22;
+try{
+let x = [...test2];
+}catch(e){
+    console.log(e.message)
+}
