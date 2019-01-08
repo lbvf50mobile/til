@@ -20,6 +20,7 @@ let x = [...test2];
 console.log([..."ok"]);
 
 let f = (...z) => console.log(z);
+// https://zendev.com/2018/05/09/understanding-spread-operator-in-javascript.html
 f([1,2]);
 f(1);
 f(1,2,3);
