@@ -1,6 +1,3 @@
-# help answering on El Anonimo reqeut
-def boom
-    "hi"
-end
-
-p boom == boom() # true
+func = -> (name:, **_) { name + 's' }
+user = { name: 'X', type: 'hash' }
+p func.(user)
