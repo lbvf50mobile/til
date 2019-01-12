@@ -1,4 +1,4 @@
-// JS [...newSet(x)]
+// JS uniq array by [...new Set(x)]
 
 console.log("alias x='node 20190112_Saturday/20190112.js'");
 
