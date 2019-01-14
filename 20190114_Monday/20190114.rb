@@ -21,10 +21,10 @@ end
 puts "[1].empty? %s" % [[1].empty?]
 puts "[1].any? %s" % [[1].any?]
 puts "[].empty? %s" % [[].empty?]
-puts "[].andy? %s" % [[].any?]
-puts "([1]&[1,2]).any? %s "  % [([1]&[1,2]).any?]
-puts "([8]&[1,2]).any? %s " % [([8]&[1,2]).any?]
+puts "[].any? %s" % [[].any?]
+puts "([1]&[1,2]).any? %s "  % [([1]&[1,2]).any?] # tip by @DarthRainbowDash
+puts "([8]&[1,2]).any? %s " % [([8]&[1,2]).any?] # tip by @DarthRainbowDash
 puts "[false].empty? %s " % [[false].empty?]
-puts "[false].any? %s " % [[false].any?]
+puts "[false].any? %s " % [[false].any?] # tip by @elsopuro
 puts "[nil].empty? %s" % [[nil].empty?]
-puts "[nil].any? %s " % [[nil].any?]
+puts "[nil].any? %s " % [[nil].any?]  # tip by @elsopuro
