@@ -15,7 +15,7 @@ let doSomethingOptional = r => { console.log(`input: ${r}`); return Promise.reso
 let doSomethingExtraNice = r => {console.log(`Extra nice input: ${r}`); return Promise.reject("This is REJECT for ExtraNice")};
 let moreCriticalStuff = () => {
     console.log("This is More critical stuff"); 
-    return Math.random() > 0.5 ? Promise.resolve("Critical Done") : Promise.reject("Critical Fails");
+    return Math.random() > 0.5 ? Promise.resolve("Critical Done") : Promise.reject(new Error("Fails"));
 };
 
 
@@ -24,4 +24,4 @@ doSomethingCritical().then( x => doSomethingOptional(x)
     .then( x =>doSomethingExtraNice(x)).catch(e => console.log(e)) // Ignore if optional stuff fails; proceed;
 ).then(() => moreCriticalStuff())
 .then(x => console.log(`Critcal succes: ${x}`))
-.catch(e => console.log(`Critical failure: ${e}`));
+.catch(e => console.log(`Critical failure: ${e.message}`));
