@@ -25,3 +25,10 @@ doSomethingCritical().then( x => doSomethingOptional(x)
 ).then(() => moreCriticalStuff())
 .then(x => console.log(`Critcal succes: ${x}`))
 .catch(e => console.log(`Critical failure: ${e.message}`));
+
+// Note that the optional steps here are neted, not from the indentation, but from the
+// precarious placment of the ouhter ( and ) around them.
+
+// The inner neutralizing 'catch' statements only catches failures from doSomethingOptional()
+// and doSomethingExtraNice(), after which the code resumes with moreCriticalStuff().
+// Importantly, if doSomethingCritical() fails, its error is caught by the final (outer) catch only.
