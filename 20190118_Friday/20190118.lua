@@ -1,6 +1,6 @@
 print("alias x='lua 20190118_Friday/20190118.lua'")
 
--- Lua table, table index, string format
+-- Lua table, table indexes, string format;
 
 print("In Lua the Array indexing start from 1, not from 0")
 print(string.format("a = {'one','two'} => a[1] => %s ",({'one','two'})[1]))
