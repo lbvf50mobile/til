@@ -18,3 +18,5 @@ do
     table.insert( z, i)
 end
 print(z)
+-- https://github.com/adnzzzzZ/blog/issues/30
+-- Creating games on Lua
