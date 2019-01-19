@@ -1,1 +1,1 @@
-alias x='lua 20190118_Friday/20190118.lua'
+alias x='node 20190119_Saturday/20190119.js'
