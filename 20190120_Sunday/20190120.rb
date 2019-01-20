@@ -15,3 +15,15 @@ p a <= Array && !(a <= Fixnum)
 
 [[Array,Enumerable],[Enumerable,Array],[Array,String]].each{|x,y|
 }
+
+
+# https://drivy.engineering/ruby-lambda-composition/
+a = ->(x){ x + 1}
+b = ->(x){ x + 2}
+compose = ->(x,y){  ->(z){x.(y.(z))}}
+p compose.(a,b).(0)
+=begin
+def apply_rules(rules:, base_price:)
+  rules.inject(:>>).call(base_price)
+end
+=end
