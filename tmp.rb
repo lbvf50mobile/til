@@ -14,3 +14,5 @@ z.report{
     end
 }
 end
+
+# TODO consize explanation of Enumerable
