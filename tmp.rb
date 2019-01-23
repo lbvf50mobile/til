@@ -24,5 +24,11 @@ def troll_filter message
     }.join(" ")
 end
 
-p troll_filter "sucks sucks" # "croak croak"
+def troll_filter1(message)
+    message.gsub(/\w+/) { |x| "croak".each_char.cycle.take(x.size).join }
+end
+
+p troll_filter "sucks. sucks" # "croak croak"
+p troll_filter1 "sucks. sucks" # "croak croak"
+
 
