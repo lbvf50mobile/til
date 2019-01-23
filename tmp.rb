@@ -31,4 +31,7 @@ end
 p troll_filter "sucks. sucks" # "croak croak"
 p troll_filter1 "sucks. sucks" # "croak croak"
 
+p "croak".each_char.cycle.take("azaza torlolo".size).join
+
+
 
