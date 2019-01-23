@@ -1,7 +1,7 @@
 p %w{a b c}.each_with_index.map{|x,i| "#{x}:#{i+1}"}
 p %w{a b c}.map.with_index(1){|x,i| "#{x}:#{i}"}
 require "benchmark"
-n = 500_000
+n = 5
 Benchmark.bm do |z|
  z.report { 
      n.times do 
@@ -16,3 +16,13 @@ z.report{
 end
 
 # TODO consize explanation of Enumerable
+
+def troll_filter message
+    message.split(" ")
+    .map{ |x| 
+        x.chars.zip(%w{c r o a k}.cycle).map{|x,y| y}.join 
+    }.join(" ")
+end
+
+p troll_filter "sucks sucks" # "croak croak"
+
