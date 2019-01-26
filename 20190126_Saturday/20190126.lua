@@ -14,3 +14,4 @@ function z(...)
 end
 
 z("a","b","c")
+print(_VERSION)
