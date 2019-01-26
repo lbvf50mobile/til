@@ -18,6 +18,10 @@ puts "one \n"
 puts "tow"
 p "Hi\n".chomp == "Hi\n".strip # true
 p "Hi         \n".chomp != "Hi  \n".strip # true
-p "Hi     ".strip == "Hi\n\n\n\n\n\n".strip # true
+puts "using t".green
+p "Hi\t     ".strip == "Hi\n\n\n\n\n\n".strip # true
+p "Hi\t".chomp != "Hi\t".strip # true
+p "Hi\t".chomp # "Hi\t" # @vasivas
+p "Hi\t".strip # "Hi"
 
 
