@@ -1,10 +1,11 @@
-function z(...)
-    print(arg) -- https://github.com/krunkathos/quasimofo/blob/master/lib/strict.lua#L37
-    -- https://www.tutorialspoint.com/lua/lua_functions.htm
-    -- http://lua-users.org/wiki/FunctionCallTutorial
-    print(table.unpack(arg))
-    print(...)
+-- answer for @ShadoWalkeR30
+str = "This-is-Pro-Ruby"
+t = {}
+for v in str:gmatch("[^-]+") do
+    table.insert(t, v)
 end
 
-z(1,2,3)
--- (function() print("cool") end)()
+for k,v in pairs(t) do
+    print(k,v)
+end
+
