@@ -10,3 +10,12 @@ for k,v in pairs(t) do
     print(k,v)
 end
 
+
+-- question about Lua for future
+for k,v in pairs(t) do
+    print(v)
+end
+print(str:gmatch("[^-]+"))
+for k,v in pairs({1,2,3})  do
+    print(v)
+end
