@@ -1,27 +1,15 @@
-require "colorize"
-#help to @vkazancev
-=begin
-name  = gets
-puts " %s name aftter %s " % ['p'.green, 'gets'.cyan]
-p name
-puts " %s name aftter %s " % ['puts'.red, 'gets'.cyan]
-puts name
-name = name.chomp
-puts " %s name aftter %s " % ['p'.green, 'chomp'.cyan]
-p name
-puts " %s name aftter %s " % ['puts'.red, 'chomp'.cyan]
-puts name
-up = gets.chomp
-p up
-=end
-puts "one \n"
-puts "tow"
-p "Hi\n".chomp == "Hi\n".strip # true
-p "Hi         \n".chomp != "Hi  \n".strip # true
-puts "using t".green
-p "Hi\t     ".strip == "Hi\n\n\n\n\n\n".strip # true
-p "Hi\t".chomp != "Hi\t".strip # true
-p "Hi\t".chomp # "Hi\t" # @vasivas
-p "Hi\t".strip # "Hi"
+# @vkazancev
+shop1 = {name: "Hohi", address: "Flat street 1"}
+shop2 = {name: "Huhi", address: "Flat street 14"}
 
+p shop1
+p shop2
 
+class Hash
+    def inspect
+        "Magazin '#{self[:name]}'"
+    end
+end
+
+p shop1
+p shop2
