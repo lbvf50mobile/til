@@ -1,8 +1,8 @@
 p "alias x='ruby 20190130_Wednesday/20190130.rb'" 
 
-# Ruby Range === Fixnum;
+# Ruby Range === Fixnum, and case when x,y;
 
-p "Ruby Range === Fixnum"
+p "Ruby Range === Fixnum, and case when x,y;"
 require "colorize"
 
 puts "Range === works with Fixnum".green
@@ -31,3 +31,13 @@ when 1..3, 10..17
 else
     p "Dose not fires here"
 end
+
+def test z
+     case z 
+     when /a/, /b/
+        "a and b"
+     else 
+        "no a and b"
+     end
+end
+p %w{ aa bb cc dd ee}.map{|x| test(x)}
