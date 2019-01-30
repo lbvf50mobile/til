@@ -22,3 +22,12 @@ when 1..3
 else
     p "Dose not fires here"
 end
+
+# This example shown by Konstatin (@perdumonocle)
+b = 15
+case b
+when 1..3, 10..17 
+    p "'b' between 1 and 3 or 10 and 17"
+else
+    p "Dose not fires here"
+end
