@@ -41,3 +41,6 @@ def test z
      end
 end
 p %w{ aa bb cc dd ee}.map{|x| test(x)}
+
+p (?A..?Z).cover?("Ruby") # ture
+p (?A..?Z).include?("Ruby") # false
