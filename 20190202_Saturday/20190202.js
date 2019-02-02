@@ -1,6 +1,6 @@
 console.log("alias x='node 20190202_Saturday/20190202.js'");
 
-// JS converst array to string for comparision, Array.prototype.sort changes array it been called on.
+// JS converst array to string for comparision; JS Array.prototype.sort changes array it been called on, array becomes sorted.
 
 // https://stackoverflow.com/questions/54492467/javascript-formal-criteria-definition-of-array-comparison
 // https://stackoverflow.com/questions/8328908/javascript-surprising-array-comparison
