@@ -30,4 +30,14 @@ var sequentialStart = async function(){
 
 };
 
+var concurrentStart = async function(){
+    console.log('==concurrent START with await ==');
+    const slow = resolveAfter2Seconds(); // starts timer immediately
+    const fast = resolveAfter1Second();
+
+    console.log(await slow);
+    console.log(await fast); // wait fo slow to finish, even thought fast is already done!
+}
+
 sequentialStart();
+concurrentStart();
