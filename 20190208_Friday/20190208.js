@@ -36,7 +36,7 @@ var concurrentStart = async function(){
     const fast = resolveAfter1Second();
 
     console.log(await slow);
-    console.log(await fast); // wait fo slow to finish, even thought fast is already done!
+    console.log(await fast); // wait for slow to finish, even thought fast is already done!
 }
 
 sequentialStart();
