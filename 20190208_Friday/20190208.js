@@ -39,5 +39,14 @@ var concurrentStart = async function(){
     console.log(await fast); // wait for slow to finish, even thought fast is already done!
 }
 
+var stillConcurrent = function(){
+    console.log('==Concurrent STart with Promise.all ==');
+    Promise.all([resolveAfter2Seconds(),resolveAfter1Second()]).then((messages) =>{
+        console.log(messages[0]); // slow
+        console.log(messages[1]); // fast
+    })
+}
+
 sequentialStart();
 concurrentStart();
+stillConcurrent();
