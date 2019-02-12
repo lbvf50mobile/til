@@ -47,6 +47,17 @@ var stillConcurrent = function(){
     })
 }
 
-sequentialStart();
-concurrentStart();
-stillConcurrent();
+var parallel = function(){
+    console.log('==PARALLEL with Promise.then==');
+    resolveAfter2Seconds().then(message => console.log(message));
+    resolveAfter1Second().then( message => console.log(message));
+}
+
+sequentialStart(); // after 2 second, logs "slow", then after 1more second, "FAST"
+// wait above to finish
+setTimeout(concurrentStart,4000); // after 2 secons, logs "slow" and then "fast"
+// wait again
+setTimeout(stillConcurrent, 7000); // same as concurrentStart
+//
+setTimeout(parallel, 10000); // trully parallel; after 1 second logs "fast", then after 1 more
+// second, "slow"
