@@ -2,6 +2,21 @@ console.log("alias x='node 20190208_Friday/20190208.js'");
 
 // JS Async function >> Simple example.
 
+// Syntax
+
+// async function name([param[, param[, ... param]]]) {
+// statements
+// }
+
+// Parameters
+// name The function name.
+// param The name of an argument to be passed to the function.
+// statements The statements comprising the body of the function.
+
+// Return value
+// A Promise which will be resolved with the value returned by the async function,
+// or rejected with an uncaught exception thrown from within the async function.
+
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function#Simple_example
 
 var resolveAfter2Seconds = function(){
