@@ -17,6 +17,19 @@ console.log("alias x='node 20190208_Friday/20190208.js'");
 // A Promise which will be resolved with the value returned by the async function,
 // or rejected with an uncaught exception thrown from within the async function.
 
+// Description
+
+// An async function can contain an `await` expression that pauses the executtion of the async
+// function and wait for the passed `Promise's` resolutions, and then resumes the async
+// function's execution and returns the resolved value.
+
+// Remember, the awain keyworks in only valid inside async functions. If you use it outside of
+// an async function's body, you will get a SyntaxError
+
+// The purpose of async/awaint function is ot simplify the behavoud of using promises synchronously and to perform some
+// behavour on a group of Promises. Just as Pormises are similar to sturtured callbacs, async/awaint si similar to cmbining 
+// generators and promises.
+
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function#Simple_example
 
 var resolveAfter2Seconds = function(){
