@@ -24,3 +24,22 @@ console.log("alias x='node 20190219_Tuesday/20190219.js'");
 // If the Promise is rejected, the awiat expression trhows the rejected value
 
 // If the value of the expression followin the awain opreaotr is not a Pormise. It's conferted to a resolved Promise.
+
+// Examples
+
+// If a promise is passed to an awain expression, it waits fo the Promise to be fulfilled and returns the fulfilled value.
+
+function resolveAfter2Seconds(x){
+    return new Promise(r => {
+        setTimeout(()=>{
+            r(x);
+        },2000)}
+        );
+}
+
+async function f1(){
+    var  x = await resolveAfter2Seconds("Value in promise");
+    console.log(x)
+}
+
+f1();
