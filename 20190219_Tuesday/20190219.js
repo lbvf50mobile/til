@@ -1,6 +1,6 @@
 console.log("alias x='node 20190219_Tuesday/20190219.js'");
 
-// JS await
+// JS await.
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await
 
