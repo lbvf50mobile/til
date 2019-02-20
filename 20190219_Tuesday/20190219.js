@@ -43,3 +43,12 @@ async function f1(){
 }
 
 f1();
+
+// If the value is not a Promise. It converts the value to a resoved pormise, and waits for it.
+
+async function f2(){
+    var y = await 20;
+    console.log(y); // 20
+}
+
+f2();
