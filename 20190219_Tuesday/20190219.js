@@ -52,3 +52,15 @@ async function f2(){
 }
 
 f2();
+
+// If the promise is rejected, the rejected value is thrown
+
+async function f3(){
+    try{
+        var z = await Promise.reject(30);
+    }catch(e){
+        console.log(e); // 30
+    }
+}
+
+f3();

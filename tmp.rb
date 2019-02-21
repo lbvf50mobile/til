@@ -1,15 +1,27 @@
-# @vkazancev
-shop1 = {name: "Hohi", address: "Flat street 1"}
-shop2 = {name: "Huhi", address: "Flat street 14"}
+require 'pp'
+require 'colorize'
+# https://app.codesignal.com/interview-practice/task/qmKLsQcqeEBckLx2q
+3.times do puts "" end
+puts "singlePointOfFailure".cyan
+puts ""
 
-p shop1
-p shop2
 
-class Hash
-    def inspect
-        "Magazin '#{self[:name]}'"
-    end
+
+
+require "minitest/autorun"
+require 'benchmark'
+require 'oj'
+require 'ostruct'
+
+# https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
+
+def singlePointOfFailure(connections)
+ 1
 end
 
-p shop1
-p shop2
+describe "countClouds" do
+    it "shold works" do
+        a = [[0, 1], [1, 0]]
+        assert_equal 1,singlePointOfFailure(a)
+    end
+end
