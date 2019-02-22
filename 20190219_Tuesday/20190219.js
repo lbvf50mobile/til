@@ -64,3 +64,15 @@ async function f3(){
 }
 
 f3();
+
+// Hande rejected Promise without try block
+
+const promisedFunction = () =>{
+    return Promise.reject("Reject message")
+};
+
+async function f4(){
+    var response = await promisedFunction().catch( e => console.log(e));
+    console.log("response", response)
+}
+f4();
