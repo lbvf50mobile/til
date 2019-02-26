@@ -26,3 +26,12 @@ p "alias x='ruby 20190225_Monday/20190225.rb'"
 
 # Tim complexity of abmove methos is O(E*(V+E)) for a graph represented using adjacency list.
 # Can we do better?
+
+# A O(V+E) algorithm to fin all Bridges.
+
+# The idea is similar to O(V+E) algorithm for Articulation Points. We do DFS traversal
+# of the given graph.  In DFS tree an endge (u,v) (u is parent of  v in DFS tree)
+# is bridge if there dose not exists any other alternative to reach u or an ancestor of u
+# from the subtree rooted with v.  As discussed in the previewos post 
+# (https://www.geeksforgeeks.org/articulation-points-or-cut-vertices-in-a-graph/)
+# The condition of an endge (u,b) to be a bridge is, "low[v] > disc[u]"
