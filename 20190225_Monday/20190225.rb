@@ -41,6 +41,7 @@ class Graph
     @V = size
     @graph = {}
     @time = 0
+    @answer = []
   end  
   def _add(u,v)
     @graph[u].nil? ? @graph[u] = [v] : @graph[u].push(v)
@@ -63,7 +64,9 @@ class Graph
           parent[v] = u
           bridgeUtil(v, visited, parent, low, disc)
           low[u] = [low[u], low[v]].min
-          p [u,v] if low[v] > disc[u]
+            if low[v] > disc[u]
+              @answer.push([u,v])
+            end
       elsif v != parent[u]
         low[u] = [low[u], disc[v]].min
       end
@@ -80,6 +83,7 @@ class Graph
       (0...@V).each{|u|
         bridgeUtil(u, visited, parent, low, disc)
       }
+      @answer
 
   end
 
@@ -92,4 +96,4 @@ g1.addEdge(2, 1)
 g1.addEdge(0, 3) 
 g1.addEdge(3, 4) 
 
-g1.bridge()
+p g1.bridge()

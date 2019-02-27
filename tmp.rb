@@ -14,6 +14,7 @@ require 'oj'
 require 'ostruct'
 
 # https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
+# https://www.geeksforgeeks.org/bridge-in-a-graph/
 
 def singlePointOfFailure(connections)
  1
