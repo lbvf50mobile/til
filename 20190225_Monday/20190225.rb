@@ -43,7 +43,7 @@ class Graph
     @time = 0
   end  
   def _add(u,v)
-    @graph[u].nil? ? @graph[u] = [v] : @graph[u].push[v]
+    @graph[u].nil? ? @graph[u] = [v] : @graph[u].push(v)
   end
   def addEdge(u,v)
     _add(u,v)
