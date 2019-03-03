@@ -16,3 +16,16 @@ p "alias x='ruby 20190228_Thursday/20190228.rb'"
 # which increases number of connected components.
 
 # Following are some example graphs with articulation points encircled with red color.
+
+# How to find all articulation points in a given graph?
+
+# A simple approach is to one by one remove all vertices and see if removal of a
+# vertex causes disconnected graph. Following are steps of simple approach of connected graph.
+
+# 1) For evey vertex v, do following
+# ... a) Remove v from graph
+# ... b) See if the graph remains connected (we can either use BFS of DFS)
+# ... c) Add v bach to the graph
+
+# Time complexity of above methods is O(V*(V+E)) for a praph represented using adjacency
+# list. Can we do better?
