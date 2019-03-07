@@ -29,3 +29,9 @@ p "alias x='ruby 20190228_Thursday/20190228.rb'"
 
 # Time complexity of above methods is O(V*(V+E)) for a praph represented using adjacency
 # list. Can we do better?
+
+# A O(V+E) algorithm to find all Articulation Points (APs)
+
+# The Idea is ot use DFS (Depth First Search). In DFS, we follow vertices in tree from
+# from called DFS tree.  In DFS tree, a vertex u is parent of anater vertex v,
+# if v is descovered by u (obviously v is an adjacent of u in graph). 
