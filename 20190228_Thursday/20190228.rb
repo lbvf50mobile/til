@@ -39,4 +39,4 @@ p "alias x='ruby 20190228_Thursday/20190228.rb'"
 
 # 1) u is roon of DFS tree and it has at least two children.
 # 2) u is not root of DFS tree and it has a  child v such that no vertes in subtree
-# rooted with v has a back enge to one of the ancestors (in DFS tree) of of u.
+# rooted with v has a back edge to one of the ancestors (in DFS tree) of of u.
