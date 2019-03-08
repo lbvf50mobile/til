@@ -35,3 +35,8 @@ p "alias x='ruby 20190228_Thursday/20190228.rb'"
 # The Idea is ot use DFS (Depth First Search). In DFS, we follow vertices in tree from
 # from called DFS tree.  In DFS tree, a vertex u is parent of anater vertex v,
 # if v is descovered by u (obviously v is an adjacent of u in graph). 
+# in DFS tree, a vertex u is articulation point if one of the following two contions is true
+
+# 1) u is roon of DFS tree and it has at least two children.
+# 2) u is not root of DFS tree and it has a  child v such that no vertes in subtree
+# rooted with v has a back enge to one of the ancestors (in DFS tree) of of u.
