@@ -40,3 +40,12 @@ p "alias x='ruby 20190228_Thursday/20190228.rb'"
 # 1) u is roon of DFS tree and it has at least two children.
 # 2) u is not root of DFS tree and it has a  child v such that no vertes in subtree
 # rooted with v has a back edge to one of the ancestors (in DFS tree) of of u.
+
+# Following figure shows same points as above with one additional point that a leaf in DFS
+# Tree can naver be an articulation point.
+
+# Root node is an articulation if it has more then one child
+# Leaf is never an articluation point
+# Non-lear, non-root node u is an articulation point
+# no non-tree adge goest abouve u from a sub-tre below some child of u
+# If remove u dose not sepaate V, there must be an exit from v's subtree via back edge.
