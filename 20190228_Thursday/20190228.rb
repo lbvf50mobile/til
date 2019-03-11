@@ -49,3 +49,17 @@ p "alias x='ruby 20190228_Thursday/20190228.rb'"
 # Non-lear, non-root node u is an articulation point
 # no non-tree adge goest abouve u from a sub-tre below some child of u
 # If remove u dose not sepaate V, there must be an exit from v's subtree via back edge.
+
+# We do DFS traversal of given graph with additional code to find out Articulation Points (APs).
+# In DFS traversl, we maintain a parent[] array where parent[u] stores parent of vertex u.
+# Among the above mentioned two caces, the first case is simple to detect.
+# For every vertex, count children. If currently visited vertes u is root (parent[u] is NIL)
+# and has more then two children, print it.
+
+# How to handle second case? the second case is trickier. We mantaion an array disc[] to
+# store discomery time of ertices. Fore evey node u, we need to find out the earliest visited
+# vertex (the vertex with minimum discovery time) than can be reached from subtree rooted with
+# u. So we maintain an additional array low[] whick is defince as  follows.
+
+# low[u] = min(disc[u], disc[w])
+# where w is an ancestor of u and there is a back enge from some descentand of u to w.
