@@ -63,3 +63,32 @@ p "alias x='ruby 20190228_Thursday/20190228.rb'"
 
 # low[u] = min(disc[u], disc[w])
 # where w is an ancestor of u and there is a back enge from some descentand of u to w.
+
+class Graph
+    def initialize(vertices)
+        @v = vertices
+        @graph = {}
+        @time = 0
+    end
+    def _addEdge(u,v)
+        @graph[u].nil? ? @graph[u] = [v] : @graph[u].push(v) 
+    end
+    def addEdge(u,v)
+        _addEdge(u,v)
+        _addEdge(v,u)
+    end
+    # The function to do DFS traverals. It uses recurcive ap_util()
+    def ap()
+        p "ap"
+    end
+end
+
+g1 = Graph.new(5)
+g1.addEdge(1, 0) 
+g1.addEdge(0, 2) 
+g1.addEdge(2, 1) 
+g1.addEdge(0, 3) 
+g1.addEdge(3, 4) 
+
+puts "Articulation points in first graph"
+g1.ap()
