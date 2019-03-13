@@ -79,6 +79,9 @@ class Graph
     end
     # The function to do DFS traverals. It uses recurcive ap_util()
     def ap()
+        # Mark all the vertices as not vidited
+        # and Initialize parent and visited,
+        # and ap(articluation point) arrays
         p "ap"
     end
 end
