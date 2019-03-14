@@ -82,7 +82,11 @@ class Graph
         # Mark all the vertices as not vidited
         # and Initialize parent and visited,
         # and ap(articluation point) arrays
-        p "ap"
+        visited = [false] * @v
+        disc = [Float::INFINITY] * @v
+        low = [Float::INFINITY] * @v
+        parent = [-1] * @v
+        ap = [false] * @v # to store articualation points
     end
 end
 
