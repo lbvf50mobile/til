@@ -77,6 +77,9 @@ class Graph
         _addEdge(u,v)
         _addEdge(v,u)
     end
+    def ap_util(i,visited,ap,parent,low,disc)
+        p i
+    end
     # The function to do DFS traverals. It uses recurcive ap_util()
     def ap()
         # Mark all the vertices as not vidited
@@ -87,6 +90,14 @@ class Graph
         low = [Float::INFINITY] * @v
         parent = [-1] * @v
         ap = [false] * @v # to store articualation points
+
+        # Call the recursive helper function
+        # to find articulation points
+        # in DFS tree rooted with vertex 'i'
+        p visited
+        @graph.each_with_index do |i,index|
+            ap_util(i,visited,ap,parent,low,disc) unless visited[index]
+        end
     end
 end
 
