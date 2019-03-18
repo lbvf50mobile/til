@@ -77,8 +77,15 @@ class Graph
         _addEdge(u,v)
         _addEdge(v,u)
     end
-    def ap_util(i,visited,ap,parent,low,disc)
-        p i
+    # A recursive function that find articulation points
+    # using DFS traversal
+    # u => the next vertex to be visited next
+    # visited[] => keeps tract of visited vertices
+    # disct[] => stores disvovery times of visited vertices
+    # parent[] => sotres parent vertices in DFS tree
+    # ap[] => stores articualtion points
+    def ap_util(u,visited,ap,parent,low,disc)
+        p u
     end
     # The function to do DFS traverals. It uses recurcive ap_util()
     def ap()
@@ -96,7 +103,7 @@ class Graph
         # in DFS tree rooted with vertex 'i'
         p visited
         @graph.each_with_index do |i,index|
-            ap_util(i,visited,ap,parent,low,disc) unless visited[index]
+            ap_util(index,visited,ap,parent,low,disc) unless visited[index]
         end
     end
 end
