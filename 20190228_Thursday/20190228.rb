@@ -85,6 +85,11 @@ class Graph
     # parent[] => sotres parent vertices in DFS tree
     # ap[] => stores articualtion points
     def ap_util(u,visited,ap,parent,low,disc)
+        # count of children in the curent node
+        children = 0 
+        # Mark the current node as visited and print it
+        visited[u] = true
+
         p u
     end
     # The function to do DFS traverals. It uses recurcive ap_util()
