@@ -90,6 +90,11 @@ class Graph
         # Mark the current node as visited and print it
         visited[u] = true
 
+        # Initialize discovery time and low value
+        disc[u] = @time
+        low[u] = @time
+        @time += 1
+
         p u
     end
     # The function to do DFS traverals. It uses recurcive ap_util()
