@@ -95,6 +95,11 @@ class Graph
         low[u] = @time
         @time += 1
 
+        # Recur for all the vertices adjacent to this vertex
+        @graph[u].each do |v|
+            p v
+        end
+
         p u
     end
     # The function to do DFS traverals. It uses recurcive ap_util()
