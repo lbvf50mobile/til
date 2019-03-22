@@ -140,7 +140,8 @@ class Graph
         @graph.each_with_index do |i,index|
             ap_util(index,visited,ap,parent,low,disc) unless visited[index]
         end
-        p ap
+
+        p ap.map.with_index{|v,i| [v,i]}.select{|v,i| v}.map{|v,i| i}
     end
 end
 
