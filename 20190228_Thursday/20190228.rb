@@ -97,7 +97,28 @@ class Graph
 
         # Recur for all the vertices adjacent to this vertex
         @graph[u].each do |v|
-            p v
+            if( false == visited[v])
+                # If v is not visited yet, then make it a child of u
+                # in DFS tree and recur for it
+                parent[v] = u
+                children += 1
+                ap_util(v,visited,ap,parent,low,disc)
+
+                # check if the subtree rooted with v has a connection
+                # to one of the ancestors of u
+                low[u] = [low[u], low[v]].min
+
+                # u is an rticulation point in following cases
+                # (1) u is root of DFS tree and has to or more childrend
+                ap[u] = true if -1 == parent[u] and children > 1
+
+                # (2) If u is not root and low value of one of its child is more
+                # than discover value of u.
+                ap[u] = true if -1 == parent[u] and low[v] >= disc[u]
+
+            elsif v != parent[u]
+                low[u] = [low[u],disc[v]].min
+            end
         end
 
         p u
@@ -116,10 +137,10 @@ class Graph
         # Call the recursive helper function
         # to find articulation points
         # in DFS tree rooted with vertex 'i'
-        p visited
         @graph.each_with_index do |i,index|
             ap_util(index,visited,ap,parent,low,disc) unless visited[index]
         end
+        p ap
     end
 end
 
