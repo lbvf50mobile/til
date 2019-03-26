@@ -1,6 +1,6 @@
 console.log("alias x='node 20190326_Tuesday/20190326.js'");
 
-// JS Array.prototype.from
+// JS Array.prototype.from;
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from#Sequence_generator_(range)
 
@@ -24,3 +24,26 @@ console.log(x);
 
 x = Array.from(mapper.keys());
 console.log(x);
+
+// Array from an Array like object (arguments)
+function ff(){
+    return Array.from(arguments);
+}
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+x = ff(1,2,3);
+console.log(x);
+
+//  Using arrow functions and Array.from
+
+// Using an arrow function as the map funtoin to manipulate the elements
+x = Array.from([1,2,3],x =>x+x)
+console.log(x);
+
+// Generate a sequence of numbers
+// Since the array is initialized with `undefined` on each position,
+// The value of `v` below will be `undefined`
+x = Array.from({length: 5}, (v,i) => i);
+console.log(x);
+
+// Sequence generator (range)
+
