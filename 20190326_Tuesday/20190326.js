@@ -62,7 +62,7 @@ console.log(x);
 x = range(0,10,2)
 console.log(x);
 
-// Generate the alphgen using Array.from
+// Generate the alphbet using Array.from
 //making use of it being ordered as a sequence
 x = range('A'.charCodeAt(0), 'Z'.charCodeAt(0),1).map(x => String.fromCharCode(x));
 console.log(x);
