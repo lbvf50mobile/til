@@ -47,3 +47,23 @@ console.log(x);
 
 // Sequence generator (range)
 
+// Sequence generator function (commonly refferred to as "range", e.g. Clojure, PHP etc)
+
+const range = (start, stop, step) => Array.from({length: (stop-start)/step + 1}, 
+    (_,i) => start + (i*step));
+
+// Generate numbers range 0..4
+x = range(0,4,1)
+console.log(x);
+
+// Genrate numbers range 1..10 with step of 2
+x = range(1,10,2);
+console.log(x);
+x = range(0,10,2)
+console.log(x);
+
+// Generate the alphgen using Array.from
+//making use of it being ordered as a sequence
+x = range('A'.charCodeAt(0), 'Z'.charCodeAt(0),1).map(x => String.fromCharCode(x));
+console.log(x);
+
