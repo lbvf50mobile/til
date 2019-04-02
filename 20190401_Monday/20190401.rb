@@ -26,16 +26,16 @@ def crosswordFormation(words)
         (2..tl).each do |ttr|
         
         # 3. Define right_top_right rtr
-        (0..(rl-3)).each do |rtr|
+        (0..(rl-2)).each do |rtr|
             if(t[ttr] == r[rtr])
-                # p [ttr,rtr,t[ttr],t.join,r.join] if f
+                [ttr,rtr,t[ttr],t.join,r.join] if f
         # 4. Define right_right_bottom rrb
         ((rtr+2)..rl).each do |rrb|
             vd = rrb - rtr
         # 5. Define bottom_right_bottom brb
         (2..bl).each do |brb|
             if(r[rrb] == b[brb])
-                # puts "-#{[rrb,brb, r[brb],r.join, b.join].inspect}" if f
+                puts "-#{[rrb,brb, r[brb],r.join, b.join].inspect}" if f
         # 6. Define bottom_bottom_left
             bbl_l = brb - 2
             if(ib(bbl_l,bl))
@@ -44,7 +44,7 @@ def crosswordFormation(words)
         # 7. Define left_bottom_left
         (2..ll).each do |lbl|
             if(b[bbl] == l[lbl])
-                # puts "--#{[bbl,lbl, b[bbl],b.join, l.join].inspect}" if f
+                puts "--#{[bbl,lbl, b[bbl],b.join, l.join].inspect}" if f
                 llt = lbl - vd
                 tlt = ttr - hd
                 if(ib(llt,ll) && ib(tlt,tl) && l[llt] == t[tlt])
