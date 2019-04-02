@@ -7,7 +7,7 @@ def crosswordFormation(words)
     # Convert words in arrays
     w = words.map(&:chars)
     total = 0
-    f = 0
+    f = nil
     # 1. Permutations
     # top, right, bottom, left
     w.permutation do |(t,r,b,l)|
@@ -64,7 +64,7 @@ def crosswordFormation(words)
         #f = nil
 
     end
-6
+total
 end
 
 
