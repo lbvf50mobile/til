@@ -36,13 +36,26 @@ def crosswordFormation(words)
         (2..bl).each do |brb|
             if(r[rrb] == b[brb])
                 puts "-#{[rrb,brb, r[brb],r.join, b.join].inspect}" if f
+        # 6. Define bottom_bottom_left
+            bbl_l = brb - 2
+            if(ib(bbl_l,bl))
+        (0..bbl_l).each do |bbl|
+            hd = brb - bbl
+        # 7. Define left_bottom_left
+        (2..ll).each do |lbl|
+            if(b[bbl] == l[lbl])
+                puts "--#{[bbl,lbl, b[bbl],b.join, l.join].inspect}" if f
+            end # if
+        end # lbl
+        end # bbl
+            end # if bbl_l (last)
             end # if
         end #brb
         end #rrb
             end # if
         end # ttr
         end # rtr
-        f = nil
+        #f = nil
 
     end
 6
