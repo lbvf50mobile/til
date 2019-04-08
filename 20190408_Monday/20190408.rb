@@ -1,6 +1,6 @@
 p "alias x='ruby 20190408_Monday/20190408.rb'" 
 
-# Ruby O(n) swithLight problem solution example.
+# Ruby O(n) switchLight problem solution example.
 
 # N candles are placed in a row, some of them are initally lit.
 # For each cnadle from the 1st to the Nth the following arogrithm is applied
