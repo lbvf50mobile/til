@@ -1,1 +1,1 @@
-alias x='ruby 20190410_Wednesday/20190410.rb'
+alias x='bash 20190411_Thursday/20190411.sh'
