@@ -1,6 +1,6 @@
 console.log("alias x='node 20190412_Friday/20190412.js'");
 
-// JS orderded count of characters with Map object.
+// JS orderded count of characters with a Map object.
 
 let data = ['aabbbbccccc', 'bbbbaaccccc', 'cccccbbbbaa'];
 
