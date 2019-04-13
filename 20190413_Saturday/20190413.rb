@@ -22,20 +22,25 @@ end
 
 p combs("*..*","*.*")
 
-p "Now visualisztion"
+p "Now visualization"
 
-a = "aaaa"
-b = "bbbbb"
+a = "xxxx"
+b = "xxxxx"
 
 size = a.size + b.size
-p "The size of a+b #{size}"
+p "Offsets range: 0..#{size}"
+p "purse_size = left + b.size + right"
+p "  "
 
-b = "-"*a.size + b + "-"*a.size 
+tmpb = "-"*a.size + b + "-"*a.size 
 
 (0..size).each do |i|
-    tmpa = ("-"*i + a).ljust(b.size,'-')
-    puts "i=#{i}"
-    puts b
+    tmpa = ("-"*i + a).ljust(tmpb.size,'-')
+    left = a.size - i > 0 ? a.size - i : 0
+    right =  i - b.size > 0 ? i - b.size : 0
+    purse_size = left + b.size + right
+    puts "i=#{i}; purse_size=#{left}+#{b.size}+#{right}=#{purse_size}"
+    puts tmpb
     puts tmpa
     
 end
