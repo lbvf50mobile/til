@@ -22,6 +22,20 @@ end
 
 p combs("*..*","*.*")
 
+p "Now visualisztion"
+
 a = "aaaa"
 b = "bbbbb"
 
+size = a.size + b.size
+p "The size of a+b #{size}"
+
+b = "-"*a.size + b + "-"*a.size 
+
+(0..size).each do |i|
+    tmpa = ("-"*i + a).ljust(b.size,'-')
+    puts "i=#{i}"
+    puts b
+    puts tmpa
+    
+end
