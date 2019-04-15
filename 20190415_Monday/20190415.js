@@ -13,5 +13,5 @@ console.log("The string representation #1 ", string_representation1)
 a[c] = "value under func_key"
 b[string_representation] = "value under string representation of a funct"
 
-console.log("A (function as key):",a)
-console.log("B (string representation as key):", b)
+console.log("A (function as key):".padEnd(33," "),a)
+console.log("B (function.toString() as key):".padEnd(33," "), b)
