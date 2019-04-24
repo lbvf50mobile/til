@@ -9,6 +9,7 @@ def christmasTree(levelNum, levelHeight)
     line_size = ->(line_number){max_width - (levelHeight  - line_number)}
     blank_amount = ->(line_number){ levelHeight - line_number }
     asterisks_amount = ->(line_number){line_size.(line_number) - blank_amount.(line_number)}
+    # Crown
     crown_top = ->(){ ([' ']*(max_width-levelHeight-2)+[?*]).join}
     crown_bottom = ->(){ ([' ']*(max_width-levelHeight-3)+[?*]*3).join}
     crown = [crown_top.(),crown_top.(),crown_bottom.()]
