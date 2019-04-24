@@ -4,13 +4,15 @@ p "alias x='ruby 20190423_Tuesday/20190423.rb'"
 
 require "minitest/autorun"
 def christmasTree(levelNum, levelHeight)
-    ["    *", 
+    crown = ["    *", 
         "    *", 
-        "   ***", 
+        "   ***"]
+    level1 = [ 
         "  *****", 
         " *******", 
-        "*********", 
-        "   ***"]
+        "*********"]
+    foot = ["   ***"] 
+    crown + level1 + foot
 
 end
 
