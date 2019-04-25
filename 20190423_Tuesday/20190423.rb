@@ -28,13 +28,26 @@ def christmasTree(levelNum, levelHeight)
     foot_empty = half - foot_half
     foot_line_hash = {empty: foot_empty, asterisks: 1+foot_half*2 }
     foot_hash = ([1]*levelNum).map{|x| foot_line_hash.clone}
+
+    # Generae levels
+    empty_extend_array = [crown_hash, level1_hash.clone, foot_hash]
+    levels = []
+    extend_by_2_empty = ->(arr){ arr.map{ |x| x.map{|y| y[:empty] += 2}}}
+    extend_by_2_asterisks = ->(arr){ arr.map{|x|  x[:asterisks] += 2}}
+    (2..levelNum).each do |level|
+        empty_extend_array = extend_by_2_empty.(empty_extend_array)
+        new_level =  extend_by_2_asterisks.(level1_hash.clone)
+        levels += new_level
+    end
+    result_array = empty_extend_array[0] + empty_extend_array[1]  + levels + empty_extend_array[2]
     
+
    # hash to lines 
-    foot = arr_to_str.(foot_hash)
-    level1 = arr_to_str.(level1_hash)
-    crown = arr_to_str.(crown_hash)
-     # generate return array
-    crown + level1 + foot
+    result_array = arr_to_str.(result_array)
+
+    result_array.each{|x| puts x}
+
+    result_array
 
 end
 
