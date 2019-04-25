@@ -1,4 +1,6 @@
-# help for Anak
+p "alias x='ruby 20190425_Thursday/20190425.rb'"
+
+# Ruby 'for' is not like JS 'for...in'. (help for Anak)
 
 require 'colorize'
 ar = ["a", "b", "c"]
