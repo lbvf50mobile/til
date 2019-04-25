@@ -21,3 +21,11 @@ end
 arr.each.with_index(1) do |value, index| 
     puts value if index != 2
 end
+
+action = ->(value,index){ puts value if index != 2}
+arr.each.with_index(1,&action)
+
+arr.each.with_index(1) do |value, index| 
+    puts value if index != 2
+end
+
