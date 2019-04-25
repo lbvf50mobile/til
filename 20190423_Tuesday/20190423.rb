@@ -11,9 +11,9 @@ def christmasTree(levelNum, levelHeight)
     line_size = ->(line_number){max_width - (levelHeight  - line_number)}
     blank_amount = ->(line_number){ levelHeight - line_number }
     asterisks_amount = ->(line_number){line_size.(line_number) - blank_amount.(line_number)}
-    level1 = (1..levelHeight).reduce([]) do |memo,line_number| 
-        value =  [" "] * blank_amount.(line_number) + [?*]*asterisks_amount.(line_number)
-        memo.push( value.join) 
+    level1_hash = (1..levelHeight).reduce([]) do |memo,line_number| 
+        value =  {empty: blank_amount.(line_number), asterisks: asterisks_amount.(line_number)}
+        memo.push(value) 
         memo
      end
 
@@ -31,6 +31,7 @@ def christmasTree(levelNum, levelHeight)
     
    
     foot = arr_to_str.(foot_hash)
+    level1 = arr_to_str.(level1_hash)
     crown + level1 + foot
 
 end
