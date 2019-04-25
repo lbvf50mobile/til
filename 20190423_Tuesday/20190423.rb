@@ -39,11 +39,11 @@ def christmasTree(levelNum, levelHeight)
     empty_extend_array = [crown_hash, level1_hash.clone, foot_hash]
     levels = []
     extend_by_1_empty = ->(arr){ arr.map{ |x| x.map{|y| y[:empty] += 1 ; y  }}}
-    extend_by_2_asterisks = ->(arr){ arr.map{|x|  x[:asterisks] += 2 ; x}}
+    extend_by_2_asterisks = ->(arr,n){ arr.map{|x|  x[:asterisks] += (2*n) ; x}}
     (2..levelNum).each do |level|
         empty_extend_array = extend_by_1_empty.(empty_extend_array)
         levels = levels.map{|y| y[:empty] += 1 ; y  }
-        new_level =  extend_by_2_asterisks.(level1_hash_proc.())
+        new_level =  extend_by_2_asterisks.(level1_hash_proc.(),level-1)
         levels += new_level
     end
     result_array = empty_extend_array[0] + empty_extend_array[1]  + levels + empty_extend_array[2]
