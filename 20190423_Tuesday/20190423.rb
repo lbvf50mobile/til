@@ -1,8 +1,12 @@
 p "alias x='ruby 20190423_Tuesday/20190423.rb'" 
+require 'colorize'
 
 # Ruby Christmas tree task solution.
 
 require "minitest/autorun"
+def decorator arr
+    arr.map{|x| counter=0; y = x.gsub(/ /){|z| counter+=1}}
+end
 def christmasTree(levelNum, levelHeight)
     max_width = 5 + (levelHeight - 1) * 2
     line_hash2str = ->(h){ ' '*h[:empty] + ?* * h[:asterisks]}
@@ -32,21 +36,20 @@ def christmasTree(levelNum, levelHeight)
     # Generae levels
     empty_extend_array = [crown_hash, level1_hash.clone, foot_hash]
     levels = []
-    extend_by_2_empty = ->(arr){ arr.map{ |x| x.map{|y| y[:empty] += 2 ; y  }}}
+    extend_by_1_empty = ->(arr){ arr.map{ |x| x.map{|y| y[:empty] += 1 ; y  }}}
     extend_by_2_asterisks = ->(arr){ arr.map{|x|  x[:asterisks] += 2 ; x}}
     (2..levelNum).each do |level|
-        empty_extend_array = extend_by_2_empty.(empty_extend_array)
+        empty_extend_array = extend_by_1_empty.(empty_extend_array)
         new_level =  extend_by_2_asterisks.(level1_hash.clone)
         levels += new_level
     end
-    p levels
     result_array = empty_extend_array[0] + empty_extend_array[1]  + levels + empty_extend_array[2]
     
 
    # hash to lines 
     result_array = arr_to_str.(result_array)
 
-    result_array.each{|x| puts x}
+    decorator(result_array).each{|x| puts x}
 
     result_array
 
@@ -78,6 +81,8 @@ tests = [
 describe "Christmas tree" do
     it "works" do
         tests.each do |test|
+            result_array = decorator(test[:ans]) 
+            result_array.each{|x| puts x.green}
             assert_equal test[:ans], christmasTree(test[:levelNum], test[:levelHeight])
         end
     end
