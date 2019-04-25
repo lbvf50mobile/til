@@ -18,9 +18,9 @@ def christmasTree(levelNum, levelHeight)
      end
 
     # Crown
-    crown_top = ->(){ ([' ']*(max_width-levelHeight-2)+[?*]).join}
-    crown_bottom = ->(){ ([' ']*(max_width-levelHeight-3)+[?*]*3).join}
-    crown = [crown_top.(),crown_top.(),crown_bottom.()]
+    crown_top = ->(){ {empty:max_width-levelHeight-2, asterisks:1}}
+    crown_bottom = ->(){ {empty: max_width-levelHeight-3, asterisks: 3}}
+    crown_hash = [crown_top.(),crown_top.(),crown_bottom.()]
 
     # Foot
     half = (max_width-1)/2
@@ -29,9 +29,11 @@ def christmasTree(levelNum, levelHeight)
     foot_line_hash = {empty: foot_empty, asterisks: 1+foot_half*2 }
     foot_hash = ([1]*levelNum).map{|x| foot_line_hash.clone}
     
-   
+   # hash to lines 
     foot = arr_to_str.(foot_hash)
     level1 = arr_to_str.(level1_hash)
+    crown = arr_to_str.(crown_hash)
+     # generate return array
     crown + level1 + foot
 
 end
