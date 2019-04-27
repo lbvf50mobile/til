@@ -4,6 +4,7 @@ console.log(new Set([1,1,1,1,2]))
 let z = new Set([1,1,1,1,2])
 z.forEach(x => console.log(x))
 
+// Get this solutino from jouko_v and rewrite it into the JS (ES6)
 function fileNaming(names) {
     h = {}
     for(let i in names){
