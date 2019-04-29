@@ -1,32 +1,14 @@
-let a ={}
-console.log(a[4], undefined == a[4])
-console.log(new Set([1,1,1,1,2]))
-let z = new Set([1,1,1,1,2])
-z.forEach(x => console.log(x))
-
-// Get this solutino from jouko_v and rewrite it into the JS (ES6)
-function fileNaming(names) {
-    h = {}
-    for(let i in names){
-        n = names[i]
-        if( undefined == h[n]){
-            h[n] = 1;
-        }else{
-            for( ; h[names[i]] != undefined ;){
-                let value = n + `(${h[n]})`
-                names[i] = value
-                h[n] += 1
-            }
-            h[names[i]] = 1
-        }
-    }
-    return names;
+console.log(a=3) // 3
+console.log(a) // 3
+if(z=2*2){
+    console.log(z) // 4
 }
 
-input = ["doc", 
-"doc", 
-"image", 
-"doc(1)", 
-"doc"]
-
-console.log(fileNaming(input))
+var a  = 15
+console.log(a) // 15
+z = ()=>{var a=16; console.log(a)}
+z() //16
+console.log(a) //15
+zz = ()=>{a=17; console.log(a)}
+zz() //17
+console.log(a) //17
