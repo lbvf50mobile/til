@@ -14,7 +14,15 @@ echo ""
 echo "${green}--------------${reset}"
 cat tmp.js | ruby -ne 'print if  /\d/' > answer.js
 cat answer.js
-
-# real    0m0.966s
-# user    0m0.060s
-# sys     0m0.197s
+echo "${green}----Use Grep-------${reset}"
+cat tmp.js | grep -e "[0-9]" > answer.js
+echo "--now Answer JS-"
+cat answer.js
+echo "---------------"
+cat tmp.js | grep -e "[0-9]"
+echo "--pure grep ------"
+grep -e "3" tmp.js > answer.js
+cat answer.js
+echo "---pure grep for digits"
+grep -e "[0-9]" tmp.js > answer.js
+cat answer.js
