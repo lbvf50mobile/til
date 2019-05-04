@@ -15,4 +15,4 @@ console.log(a.sort(((a,b) => a-b))[0],'JS sort elements using sort with function
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters
 volume = (...a) => a.reduce((x,y) => x*y, 1);
-console.log(volume(2,2,2),"Rest operator in defining function.");
+console.log(volume(2,2,2),"Rest operator in definintion of a function.");
