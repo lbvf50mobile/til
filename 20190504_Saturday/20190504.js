@@ -1,7 +1,7 @@
 console.log("alias x='node 20190504_Saturday/20190504.js'");
 
 
-// JS Spread syntax(calling), Sort, Rest parameters (defining).
+// JS Spread syntax (when calling), Sort, Rest parameters (when defining).
 
 a = [19,2,7,4];
 
@@ -14,5 +14,5 @@ console.log(a.sort()[0],'Average JS sort elements like strings', a, a.sort())
 console.log(a.sort(((a,b) => a-b))[0],'JS sort elements using sort with function', a, a.sort(((a,b) => a-b)))
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters
-volume = (...a) => a.reduce((x,y) => x*y, 0);
+volume = (...a) => a.reduce((x,y) => x*y, 1);
 console.log(volume(2,2,2),"Rest operator in defining function.");
