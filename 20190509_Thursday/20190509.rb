@@ -13,6 +13,9 @@ def get_zero_contour matrix
     {initial: matrix, contour: top+right+bottom+left, center: matrix[1..-2].map{|x| x[1..-2]}}
 end
 
+# TODO: I can pass to construct_matrix the same kind of hash with: :initial, :contour, :center keys.
+# where :contour is rotated, and :center changes recoursively. 
+
 Matrix = [[1,2,3,4], 
 [5,6,7,8], 
 [9,10,11,12], 
