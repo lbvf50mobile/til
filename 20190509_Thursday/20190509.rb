@@ -15,6 +15,18 @@ end
 
 # TODO: I can pass to construct_matrix the same kind of hash with: :initial, :contour, :center keys.
 # where :contour is rotated, and :center changes recoursively. 
+def construct_matrix(hash)
+    initial = hash[:initial]
+    contour = hash[:contour]
+    center = hash[:center]
+    h = initial.size
+    w = initial[0].size
+    top = contour[0...w]
+    right = contour[w...w+h-2]
+    bottom = contour[w+h-2...w+h-2+w]
+    left = contour[w+h-2+w...w+h-2+w+h-2]
+    [top] +  center.map.with_index(0){|x,i|[left.reverse[i]] + x + [right[i]]} + [bottom.reverse]
+end
 
 Matrix = [[1,2,3,4], 
 [5,6,7,8], 
@@ -30,9 +42,17 @@ describe "contoursShifting" do
     it "shoud correctly get the 0 countur" do
         contour = [1,2,3,4,8,12,16,20,19,18,17,13,9,5]
         center = [[6,7],[10,11],[14,15]]
-        initial = Matrix
+        initial = Matrix.clone
         answer = {initial: initial, contour: contour, center: center}
         ret = get_zero_contour(Matrix)
         assert_equal answer, ret
+    end
+    it "should correctly aggergate current counure" do
+        contour = [1,2,3,4,8,12,16,20,19,18,17,13,9,5]
+        center = [[6,7],[10,11],[14,15]]
+        initial = Matrix.clone
+        hash = {initial: initial, contour: contour, center: center}
+        ret = construct_matrix(hash)
+        assert_equal Matrix.clone, ret
     end
 end
