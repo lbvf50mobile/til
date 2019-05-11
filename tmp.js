@@ -1,5 +1,5 @@
-a = {z: x=>console.log(2)}
-a.z() // 2
-b = a.z
-console.log(b) // [Funciton: z]
-b() // 2
+a();
+b();
+function b(){console.log(2,'b', c())}
+function a(){ console.log(1,'a',c())}
+function c(){ return 3;}
