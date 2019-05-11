@@ -16,6 +16,9 @@ def get_zero_contour matrix
     if h == 1 && w > 1
         return get_zero_contour1xn matrix
     end
+    if h > 1 && w == 1
+        return get_zero_contournx1 matrix
+    end
 end
 def construct_matrix(hash)
     initial = hash[:initial]
@@ -29,6 +32,9 @@ def construct_matrix(hash)
     end
     if h == 1 && w > 1
         return construct_matrix1xn(hash)
+    end
+    if h > 1 && w == 1
+        return construct_matrixnx1(hash)
     end
 end
 # ---------------------------------------------------
@@ -48,6 +54,10 @@ end
 def get_zero_contour1xn matrix
     top = matrix[0]
     {initial: matrix, contour: top, center: [[]]}
+end
+def get_zero_contournx1 matrix
+    right = matrix.transpose[0]
+    {initial: matrix, contour: right, center: [[]]}
 end
 
 
@@ -75,6 +85,11 @@ def construct_matrix1xn(hash)
     contour = hash[:contour]
     top = contour
     [top] 
+end
+def construct_matrixnx1(hash)
+    contour = hash[:contour]
+    right = contour
+    [right].transpose 
 end
 #------------------------------------------------------
 Matrix = [[1,2,3,4], 
@@ -164,6 +179,36 @@ describe "contoursShifting" do
         contour = [238, 239, 240, 241, 242, 243, 244, 245]
         center = [[]]
         initial = [[238, 239, 240, 241, 242, 243, 244, 245]]
+        hash = {initial: initial, contour: contour, center: center}
+        ret = construct_matrix(hash)
+        assert_equal initial.clone, ret
+    end
+    it "shoud correctly get the 0 countur Nx1" do
+        contour = [238, 239, 240, 241, 242, 243, 244, 245]
+        center = [[]]
+        initial = [[238],
+        [239],
+        [240],
+        [241],
+        [242],
+        [243],
+        [244],
+        [245]]
+        answer = {initial: initial, contour: contour, center: center}
+        ret = get_zero_contour(initial)
+        assert_equal answer, ret
+    end
+    it "should correctly aggergate current counure Nx1" do
+        contour = [238, 239, 240, 241, 242, 243, 244, 245]
+        center = [[]]
+        initial = [[238],
+        [239],
+        [240],
+        [241],
+        [242],
+        [243],
+        [244],
+        [245]]
         hash = {initial: initial, contour: contour, center: center}
         ret = construct_matrix(hash)
         assert_equal initial.clone, ret
