@@ -62,11 +62,16 @@ def cs(matrix,c)
     cont_values = cont.map{|x,y| matrix[x][y]} 
     cent_values = cent.map{|row| row.map{|x,y| matrix[x][y]}} 
     rotate = c.even? ? -1 : 1
-    p cont_values
-    p cent_values
-    cont.each_with_index{|(x,y), i| matrix[x][y] = cont_values.rotate(rotate)[i]}
+    p "cont values #{c}"
+    p cont_values = cont_values.rotate(rotate)
+    p "cent values #{c}"
+    p cent_values 
+    p cent_values = cs(cent_values,c+1) unless cent_values.empty?
+    cont.each_with_index{|(x,y), i| matrix[x][y] = cont_values[i]}
     cent.each_with_index{|row,i| row.each_with_index{|(x,y),j| matrix[x][y] = cent_values[i][j] }}
-    p matrix
+    p "matrix #{c}"
+    p "matrix #{c}: #{matrix.inspect}";
+    p "new #{c}"
 
     
     [[5,1,2,3], 
