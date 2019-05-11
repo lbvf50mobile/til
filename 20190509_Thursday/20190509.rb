@@ -74,9 +74,12 @@ def construct_matrix3x2(hash)
     [top] +  center.map.with_index(0){|x,i|[left.reverse[i]] + x + [right[i]]} + [bottom.reverse]
 end
 def construct_matrix2x2(hash)
+    initial = hash[:initial]
+    h = initial.size
+    w = initial[0].size
     contour = hash[:contour]
-    top = contour[0...2]
-    bottom = contour[2..-1]
+    top = contour[0...w]
+    bottom = contour[w..-1]
     [top] + [bottom.reverse]
 end
 def construct_matrix1xn(hash)
@@ -99,8 +102,12 @@ def cs(m,c)
         return m
     end
     ret = get_zero_contour(m)
+    puts "-- was countour: #{ret[:contour].inspect}"
     ret[:contour] = c.even? ? ret[:contour].rotate(-1) : ret[:contour].rotate(1)
+    puts "-- now countour: #{ret[:contour].inspect}"
+    puts "-- was center: #{ret[:center].inspect}"
     ret[:center] = cs(ret[:center],c+1)
+    puts "-- now center: #{ret[:center].inspect}"
     construct_matrix(ret)
 end
 def contoursShifting(matrix)
@@ -114,7 +121,8 @@ Matrix = [[1,2,3,4],
 [17,18,19,20]];
 
 Tests = [
-    {matrix: [[1,2,3,4], 
+=begin 
+{matrix: [[1,2,3,4], 
  [5,6,7,8], 
  [9,10,11,12], 
  [13,14,15,16], 
@@ -124,6 +132,7 @@ Tests = [
  [17,10,14,12], 
  [18,19,20,16]]},
  {matrix: [[238,239,240,241,242,243,244,245]], a: [[245,238,239,240,241,242,243,244]]},
+=end
  {matrix: [[1,2,3,4,5], 
     [6,7,8,9,10], 
     [11,12,13,14,15], 
