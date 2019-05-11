@@ -62,23 +62,12 @@ def cs(matrix,c)
     cont_values = cont.map{|x,y| matrix[x][y]} 
     cent_values = cent.map{|row| row.map{|x,y| matrix[x][y]}} 
     rotate = c.even? ? -1 : 1
-    p "cont values #{c}"
-    p cont_values = cont_values.rotate(rotate)
-    p "cent values #{c}"
-    p cent_values 
-    p cent_values = cs(cent_values,c+1) unless cent_values.empty?
+    cont_values = cont_values.rotate(rotate)
+    cent_values = cs(cent_values,c+1) unless cent_values.empty?
     cont.each_with_index{|(x,y), i| matrix[x][y] = cont_values[i]}
     cent.each_with_index{|row,i| row.each_with_index{|(x,y),j| matrix[x][y] = cent_values[i][j] }}
-    p "matrix #{c}"
-    p "matrix #{c}: #{matrix.inspect}";
-    p "new #{c}"
-
-    
-    [[5,1,2,3], 
-    [9,7,11,4], 
-    [13,6,15,8], 
-    [17,10,14,12], 
-    [18,19,20,16]]
+    p matrix
+    matrix
 end
 def contoursShifting(matrix)
     cs(matrix,0)
@@ -96,7 +85,7 @@ Tests = [
  [13,6,15,8], 
  [17,10,14,12], 
  [18,19,20,16]]},
-=begin 
+ 
  {matrix: [[238,239,240,241,242,243,244,245]], a: [[245,238,239,240,241,242,243,244]]},
  {matrix: [[1,2,3,4,5], 
     [6,7,8,9,10], 
@@ -105,7 +94,7 @@ Tests = [
     [11,8,9,14,5], 
     [16,7,12,13,10], 
     [17,18,19,20,15]]},
-=end
+
 ]
 
 
