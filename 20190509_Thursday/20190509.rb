@@ -37,8 +37,26 @@ def contour_coordinates matrix
     end
     coorditantes
 end
+def center_coordinates matrix
+    h, w = matrix.size - 1, matrix[0].size - 1
+    unic_coordinates = {}
+    coorditantes = []
+    valid = ->(x,y){
+        coord = [x,y]
+        unic_coordinates[coord].nil? && x.between?(0,h) && y.between?(0,w)
+    }
+    (1..h-1).each do |x|
+        tmp = []
+        (1..w-1).each do |y|
+            tmp.push([x,y]) if valid.(x,y)
+        end
+        coorditantes.push(tmp) unless tmp.empty?
+    end
+    coorditantes
+end
 def cs(matrix,c)
     p contour_coordinates(matrix)
+    p center_coordinates matrix
     [[5,1,2,3], 
     [9,7,11,4], 
     [13,6,15,8], 
