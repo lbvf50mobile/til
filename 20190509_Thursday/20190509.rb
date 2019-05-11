@@ -66,7 +66,6 @@ def cs(matrix,c)
     cent_values = cs(cent_values,c+1) unless cent_values.empty?
     cont.each_with_index{|(x,y), i| matrix[x][y] = cont_values[i]}
     cent.each_with_index{|row,i| row.each_with_index{|(x,y),j| matrix[x][y] = cent_values[i][j] }}
-    p matrix
     matrix
 end
 def contoursShifting(matrix)
