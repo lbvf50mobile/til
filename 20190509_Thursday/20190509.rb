@@ -5,6 +5,22 @@ p "alias x='ruby 20190509_Thursday/20190509.rb'"
 # https://gist.github.com/lbvf50mobile/2da768bfd2f0900719c37f1b4ecf06c0
 require "minitest/autorun"
 def get_zero_contour matrix
+    h = matrix.size
+    w = matrix[0].size
+    if h >= 3 && w >=w
+        get_zero_contour3x2 matrix
+    end
+end
+def construct_matrix(hash)
+    initial = hash[:initial]
+    h = initial.size
+    w = initial[0].size
+    if h >= 3 && w >=w
+        construct_matrix3x2(hash)
+    end
+end
+# ---------------------------------------------------
+def get_zero_contour3x2 matrix
     top = matrix[0]
     bottom = matrix[-1].reverse
     matrix1 = matrix[1..-2].transpose
@@ -15,7 +31,7 @@ end
 
 # TODO: I can pass to construct_matrix the same kind of hash with: :initial, :contour, :center keys.
 # where :contour is rotated, and :center changes recoursively. 
-def construct_matrix(hash)
+def construct_matrix3x2(hash)
     initial = hash[:initial]
     contour = hash[:contour]
     center = hash[:center]
@@ -27,7 +43,7 @@ def construct_matrix(hash)
     left = contour[w+h-2+w...w+h-2+w+h-2]
     [top] +  center.map.with_index(0){|x,i|[left.reverse[i]] + x + [right[i]]} + [bottom.reverse]
 end
-
+#------------------------------------------------------
 Matrix = [[1,2,3,4], 
 [5,6,7,8], 
 [9,10,11,12], 
@@ -79,7 +95,7 @@ describe "contoursShifting" do
         ret = get_zero_contour(initial)
         assert_equal answer, ret
     end
-    it "should correctly aggergate current counure" do
+    it "should correctly aggergate current counure 3x2" do
         contour = [6,7,11,15,14,10]
         center = [[]]
         initial =[[6,7],[10,11],[14,15]]
