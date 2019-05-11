@@ -13,6 +13,9 @@ def get_zero_contour matrix
     if h == 2 && w == 2
         return get_zero_contour2x2 matrix
     end
+    if h == 1 && w > 1
+        return get_zero_contour1xn matrix
+    end
 end
 def construct_matrix(hash)
     initial = hash[:initial]
@@ -23,6 +26,9 @@ def construct_matrix(hash)
     end
     if h == 2 && w == 2
         return construct_matrix2x2(hash)
+    end
+    if h == 1 && w > 1
+        return construct_matrix1xn(hash)
     end
 end
 # ---------------------------------------------------
@@ -38,6 +44,10 @@ def get_zero_contour2x2 matrix
     top = matrix[0]
     bottom = matrix[-1].reverse
     {initial: matrix, contour: top+bottom, center: [[]]}
+end
+def get_zero_contour1xn matrix
+    top = matrix[0]
+    {initial: matrix, contour: top, center: [[]]}
 end
 
 
@@ -60,6 +70,11 @@ def construct_matrix2x2(hash)
     top = contour[0...2]
     bottom = contour[2..-1]
     [top] + [bottom.reverse]
+end
+def construct_matrix1xn(hash)
+    contour = hash[:contour]
+    top = contour
+    [top] 
 end
 #------------------------------------------------------
 Matrix = [[1,2,3,4], 
@@ -133,6 +148,22 @@ describe "contoursShifting" do
         contour = [1,2,4,3]
         center = [[]]
         initial = [[1,2],[3,4]]
+        hash = {initial: initial, contour: contour, center: center}
+        ret = construct_matrix(hash)
+        assert_equal initial.clone, ret
+    end
+    it "shoud correctly get the 0 countur 1xN" do
+        contour = [238, 239, 240, 241, 242, 243, 244, 245]
+        center = [[]]
+        initial = [[238, 239, 240, 241, 242, 243, 244, 245]]
+        answer = {initial: initial, contour: contour, center: center}
+        ret = get_zero_contour(initial)
+        assert_equal answer, ret
+    end
+    it "should correctly aggergate current counure 1xN" do
+        contour = [238, 239, 240, 241, 242, 243, 244, 245]
+        center = [[]]
+        initial = [[238, 239, 240, 241, 242, 243, 244, 245]]
         hash = {initial: initial, contour: contour, center: center}
         ret = construct_matrix(hash)
         assert_equal initial.clone, ret
