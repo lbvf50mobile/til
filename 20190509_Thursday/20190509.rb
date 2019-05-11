@@ -59,10 +59,6 @@ def get_zero_contournx1 matrix
     right = matrix.transpose[0]
     {initial: matrix, contour: right, center: [[]]}
 end
-
-
-# TODO: I can pass to construct_matrix the same kind of hash with: :initial, :contour, :center keys.
-# where :contour is rotated, and :center changes recoursively. 
 def construct_matrix3x2(hash)
     initial = hash[:initial]
     contour = hash[:contour]
@@ -91,12 +87,41 @@ def construct_matrixnx1(hash)
     right = contour
     [right].transpose 
 end
+def cs(m,c)
+    puts "--- matrix c= #{c}"
+    p m
+    h = m.size
+    w = m[0].size
+    puts "w = #{w} && h = #{h}"
+    if 1 >= w && 1 == h
+        return m
+    end
+    ret = get_zero_contour(m)
+    ret[:contour] = c.even? ? ret[:contour].rotate(-1) : ret[:contour].rotate(1)
+    ret[:center] = cs(ret[:center],c+1)
+    construct_matrix(ret)
+end
+def contoursShifting(matrix)
+    cs(matrix,0)
+end
 #------------------------------------------------------
 Matrix = [[1,2,3,4], 
 [5,6,7,8], 
 [9,10,11,12], 
 [13,14,15,16], 
 [17,18,19,20]];
+
+Tests = [
+    {matrix: [[1,2,3,4], 
+ [5,6,7,8], 
+ [9,10,11,12], 
+ [13,14,15,16], 
+ [17,18,19,20]], a:[[5,1,2,3], 
+ [9,7,11,4], 
+ [13,6,15,8], 
+ [17,10,14,12], 
+ [18,19,20,16]]}
+]
 
 
 describe "contoursShifting" do
@@ -212,5 +237,13 @@ describe "contoursShifting" do
         hash = {initial: initial, contour: contour, center: center}
         ret = construct_matrix(hash)
         assert_equal initial.clone, ret
+    end
+    it "should work with tests" do
+        Tests.each do |test|
+            p test
+            m = test[:matrix]
+            a = test[:a]
+            assert_equal a, contoursShifting(m)
+        end
     end
 end
