@@ -10,7 +10,8 @@ def get_zero_contour matrix
     if h >= 3 && w >=2
         return get_zero_contour3x2 matrix
     end
-    if h == 2 && w == 2
+    if h == 2 && w >= 2
+        p "this"
         return get_zero_contour2x2 matrix
     end
     if h == 1 && w > 1
@@ -27,7 +28,8 @@ def construct_matrix(hash)
     if h >= 3 && w >= 2
         return construct_matrix3x2(hash)
     end
-    if h == 2 && w == 2
+    if h == 2 && w >= 2
+        p "this"
         return construct_matrix2x2(hash)
     end
     if h == 1 && w > 1
@@ -120,7 +122,16 @@ Tests = [
  [9,7,11,4], 
  [13,6,15,8], 
  [17,10,14,12], 
- [18,19,20,16]]}
+ [18,19,20,16]]},
+ {matrix: [[238,239,240,241,242,243,244,245]], a: [[245,238,239,240,241,242,243,244]]},
+ {matrix: [[1,2,3,4,5], 
+    [6,7,8,9,10], 
+    [11,12,13,14,15], 
+    [16,17,18,19,20]], a: [[6,1,2,3,4], 
+    [11,8,9,14,5], 
+    [16,7,12,13,10], 
+    [17,18,19,20,15]]},
+ 
 ]
 
 
