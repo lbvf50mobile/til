@@ -79,4 +79,12 @@ describe "contoursShifting" do
         ret = get_zero_contour(initial)
         assert_equal answer, ret
     end
+    it "should correctly aggergate current counure" do
+        contour = [6,7,11,15,14,10]
+        center = [[]]
+        initial =[[6,7],[10,11],[14,15]]
+        hash = {initial: initial, contour: contour, center: center}
+        ret = construct_matrix(hash)
+        assert_equal initial.clone, ret
+    end
 end
