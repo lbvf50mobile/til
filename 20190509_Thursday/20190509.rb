@@ -8,41 +8,32 @@ def contour_coordinates matrix
     h, w = matrix.size - 1, matrix[0].size - 1
     unic_coordinates = {}
     coorditantes = []
-    # top
-    (0..w).each do |i|
-        x,y = 0,i
+    insert = ->(x,y){
         coord = [x,y]
         if unic_coordinates[coord].nil? && x.between?(0,h) && y.between?(0,w)
             unic_coordinates[coord] = true
             coorditantes.push coord
         end
+    }
+    # top
+    (0..w).each do |i|
+        x,y = 0,i
+        insert.(x,y)
     end
     # right
     (1..h-1).each do |i|
         x,y = i,w
-        coord = [x,y]
-        if unic_coordinates[coord].nil? && x.between?(0,h) && y.between?(0,w)
-            unic_coordinates[coord] = true
-            coorditantes.push coord
-        end
+        insert.(x,y)
     end
     # bottom
     (0..w).to_a.reverse.each do |i|
         x,y = h,i
-        coord = [x,y]
-        if unic_coordinates[coord].nil? && x.between?(0,h) && y.between?(0,w)
-            unic_coordinates[coord] = true
-            coorditantes.push coord
-        end
+        insert.(x,y)
     end
     # left
     (1..h-1).to_a.reverse.each do |i|
         x,y = i,0
-        coord = [x,y]
-        if unic_coordinates[coord].nil? && x.between?(0,h) && y.between?(0,w)
-            unic_coordinates[coord] = true
-            coorditantes.push coord
-        end
+        insert.(x,y)
     end
     coorditantes
 end
