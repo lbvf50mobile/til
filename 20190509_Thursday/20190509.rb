@@ -55,4 +55,28 @@ describe "contoursShifting" do
         ret = construct_matrix(hash)
         assert_equal Matrix.clone, ret
     end
+    it "should correctly aggregate new conture" do
+        contour = [?t,?t,?t,?t,?r,?r,?r,?b,?b,?b,?b,?l,?l,?l]
+        center = [[?*,?*],[?-,?-],[?*,?*]]
+        aggregated_matrix = [[?t,?t,?t,?t], 
+        [?l,?*,?*,?r], 
+        [?l,?-,?-,?r], 
+        [?l,?*,?*,?r], 
+        [?b,?b,?b,?b]];
+        answer = {initial: aggregated_matrix, contour: contour, center: center}
+        ret = get_zero_contour(aggregated_matrix)
+        assert_equal answer[:contour], ret[:contour]
+        assert_equal answer, ret
+        answer = {initial: Matrix.clone, contour: contour, center: center}
+        ret = construct_matrix(answer)
+        assert_equal aggregated_matrix.clone, ret
+    end
+    it "shoud correctly get the 0 countur 3x2" do
+        contour = [6,7,11,15,14,10]
+        center = [[]]
+        initial = [[6,7],[10,11],[14,15]]
+        answer = {initial: initial, contour: contour, center: center}
+        ret = get_zero_contour(initial)
+        assert_equal answer, ret
+    end
 end
