@@ -7,16 +7,22 @@ require "minitest/autorun"
 def get_zero_contour matrix
     h = matrix.size
     w = matrix[0].size
-    if h >= 3 && w >=w
-        get_zero_contour3x2 matrix
+    if h >= 3 && w >=2
+        return get_zero_contour3x2 matrix
+    end
+    if h == 2 && w == 2
+        return get_zero_contour2x2 matrix
     end
 end
 def construct_matrix(hash)
     initial = hash[:initial]
     h = initial.size
     w = initial[0].size
-    if h >= 3 && w >=w
-        construct_matrix3x2(hash)
+    if h >= 3 && w >= 2
+        return construct_matrix3x2(hash)
+    end
+    if h == 2 && w == 2
+        return construct_matrix2x2(hash)
     end
 end
 # ---------------------------------------------------
@@ -28,6 +34,12 @@ def get_zero_contour3x2 matrix
     right = matrix1[-1]
     {initial: matrix, contour: top+right+bottom+left, center: matrix[1..-2].map{|x| x[1..-2]}}
 end
+def get_zero_contour2x2 matrix
+    top = matrix[0]
+    bottom = matrix[-1].reverse
+    {initial: matrix, contour: top+bottom, center: [[]]}
+end
+
 
 # TODO: I can pass to construct_matrix the same kind of hash with: :initial, :contour, :center keys.
 # where :contour is rotated, and :center changes recoursively. 
@@ -42,6 +54,12 @@ def construct_matrix3x2(hash)
     bottom = contour[w+h-2...w+h-2+w]
     left = contour[w+h-2+w...w+h-2+w+h-2]
     [top] +  center.map.with_index(0){|x,i|[left.reverse[i]] + x + [right[i]]} + [bottom.reverse]
+end
+def construct_matrix2x2(hash)
+    contour = hash[:contour]
+    top = contour[0...2]
+    bottom = contour[2..-1]
+    [top] + [bottom.reverse]
 end
 #------------------------------------------------------
 Matrix = [[1,2,3,4], 
@@ -99,6 +117,22 @@ describe "contoursShifting" do
         contour = [6,7,11,15,14,10]
         center = [[]]
         initial =[[6,7],[10,11],[14,15]]
+        hash = {initial: initial, contour: contour, center: center}
+        ret = construct_matrix(hash)
+        assert_equal initial.clone, ret
+    end
+    it "shoud correctly get the 0 countur 2x2" do
+        contour = [1,2,4,3]
+        center = [[]]
+        initial = [[1,2],[3,4]]
+        answer = {initial: initial, contour: contour, center: center}
+        ret = get_zero_contour(initial)
+        assert_equal answer, ret
+    end
+    it "should correctly aggergate current counure 2x2" do
+        contour = [1,2,4,3]
+        center = [[]]
+        initial = [[1,2],[3,4]]
         hash = {initial: initial, contour: contour, center: center}
         ret = construct_matrix(hash)
         assert_equal initial.clone, ret
