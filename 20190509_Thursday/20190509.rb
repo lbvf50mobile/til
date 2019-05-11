@@ -43,7 +43,9 @@ def center_coordinates matrix
     coorditantes = []
     valid = ->(x,y){
         coord = [x,y]
-        unic_coordinates[coord].nil? && x.between?(0,h) && y.between?(0,w)
+        ans = unic_coordinates[coord].nil? && x.between?(0,h) && y.between?(0,w)
+        unic_coordinates[coord] = true if ans
+        ans
     }
     (1..h-1).each do |x|
         tmp = []
@@ -55,8 +57,18 @@ def center_coordinates matrix
     coorditantes
 end
 def cs(matrix,c)
-    p contour_coordinates(matrix)
-    p center_coordinates matrix
+    cont = contour_coordinates(matrix)
+    cent = center_coordinates(matrix)
+    cont_values = cont.map{|x,y| matrix[x][y]} 
+    cent_values = cent.map{|row| row.map{|x,y| matrix[x][y]}} 
+    rotate = c.even? ? -1 : 1
+    p cont_values
+    p cent_values
+    cont.each_with_index{|(x,y), i| matrix[x][y] = cont_values.rotate(rotate)[i]}
+    cent.each_with_index{|row,i| row.each_with_index{|(x,y),j| matrix[x][y] = cent_values[i][j] }}
+    p matrix
+
+    
     [[5,1,2,3], 
     [9,7,11,4], 
     [13,6,15,8], 
@@ -96,7 +108,6 @@ describe "contoursShifting" do
     
     it "should work with tests" do
         Tests.each do |test|
-            p test
             m = test[:matrix]
             a = test[:a]
             assert_equal a, contoursShifting(m)
