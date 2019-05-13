@@ -1,6 +1,9 @@
+#!/usr/bin/env ruby
 p "alias x='ruby 20190513_Monday/20190513.rb'" 
 
 # Ruby Method#arity: returns an indication of the number of arguments accepted by a method.
+
+# https://ruby-doc.org/core-2.4.0/Method.html
 
 a = ->{2}
 b = ->(x,y){x+y}
