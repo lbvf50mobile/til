@@ -1,19 +1,22 @@
+# Solution for @LazyNick
+# http://bit.ly/2LRXyg2
+# Find digit deleted form Array.
 
-
-p a=3
-p a
-
-def feb n
-    return 0 if 0 == n
-    return 1 if 1 == n
-    fn1 = 0
-    fn2 = 1
-    f = fn1+fn2
-    (2..n).each do |n|
-        f = fn1+fn2
-        fn2,fn1 = f,fn2
-    end
-    f
+def find_lost_digit (full_array, messed_array_without_digit)
+    hash = {}
+    full_array.each{|x| 
+        if hash[x].nil?
+            hash[x] = {full: 1, messed: 0}
+        else
+            hash[x] = {full: hash[x][:full]+1, messed: 0}
+        end
+    }
+    messed_array_without_digit.each{|x|
+        hash[x] = {full: hash[x][:full], messed: hash[x][:messed]+1}
+    }
+    hash.to_a.find{|value,h| h[:full] > h[:messed]}[0]
 end
 
-p (0..10).map{|x| feb x}
+p full = (1..4).to_a
+p messed = full.shuffle[0...-1]
+p find_lost_digit(full, messed)
