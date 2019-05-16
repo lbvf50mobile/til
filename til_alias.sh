@@ -1,1 +1,1 @@
-alias x='php 20190515_Wednesday/20190515.php'
+alias x='ruby 20190516_Thursday/20190516.rb'
