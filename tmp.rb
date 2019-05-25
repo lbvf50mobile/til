@@ -1,16 +1,5 @@
+# Ruby examples for @jabascripter
+x = [1,2,3,4,5]
+y = [?a,?b,?c,?d,?e]
+p x.zip(y) # [[1, "a"], [2, "b"], [3, "c"], [4, "d"], [5, "e"]]
 
-
-hash = {a:1, b:{b1: 1, b2:{b3:4, b4:5}}, c: 8}
-
-def recursive_print argument
-    argument.each{|key, value| 
-        if(Hash == value.class)
-            p key
-            recursive_print value
-        else 
-            p key, value
-        end
-    }
-end
-
-recursive_print(hash)
