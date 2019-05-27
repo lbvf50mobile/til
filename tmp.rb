@@ -1,9 +1,6 @@
-# Resque Example from https://github.com/davydovanton/vim-html2slim/blob/master/plugin/html2slim.vim
-def test_rescue
-    some_error
-rescue 
-    puts "An error Happens"
-    
+# @jouko_v Ruby return array
+def test
+    return 1,2
 end
 
-test_rescue
+p [1,2] == test
