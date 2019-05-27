@@ -1,6 +1,6 @@
 p "alias x='ruby 20190527_Monday/20190527.rb'" 
 
-# Ruby 'rescue' in the end of amethod block to catch error in method. (@davydovanton)
+# Ruby 'rescue' in the end of a method block to catch error in this method. (@davydovanton)
 
 #https://github.com/davydovanton/vim-html2slim/blob/master/plugin/html2slim.vim
 
