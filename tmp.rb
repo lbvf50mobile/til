@@ -1,5 +1,9 @@
-# Ruby examples for @jabascripter
-x = [1,2,3,4,5]
-y = [?a,?b,?c,?d,?e]
-p x.zip(y) # [[1, "a"], [2, "b"], [3, "c"], [4, "d"], [5, "e"]]
+# Resque Example from https://github.com/davydovanton/vim-html2slim/blob/master/plugin/html2slim.vim
+def test_rescue
+    some_error
+rescue 
+    puts "An error Happens"
+    
+end
 
+test_rescue
