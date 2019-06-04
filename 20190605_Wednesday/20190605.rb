@@ -28,7 +28,12 @@ def chessTriangle(n,m)
             type.permutation(3) do |a,b,c|
                 # Selected sells that beat by first point [[x,y], [x1,y1]]
                 point12 = a[:delta].map{|dx,dy| {p1: [x,y],p2:[x+dx,y+dy],t: a[:t]+b[:t]}}.select{|arr| v[arr[:p2]]}
-                p point12
+                point123 = point12.map do |p12| 
+                    b[:delta].map{|dx,dy| {p1: p12[:p1],p2:p12[:p2], p3: [p12[:p2][0]+dx,p12[:p2][1]+dy], t: a[:t]+b[:t]+c[:t]}}
+                    .select{|p123| v[p123[:p3]]}
+                    .select{|p123| c[:delta].any?{|dx,dy| p123[:p1]==[p123[:p3][0]+dx,p123[:p3][1]+dy]}}
+                end.flatten.uniq
+                p point123
                 
             end
         end
