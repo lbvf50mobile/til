@@ -76,7 +76,7 @@ def chessTriangle(n,m)
     valid = variants.all?{|x| check_validnes(x)}
     p "varians #{variants.size}, variantes.uniq #{variants.uniq.size}, valid #{valid}"
     variants = variants.map{|x| a,b,c = x[:t].chars; a1,b1,c1 = x[:p1], x[:p2], x[:p3]; [[*a1,a],[*b1,b],[*c1,c]]}
-    .sort{|a,b| (a[0] <=> b[0]) == 0 ? a[1] <=> b[1] : a[0] <=> b[0]}
+    .sort{|a,b,c| (a[0] <=> b[0]) == 0 ? a[1] <=> b[1] : a[0] <=> b[0]}
     .map{|x| 
         a,b,c = x
         at,bt,ct = a[2],b[2],c[2]
