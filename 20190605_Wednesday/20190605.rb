@@ -89,9 +89,9 @@ def chessTriangle(n,m)
     # variants.each.with_index{|x,i|p i; show23 x}
     names = variants.map{|x| x.last}
     # puts names.join('; ').red
-    puts names.uniq.join('; ').green
+    puts names.uniq.sort.join('; ').green
     puts names.uniq.size
-    
+
 
 end
 
