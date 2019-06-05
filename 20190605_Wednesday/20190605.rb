@@ -14,14 +14,35 @@ p "alias x='ruby 20190605_Wednesday/20190605.rb'"
 # https://medium.com/@tchryssos/array-combinations-and-permutations-f9599ac5d403
 
 
-def valid (x,y,n,m); x.between?(0,m-1) && y.between?(0,n-1) end 
+
+
+def type 
+     [
+    {t:'k', delta: [ [1,2],[2,1],[2,-1],[1,-2],[-1,-2],[-2,-1],[-2,1],[-1,2]]},
+    {t:'b', delta:[[1,1],[1,-1],[-1,-1],[-1,1]]},
+    {t:'r', delta:[[0,1],[1,0],[0,-1],[-1,0]]}
+]
+end
+
+def check_validnes hash
+    a = hash[:p1]
+    b = hash[:p2]
+    c = hash[:p3]
+    delta = ->y{ type.select{|x| x[:t] == y}[0][:delta] }
+    values = ->(x,delta){ delta.map{|dx,dy| [x[0]+dx,x[1]+dy]}}
+    delta_a = delta[hash[:t][0]]
+    delta_b = delta[hash[:t][1]]
+    delta_c = delta[hash[:t][2]]
+    a1 = values[a,delta_a].any?{|x| x == b} 
+    b1 = values[b,delta_b].any?{|x| x == c}
+    c1 = values[c,delta_c].any?{|x| x == a}
+    a1 && b1 && c1
+end
+
 
 def chessTriangle(n,m)
-    type = [
-        {t:'k', delta: [ [1,2],[2,1],[2,-1],[1,-2],[-1,-2],[-2,-1],[-2,1],[-1,2]]},
-        {t:'b', delta:[[1,1],[1,-1],[-1,-1],[-1,1]]},
-        {t:'r', delta:[[0,1],[1,0],[0,-1],[-1,0]]}
-    ]
+    
+    variants = []
     v = ->a{ a[0].between?(0,m-1) && a[1].between?(0,n-1)}
     m.times do |x|
         n.times do |y|
@@ -33,11 +54,13 @@ def chessTriangle(n,m)
                     .select{|p123| v[p123[:p3]]}
                     .select{|p123| c[:delta].any?{|dx,dy| p123[:p1]==[p123[:p3][0]+dx,p123[:p3][1]+dy]}}
                 end.flatten.uniq
-                p point123
+                variants = variants + point123
                 
             end
         end
     end
+    valid = variants.all?{|x| check_validnes(x)}
+    p "varians #{variants.size}, variantes.uniq #{variants.uniq.size}, valid #{valid}"
 
 end
 
