@@ -38,8 +38,9 @@ def check_validnes hash
     c1 = values[c,delta_c].any?{|x| x == a}
     a1 && b1 && c1
 end
-
+require "colorize"
 def show23 arr
+    puts arr[3].green
     (0..2).reverse_each do |y|
         str = "---"
         (0..3).reverse_each do |x|
@@ -74,6 +75,14 @@ def chessTriangle(n,m)
     p "varians #{variants.size}, variantes.uniq #{variants.uniq.size}, valid #{valid}"
     variants = variants.map{|x| a,b,c = x[:t].chars; a1,b1,c1 = x[:p1], x[:p2], x[:p3]; [[*a1,a],[*b1,b],[*c1,c]]}
     .sort{|a,b| (a[0] <=> b[0]) == 0 ? a[1] <=> b[1] : a[0] <=> b[0]}
+    .map{|x| 
+        a,b,c = x
+        at,bt,ct = a[2],b[2],c[2]
+        adelta = "#{b[0]-a[0]}#{b[1]-a[1]}" 
+        bdelta = "#{c[0]-b[0]}#{c[1]-b[1]}"
+        name = at+adelta+bt+bdelta+ct
+        [*x,name]  
+    }
     p "arter sort; varians #{variants.size}, variantes.uniq #{variants.uniq.size}, valid #{valid}"
     variants.each.with_index{|x,i|p i; show23 x}
 
