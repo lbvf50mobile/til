@@ -39,6 +39,17 @@ def check_validnes hash
     a1 && b1 && c1
 end
 
+def show23 arr
+    (0..2).reverse_each do |y|
+        str = "---"
+        (0..3).reverse_each do |x|
+            v = arr.select{|x1,y1,v| x1 == x && y1 == y}[0]
+            str[x] = v[2] if v
+            
+        end
+        puts str
+    end
+end
 
 def chessTriangle(n,m)
     
@@ -64,6 +75,7 @@ def chessTriangle(n,m)
     variants = variants.map{|x| a,b,c = x[:t].chars; a1,b1,c1 = x[:p1], x[:p2], x[:p3]; [[*a1,a],[*b1,b],[*c1,c]]}
     .sort{|a,b| (a[0] <=> b[0]) == 0 ? a[1] <=> b[1] : a[0] <=> b[0]}
     p "arter sort; varians #{variants.size}, variantes.uniq #{variants.uniq.size}, valid #{valid}"
+    variants.each.with_index{|x,i|p i; show23 x}
 
 end
 
