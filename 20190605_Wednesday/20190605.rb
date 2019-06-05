@@ -1,6 +1,8 @@
 p "alias x='ruby 20190605_Wednesday/20190605.rb'" 
 
-# Chess triangle.
+# Ruby Chess triangle.
+
+# https://gist.github.com/lbvf50mobile/2e4f8b906526f28f5afe6ef5846c3008
 
 # Consider a bishop, a knight and a rook on an n × m chessboard. 
 # They are said to form a triangle if each piece attacks exactly 
