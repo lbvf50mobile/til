@@ -54,6 +54,20 @@ def show23 arr
     end
 end
 
+def sort_by_cell_order(n,m,triangle)
+    ans = []
+    n.times do |y|
+        m.times do |x|
+            tmp = triangle.select{|x1,y1,c| x1 == x && y1 == y }
+            unless tmp.empty?
+                tmp = tmp[0]
+                ans.push(tmp)
+            end
+        end    
+    end
+    ans
+end
+
 def chessTriangle(n,m)
     
     variants = []
@@ -78,6 +92,8 @@ def chessTriangle(n,m)
     variants = variants.reduce([]){|memo,x| memo.push( [[*x[:p1],x[:t][0]],[*x[:p2],x[:t][1]],[*x[:p3],x[:t][2]]]); memo}
     throw 'Invalind variants' unless valid
     puts "%s. Triangles based on full brootforse %s #{variants.first}" % ["#{n}x#{m}".red, variants.size.to_s.yellow]
+    variants.map!{|x| sort_by_cell_order(n,m,x) }
+    puts "%s. Triangles ordered by cell order %s #{variants.first}" % ["#{n}x#{m}".red, variants.size.to_s.cyan]
 end
 chessTriangle(3,3)
 # chessTriangle(4,4)
