@@ -78,7 +78,7 @@ end
 
 
 def group_by_size variants
-    variants.group_by{|x,y,z| ([x[0],y[0],z[0]].max - [x[0],y[0],z[0]].min + 1).to_s + 'x' + (1 + [x[1],y[1],z[1]].max - [x[1],y[1],z[1]].min).to_s}
+    variants.group_by{|x,y,z| [([x[0],y[0],z[0]].max - [x[0],y[0],z[0]].min + 1) ,(1 + [x[1],y[1],z[1]].max - [x[1],y[1],z[1]].min)]}
     .map{|k,v| [k,v.size]}.to_h
 end
 
@@ -109,7 +109,7 @@ def chessTriangle(n,m)
     throw 'Invalind variants' unless valid
     variants.map!{|x| sort_by_cell_order(n,m,x) }
     variants.uniq!
-    puts "%s. Triangles ordered and uniq %s #{variants.first}" % ["#{n}x#{m}".red, variants.size.to_s.green]
+    puts "%s. %s #{variants.first}" % ["#{n}x#{m}".red, variants.size.to_s.green]
     puts "Possible gabarits #{group_by_size(variants)}"
 end
 
