@@ -118,4 +118,6 @@ chessTriangle(2,3)
 chessTriangle(3,2)
 chessTriangle(2,4)
 chessTriangle(4,2)
+chessTriangle(3,3)
+chessTriangle(5,2)
 
