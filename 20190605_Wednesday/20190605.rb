@@ -85,6 +85,7 @@ def chessTriangle(n,m)
         name = at+adelta+bt+bdelta+ct
         [*x,name]  
     }
+    p variants.first
     p "arter sort; varians #{variants.size}, variantes.uniq #{variants.uniq.size}, valid #{valid}"
     # variants.each.with_index{|x,i|p i; show23 x}
     names = variants.map{|x| x.last}
@@ -92,8 +93,41 @@ def chessTriangle(n,m)
     puts names.uniq.sort.join('; ').green
     puts names.uniq.size
 
+    # I think part of variants id dublicated because the same triangle cold be counted from different points.
+    # because there is 3 figures and each counts as a triagle.
+    # Idea is to count triangle by it's gabarit size and where is to point it's 0.0
+
+    box_vars = variants
+    .map{|a,b,c,name| 
+        point = [[a[0],b[0],c[0]].min,[a[1],b[1],c[1]].min]
+        x,y = point
+        a = [a[0]-x,a[1]-y,a[2]]
+        b = [b[0]-x,b[1]-y,b[2]]
+        c = [c[0]-x,c[1]-y,c[2]]
+        points = [a,b,c]
+        fullname = "#{x}:#{y};"
+        10.times do |y|
+            10.times do |x|
+                tmp = points.select{|z| z[0] == x && z[1] == y}
+                if !tmp.empty?
+                    tmp = tmp[0]
+                    fullname += "#{tmp[2]}#{tmp[0]}:#{tmp[1]};"
+                end
+            end
+        end
+        [point,a,b,c,name,fullname]
+        
+    }
+
+    box_vars.each{|x,a,b,c,n,n1|
+        puts "%s %s" % [n.red, n1.green]
+     }
+     # calculate gabarit boxes [min[x1,x2,x3] min[y1,y2,y3]] = box point
+     
+     
+
 
 end
-
-chessTriangle(4,4)
-chessTriangle(5,5)
+chessTriangle(3,3)
+# chessTriangle(4,4)
+# chessTriangle(5,5)
