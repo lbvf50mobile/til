@@ -121,3 +121,22 @@ chessTriangle(4,2)
 chessTriangle(3,3)
 chessTriangle(5,2)
 
+def chessTriangleSolution(height, width)
+    p "h #{height} w #{width}"
+    [[2, 3], [2, 4], [4, 3],[4, 2], [3, 2], [3, 4], [3, 3]]
+    .map{|x,y|
+        ans = 0
+        if(x <= width && y <= height)
+            columns = 1 + (width - x )
+            rows = 1 + (height - y )
+            p "x,y #{[x,y]} columns #{columns} rows #{rows}"
+            vars =  8 * columns * rows
+            vars *= 2 if x == y
+            ans += vars
+        end
+      
+        ans
+    }.sum
+end
+
+
