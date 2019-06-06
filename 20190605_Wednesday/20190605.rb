@@ -74,7 +74,7 @@ def chessTriangle(n,m)
         end
     end
     valid = variants.all?{|x| check_validnes(x)}
-    p "varians #{variants.size}, variantes.uniq #{variants.uniq.size}, valid #{valid}"
+    #p "valid #{valid}"
     variants = variants.map{|x| a,b,c = x[:t].chars; a1,b1,c1 = x[:p1], x[:p2], x[:p3]; [[*a1,a],[*b1,b],[*c1,c]]}
     .sort{|a,b,c| (a[0] <=> b[0]) == 0 ? a[1] <=> b[1] : a[0] <=> b[0]}
     .map{|x| 
@@ -85,45 +85,62 @@ def chessTriangle(n,m)
         name = at+adelta+bt+bdelta+ct
         [*x,name]  
     }
-    p variants.first
-    p "arter sort; varians #{variants.size}, variantes.uniq #{variants.uniq.size}, valid #{valid}"
+    # p variants.first
+    # p "arter sort; varians #{variants.size}, variantes.uniq #{variants.uniq.size}, valid #{valid}"
     # variants.each.with_index{|x,i|p i; show23 x}
     names = variants.map{|x| x.last}
     # puts names.join('; ').red
-    puts names.uniq.sort.join('; ').green
-    puts names.uniq.size
+    # puts names.uniq.sort.join('; ').green
+
+    #puts names.uniq.first.to_s.green
+    #puts names.uniq.size
 
     # I think part of variants id dublicated because the same triangle cold be counted from different points.
     # because there is 3 figures and each counts as a triagle.
     # Idea is to count triangle by it's gabarit size and where is to point it's 0.0
 
+    # calculate gabarit boxes [min[x1,x2,x3] min[y1,y2,y3]] = box point
     box_vars = variants
     .map{|a,b,c,name| 
         point = [[a[0],b[0],c[0]].min,[a[1],b[1],c[1]].min]
-        x,y = point
-        a = [a[0]-x,a[1]-y,a[2]]
-        b = [b[0]-x,b[1]-y,b[2]]
-        c = [c[0]-x,c[1]-y,c[2]]
+        dx,dy = point
+        a = [a[0]-dx,a[1]-dy,a[2]]
+        b = [b[0]-dx,b[1]-dy,b[2]]
+        c = [c[0]-dx,c[1]-dy,c[2]]
         points = [a,b,c]
-        fullname = "#{x}:#{y};"
+        fullname = "#{dx}:#{dy};"
+        figures = ""
+        coords = ""
         10.times do |y|
             10.times do |x|
                 tmp = points.select{|z| z[0] == x && z[1] == y}
                 if !tmp.empty?
                     tmp = tmp[0]
                     fullname += "#{tmp[2]}#{tmp[0]}:#{tmp[1]};"
+                    figures += "#{tmp[2]}#{tmp[0]}:#{tmp[1]};"
+                    coords += "#{tmp[2]}#{tmp[0]+dx}:#{tmp[1]+dy};"
                 end
             end
         end
-        [point,a,b,c,name,fullname]
+        # [point,a,b,c,name,fullname]
+        [name,fullname,figures, coords]
         
     }
+    names = box_vars.map{|x| x[0]}.uniq
+    fullnames = box_vars.map{|x| x[1]}.uniq
+    figures = box_vars.map{|x| x[2]}.uniq
+    coords = box_vars.map{|x| x[3]}.uniq
+    puts "#{n}x#{m}"
+    puts "fullnames #{fullnames.size} #{fullnames[0..2]}"
+    puts "names #{names.size} #{names[0..2]}"
+    puts "figures #{figures.size} #{figures[0..2]}"
+    puts "coords #{coords.size} #{coords[0..2]}"
 
-    box_vars.each{|x,a,b,c,n,n1|
-        puts "%s %s" % [n.red, n1.green]
-     }
-     # calculate gabarit boxes [min[x1,x2,x3] min[y1,y2,y3]] = box point
+
+    
      
+
+ 
      
 
 
