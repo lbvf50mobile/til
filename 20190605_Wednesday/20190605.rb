@@ -75,6 +75,7 @@ def chessTriangle(n,m)
     end
     variants.uniq!
     valid = variants.all?{|x| check_validnes(x)}
+    variants = variants.reduce([]){|memo,x| memo.push( [[*x[:p1],x[:t][0]],[*x[:p2],x[:t][1]],[*x[:p3],x[:t][2]]]); memo}
     throw 'Invalind variants' unless valid
     puts "%s. Triangles based on full brootforse %s #{variants.first}" % ["#{n}x#{m}".red, variants.size.to_s.yellow]
 end
