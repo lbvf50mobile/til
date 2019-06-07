@@ -1,6 +1,6 @@
 p "alias x='ruby 20190607_Friday/20190607.rb'" 
 
-# Ruby int32_to_ip: a.pack(?N).unpack('C*') * ?.
+# Ruby int32_to_ip: a.pack(?N).unpack('C*') * ? ;
 
 require "minitest/autorun"
 
