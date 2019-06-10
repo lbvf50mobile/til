@@ -41,11 +41,13 @@ def amazonCheckmate(k_, a_)
     a_attacks = moves(amazon,a)
     
     can_be = all - used
-    can_be_under_attak = (k_attacks + a_attacks - used).uniq
+    place_for_checkmate = (a_attacks - used - k_attacks).uniq
     can_be_free = all - used - a_attacks - k_attacks
     
     # it's checkmate (i.e. black's king is under amazon's attack and it cannot make a valid move);
-    checkmate = 5
+    checkmate = place_for_checkmate
+        .reduce(0){|memo,v| moves(king,v).any?{|x| can_be_free.include?(x)} ? memo : memo+=1; memo  }
+
     
     [checkmate, 21, 0, 29]
 end
