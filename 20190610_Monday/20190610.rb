@@ -51,7 +51,7 @@ def amazonCheckmate(k_, a_)
     check = place_for_checkmate
         .reduce(0){|memo,v| moves(king,v).any?{|x| can_be_free.include?(x)} ? memo+=1 : memo; memo  }
     
-    [checkmate, 21, 0, 29]
+    [checkmate, check, 0, 29]
 end
 
 
