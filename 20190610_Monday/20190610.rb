@@ -40,7 +40,7 @@ def amazonCheckmate(k_, a_)
     k_attacks = moves(king,k)
     a_attacks = moves(amazon,a)
     
-    can_be = all - used
+    can_be = all - used - k_attacks
     place_for_checkmate = (a_attacks - used - k_attacks).uniq
     can_be_free = all - used - a_attacks - k_attacks
     
