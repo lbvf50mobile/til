@@ -49,8 +49,13 @@ def amazonCheckmate(k_, a_)
     # it's check (i.e. black's king is under amazon's attack but it can reach a safe square in one move);
     check = place_for_checkmate
         .reduce(0){|memo,v|  moves(king,v).any?{|x| can_be_free.include?(x)} ? memo+=1: memo; memo }
-    
-    [checkmate, check, 0, 29]
+    # it's stalemate (i.e. black's king is on a safe square but it cannot make a valid move);
+    stalemate = can_be_free
+    .reduce(0){|memo,v| moves(king,v).any?{|x| can_be_free.include?(x)} ? memo : memo+=1; memo  }
+    # black's king is on a safe square and it can make a valid move.
+    safe = can_be_free
+    .reduce(0){|memo,v| moves(king,v).any?{|x| can_be_free.include?(x)} ? memo +=1 : memo; memo  }
+    [checkmate, check, stalemate, safe ] # dirty hack with -1 and +1
 end
 
 
