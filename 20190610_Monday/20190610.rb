@@ -2,7 +2,7 @@ p "alias x='ruby 20190610_Monday/20190610.rb'"
 
 require 'minitest/autorun'
 
-def in(x);  x[0].between?(0,7) && x[1].between?(0,7) end
+def on_board(x);  x[0].between?(0,7) && x[1].between?(0,7) end
 def coord(cell); [cell[0].ord - ?a.ord ,cell[1].to_i - 1] end
 def knight; [[1,2],[2,1],[2,-1],[1,-2],[-1,-2],[-2,-1],[-2,1],[-1,2]] end
 def rook
@@ -28,11 +28,22 @@ def board
     end
     ans
 end
+def moves arr, piece
+    arr.map{|dx,dy| [piece[0]+dx,piece[1]+dy]}.select{|x| on_board(x)}
+end
 
-def amazonCheckmate(king, amazon)
-    k = coord(king)
-    a = coord(amazon)
-    p [k,a]
+def amazonCheckmate(k_, a_)
+    k = coord(k_)
+    a = coord(a_)
+    all = board
+    plased = [k,a]
+    k_attacks = moves(king,k)
+    a_attacks = moves(amazon,a)
+    attack = (k_attacks + a_attacks - plased).uniq
+    used = (plased + attack).uniq
+    free = all - used
+    p free
+    
     [5, 21, 0, 29]
 end
 
