@@ -36,15 +36,18 @@ def amazonCheckmate(k_, a_)
     k = coord(k_)
     a = coord(a_)
     all = board
-    plased = [k,a]
+    used = [k,a]
     k_attacks = moves(king,k)
     a_attacks = moves(amazon,a)
-    attack = (k_attacks + a_attacks - plased).uniq
-    used = (plased + attack).uniq
-    free = all - used
-    p free
     
-    [5, 21, 0, 29]
+    can_be = all - used
+    can_be_under_attak = (k_attacks + a_attacks - used).uniq
+    can_be_free = all - used - a_attacks - k_attacks
+    
+    # it's checkmate (i.e. black's king is under amazon's attack and it cannot make a valid move);
+    checkmate = 5
+    
+    [checkmate, 21, 0, 29]
 end
 
 
