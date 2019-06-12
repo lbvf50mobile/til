@@ -1,8 +1,10 @@
-console.log("alias x='node 20190612_Wednesday/20190612.js'");
+p "alias x='ruby 20190612_Wednesday/20190612.rb'" 
 
-// JS/Ruby A Simplistic TCP Finite State Machine (FSM)
+# JS/Ruby A Simplistic TCP Finite State Machine (FSM)
 
-let states =`CLOSED: APP_PASSIVE_OPEN -> LISTEN
+# https://commandercoriander.net/blog/2014/11/09/a-multiline-string-cheatsheet-for-ruby/
+
+states = %q{CLOSED: APP_PASSIVE_OPEN -> LISTEN
 CLOSED: APP_ACTIVE_OPEN  -> SYN_SENT
 LISTEN: RCV_SYN          -> SYN_RCVD
 LISTEN: APP_SEND         -> SYN_SENT
@@ -21,14 +23,14 @@ CLOSING: RCV_ACK         -> TIME_WAIT
 FIN_WAIT_2: RCV_FIN      -> TIME_WAIT
 TIME_WAIT: APP_TIMEOUT   -> CLOSED
 CLOSE_WAIT: APP_CLOSE    -> LAST_ACK
-LAST_ACK: RCV_ACK        -> CLOSE`
+LAST_ACK: RCV_ACK        -> CLOSED}
 .split("\n")
-.map(x => x.replace(/\s+/g,''))
-.map(x=> x.split(/:|->/))
-.reduce((a,[state,event,new_state])=> {
-    if(undefined == a[state]) a[state] = {};
-    a[state][event] = new_state;
-    return a;
-},{});
+.map{|x| x.gsub(/\s+/,'')}
+.map{|x| x.split(/:|->/)}
+.reduce({}){|memo,(init_state,event,new_state)|
+    memo[init_state] = {} if memo[init_state].nil?
+    memo[init_state][event] = new_state
+memo
+}
 
-console.log(states);
+p states
