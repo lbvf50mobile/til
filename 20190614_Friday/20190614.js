@@ -27,12 +27,21 @@ for ( x in a) console.log(x);
 console.log('Object.entries()')
 for( let [name,value] of Object.entries(a)) console.log(`${name} => ${value}`);
 
-console.log(" An zi object")
+console.log(" An zi object:")
 ancestor = {a_prot: 1, b_prot: 2}
 z = function(){ this.c_own = 2 }
 z.prototype = ancestor
 zi = new z();
-console.log("for..in")
+console.log("for...in")
 for (x in zi) console.log(x);
 console.log('Object.entries()');
 for(let [name,value] of Object.entries(zi)) console.log(`${name} => ${value}`);
+
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#With_a_generator
+console.log('for...of with a Generator:')
+function* foo(){
+    yield 1;
+    yield 2;
+  }
+  
+  for (let o of foo()) console.log(o);
