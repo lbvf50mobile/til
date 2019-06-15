@@ -8,6 +8,7 @@ console.log("alias x='node 20190615_Saturday/20190615.js'");
 // https://regex101.com/r/YtwjA9/1
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Boundaries
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Assertions
+
 function groupByCommas(n) {
     return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
