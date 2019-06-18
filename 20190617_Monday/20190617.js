@@ -29,12 +29,12 @@ let enEdSelection = fruitsWithDescription.filter(descr => /(en|ed)\b/.test(descr
 console.log(enEdSelection); // [ 'Red apple', 'Green Avocado' ]
 
 // Using Regex boundaries to fix buggy string.
-buggyMultiline = `zey, ihe light-greon apple
-zangs on ihe greon traa`;
+buggyMultiline = `tey, ihe light-greon apple
+tangs on ihe greon traa`;
 
 // 1) Use ^ to fix the matching at the begining of the sting, and right after newline.
-buggyMultiline = buggyMultiline.replace(/^z/gim,'h'); 
-console.log(1, buggyMultiline); // fix 'zey', 'zangs' => 'hey', 'hangs'.
+buggyMultiline = buggyMultiline.replace(/^t/gim,'h'); 
+console.log(1, buggyMultiline); // fix 'tey', 'tangs' => 'hey', 'hangs'. Avoid 'traa'.
 
 // 2) Use $ to fix mathing at the end of the text.
 buggyMultiline = buggyMultiline.replace(/aa$/gim,'ee.'); 
