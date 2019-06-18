@@ -21,6 +21,17 @@ def b_pos
     bottom_left = ([1] * 8).map.with_index(1){|x,i| [-i,-i] }
     top_right + bottom_right + top_left + bottom_left
 end
+def kg_pos
+    top = ([1] ).map.with_index(1){|x,i| [0,i] }
+    bottom = ([1] ).map.with_index(1){|x,i| [0,-i] }
+    left = ([1]).map.with_index(1){|x,i| [-i,0] }
+    right = ([1] ).map.with_index(1){|x,i| [i,0] }
+    top_right = ([1] ).map.with_index(1){|x,i| [i,i] }
+    bottom_right = ([1] ).map.with_index(1){|x,i| [i,-i] }
+    top_left = ([1] ).map.with_index(1){|x,i| [-i,i] }
+    bottom_left = ([1] ).map.with_index(1){|x,i| [-i,-i] }
+    top + bottom + left + right + top_right + bottom_right + top_left + bottom_left
+end
 
 def pos(position,moves)
     xn,yn = str2crd(position);
@@ -35,6 +46,9 @@ def rook_position(position)
 end
 def bishop_position(position)
     pos(position, b_pos)
+end
+def king_position(position)
+    pos(position, kg_pos)
 end
 
 
@@ -64,5 +78,15 @@ describe "base" do
         assert_equal moves, bishop_position('a8').sort
         moves =  ['a1','b2','c3','d4','e5','f6','g7'].sort
         assert_equal moves, bishop_position('h8').sort
+    end
+    it "must work with bishop" do
+        moves =  ['a2','b2','b1'].sort
+        assert_equal moves, king_position('a1').sort
+        moves =  ['g1','g2','h2'].sort
+        assert_equal moves, king_position('h1').sort
+        moves =  ['h7','g8','g7'].sort
+        assert_equal moves, king_position('h8').sort
+        moves =  ['a7','b8','b7'].sort
+        assert_equal moves, king_position('a8').sort
     end
 end
