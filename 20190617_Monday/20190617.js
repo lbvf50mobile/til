@@ -28,7 +28,7 @@ let enEdSelection = fruitsWithDescription.filter(descr => /(en|ed)\b/.test(descr
 
 console.log(enEdSelection); // [ 'Red apple', 'Green Avocado' ]
 
-// Using Regex boudaries to fix buggy string.
+// Using Regex boundaries to fix buggy string.
 buggyMultiline = `zey, ihe light-greon apple
 zangs on ihe greon traa`;
 
