@@ -2,67 +2,47 @@ p "alias x='ruby 20190610_Monday/20190610.rb'"
 
 require 'minitest/autorun'
 
+def str2crd(cell); [cell[0].ord - ?a.ord ,cell[1].to_i - 1] end
+def crd2str(str); (str[0] + ?a.ord).chr + (str[1] + 1).to_s end
+
+def k_pos; [[1,2],[2,1],[2,-1],[1,-2],[-1,-2],[-2,-1],[-2,1],[-1,2]] end
 def on_board(x);  x[0].between?(0,7) && x[1].between?(0,7) end
-def coord(cell); [cell[0].ord - ?a.ord ,cell[1].to_i - 1] end
-def knight; [[1,2],[2,1],[2,-1],[1,-2],[-1,-2],[-2,-1],[-2,1],[-1,2]] end
-def rook
-    ([[[0,1],[0,-1],[1,0],[-1,0]]] * 8)
-        .map
-        .with_index(1){|x,i| [[0,1*i],[0,-1*i],[1*i,0],[-1*i,0]]}
-        .flatten(1)
+def r_pos 
+    top = ([1] * 8).map.with_index(1){|x,i| [0,i] }
+    bottom = ([1] * 8).map.with_index(1){|x,i| [0,-i] }
+    left = ([1] * 8).map.with_index(1){|x,i| [-i,0] }
+    right = ([1] * 8).map.with_index(1){|x,i| [i,0] }
+    top + bottom + left + right
 end
-def bishop
-    ([[[-1,1],[1,1],[1,-1],[-1,-1]]] * 8)
-        .map
-        .with_index(1){|x,i| [[-i,i],[i,i],[i,-i],[-i,-i]]}
-        .flatten(1)
+
+def pos(position,moves)
+    xn,yn = str2crd(position);
+    moves.map{|x,y| [x+xn, y+yn]}.select{|x| on_board(x)}.map{|x| crd2str(x)}
 end
-def king; [[-1,-1],[-1,0],[-1,1],[0,1],[1,1],[1,0],[1,-1],[0,-1]] end;
-def amazon; knight + rook + bishop end;
-def board
-    ans = []
-    (0..7).each do |y|
-        (0..7).each do |x|
-            ans.push([x,y])
-        end
+
+def knight_position(position)
+    pos(position,k_pos)
+end
+def rook_position(position)
+    pos(position,r_pos)
+end
+
+
+describe "base" do
+    it 'must convert a1=>0,1' do
+        assert_equal [0,0], str2crd('a1')
+        assert_equal [7,5], str2crd('h6')
     end
-    ans
-end
-def moves arr, piece
-    arr.map{|dx,dy| [piece[0]+dx,piece[1]+dy]}.select{|x| on_board(x)}
-end
-
-def amazonCheckmate(k_, a_)
-    k = coord(k_)
-    a = coord(a_)
-    all = board.select{|x| on_board(x)}
-    used = [k,a]
-    k_attacks = moves(king,k)
-    a_attacks = moves(amazon,a)
-    
-    place_for_checkmate = (a_attacks - used - k_attacks).uniq
-    can_be_free = (all - used - a_attacks - k_attacks).uniq
-    
-    # it's checkmate (i.e. black's king is under amazon's attack and it cannot make a valid move);
-    checkmate = place_for_checkmate
-        .reduce(0){|memo,v| moves(king,v).any?{|x| can_be_free.include?(x)} ? memo : memo+=1; memo  }
-    # it's check (i.e. black's king is under amazon's attack but it can reach a safe square in one move);
-    check = place_for_checkmate
-        .reduce(0){|memo,v|  moves(king,v).any?{|x| can_be_free.include?(x)} ? memo+=1: memo; memo }
-    # it's stalemate (i.e. black's king is on a safe square but it cannot make a valid move);
-    stalemate = can_be_free
-    .reduce(0){|memo,v| moves(king,v).any?{|x| can_be_free.include?(x)} ? memo : memo+=1; memo  }
-    # black's king is on a safe square and it can make a valid move.
-    safe = can_be_free
-    .reduce(0){|memo,v| moves(king,v).any?{|x| can_be_free.include?(x)} ? memo +=1 : memo; memo  }
-    [checkmate, check, stalemate, safe ] # dirty hack with -1 and +1
-end
-
-
-describe "test" do
-    it 'works' do
-        assert_equal [5, 21, 0, 29], amazonCheckmate('d3','e4')
+    it 'must convert 1,3 = b4' do
+        assert_equal 'b4', crd2str([1,3])
     end
-
+    it 'must select possible moves knight h1 => f2, g3' do
+        assert_equal ['f2','g3'].sort, knight_position('h1').sort
+    end
+    it "must work in rook h1=> a1,b1,c1,d1,e1,f1,g1,h2,h3,h4,h5,h6,h7,h8" do
+        assert_equal ['a1','b1','c1','d1','e1','f1','g1','h2','h3','h4','h5','h6','h7','h8']
+        .sort, rook_position('h1').sort
+        assert_equal ['b8','c8','d8','e8','f8','g8','h8','a1','a2','a3','a4','a5','a6','a7']
+        .sort, rook_position('a8').sort
+    end
 end
-
