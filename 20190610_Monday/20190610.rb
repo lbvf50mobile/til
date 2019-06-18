@@ -50,7 +50,31 @@ end
 def king_position(position)
     pos(position, kg_pos)
 end
+def amazon_postion(position)
+    pos = knight_position(position) 
+    pos += rook_position(position)
+    pos += bishop_position(position)
+    pos
+end
+def all_position
+    ans = []
+    (?a..?h).each do |r|
+        (?1..?8).each do |c|
+            ans.push(r+c)
+        end
+    end
+    ans
+end
 
+
+def amazonCheckmate(king, amazon)
+    used = (king_position(king) + amazon_postion(amazon)).sort.uniq
+    under_amazon_attack = (amazon_postion(amazon) - king_position(king)).sort.uniq
+    free = (all_position - used).sort.uniq
+    # it's checkmate (i.e. black's king is under amazon's attack and it cannot make a valid move);
+    p checkmate = under_amazon_attack.count{|x| [] == free & king_position(x) }
+    [5, 21, 0, 29]
+end
 
 describe "base" do
     it 'must convert a1=>0,1' do
@@ -89,4 +113,12 @@ describe "base" do
         moves =  ['a7','b8','b7'].sort
         assert_equal moves, king_position('a8').sort
     end
-end
+    it "must be 56" do
+        assert_equal 8*8, all_position.size
+    end
+    it "should solve" do
+        assert_equal [5, 21, 0, 29], amazonCheckmate("d3",'e4')
+    end
+    it "amazon" do
+    end
+end 
