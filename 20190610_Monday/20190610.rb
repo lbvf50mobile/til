@@ -115,10 +115,25 @@ describe "base" do
     end
     it "must be 56" do
         assert_equal 8*8, all_position.size
+        p all_position[0...8]
+        p all_position[0+8*5...8*6]
+        p all_position[0+8*6...8*7]
+        p all_position[0+8*7...8*8]
     end
     it "should solve" do
         assert_equal [5, 21, 0, 29], amazonCheckmate("d3",'e4')
     end
     it "amazon" do
+        amazon = [
+            'b1','e1','h1',
+            'c2','d2','e2','f2','g2',
+            'c3','d3','e3','f3','g3',
+            'a4','b4','c4','d4','f4','g4','h4',
+            'c5','d5','e5','f5','g5',
+            'c6','d6','e6','f6','g6',
+            'b7','e7','h7',
+            'a8','e8'
+        ].sort
+        assert_equal amazon, amazon_postion('e4').sort
     end
 end 
