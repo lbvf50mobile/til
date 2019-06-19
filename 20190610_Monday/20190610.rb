@@ -149,3 +149,6 @@ describe "base" do
         assert_equal amazon, amazon_postion('e4').sort
     end
 end 
+
+# TODO: I have an IDEA that figrues cannot jump over each other. Need to add this to this programm.
+# Deleta from amazon cells after king.
