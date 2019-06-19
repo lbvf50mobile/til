@@ -80,7 +80,7 @@ def amazonCheckmate(king, amazon)
     # it's checkmate (i.e. black's king is under amazon's attack and it cannot make a valid move);
     p checkmate = place_for_checkmate
         .reduce(0){|memo,v|king_position(v).any?{|x| can_be_free.include?(x)} ? memo : memo+=1; memo }
-    p c2 = place_for_checkmate.select{|v| !king_position(v).any?{|x| can_be_free.include?(x)}}.size
+    p c2 = place_for_checkmate.count{|v| !king_position(v).any?{|x| can_be_free.include?(x)}}
     [checkmate, 21, 0, 29]
 end
 
