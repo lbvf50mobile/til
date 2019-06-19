@@ -68,11 +68,18 @@ end
 
 
 def amazonCheckmate(king, amazon)
-    used = (king_position(king) + amazon_postion(amazon)).sort.uniq
-    under_amazon_attack = (amazon_postion(amazon) - king_position(king)).sort.uniq
-    free = (all_position - used).sort.uniq
+    k = king
+    a = amazon
+    all = all_position
+    used = [k,a]
+    k_attacks = king_position(k)
+    a_attacks = amazon_postion(a)
+    place_for_checkmate = (a_attacks - used - k_attacks).uniq
+    can_be_free = (all - used - a_attacks - k_attacks).uniq
+    
     # it's checkmate (i.e. black's king is under amazon's attack and it cannot make a valid move);
-    p checkmate = under_amazon_attack.count{|x| [] == free & king_position(x) }
+    p checkmate = place_for_checkmate
+        .reduce(0){|memo,v|king_position(v).any?{|x| can_be_free.include?(x)} ? memo : memo+=1; memo }
     [5, 21, 0, 29]
 end
 
