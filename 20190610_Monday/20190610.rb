@@ -66,6 +66,10 @@ def all_position
     ans
 end
 
+def vertical?(a,b)
+    str2crd(a)[0] == str2crd(b)[0]
+end
+
 
 def amazonCheckmate(king, amazon)
     k = king
@@ -148,6 +152,11 @@ describe "base" do
         ].sort
         assert_equal amazon, amazon_postion('e4').sort
     end
+    it "must check same vetical" do
+        assert vertical?('c2','c3')
+        refute vertical?('c2','a4')
+    end
+
 end 
 
 # TODO: I have an IDEA that figrues cannot jump over each other. Need to add this to this programm.
