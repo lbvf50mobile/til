@@ -69,6 +69,9 @@ end
 def vertical?(a,b)
     str2crd(a)[0] == str2crd(b)[0]
 end
+def horisontal?(a,b)
+    str2crd(a)[1] == str2crd(b)[1]
+end
 
 
 def amazonCheckmate(king, amazon)
@@ -155,6 +158,10 @@ describe "base" do
     it "must check same vetical" do
         assert vertical?('c2','c3')
         refute vertical?('c2','a4')
+    end
+    it 'must check same horisontal' do
+        assert horisontal?('a1','c1')
+        refute horisontal?('a2','c3')
     end
 
 end 
