@@ -78,6 +78,12 @@ def king_up_right?(king,amazon)
     dy == dx && dy > 0 && dx > 0
 end
 
+def king_bottom_left?(king,amazon)
+    dy = str2crd(king)[1]  - str2crd(amazon)[1]
+    dx = str2crd(king)[0]  - str2crd(amazon)[0]
+    dy == dx && dy < 0 && dx < 0
+end
+
 
 
 def amazonCheckmate(king, amazon)
@@ -169,12 +175,19 @@ describe "base" do
         assert horisontal?('a1','c1')
         refute horisontal?('a2','c3')
     end
-    it 'must check upper rigth vertical' do
+    it 'must check upper rigth diagonal' do
         assert king_up_right?('g7','a1')
         assert king_up_right?('c4','a2')
 
         assert king_up_right?('g8','a1')
         assert king_up_right?('c4','a5')
+    end
+    it 'must check bottom bottom diagonal' do
+        assert king_bottom_left?('a1','g7')
+        assert king_bottom_left?('a2','c4')
+
+        assert king_bottom_left?('a1','g8')
+        assert king_bottom_left?('a5','c4')
     end
 
 end 
