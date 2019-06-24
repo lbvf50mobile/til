@@ -84,6 +84,18 @@ def king_bottom_left?(king,amazon)
     dy == dx && dy < 0 && dx < 0
 end
 
+def king_upper_left?(king,amazon)
+    dy = str2crd(king)[1]  - str2crd(amazon)[1]
+    dx = str2crd(king)[0]  - str2crd(amazon)[0]
+    dy.abs == dx.abs && dy > 0 && dx < 0
+end
+
+def king_bottom_right?(king,amazon)
+    dy = str2crd(king)[1]  - str2crd(amazon)[1]
+    dx = str2crd(king)[0]  - str2crd(amazon)[0]
+    dy.abs == dx.abs && dy < 0 && dx > 0
+end
+
 
 
 def amazonCheckmate(king, amazon)
@@ -176,20 +188,50 @@ describe "base" do
         refute horisontal?('a2','c3')
     end
     it 'must check upper rigth diagonal' do
-        assert king_up_right?('g7','a1')
-        assert king_up_right?('c4','a2')
-
-        assert king_up_right?('g8','a1')
-        assert king_up_right?('c4','a5')
-    end
-    it 'must check bottom bottom diagonal' do
-        assert king_bottom_left?('a1','g7')
-        assert king_bottom_left?('a2','c4')
-
-        assert king_bottom_left?('a1','g8')
-        assert king_bottom_left?('a5','c4')
+        king, amazon = 'g7','a1'
+        assert king_up_right?(king, amazon)
+        king, amazon = 'c4','a2'
+        assert king_up_right?(king, amazon)
+        
+        king, amazon = 'g8','a1'
+        refute king_up_right?(king, amazon)
+        king, amazon = 'c4','a5'
+        refute king_up_right?(king, amazon)
     end
 
+    it 'must check king bottom left diagonal' do
+        king, amazon = 'a1','g7'
+        assert king_bottom_left?(king, amazon)
+        king, amazon = 'a2','c4'
+        assert king_bottom_left?(king, amazon)
+
+        king, amazon = 'a1','g8'
+        refute king_bottom_left?(king, amazon)
+        king, amazon = 'a5','c4'
+        refute king_bottom_left?(king, amazon)
+    end
+    it 'must check upper left diaganal' do
+        amazon, king = 'e4', 'c6'
+        assert king_upper_left?(king, amazon)
+       amazon, king = 'f3', 'c6'
+       assert king_upper_left?(king, amazon)
+
+       amazon, king = 'c6', 'f3'
+       refute king_upper_left?(king, amazon)
+       amazon, king = 'e4', 'c7'
+       refute king_upper_left?(king, amazon)
+    end
+    it 'must checkm bottom rigth diagonal' do
+        amazon, king = 'e4', 'h1'
+        assert king_bottom_right?(king, amazon)
+        amazon, king = 'g2', 'h1'
+        assert king_bottom_right?(king, amazon)
+
+        amazon, king = 'e4', 'c6'
+        refute king_bottom_right?(king, amazon)
+        amazon, king = 'e4', 'g7'
+        refute king_bottom_right?(king, amazon)
+    end
 end 
 
 # TODO: I have an IDEA that figrues cannot jump over each other. Need to add this to this programm.
