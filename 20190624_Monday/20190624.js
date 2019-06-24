@@ -1,6 +1,6 @@
 console.log("alias x='node 20190624_Monday/20190624.js'");
 
-// JS positive Lookbehind assertion /(?<=y)x/;
+// JS Lookbehind assertion /(?<=y)x/;
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Assertions
 
