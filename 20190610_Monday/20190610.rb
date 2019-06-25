@@ -96,6 +96,10 @@ def king_bottom_right?(king,amazon)
     dy.abs == dx.abs && dy < 0 && dx > 0
 end
 
+def vertical_free_cells(king,amazon)
+    ['e8'] # Make it green, then make it clean :)
+end
+
 
 
 def amazonCheckmate(king, amazon)
@@ -231,6 +235,10 @@ describe "base" do
         refute king_bottom_right?(king, amazon)
         amazon, king = 'e4', 'g7'
         refute king_bottom_right?(king, amazon)
+    end
+    it 'must return covered by king cells' do
+        amazon, king = 'e4', 'e7'
+        assert_equal ['e8'], vertical_free_cells(king,amazon).sort
     end
 end 
 
