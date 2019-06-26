@@ -97,7 +97,9 @@ def king_bottom_right?(king,amazon)
 end
 
 def vertical_free_cells(king,amazon)
-    (str2crd(king)[1]+2..8).map{|x| "#{king[0]}#{x}" } # Make it green, then make it clean :)
+    return (str2crd(king)[1]+2..8).map{|x| "#{king[0]}#{x}" } if str2crd(king)[1] > str2crd(amazon)[1]
+    return (1...str2crd(king)[1]+1).map{|x| "#{king[0]}#{x}" } if str2crd(king)[1] < str2crd(amazon)[1]
+    raise "king and amazon could not be on the same cell #{king} #{amazon}"
 end
 
 
@@ -239,6 +241,12 @@ describe "base" do
     it 'must return covered by king cells' do
         amazon, king = 'e4', 'e7'
         assert_equal ['e8'], vertical_free_cells(king,amazon).sort
+        amazon, king = 'e7', 'e4'
+        assert_equal ['e1','e2','e3'].sort, vertical_free_cells(king,amazon).sort
+        amazon, king = 'e7', 'e7'
+        assert_raises RuntimeError do 
+            vertical_free_cells(king,amazon)
+        end
     end
 end 
 
