@@ -97,7 +97,7 @@ def king_bottom_right?(king,amazon)
 end
 
 def vertical_free_cells(king,amazon)
-    ['e8'] # Make it green, then make it clean :)
+    (str2crd(king)[1]+2..8).map{|x| "#{king[0]}#{x}" } # Make it green, then make it clean :)
 end
 
 
