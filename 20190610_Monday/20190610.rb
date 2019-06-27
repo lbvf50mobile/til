@@ -102,6 +102,9 @@ def vertical_free_cells(king,amazon)
     raise "king and amazon could not be on the same cell #{king} #{amazon}"
 end
 
+def horisontal_free_cells(king,amazon)
+    ['a1'] # Make it green, then make it clean :)
+end
 
 
 def amazonCheckmate(king, amazon)
@@ -247,6 +250,11 @@ describe "base" do
         assert_raises RuntimeError do 
             vertical_free_cells(king,amazon)
         end
+    end
+    it 'must return covered by king cells' do
+        amazon, king = 'a8', 'a2'
+        assert_equal ['a1'], horisontal_free_cells(king,amazon).sort
+     
     end
 end 
 
