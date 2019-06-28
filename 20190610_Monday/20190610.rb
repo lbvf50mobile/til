@@ -103,7 +103,12 @@ def vertical_free_cells(king,amazon)
 end
 
 def horisontal_free_cells(king,amazon)
-    ['a1'] # Make it green, then make it clean :)
+    king_row, amazon_row = king[1], amazon[1]
+    raise "king and amazon must be on one row #{king} #{amazon}" if king_row != amazon_row
+    king_column, amazon_column = king[0], amazon[0]
+    return ('a'...king_column).map{|x| x+amazon_row} if king_column < amazon_column
+    return (king_column..'h').map{|x| x+amazon_row}[1..-1] if king_column > amazon_column
+    raise "king and amazon could not be on the same cell #{king} #{amazon}"
 end
 
 
@@ -252,8 +257,22 @@ describe "base" do
         end
     end
     it 'must return covered by king cells' do
-        amazon, king = 'a8', 'a2'
+        amazon, king = 'c1', 'b1'
         assert_equal ['a1'], horisontal_free_cells(king,amazon).sort
+        amazon, king = 'd1', 'c1'
+        assert_equal ['a1','b1'], horisontal_free_cells(king,amazon).sort
+        amazon, king = 'f5', 'e5'
+        assert_equal ['a5','b5','c5','d5'], horisontal_free_cells(king,amazon).sort
+        amazon, king = 'f1', 'g1'
+        assert_equal ['h1'], horisontal_free_cells(king,amazon).sort
+        amazon, king = 'e5', 'f5'
+        assert_equal ['g5','h5'], horisontal_free_cells(king,amazon).sort
+        amazon, king = 'a8', 'b8'
+        assert_equal ['c8','d8','e8','f8','g8','h8'], horisontal_free_cells(king,amazon).sort
+        amazon, king = 'e8', 'e8'
+        assert_raises RuntimeError do 
+            vertical_free_cells(king,amazon)
+        end
      
     end
 end 
