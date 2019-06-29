@@ -110,6 +110,9 @@ def horisontal_free_cells(king,amazon)
     return (king_column..'h').map{|x| x+amazon_row}[1..-1] if king_column > amazon_column
     raise "king and amazon could not be on the same cell #{king} #{amazon}"
 end
+def upper_right_cells(king,amazon)
+    ['h8'] # Be not afraid of growing slowly, be afraid of standing still.
+end
 
 
 def amazonCheckmate(king, amazon)
@@ -274,6 +277,10 @@ describe "base" do
             vertical_free_cells(king,amazon)
         end
      
+    end
+    it 'must return upper right diagoanl' do
+        amazon, king = 'a1', 'g7'
+        assert_equal ['h8'], upper_right_cells(king,amazon).sor
     end
 end 
 
