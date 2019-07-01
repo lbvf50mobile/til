@@ -111,7 +111,11 @@ def horisontal_free_cells(king,amazon)
     raise "king and amazon could not be on the same cell #{king} #{amazon}"
 end
 def upper_right_cells(king,amazon)
-    ['h8'] # Be not afraid of growing slowly, be afraid of standing still.
+    ([str2crd(king)]*15).map
+    .with_index(1){|(x,y),i| [x+i,y+i]}
+    .select{|x| on_board(x)}
+    .map{|x| crd2str(x)}
+    # Be not afraid of growing slowly, be afraid of standing still.
 end
 
 
@@ -280,7 +284,15 @@ describe "base" do
     end
     it 'must return upper right diagoanl' do
         amazon, king = 'a1', 'g7'
-        assert_equal ['h8'], upper_right_cells(king,amazon).sor
+        assert_equal ['h8'], upper_right_cells(king,amazon).sort
+        amazon, king = 'e4', 'f5'
+        assert_equal ['g6','h7'], upper_right_cells(king,amazon).sort
+        amazon, king = 'e1', 'f2'
+        assert_equal ['g3','h4'], upper_right_cells(king,amazon).sort
+        amazon, king = 'd4', 'f6'
+        assert_equal ['g7','h8'], upper_right_cells(king,amazon).sort
+        amazon, king = 'b2', 'c2'
+        assert_equal ['d3','e4','f5','g6','h7'], upper_right_cells(king,amazon).sort
     end
 end 
 
