@@ -1,6 +1,6 @@
 p "alias x='ruby 20190702_Tuesday/20190702.rb'" 
 
-# Ruby +@ and -@;
+# Ruby +@ and -@ (Unary operations);
 
 # To define unary + and unary – operators, use method names +@ and -@ to avoid ambiguity
 # with the binary operators that use the same symbols.
