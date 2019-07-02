@@ -110,12 +110,16 @@ def horisontal_free_cells(king,amazon)
     return (king_column..'h').map{|x| x+amazon_row}[1..-1] if king_column > amazon_column
     raise "king and amazon could not be on the same cell #{king} #{amazon}"
 end
-def upper_right_cells(king,amazon)
+def diagonal_arrays(king,amazon,x_sign,y_sign)
     ([str2crd(king)]*15).map
-    .with_index(1){|(x,y),i| [x+i,y+i]}
+    .with_index(1){|(x,y),i| [x+x_sign*i,y+y_sign*i]}
     .select{|x| on_board(x)}
     .map{|x| crd2str(x)}
     # Be not afraid of growing slowly, be afraid of standing still.
+end
+
+def upper_right_cells(king,amazon)
+    diagonal_arrays(king,amazon,1,1)
 end
 
 
