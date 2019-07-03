@@ -139,10 +139,14 @@ def free_cells(king,amazon)
         [ "vertical?" , "vertical_free_cells"],
         ["horisontal?", "horisontal_free_cells"],
         ["king_up_right?","upper_right_cells"],
-        ["king_bottom_left?"," bottom_left_cells"],
+        ["king_bottom_left?","bottom_left_cells"],
         ['king_upper_left?',"upper_left_cells"],
         ['king_bottom_right?','bottom_right_cells']
-    ].each{|check,solution| answer += send(solution,king,amazon) if send(check,king,amazon)}
+    ]
+    .select{|check,solution| send(check,king,amazon) }
+    .each{|check,solution|
+        answer += send(solution,king,amazon) 
+    }
     answer
 end
 
@@ -319,7 +323,7 @@ describe "base" do
         assert_equal ['g3','h4'], upper_right_cells(king,amazon).sort
         amazon, king = 'd4', 'f6'
         assert_equal ['g7','h8'], upper_right_cells(king,amazon).sort
-        amazon, king = 'b2', 'c2'
+        amazon, king = 'b1', 'c2'
         assert_equal ['d3','e4','f5','g6','h7'], upper_right_cells(king,amazon).sort
         amazon, king = 'e8', 'e8'
         assert_raises RuntimeError do 
@@ -398,7 +402,7 @@ describe "base" do
         assert_equal ['g3','h4'], free_cells(king,amazon).sort
         amazon, king = 'd4', 'f6'
         assert_equal ['g7','h8'], free_cells(king,amazon).sort
-        amazon, king = 'b2', 'c2'
+        amazon, king = 'b1', 'c2'
         assert_equal ['d3','e4','f5','g6','h7'], free_cells(king,amazon).sort
 
         # bottom_left_cells
