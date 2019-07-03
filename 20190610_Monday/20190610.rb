@@ -132,6 +132,20 @@ def bottom_right_cells(king,amazon)
     diagonal_arrays(king,amazon, 1,-1)
 end
 
+def free_cells(king,amazon)
+    raise "king and amazon could not be on the same cell #{king} #{amazon}" if king == amazon
+    answer = []
+    [
+        [ "vertical?" , "vertical_free_cells"],
+        ["horisontal?", "horisontal_free_cells"],
+        ["king_up_right?","upper_right_cells"],
+        ["king_bottom_left?"," bottom_left_cells"],
+        ['king_upper_left?',"upper_left_cells"],
+        ['king_bottom_right?','bottom_right_cells']
+    ].each{|check,solution| answer += send(solution,king,amazon) if send(check,king,amazon)}
+    answer
+end
+
 
 def amazonCheckmate(king, amazon)
     k = king
@@ -341,7 +355,6 @@ describe "base" do
         assert_equal ['h1'].sort, bottom_right_cells(king,amazon).sort
         amazon, king = 'b5', 'd3'
         assert_equal ['e2','f1'].sort, bottom_right_cells(king,amazon).sort
-#begin        
         amazon, king = 'a8', 'b7'
         assert_equal ['c6','d5','e4','f3','g2','h1'].sort, bottom_right_cells(king,amazon).sort
         amazon, king = 'g2', 'h1'
@@ -350,7 +363,69 @@ describe "base" do
         assert_raises RuntimeError do 
             vertical_free_cells(king,amazon)
         end
-#end
+    end
+    it 'must return free cells' do
+        # vertical_free_cells
+        amazon, king = 'e4', 'e7'
+        assert_equal ['e8'], free_cells(king,amazon).sort
+        amazon, king = 'e7', 'e4'
+        assert_equal ['e1','e2','e3'].sort, free_cells(king,amazon).sort
+        amazon, king = 'e7', 'e7'
+        assert_raises RuntimeError do 
+            free_cells(king,amazon)
+        end
+
+        # horisontal_free_cells
+        amazon, king = 'c1', 'b1'
+        assert_equal ['a1'], free_cells(king,amazon).sort
+        amazon, king = 'd1', 'c1'
+        assert_equal ['a1','b1'], free_cells(king,amazon).sort
+        amazon, king = 'f5', 'e5'
+        assert_equal ['a5','b5','c5','d5'], free_cells(king,amazon).sort
+        amazon, king = 'f1', 'g1'
+        assert_equal ['h1'], free_cells(king,amazon).sort
+        amazon, king = 'e5', 'f5'
+        assert_equal ['g5','h5'], free_cells(king,amazon).sort
+        amazon, king = 'a8', 'b8'
+        assert_equal ['c8','d8','e8','f8','g8','h8'], free_cells(king,amazon).sort
+
+        # upper_right_cells
+        amazon, king = 'a1', 'g7'
+        assert_equal ['h8'], free_cells(king,amazon).sort
+        amazon, king = 'e4', 'f5'
+        assert_equal ['g6','h7'], free_cells(king,amazon).sort
+        amazon, king = 'e1', 'f2'
+        assert_equal ['g3','h4'], free_cells(king,amazon).sort
+        amazon, king = 'd4', 'f6'
+        assert_equal ['g7','h8'], free_cells(king,amazon).sort
+        amazon, king = 'b2', 'c2'
+        assert_equal ['d3','e4','f5','g6','h7'], free_cells(king,amazon).sort
+
+        # bottom_left_cells
+        amazon, king = 'e4', 'c2'
+        assert_equal ['b1'], free_cells(king,amazon).sort
+        amazon, king = 'e6', 'c4'
+        assert_equal ['b3','a2'].sort, free_cells(king,amazon).sort
+        amazon, king = 'b8', 'a7'
+        assert_equal [].sort, free_cells(king,amazon).sort
+
+        # upper_left_cells
+        amazon, king = 'h1', 'e4'
+        assert_equal ['d5','c6','b7','a8'].sort, free_cells(king,amazon).sort
+        amazon, king = 'd4', 'c5'
+        assert_equal ['b6','a7'].sort, free_cells(king,amazon).sort
+        amazon, king = 'd7', 'c8'
+        assert_equal [].sort, free_cells(king,amazon).sort
+
+        # bottom_right_cells
+        amazon, king = 'e4', 'g2'
+        assert_equal ['h1'].sort, free_cells(king,amazon).sort
+        amazon, king = 'b5', 'd3'
+        assert_equal ['e2','f1'].sort, free_cells(king,amazon).sort
+        amazon, king = 'a8', 'b7'
+        assert_equal ['c6','d5','e4','f3','g2','h1'].sort, free_cells(king,amazon).sort
+        amazon, king = 'g2', 'h1'
+        assert_equal [].sort, free_cells(king,amazon).sort
     end
 end 
 
