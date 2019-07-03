@@ -111,6 +111,7 @@ def horisontal_free_cells(king,amazon)
     raise "king and amazon could not be on the same cell #{king} #{amazon}"
 end
 def diagonal_arrays(king,amazon,x_sign,y_sign)
+    raise "king and amazon could not be on the same cell #{king} #{amazon}" if king == amazon 
     ([str2crd(king)]*15).map
     .with_index(1){|(x,y),i| [x+x_sign*i,y+y_sign*i]}
     .select{|x| on_board(x)}
@@ -120,6 +121,15 @@ end
 
 def upper_right_cells(king,amazon)
     diagonal_arrays(king,amazon,1,1)
+end
+def bottom_left_cells(king,amazon)
+    diagonal_arrays(king,amazon,-1,-1)
+end
+def upper_left_cells(king,amazon)
+    diagonal_arrays(king,amazon,-1,1)
+end
+def bottom_right_cells(king,amazon)
+    diagonal_arrays(king,amazon, 1,-1)
 end
 
 
@@ -257,7 +267,7 @@ describe "base" do
         amazon, king = 'e4', 'g7'
         refute king_bottom_right?(king, amazon)
     end
-    it 'must return covered by king cells' do
+    it 'must return covered  VERTICAL by king cells' do
         amazon, king = 'e4', 'e7'
         assert_equal ['e8'], vertical_free_cells(king,amazon).sort
         amazon, king = 'e7', 'e4'
@@ -267,7 +277,7 @@ describe "base" do
             vertical_free_cells(king,amazon)
         end
     end
-    it 'must return covered by king cells' do
+    it 'must return covered HORIZONTAL by king cells' do
         amazon, king = 'c1', 'b1'
         assert_equal ['a1'], horisontal_free_cells(king,amazon).sort
         amazon, king = 'd1', 'c1'
@@ -297,8 +307,54 @@ describe "base" do
         assert_equal ['g7','h8'], upper_right_cells(king,amazon).sort
         amazon, king = 'b2', 'c2'
         assert_equal ['d3','e4','f5','g6','h7'], upper_right_cells(king,amazon).sort
+        amazon, king = 'e8', 'e8'
+        assert_raises RuntimeError do 
+            vertical_free_cells(king,amazon)
+        end
+    end
+    it 'must return bottom left diagonal' do
+        amazon, king = 'e4', 'c2'
+        assert_equal ['b1'], bottom_left_cells(king,amazon).sort
+        amazon, king = 'e6', 'c4'
+        assert_equal ['b3','a2'].sort, bottom_left_cells(king,amazon).sort
+        amazon, king = 'b8', 'a7'
+        assert_equal [].sort, bottom_left_cells(king,amazon).sort
+        amazon, king = 'e8', 'e8'
+        assert_raises RuntimeError do 
+            vertical_free_cells(king,amazon)
+        end
+    end
+    it 'must return upper left diagonal' do
+        amazon, king = 'h1', 'e4'
+        assert_equal ['d5','c6','b7','a8'].sort, upper_left_cells(king,amazon).sort
+        amazon, king = 'd4', 'c5'
+        assert_equal ['b6','a7'].sort, upper_left_cells(king,amazon).sort
+        amazon, king = 'd7', 'c8'
+        assert_equal [].sort, upper_left_cells(king,amazon).sort
+        amazon, king = 'e8', 'e8'
+        assert_raises RuntimeError do 
+            vertical_free_cells(king,amazon)
+        end
+    end
+    it 'must return bottom right diagonal' do
+        amazon, king = 'e4', 'g2'
+        assert_equal ['h1'].sort, bottom_right_cells(king,amazon).sort
+        amazon, king = 'b5', 'd3'
+        assert_equal ['e2','f1'].sort, bottom_right_cells(king,amazon).sort
+#begin        
+        amazon, king = 'a8', 'b7'
+        assert_equal ['c6','d5','e4','f3','g2','h1'].sort, bottom_right_cells(king,amazon).sort
+        amazon, king = 'g2', 'h1'
+        assert_equal [].sort, bottom_right_cells(king,amazon).sort
+        amazon, king = 'e8', 'e8'
+        assert_raises RuntimeError do 
+            vertical_free_cells(king,amazon)
+        end
+#end
     end
 end 
 
 # TODO: I have an IDEA that figrues cannot jump over each other. Need to add this to this programm.
 # Deleta from amazon cells after king.
+
+# TODO (20190703 July Wednesday): Start checking all examples by one position. It will be more easy
