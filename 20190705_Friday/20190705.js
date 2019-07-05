@@ -1,8 +1,9 @@
 console.log("alias x='node 20190705_Friday/20190705.js'");
 
-// JS Testing Lodash _.uniq
+// JS Testing Lodash _.uniq and [...new Set(a)] and unique(a) method.
 var _ = require('lodash')
 
+// https://stackoverflow.com/a/25878121/8574922
 var timer = function(name) {
     var start = new Date();
     return {
