@@ -1,7 +1,6 @@
 console.log("alias x='node 20190705_Friday/20190705.js'");
 
 // JS Testing Lodash _.uniq and [...new Set(a)] and unique(a) method.
-var _ = require('lodash')
 
 // https://stackoverflow.com/a/25878121/8574922
 var timer = function(name) {
@@ -14,6 +13,16 @@ var timer = function(name) {
         }
     }
 };
+
+var t = timer('require lodash');
+var _ = require('lodash')
+t.stop();
+
+var t = timer('node-fetch');
+require('node-fetch')
+t.stop();
+
+
 
 var t = timer('Using Lodas');
 for(i = 0; i < 1000000; i+=1){
