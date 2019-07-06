@@ -149,8 +149,21 @@ def free_cells(king,amazon)
     }
     answer
 end
-def checkmate(king,amazon)
-    5
+# it's checkmate (i.e. black's king is under amazon's attack and it cannot make a valid move);
+def checkmate(k,a)
+    # Checkmate test where king may be; k_attacks - used - king_attaks - cells_behind_the_king
+    all = all_position
+    used = [k,a]
+    k_attacks = king_position(k).uniq 
+    a_attacks = (amazon_postion(a) - free_cells(k,a)).uniq
+    stand_positions = a_attacks - k_attacks - used
+    safe_squares = (all - k_attacks - a_attacks - used).uniq
+    ans = stand_positions.reduce([]){ |acc,x| 
+        acc.push(x) if (safe_squares & king_position(x)).empty?
+        acc
+    }
+    ans.size
+    
 end
 
 def amazonCheckmate(king, amazon)
@@ -164,12 +177,12 @@ def amazonCheckmate(king, amazon)
     can_be_free = (all - used - a_attacks - k_attacks).uniq
     
     # it's checkmate (i.e. black's king is under amazon's attack and it cannot make a valid move);
-    p checkmate = place_for_checkmate
+    checkmate = place_for_checkmate
         .reduce(0){|memo,v| king_position(v).any?{|x| can_be_free.include?(x)} ? memo : memo+=1; memo }
-    p c2 = place_for_checkmate.count{|v| !king_position(v).any?{|x| can_be_free.include?(x)}}
+    c2 = place_for_checkmate.count{|v| !king_position(v).any?{|x| can_be_free.include?(x)}}
     # it's check (i.e. black's king is under amazon's attack but it can reach a safe square in one move)
-    p check1 = place_for_checkmate.count{|v| king_position(v).any?{|x| can_be_free.include?(x)}}
-    p check = place_for_checkmate
+    check1 = place_for_checkmate.count{|v| king_position(v).any?{|x| can_be_free.include?(x)}}
+    check = place_for_checkmate
         .reduce(0){|memo,v|  king_position(v).any?{|x| can_be_free.include?(x)} ? memo+=1: memo; memo }
     [checkmate, 21, 0, 29]
 end
@@ -213,10 +226,7 @@ describe "base" do
     end
     it "must be 56" do
         assert_equal 8*8, all_position.size
-        p all_position[0...8]
-        p all_position[0+8*5...8*6]
-        p all_position[0+8*6...8*7]
-        p all_position[0+8*7...8*8]
+       
     end
     it "should solve" do
         assert_equal [5, 21, 0, 29], amazonCheckmate("d3",'e4')
