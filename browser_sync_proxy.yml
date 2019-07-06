@@ -1,0 +1,5 @@
+---
+:host: localhost
+:port: '4567'
+:directories:
+- 20190706_Saturday
