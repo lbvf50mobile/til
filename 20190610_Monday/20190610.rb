@@ -151,17 +151,21 @@ def free_cells(king,amazon)
 end
 # it's checkmate (i.e. black's king is under amazon's attack and it cannot make a valid move);
 def checkmate(k,a)
-    # Checkmate test where king may be; k_attacks - used - king_attaks - cells_behind_the_king
+    # Checkmate test where king may be: k_attacks - used - king_attaks - cells_behind_the_king
     all = all_position
-    used = [k,a]
+    p used = [k,a]
     k_attacks = king_position(k).uniq 
     a_attacks = (amazon_postion(a) - free_cells(k,a)).uniq
     stand_positions = a_attacks - k_attacks - used
     safe_squares = (all - k_attacks - a_attacks - used).uniq
     ans = stand_positions.reduce([]){ |acc,x| 
-        acc.push(x) if (safe_squares & king_position(x)).empty?
+        if (safe_squares & king_position(x)).empty?
+            p x
+            acc.push(x) 
+        end
         acc
     }
+    p ans
     ans.size
     
 end
@@ -446,7 +450,8 @@ describe "base" do
     it "should show checkmate" do
         require "ostruct"
         [
-            OpenStruct.new({king: "d3", amazon: "e4", answer: 5})
+            OpenStruct.new({king: "d3", amazon: "e4", answer: 5}),
+            OpenStruct.new({king: "a1", amazon: "g5", answer: 0})
         ].each{|x| assert_equal x.answer, checkmate(x.king,x.amazon) }
         
     end
