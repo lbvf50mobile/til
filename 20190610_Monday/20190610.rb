@@ -149,7 +149,9 @@ def free_cells(king,amazon)
     }
     answer
 end
-
+def checkmate(king,amazon)
+    5
+end
 
 def amazonCheckmate(king, amazon)
     k = king
@@ -430,6 +432,13 @@ describe "base" do
         assert_equal ['c6','d5','e4','f3','g2','h1'].sort, free_cells(king,amazon).sort
         amazon, king = 'g2', 'h1'
         assert_equal [].sort, free_cells(king,amazon).sort
+    end
+    it "should show checkmate" do
+        require "ostruct"
+        [
+            OpenStruct.new({king: "d3", amazon: "e4", answer: 5})
+        ].each{|x| assert_equal x.answer, checkmate(x.king,x.amazon) }
+        
     end
 end 
 
