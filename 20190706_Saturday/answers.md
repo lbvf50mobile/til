@@ -22,12 +22,15 @@ For king = "d3" and amazon = "e4", the output should be
 amazonCheckmate(king, amazon) = [5, 21, 0, 29].
 ![king = "d3" and amazon = "e4"](example1.png)
 
+Red crosses correspond to the checkmate positions, orange pluses refer to check positions, and green circles denote safe squares.
+
 ## For king = "d3" and amazon = "e4"
 
 For king = "a1" and amazon = "g5", the output should be
 amazonCheckmate(king, amazon) = [0, 29, 1, 29].
 ![king = "a1" and amazon = "g5"](example2.png)
 
+The stalemate position is marked by a blue square.
 
 ## Open test cases.
 - 1)  Input:
