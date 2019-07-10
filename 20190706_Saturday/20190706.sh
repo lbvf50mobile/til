@@ -11,4 +11,4 @@ echo "${green}browser-sync start --file 20190706_Saturday/index.html --server${r
 # https://github.com/jwald200/browser_sync_proxy
 # browser-sync start --proxy "localhost:4567" # --files "20190706_Saturday/static/*.*"
 cd 20190706_Saturday/
-browser-sync start --file index.html --server 
+browser-sync start --file index.html --server --files "*.*"
