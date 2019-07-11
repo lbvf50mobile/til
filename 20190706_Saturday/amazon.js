@@ -41,9 +41,11 @@ $(function(){
         
         let id = $(this).attr('id')
         $(`.xaxis.${id[0]}`).addClass('axis-selected')
+        $(`.yaxis.${id[1]}`).addClass('axis-selected')
         $(this).addClass('cell-selected')
     })
     $('.cell').on('mouseout',function(){
+        $(`.yaxis`).removeClass('axis-selected')
         $(`.xaxis`).removeClass('axis-selected')
         $('.cell').removeClass('cell-selected');
     })
