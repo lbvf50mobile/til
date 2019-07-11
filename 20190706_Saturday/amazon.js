@@ -16,26 +16,20 @@ const crd2str = a => `${String.fromCharCode(a[0]+'a'.charCodeAt(0))}${a[1]+1}`;
 const str2crd = a => [a[0].charCodeAt(0)-'a'.charCodeAt(0),parseInt(a[1])-1];
 const color = a => 0 == (a[0]+a[1])%2 ? 'black' : 'white';
 const onboard = ([x,y]) => x >= 0 && x <= 7 && y >= 0 && y <= 7;
-const king_moves = a => {
-    let [x,y] = str2crd(a);
-    return [
-        [-1,1],[0,1],[1,1],
-        [-1,0],      [1,0],
-        [-1,-1],[0,-1],[1,-1]
-    ].map(([dx,dy])=> [x+dx,y+dy])
-    .filter(x=>onboard(x))
-    .map(x=>`#${crd2str(x)}`)
-    .join(',');
-};
-const knight_moves = a =>{
-    let [x,y] = str2crd(a);
-    return [
-        [1,2],[2,1],[2,-1],[1,-2],[-1,-2],[-2,-1],[-2,1],[-1,2]
-    ].map(([dx,dy])=> [x+dx,y+dy])
+const moves = (pos,diffs) =>{
+    let [x,y] = str2crd(pos);
+    return diffs.map(([dx,dy])=> [x+dx,y+dy])
     .filter(x=>onboard(x))
     .map(x=>`#${crd2str(x)}`)
     .join(',');
 }
+const king_moves = a => moves(a,[
+        [-1,1],[0,1],[1,1],
+        [-1,0],      [1,0],
+        [-1,-1],[0,-1],[1,-1]
+    ]);
+  
+const knight_moves = a => moves(a,[[1,2],[2,1],[2,-1],[1,-2],[-1,-2],[-2,-1],[-2,1],[-1,2]]);
 
 const append_board_table = () =>{
     let arr = board_array();
