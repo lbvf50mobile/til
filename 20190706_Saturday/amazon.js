@@ -79,8 +79,11 @@ $(function(){
         {type:'circle', cells: ['c1','c2']},
         {type:'circle-new', cells: ['c1','d2']},
         {type:'cross-diagonal', cells: ['c3','c4']},
-        {type:'cross-diagonal-new', cells: ['c3','d4']}
-
+        {type:'cross-diagonal-new', cells: ['c3','d4']},
+        {type:'king', cells: ['d5']},
+        {type:'amazon', cells: ['d7']},
+        {type:'square', cells: ['f1']},
+        {type:'square-new', cells: ['f2']}
     ];
     draw_elements(obj);
 });

@@ -58,8 +58,8 @@ body{
     position: absolute;
     width:30px;
     height:30px;
-    left: 2px;
-    right: 2px;
+    left: 10px;
+    top: 10px;
     margin: 0px;
     padding: 0px;
     background-image: url(/elements.png);
@@ -83,4 +83,16 @@ body{
 }
 .cross-diagonal-new{
     background-position: -30px -60px;
+}
+.king{
+    background-position: 0px -90px;
+}
+.amazon{
+    background-position: 0px -120px;
+}
+.square{
+    background-position: 0px -150px;
+}
+.square-new{
+    background-position: -30px -150px;
 }
