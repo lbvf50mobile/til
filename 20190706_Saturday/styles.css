@@ -69,3 +69,18 @@ body{
 .cross{
     background-position: 0px 0px;
 }
+.cross-new{
+    background-position: -30px 0px;
+}
+.circle{
+    background-position: 0px -30px;
+}
+.circle-new{
+    background-position: -30px -30px;
+}
+.cross-diagonal{
+    background-position: 0px -60px;
+}
+.cross-diagonal-new{
+    background-position: -30px -60px;
+}

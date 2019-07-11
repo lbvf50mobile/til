@@ -74,7 +74,12 @@ $(function(){
         $('.cell').removeClass('cell-selected king-cell-selected knight-cell-selected');
     })
     obj = [
-        {type:'cross', cells: ['a1','a2']}
+        {type:'cross', cells: ['a1','a2']},
+        {type:'cross-new', cells: ['b1','b2']},
+        {type:'circle', cells: ['c1','c2']},
+        {type:'circle-new', cells: ['c1','d2']},
+        {type:'cross-diagonal', cells: ['c3','c4']},
+        {type:'cross-diagonal-new', cells: ['c3','d4']}
 
     ];
     draw_elements(obj);
