@@ -30,6 +30,15 @@ const king_moves = a => moves(a,[
     ]);
   
 const knight_moves = a => moves(a,[[1,2],[2,1],[2,-1],[1,-2],[-1,-2],[-2,-1],[-2,1],[-1,2]]);
+const draw_elements = obj =>{
+    obj.forEach(x =>{
+        let {type: type, cells: cells} = x;
+        cells.forEach(x => {
+            console.log(x)
+            $(`#${x}`).append(`<div class='element ${type}'></div>`);
+        });
+    })
+};
 
 const append_board_table = () =>{
     let arr = board_array();
@@ -68,11 +77,5 @@ $(function(){
         {type:'cross', cells: ['a1','a2']}
 
     ];
-    obj.forEach(x =>{
-        let {type: type, cells: cells} = x;
-        cells.forEach(x => {
-            console.log(x)
-            $(`#${x}`).append(`<div class='element ${type}'></div>`);
-        });
-    })
+    draw_elements(obj);
 });
