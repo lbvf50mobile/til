@@ -17,3 +17,14 @@ body{
     background-color: #f4dfc1;
     border-color: #f4dfc1;
 }
+.xaxis{
+    width: 50px;
+    height: 25px;
+    border: 2px solid;
+    text-align: center;
+    font-weight: bolder;
+    border-color: #b5b5b5;
+    margin: 0px;
+    position: static;
+    border-spacing: 0px;
+}
