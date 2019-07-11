@@ -5,7 +5,10 @@ const board_array = () => {
     let array = [...Array(8).keys()].reverse()
     .map(row => [...Array(8).keys()].map( column => new Object({type: 'cell', data:[column,row]})) );
     let chars = [...Array(8).keys()].map( x => new Object({type: 'xaxis', data: String.fromCharCode(x + 'a'.charCodeAt(0))}));
-    array = array.concat([chars]);
+    array = array.concat([chars]).map( (x,i) =>{
+        x.unshift(new Object({type: 'yaxis', data: 0 == 8-i ? '': 8-i}));
+        return x
+    } );
     return array;
 }
 

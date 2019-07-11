@@ -28,3 +28,14 @@ body{
     position: static;
     border-spacing: 0px;
 }
+.yaxis{
+    width: 25px;
+    height: 50px;
+    border: 2px solid;
+    text-align: center;
+    font-weight: bolder;
+    border-color: #b5b5b5;
+    margin: 0px;
+    position: static;
+    border-spacing: 0px;
+}
