@@ -12,7 +12,7 @@ const append_board_table = () =>{
     arr.forEach(row =>{
         let html_row = $('<tr></tr>');
         row.forEach(cell =>{
-            let html_cell = $(`<td class="cell ${color(cell)}" >${cell[0]};${cell[1]};${crd2str(cell)}; ${str2crd(crd2str(cell))}</td>`);
+            let html_cell = $(`<td class="cell ${color(cell)}" ></td>`);
             html_row.append(html_cell);
         });
         $(`#${board_table_id}`).append(html_row);
