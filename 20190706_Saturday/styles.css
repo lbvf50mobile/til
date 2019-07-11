@@ -21,8 +21,12 @@ body{
 .cell-selected{
     border-color: red;
 }
-.round-cell-selected{
+.king-cell-selected{
     border-color: #b5b5b5;
+    border-style: dashed;
+}
+.knight-cell-selected{
+    border-color: green;
     border-style: dashed;
 }
 .xaxis{
