@@ -64,4 +64,15 @@ $(function(){
         $(`.xaxis`).removeClass('axis-selected')
         $('.cell').removeClass('cell-selected king-cell-selected knight-cell-selected');
     })
+    obj = [
+        {type:'cross', cells: ['a1','a2']}
+
+    ];
+    obj.forEach(x =>{
+        let {type: type, cells: cells} = x;
+        cells.forEach(x => {
+            console.log(x)
+            $(`#${x}`).append(`<div class='element ${type}'></div>`);
+        });
+    })
 });

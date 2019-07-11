@@ -7,7 +7,7 @@ body{
     border: 2px solid;
     margin: 0px;
     padding: 0px;
-    position: static;
+    position: relative;
     border-spacing: 0px;
 }
 .black{
@@ -53,4 +53,19 @@ body{
 }
 .axis-selected{
     background-color:  #b5b5b5;
+}
+.element{
+    position: absolute;
+    width:30px;
+    height:30px;
+    left: 2px;
+    right: 2px;
+    margin: 0px;
+    padding: 0px;
+    background-image: url(/elements.png);
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+}
+.cross{
+    background-position: 0px 0px;
 }
