@@ -39,6 +39,7 @@ const draw_elements = obj =>{
         });
     })
 };
+const clear_elements = () => $('.element').remove();
 
 const append_board_table = () =>{
     let arr = board_array();
@@ -58,7 +59,6 @@ const append_board_table = () =>{
 };
 
 $(function(){
-    $('body').append("This is a script line")
     append_board_table();
     $('.cell').on('mouseover',function(){
         let id = $(this).attr('id')
@@ -86,4 +86,5 @@ $(function(){
         {type:'square-new', cells: ['f2']}
     ];
     draw_elements(obj);
+    $('#clear-the-board').on('click', function(){clear_elements();});
 });
