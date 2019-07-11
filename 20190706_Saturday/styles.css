@@ -19,7 +19,11 @@ body{
     border-color: #f4dfc1;
 }
 .cell-selected{
-    border-color: black;
+    border-color: red;
+}
+.round-cell-selected{
+    border-color: #b5b5b5;
+    border-style: dashed;
 }
 .xaxis{
     width: 50px;

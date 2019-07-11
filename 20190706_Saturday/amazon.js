@@ -15,6 +15,18 @@ const board_array = () => {
 const crd2str = a => `${String.fromCharCode(a[0]+'a'.charCodeAt(0))}${a[1]+1}`;
 const str2crd = a => [a[0].charCodeAt(0)-'a'.charCodeAt(0),parseInt(a[1])-1];
 const color = a => 0 == (a[0]+a[1])%2 ? 'black' : 'white';
+const onboard = ([x,y]) => x >= 0 && x <= 7 && y >= 0 && y <= 7;
+const round_selection = a => {
+    let [x,y] = str2crd(a);
+    return [
+        [-1,1],[0,1],[1,1],
+        [-1,0],      [1,0],
+        [-1,-1],[0,-1],[1,-1]
+    ].map(([dx,dy])=> [x+dx,y+dy])
+    .filter(x=>onboard(x))
+    .map(x=>`#${crd2str(x)}`)
+    .join(',');
+};
 
 const append_board_table = () =>{
     let arr = board_array();
@@ -37,9 +49,8 @@ $(function(){
     $('body').append("This is a script line")
     append_board_table();
     $('.cell').on('mouseover',function(){
-        
-        
         let id = $(this).attr('id')
+        $(round_selection(id)).addClass('round-cell-selected')
         $(`.xaxis.${id[0]}`).addClass('axis-selected')
         $(`.yaxis.${id[1]}`).addClass('axis-selected')
         $(this).addClass('cell-selected')
@@ -47,6 +58,6 @@ $(function(){
     $('.cell').on('mouseout',function(){
         $(`.yaxis`).removeClass('axis-selected')
         $(`.xaxis`).removeClass('axis-selected')
-        $('.cell').removeClass('cell-selected');
+        $('.cell').removeClass('cell-selected round-cell-selected');
     })
 });
