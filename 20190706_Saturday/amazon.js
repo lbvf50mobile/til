@@ -37,14 +37,14 @@ $(function(){
     $('body').append("This is a script line")
     append_board_table();
     $('.cell').on('mouseover',function(){
-        $('.cell').each((_,x)=>{
-            $(x).removeClass('cell-selected');
-        });
+        
+        
+        let id = $(this).attr('id')
+        $(`.xaxis.${id[0]}`).addClass('axis-selected')
         $(this).addClass('cell-selected')
     })
     $('.cell').on('mouseout',function(){
-        $('.cell').each((_,x)=>{
-            $(x).removeClass('cell-selected');
-        });
+        $(`.xaxis`).removeClass('axis-selected')
+        $('.cell').removeClass('cell-selected');
     })
 });

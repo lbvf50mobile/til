@@ -6,6 +6,7 @@ body{
     height: 50px;
     border: 2px solid;
     margin: 0px;
+    padding: 0px;
     position: static;
     border-spacing: 0px;
 }
@@ -41,4 +42,7 @@ body{
     margin: 0px;
     position: static;
     border-spacing: 0px;
+}
+.axis-selected{
+    background-color:  #b5b5b5;
 }
