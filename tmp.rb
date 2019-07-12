@@ -1,11 +1,3 @@
-class X
-    def -@
-        'this is minus'
-    end
-    def +@
-        "this is plus"
-    end
-end
+require 'prime'
 
-p -X.new # "this is minus"
-p +X.new # "this is plus"
+ p 10001.times.select{|x| Prime.prime?(x)}
