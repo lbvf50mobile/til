@@ -89,4 +89,12 @@ $(function(){
     draw_elements(obj);
     $('#clear-the-board').on('click', function(){clear_elements();});
     $('#render-json').on('click', function(){draw_elements(JSON.parse($('#json').val()));});
+    $('a.render').click(function(event){
+        event.preventDefault();
+        let href = $(this).attr('href')
+        $.get(href,function(data){
+            draw_elements(data)
+        })
+        return false;
+    })
 });
