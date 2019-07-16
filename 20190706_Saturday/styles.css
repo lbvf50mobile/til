@@ -108,3 +108,6 @@ textarea{
 .square-new{
     background-position: -30px -150px;
 }
+a.render{
+    cursor: pointer;
+}

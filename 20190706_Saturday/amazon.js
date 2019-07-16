@@ -85,8 +85,8 @@ $(function(){
         {type:'square', cells: ['f1']},
         {type:'square-new', cells: ['f2']}
     ];
-    $('#json').val(JSON.stringify(obj))
-    draw_elements(obj);
+    // $('#json').val(JSON.stringify(obj))
+    // draw_elements(obj);
     $('#clear-the-board').on('click', function(){clear_elements();});
     $('#render-json').on('click', function(){draw_elements(JSON.parse($('#json').val()));});
     $('a.render').click(function(event){

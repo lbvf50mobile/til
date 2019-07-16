@@ -24,3 +24,11 @@ get '/one' do
     content_type :json
     obj.to_json
 end
+get '/king-d3amazon-e4' do
+    obj = [
+        {type:'king', cells: ['d3']},
+        {type:'amazon', cells: ['e4']},
+    ]
+    content_type :json
+    obj.to_json
+end
