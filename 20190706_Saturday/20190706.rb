@@ -32,3 +32,10 @@ get '/king-d3amazon-e4' do
     content_type :json
     obj.to_json
 end
+get '/d3e4checkmate' do
+    obj = [
+        {type:'cross-diagonal', cells: ['d5','e5','f5','f4','f3']},
+    ]
+    content_type :json
+    obj.to_json
+end
