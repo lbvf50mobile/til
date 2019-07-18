@@ -11,4 +11,11 @@ it "should show checkmate" do
     ].each{|x| assert_equal x.answer, Amazon.new.checkmate(x.king,x.amazon).size }
     
 end
+it "should show amazonCheckmate" do
+    require "ostruct"
+    [
+        OpenStruct.new({king: "d3", amazon: "e4", answer: [5, 21, 0, 29]}),
+    ].each{|x| assert_equal x.answer, Amazon.new.amazonCheckmate(x.king, x.amazon) }
+    
+end
 end

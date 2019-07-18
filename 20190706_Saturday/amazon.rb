@@ -214,23 +214,9 @@ def safe(k,a)
 end
 
 def amazonCheckmate(king, amazon)
-    k = king
-    a = amazon
-    all = all_position
-    used = [k,a]
-    k_attacks = king_position(k)
-    a_attacks = amazon_postion(a)
-    place_for_checkmate = (a_attacks - used - k_attacks).uniq
-    can_be_free = (all - used - a_attacks - k_attacks).uniq
-    
-    # it's checkmate (i.e. black's king is under amazon's attack and it cannot make a valid move);
-    checkmate = place_for_checkmate
-        .reduce(0){|memo,v| king_position(v).any?{|x| can_be_free.include?(x)} ? memo : memo+=1; memo }
-    c2 = place_for_checkmate.count{|v| !king_position(v).any?{|x| can_be_free.include?(x)}}
-    # it's check (i.e. black's king is under amazon's attack but it can reach a safe square in one move)
-    check1 = place_for_checkmate.count{|v| king_position(v).any?{|x| can_be_free.include?(x)}}
-    check = place_for_checkmate
-        .reduce(0){|memo,v|  king_position(v).any?{|x| can_be_free.include?(x)} ? memo+=1: memo; memo }
-    [checkmate, 21, 0, 29]
+    [checkmate(king,amazon).size, 
+        check(king,amazon).size,
+         stalemate(king,amazon).size, 
+        safe(king,amazon).size]
 end
 end
