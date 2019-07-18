@@ -146,6 +146,7 @@ def free_cells(king,amazon)
     }
     answer
 end
+
 # it's checkmate (i.e. black's king is under amazon's attack and it cannot make a valid move);
 def checkmate(k,a)
     # Checkmate test where king may be: k_attacks - used - king_attaks - cells_behind_the_king
@@ -157,13 +158,27 @@ def checkmate(k,a)
     safe_squares = (all - k_attacks - a_attacks - used).uniq
     ans = stand_positions.reduce([]){ |acc,x| 
         if (safe_squares & king_position(x)).empty?
-            p x
             acc.push(x) 
         end
         acc
     }
     ans
-    
+end
+def check(k,a)
+    # it's check (i.e. black's king is under the amazon's attack but it can reach a safe square in one move);
+    all = all_position
+    p used = [k,a]
+    k_attacks = king_position(k).uniq 
+    a_attacks = (amazon_postion(a) - free_cells(k,a)).uniq
+    stand_positions = a_attacks - k_attacks - used
+    safe_squares = (all - k_attacks - a_attacks - used).uniq
+    ans = stand_positions.reduce([]){ |acc,x| 
+        if !(safe_squares & king_position(x)).empty?
+            acc.push(x) 
+        end
+        acc
+    }
+    ans
 end
 
 def amazonCheckmate(king, amazon)
