@@ -180,6 +180,22 @@ def check(k,a)
     }
     ans
 end
+# it's stalemate (i.e. black's king is on a safe square but it cannot make a valid move);
+def stalemate(k,a)
+    all = all_position
+    used = [k,a]
+    k_attacks = king_position(k).uniq 
+    a_attacks = (amazon_postion(a) - free_cells(k,a)).uniq
+    stand_positions = a_attacks - k_attacks - used
+    safe_squares = (all - k_attacks - a_attacks - used).uniq
+    ans = safe_squares.reduce([]){ |acc,x| 
+        if (safe_squares & king_position(x)).empty?
+            acc.push(x) 
+        end
+        acc
+    }
+    ans
+end
 # black's king is on a safe square and it can make a valid move.
 def safe(k,a)
     all = all_position

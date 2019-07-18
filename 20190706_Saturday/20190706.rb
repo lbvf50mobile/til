@@ -102,3 +102,12 @@ get '/d3e4safe_code' do
     obj.to_json
 end
 
+# it's stalemate (i.e. black's king is on a safe square but it cannot make a valid move);
+get '/d3e4stalemate_code' do
+    obj = [
+        {type:'circle-new', cells: Amazon.new.stalemate('d3','e4')},
+    ]
+    content_type :json
+    obj.to_json
+end
+
