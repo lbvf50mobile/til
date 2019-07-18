@@ -39,3 +39,21 @@ get '/d3e4checkmate' do
     content_type :json
     obj.to_json
 end
+# orange pluses refer to check positions
+# it's check (i.e. black's king is under the amazon's attack but it can reach a safe square in one move);
+get '/d3e4check' do
+    obj = [
+        {type:'cross', cells: [
+            'a8','e8',
+            'b7','e7', 'h7',
+            'c6','d6','e6','f6','g6',
+            'c5','g5',
+            'a4','b4','g4','h4',
+            'g3',
+            'f2','g2',
+            'e1','h1'
+        ]},
+    ]
+    content_type :json
+    obj.to_json
+end
