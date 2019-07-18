@@ -16,7 +16,7 @@ it "should show amazonCheckmate" do
     [
         OpenStruct.new({king: "d3", amazon: "e4", answer: [5, 21, 0, 29]}),
         OpenStruct.new({king: "a1", amazon: "g5", answer: [0, 29, 1, 29]}),
-        OpenStruct.new({king: "a1", amazon: "e4", answer: [1, 32, 1, 23]}),
+        OpenStruct.new({king: "a3", amazon: "e4", answer: [1, 32, 1, 23]}),
     ].each{|x| assert_equal x.answer, Amazon.new.amazonCheckmate(x.king, x.amazon) }
     
 end
