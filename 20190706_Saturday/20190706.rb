@@ -94,4 +94,11 @@ get '/d3e4safe' do
     content_type :json
     obj.to_json
 end
+get '/d3e4safe_code' do
+    obj = [
+        {type:'circle-new', cells: Amazon.new.safe('d3','e4')},
+    ]
+    content_type :json
+    obj.to_json
+end
 
