@@ -151,7 +151,7 @@ end
 def checkmate(k,a)
     # Checkmate test where king may be: k_attacks - used - king_attaks - cells_behind_the_king
     all = all_position
-    used = [k,a]
+    used = [k]
     k_attacks = king_position(k).uniq 
     a_attacks = (amazon_postion(a) - free_cells(k,a)).uniq
     stand_positions = a_attacks - k_attacks - used
@@ -167,7 +167,7 @@ end
 def check(k,a)
     # it's check (i.e. black's king is under the amazon's attack but it can reach a safe square in one move);
     all = all_position
-    used = [k,a]
+    used = [k]
     k_attacks = king_position(k).uniq 
     a_attacks = (amazon_postion(a) - free_cells(k,a)).uniq
     stand_positions = a_attacks - k_attacks - used
@@ -183,7 +183,7 @@ end
 # it's stalemate (i.e. black's king is on a safe square but it cannot make a valid move);
 def stalemate(k,a)
     all = all_position
-    used = [k,a]
+    used = [k]
     k_attacks = king_position(k).uniq 
     a_attacks = (amazon_postion(a) - free_cells(k,a)).uniq
     stand_positions = a_attacks - k_attacks - used
@@ -199,7 +199,7 @@ end
 # black's king is on a safe square and it can make a valid move.
 def safe(k,a)
     all = all_position
-    used = [k,a]
+    used = [k]
     k_attacks = king_position(k).uniq 
     a_attacks = (amazon_postion(a) - free_cells(k,a)).uniq
     stand_positions = a_attacks - k_attacks - used
