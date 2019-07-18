@@ -57,3 +57,20 @@ get '/d3e4check' do
     content_type :json
     obj.to_json
 end
+# black's king is on a safe square and it can make a valid move.
+# and green circles denote safe squares.
+get '/d3e4safe' do
+    obj = [
+        {type:'circle', cells: [
+            'b8', 'c8', 'd8', 'f8', 'g8', 'h8',
+            'a7', 'c7','d7','f7','g7',
+            'a6', 'b6', 'h6',
+            'a5', 'b5', 'h5',
+            'a3', 'b3', 'h3',
+            'a2', 'b2', 'h2',
+            'a1', 'b1', 'c1', 'd1', 'f1', 'g1'
+        ]},
+    ]
+    content_type :json
+    obj.to_json
+end
