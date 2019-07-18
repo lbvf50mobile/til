@@ -33,6 +33,14 @@ get '/king-d3amazon-e4' do
     content_type :json
     obj.to_json
 end
+get '/king-a1amazon-g5' do
+    obj = [
+        {type:'king', cells: ['a1']},
+        {type:'amazon', cells: ['g5']},
+    ]
+    content_type :json
+    obj.to_json
+end
 
 # it's checkmate (i.e. black's king is under amazon's attack and it cannot make a valid move);
 get '/d3e4checkmate' do
@@ -45,6 +53,20 @@ end
 get '/d3e4checkmate_code' do
     obj = [
         {type:'cross-diagonal-new', cells: Amazon.new.checkmate('d3','e4')},
+    ]
+    content_type :json
+    obj.to_json
+end
+get '/a1g5checkmate' do
+    obj = [
+        {type:'cross-diagonal', cells: []},
+    ]
+    content_type :json
+    obj.to_json
+end
+get '/a1g5checkmate_code' do
+    obj = [
+        {type:'cross-diagonal', cells: Amazon.new.checkmate('a1','g5')},
     ]
     content_type :json
     obj.to_json
