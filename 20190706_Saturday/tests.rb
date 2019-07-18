@@ -1,0 +1,14 @@
+p "alias x='ruby 20190706_Saturday/tests.rb'" 
+require 'minitest/autorun'
+require_relative 'amazon.rb'
+
+describe 'Amazon' do
+it "should show checkmate" do
+    require "ostruct"
+    [
+        OpenStruct.new({king: "d3", amazon: "e4", answer: 5}),
+        OpenStruct.new({king: "a1", amazon: "g5", answer: 0})
+    ].each{|x| assert_equal x.answer, Amazon.new.checkmate(x.king,x.amazon).size }
+    
+end
+end
