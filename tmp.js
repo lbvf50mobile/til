@@ -10,7 +10,12 @@ function simple_assembler(program) {
         pointer += 1;}),
       inc: (({a,b}) => {console.log('inc', a,b); registers[a] += 1; pointer += 1;}),
       dec: (({a,b}) => {console.log('dec', a,b); registers[a] -= 1; pointer += 1;}),
-      jnz: (({a,b}) => {console.log('jnz', a,b); pointer += 1;}),
+      jnz: (({a,b}) => {
+      console.log('jnz', a,b);
+        let x = /^[a-z]$/.test(a) ? registers[a] : +a;
+        let y = /^[a-z]$/.test(b) ? registers[b] : +b;
+        if( x > 0) pointer += y;
+      }),
     }
     for( ; ; ){
       if(!cmd[pointer]) break;
