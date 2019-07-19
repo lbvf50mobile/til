@@ -30,9 +30,13 @@ function simple_assembler(program) {
         console.log(info)
         }),
       jnz: (({a,b}) => {
+        info = `jnz ${a}, ${b}`
         let x = /^[a-z]$/.test(a) ? registers[a] : +a;
         let y = /^[a-z]$/.test(b) ? registers[b] : +b;
+        info += `; if: ${x}, jump_to: ${y}, pointer: ${pointer}`
          x > 0 ? pointer += y : pointer += 1;
+         info += `=> ${pointer}`
+         console.log(info)
       }),
     }
     for( ; ; ){
