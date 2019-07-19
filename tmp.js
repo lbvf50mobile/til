@@ -4,7 +4,8 @@ function simple_assembler(program) {
     let act = {
       mov: (({a,b}) => console.log('mov', a,b)),
       inc: (({a,b}) => console.log('inc', a,b)),
-      dec: (({a,b}) => console.log('mov', a,b)),
-      jnz: (({a,b}) => console.log('mov', a,b)),
+      dec: (({a,b}) => console.log('dec', a,b)),
+      jnz: (({a,b}) => console.log('jnz', a,b)),
     }
+    cmd.forEach( x => act[x.c](x));
   }
