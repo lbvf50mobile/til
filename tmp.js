@@ -14,7 +14,8 @@ function simple_assembler(program) {
       console.log('jnz', a,b);
         let x = /^[a-z]$/.test(a) ? registers[a] : +a;
         let y = /^[a-z]$/.test(b) ? registers[b] : +b;
-        if( x > 0) pointer += y;
+        console.log(x,y)
+         x > 0 ? pointer += y : pointer += 1;
       }),
     }
     for( ; ; ){
