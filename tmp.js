@@ -34,7 +34,7 @@ function simple_assembler(program) {
         let x = /^[a-z]$/.test(a) ? registers[a] : +a;
         let y = /^[a-z]$/.test(b) ? registers[b] : +b;
         info += `; if: ${x}, jump_to: ${y}, pointer: ${pointer}`
-         x > 0 ? pointer += y : pointer += 1;
+         x != 0 ? pointer += y : pointer += 1;
          info += `=> ${pointer}`
          console.log(info)
       }),
