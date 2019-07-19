@@ -1,5 +1,6 @@
 // https://www.codewars.com/kata/simple-assembler-interpreter/train/javascript
 function simple_assembler(program) {
+    let debug = false;
     let cmd = program.map( x => new Object({c:x.split(' ')[0], a:x.split(' ')[1], b:x.split(' ')[2]}));
     let pointer = 0;
     let registers = {};
@@ -11,7 +12,7 @@ function simple_assembler(program) {
         registers[a] = y;
         info += `; ${a} = ${registers[a]}`
         pointer += 1;
-        console.log(info)
+        if(debug) console.log(info)
         }),
       inc: (({a}) => { 
         info = `inc ${a}`
@@ -19,7 +20,7 @@ function simple_assembler(program) {
         registers[a] += 1; 
         info += `; ${a} = ${registers[a]}`
         pointer += 1;
-        console.log(info)
+        if(debug) console.log(info)
         }),
       dec: (({a}) => {
         info = `dec ${a}`
@@ -27,7 +28,7 @@ function simple_assembler(program) {
         registers[a] -= 1;
         info += `; ${a} = ${registers[a]}`
         pointer += 1;
-        console.log(info)
+        if(debug) console.log(info)
         }),
       jnz: (({a,b}) => {
         info = `jnz ${a}, ${b}`
@@ -36,7 +37,7 @@ function simple_assembler(program) {
         info += `; if: ${x}, jump_to: ${y}, pointer: ${pointer}`
          x != 0 ? pointer += y : pointer += 1;
          info += `=> ${pointer}`
-         console.log(info)
+         if(debug) console.log(info)
       }),
     }
     for( ; ; ){
