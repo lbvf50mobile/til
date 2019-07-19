@@ -13,13 +13,21 @@ function simple_assembler(program) {
         pointer += 1;
         console.log(info)
         }),
-      inc: (({a,b}) => { 
+      inc: (({a}) => { 
+        info = `inc ${a}`
+        info += `; ${a} = ${registers[a]}`
         registers[a] += 1; 
+        info += `; ${a} = ${registers[a]}`
         pointer += 1;
+        console.log(info)
         }),
-      dec: (({a,b}) => {
-        registers[a] -= 1; 
+      dec: (({a}) => {
+        info = `dec ${a}`
+        info += `; ${a} = ${registers[a]}`
+        registers[a] -= 1;
+        info += `; ${a} = ${registers[a]}`
         pointer += 1;
+        console.log(info)
         }),
       jnz: (({a,b}) => {
         let x = /^[a-z]$/.test(a) ? registers[a] : +a;
