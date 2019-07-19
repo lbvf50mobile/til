@@ -5,9 +5,14 @@ function simple_assembler(program) {
     let registers = {};
     let act = {
       mov: (({a,b}) => { 
+        info = `mov ${a}, ${b}`
         let y = /^[a-z]$/.test(b) ? registers[b] : +b;
+        info += `; ${a} = ${registers[a]}; ${a} <= ${y}`
         registers[a] = y;
-        pointer += 1;}),
+        info += `; ${a} = ${registers[a]}`
+        pointer += 1;
+        console.log(info)
+        }),
       inc: (({a,b}) => { 
         registers[a] += 1; 
         pointer += 1;
