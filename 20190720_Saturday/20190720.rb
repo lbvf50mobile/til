@@ -67,6 +67,12 @@ describe "Pawn Race" do
                 toMove: "b",
                 answer: 'black'
             }),
+            OpenStruct.new({
+                white: "a7",
+                black: "h2",
+                toMove: "w",
+                answer: 'white'
+            })
 
         ].each{|x| assert_equal x.answer, PawnRace.new.pawnRace(x.white, x.black, x.toMove)}
     end
