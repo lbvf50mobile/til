@@ -12,7 +12,56 @@ describe "Pawn Race" do
                 black: "e7",
                 toMove: "w",
                 answer: 'draw'
-            })
+            }),
+            OpenStruct.new({
+                white: "a2",
+                black: "b3",
+                toMove: "w",
+                answer: 'white'
+            }),
+            OpenStruct.new({
+                white: "a2",
+                black: "b3",
+                toMove: "b",
+                answer: 'black'
+            }),
+            OpenStruct.new({
+                white: "h2",
+                black: "g3",
+                toMove: "w",
+                answer: 'white'
+            }),
+            OpenStruct.new({
+                white: "h2",
+                black: "g3",
+                toMove: "b",
+                answer: 'black'
+            }),
+            OpenStruct.new({
+                white: "b6",
+                black: "a7",
+                toMove: "w",
+                answer: 'white'
+            }),
+            OpenStruct.new({
+                white: "b6",
+                black: "a7",
+                toMove: "b",
+                answer: 'black'
+            }),
+            OpenStruct.new({
+                white: "g6",
+                black: "h7",
+                toMove: "w",
+                answer: 'white'
+            }),
+            OpenStruct.new({
+                white: "g6",
+                black: "h7",
+                toMove: "b",
+                answer: 'black'
+            }),
+
         ].each{|x| assert_equal x.answer, PawnRace.new.pawnRace(x.white, x.black, x.toMove)}
     end
 end
