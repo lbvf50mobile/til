@@ -13,5 +13,26 @@ class PawnRace
     def pawnRace(w, b, toMove)
         return 'draw' if in_front_of(w,b)
         return 'w' == toMove ? 'white' : 'black' if capture(w,b)
+        ax, ay = str2crd(w)
+        bx,by = str2crd(b)
+        return 'white' if  7 == ay
+        return 'black' if  0 == by
+        if ?w == toMove && 1 == ay
+            dif = by - ay
+            # when to make one move
+            if [ax-1,ax+1].include?(bx) && dif.positive? && diff.odd?
+                return pawnRace(crd2str([ax, ay+1]), b, ?b)
+            end
+            return pawnRace(crd2str([ax, ay+2]), b, ?b)
+        end
+        if ?b == toMove && 6 == by
+            dif = by - ay
+            # when to make one move
+            if [bx-1,bx+1].include?(ax) && dif.positive? && diff.odd?
+                return pawnRace(w,crd2str([bx, by-1]),?w)
+            end
+            return pawnRace(w, crd2str([bx, by-2]),?w)
+        end
     end 
+    return ?w == toMove ? pawnRace(crd2str([ax, ay+1]), b, ?b) : pawnRace(w,crd2str([bx, by-1]),?w)
 end
