@@ -10,14 +10,14 @@ class PawnRace
         return true if bdx.map{|dx,dy| [str2crd(b)[0]+dx, str2crd(b)[1]+dy]}.select{|x| on_board(x)}.map{|x| crd2str(x)}.include?(w)
         false
     end
-    def pawnRace(w, b, toMove)
+    def pawnRace(w, b, mv)
         return 'draw' if in_front_of(w,b)
-        return 'w' == toMove ? 'white' : 'black' if capture(w,b)
+        return 'w' == mv ? 'white' : 'black' if capture(w,b)
         ax, ay = str2crd(w)
         bx,by = str2crd(b)
         return 'white' if  7 == ay
         return 'black' if  0 == by
-        if ?w == toMove && 1 == ay
+        if ?w == mv && 1 == ay
             dif = by - ay
             # when to make one move
             if [ax-1,ax+1].include?(bx) && dif.positive? && diff.odd?
@@ -25,7 +25,7 @@ class PawnRace
             end
             return pawnRace(crd2str([ax, ay+2]), b, ?b)
         end
-        if ?b == toMove && 6 == by
+        if ?b == mv && 6 == by
             dif = by - ay
             # when to make one move
             if [bx-1,bx+1].include?(ax) && dif.positive? && diff.odd?
@@ -33,6 +33,7 @@ class PawnRace
             end
             return pawnRace(w, crd2str([bx, by-2]),?w)
         end
+        'w' == mv ?  pawnRace(crd2str([ax, ay+1]), b, ?b) : pawnRace(w,crd2str([bx, by-1]),?w)
     end 
-    return ?w == toMove ? pawnRace(crd2str([ax, ay+1]), b, ?b) : pawnRace(w,crd2str([bx, by-1]),?w)
+    
 end
