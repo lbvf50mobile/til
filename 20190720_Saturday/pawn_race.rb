@@ -20,7 +20,7 @@ class PawnRace
         if ?w == mv && 1 == ay
             dif = by - ay
             # when to make one move
-            if [ax-1,ax+1].include?(bx) && dif.positive? && diff.odd?
+            if [ax-1,ax+1].include?(bx) && dif.positive? && dif.odd?
                 return pawnRace(crd2str([ax, ay+1]), b, ?b)
             end
             return pawnRace(crd2str([ax, ay+2]), b, ?b)
@@ -28,7 +28,7 @@ class PawnRace
         if ?b == mv && 6 == by
             dif = by - ay
             # when to make one move
-            if [bx-1,bx+1].include?(ax) && dif.positive? && diff.odd?
+            if [bx-1,bx+1].include?(ax) && dif.positive? && dif.odd?
                 return pawnRace(w,crd2str([bx, by-1]),?w)
             end
             return pawnRace(w, crd2str([bx, by-2]),?w)
