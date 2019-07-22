@@ -1,6 +1,7 @@
 p "alias x='ruby 20190722_Monday/20190722.rb'" 
 
-# Ruby Integer#gcd (greatest common divsior).
+# Ruby Integer#gcd (greatest common divsior)
+
 
 # https://apidock.com/ruby/Integer/gcd
 def videoPart(part, total)
