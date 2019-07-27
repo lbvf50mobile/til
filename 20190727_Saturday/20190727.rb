@@ -1,3 +1,7 @@
+p "alias x='ruby 20190727_Saturday/20190727.rb'" 
+
+# Ruby use single quotes in gsub. (and positive look ahead/behind positions)
+
 def one(solution, args)
     argumentVariants = args.join('|')
     p pattern = /(?<=[^\w$])(#{argumentVariants})(\W)/
