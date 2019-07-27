@@ -1,3 +1,10 @@
-require 'prime'
+def isSubsequence(t, s)
+    pattern = ''
+    s.split('').each do |ch|
+        pattern += '.*'+ch
+    end
+    re = Regexp.new pattern
+    return !!(t =~ re)
+end
 
- p 10001.times.select{|x| Prime.prime?(x)}
+p isSubsequence('CodeSignal','CoSi')
