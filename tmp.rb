@@ -1,10 +1,8 @@
-def isSubsequence(t, s)
-    pattern = ''
-    s.split('').each do |ch|
-        pattern += '.*'+ch
-    end
-    re = Regexp.new pattern
-    return !!(t =~ re)
+def eyeRhyme(pairOfLines)
+    pattern = /.*(.{3})\t.*(.{3})$/
+    match = pattern.match(pairOfLines)
+    p [match, match[1],match[2]]
+    return match[1] == match[2]
 end
 
-p isSubsequence('CodeSignal','CoSi')
+p eyeRhyme("cough\tbough")
