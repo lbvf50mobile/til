@@ -8,7 +8,7 @@ require "minitest/autorun"
 require 'ostruct'
 
 def repetitionEncryption(letter)
-    pattern = /(?:[^a-z]|^)([a-z]+)[\W]+\1(?:[^a-z]|$)/i
+    pattern = /(?:[^a-z]|^)(\b[a-z]+\b)[^a-z]+\1(?:[^a-z]|$)/i
     return letter.scan(pattern).size
 end
 
