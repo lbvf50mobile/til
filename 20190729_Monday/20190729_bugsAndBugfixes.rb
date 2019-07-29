@@ -5,7 +5,7 @@ require "minitest/autorun"
 require 'ostruct'
 
 def bugsAndBugfixes(rules)
-    pattern = /1/
+    pattern = /(\d*)d(\d+)([+-]\d+)*/
     formulas = rules.scan(pattern)
 
     res = 0
