@@ -37,6 +37,26 @@ describe "bugsAndBugfixes" do
                 rules: "Roll d6-3 and 4d4+3 to pick a weapon, and finish the boss with 3d7!",
                 answer: 43
             }),
+            OpenStruct.new({
+                rules: "d6-almost 01d4+2 12d01-3 5d5-00 a valid formula",
+                answer: 46
+            }),
+            OpenStruct.new({
+                rules: "meh4d2-3D3",
+                answer: 5
+            }),
+            OpenStruct.new({
+                rules: "ad3+4, 44b-6, 5daa",
+                answer: 7
+            }),
+            OpenStruct.new({
+                rules: "4d6-L1d20-10 did4n't expect that",
+                answer: 38
+            }),
+            OpenStruct.new({
+                rules: "nothing here",
+                answer: 0
+            }),
         ].each{|x| assert_equal x.answer, bugsAndBugfixes(x.rules)}
     end
 end
