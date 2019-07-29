@@ -1,5 +1,6 @@
 p "alias x='ruby 20190729_Monday/20190729_bugsAndBugfixes.rb'"
 
+# Ruby nil.to_s = ''; Regex difference between (.*) -> '' and (.+)* -> nil;
 
 require "minitest/autorun"
 require 'ostruct'
@@ -10,6 +11,7 @@ def bugsAndBugfixes(rules)
 
     res = 0
     for formula in formulas
+        p formula
         rolls = formula[0].empty? ? 1 : formula[0].to_i
         dieType = formula[1].to_i
         formulaMax = rolls * dieType
