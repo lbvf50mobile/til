@@ -1,6 +1,6 @@
 p "alias x='ruby 20190729_Monday/20190729_bugsAndBugfixes.rb'"
 
-# Ruby nil.to_s = ''; Regex difference between (.*) -> '' and (.+)* -> nil;
+# Ruby nil.to_s == ''; Regex difference between (.*) -> '' and (.+)* -> nil;
 
 require "minitest/autorun"
 require 'ostruct'
