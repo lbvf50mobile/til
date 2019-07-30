@@ -8,18 +8,18 @@ def subrip_time sec_xx_hash
 end
 
 def lrc2subRip(lrcLyrics, songLength)
-    p stop = length2secs(songLength)
-    p array = lrcLyrics.map.with_index(1){|x,i| {index: i,  **lrc2hash(x)}}
+    stop = length2secs(songLength)
+    array = lrcLyrics.map.with_index(1){|x,i| {index: i.to_s,  **lrc2hash(x)}}
     answer = []
     array.each_with_index do |value, index|
-        p start_time = subrip_time(sec: value[:sec], xx: value[:xx])
+        start_time = subrip_time(sec: value[:sec], xx: value[:xx])
+        end_time = array[index+1] ? subrip_time(sec: array[index+1][:sec], xx: array[index+1][:xx]) : subrip_time(sec: stop, xx: 0)
+        answer.push value[:index]
+        answer.push "#{start_time} --> #{end_time}"
+        answer.push value[:text]
+        answer.push ""
     end
-    ["1", 
-        "00:00:12,000 --> 00:00:17,200", 
-        "Happy birthday dear coder,", 
-        "", 
-        "2", 
-        "00:00:17,200 --> 00:00:20,000", 
-        "Happy birthday to you!"]
+    answer.pop
+    answer
 end
 end
