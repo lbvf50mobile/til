@@ -1,6 +1,7 @@
 p "alias x='ruby 20190730_Tuesday/20190730.rb'" 
 
 # Ruby Regex#scan returns a flat array. ^\[(\d+):(\d+)\.(\d+)\]( (.*)){0,1}$ => [["...","...","...","...","..."]];
+
 require "minitest/autorun"
 require_relative "lrc2subrip.rb"
 require 'ostruct'
