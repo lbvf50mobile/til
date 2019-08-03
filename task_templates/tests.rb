@@ -1,4 +1,4 @@
-p "alias x='ruby __FULL_DATE__/DATE____TASK__.rb'" 
+p "alias x='ruby __FULL_DATE__/__DATE____TASK__.rb'" 
 
 # Ruby __TASK__
 
