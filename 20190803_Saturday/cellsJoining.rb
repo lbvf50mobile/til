@@ -1,4 +1,7 @@
 class Task
+    def replace(str,width)
+        str.gsub(/^(\+-+){#{width}}/,' ')
+    end
     def cellsJoining(input)
         ["+----+--+-----+----+", 
             "|abcd|56|!@#$%|qwer|", 
