@@ -29,6 +29,6 @@ describe "cellsJoining" do
                     "|asdf ~~|ghjkl|100$|", 
                     "+-------+-----+----+"]
             }),
-        ].each{|x| assert_equal x.answer, Task.new.cellsJoining(x.input)}
+        ].each{|x| assert_equal x.answer, Task.new.cellsJoining(x.table)}
     end
 end
