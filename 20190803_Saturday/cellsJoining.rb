@@ -11,6 +11,14 @@ class Task
         str[str.size - 1] = ?| if right == columns_amount - 1
         str
     end
+    def column_replacer(str,left,right)
+        arr = str.split(?|)
+        one = arr[0..left].join(?|)
+        two = arr[left+1..right].join(' ')
+        three = arr[right+1..-1].join(?|)
+        ?|+one+two + ?| +three+?|
+        arr.join(" ")
+    end
     def cellsJoining(input,coords)
         
         get_columns_amount = ->arr{arr[0].count(?+)-1}
@@ -40,7 +48,7 @@ class Task
                 display = border_replacer(x,left,right,columns_amount).red
             end
             if border_index.between?(top,bottom) && (! is_border)
-                display = x.green
+                display = column_replacer(x,left,right).green
             end
 
 
