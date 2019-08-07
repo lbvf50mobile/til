@@ -17,10 +17,16 @@ class Task
         hash_positions = {bottom: bottom, top: top, left: left, right: right}
         shows_bounds hash_positions
         shows_start_finish(start: start, finish: finish)
+        border_index = -1
+        row_index = -1
 
         input.each do |x|
             is_border = (?+ == x[0])
-            puts "%s %s" % [x, is_border.inspect]
+            if is_border 
+                border_index += 1
+                row_index += 1
+            end
+            puts "%s %s %d %d" % [x, is_border.inspect, border_index, row_index]
         end
 
         ["+----+--+-----+----+", 
