@@ -12,12 +12,14 @@ class Task
         str
     end
     def column_replacer(str,left,right)
-        arr = str.split(?|)
-        one = arr[0..left].join(?|)
-        two = arr[left+1..right].join(' ')
-        three = arr[right+1..-1].join(?|)
-        ?|+one+two + ?| +three+?|
-        arr.join(" ")
+        arr = str.split("|")
+        str = arr.each_with_index.reduce(""){|memo,(x,i)|
+            if i.between?(left+1,right)
+                memo + (x + " ")
+            else
+                memo + x + ?|
+            end
+        }
     end
     def cellsJoining(input,coords)
         
@@ -36,7 +38,7 @@ class Task
         row_index = -1
         display = ""
 
-        input.each do |x|
+        input.each_with_index do |x,i|
             is_border = (?+ == x[0])
             if is_border 
                 border_index += 1
@@ -45,9 +47,11 @@ class Task
             display = x
 
             if row_index.between?(start, finish) && is_border
+                input[i] = border_replacer(x,left,right,columns_amount)
                 display = border_replacer(x,left,right,columns_amount).red
             end
             if border_index.between?(top,bottom) && (! is_border)
+                input[i] = column_replacer(x,left,right)
                 display = column_replacer(x,left,right).green
             end
 
@@ -55,7 +59,9 @@ class Task
             puts "%s %s %d %d" % [display, is_border.inspect, border_index, row_index]
         end
 
-        ["+----+--+-----+----+", 
+        input.each{|x| puts x}
+
+        ans = ["+----+--+-----+----+", 
             "|abcd|56|!@#$%|qwer|", 
             "|1234|78|^&=()|tyui|", 
             "+----+--+-----+----+", 
@@ -63,6 +69,9 @@ class Task
             "|       +-----+----+", 
             "|asdf ~~|ghjkl|100$|", 
             "+-------+-----+----+"]
+        ans.each{|x| puts x}
+        ans
+            
     end
     # ---------------------------------
     def shows_columns_amount amount
