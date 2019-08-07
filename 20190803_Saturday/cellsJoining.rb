@@ -69,7 +69,9 @@ class Task
             "|       +-----+----+", 
             "|asdf ~~|ghjkl|100$|", 
             "+-------+-----+----+"]
-        ans.each{|x| puts x}
+        ans.each_with_index{|x,i| 
+            p [ans[i] == input[i],ans[i],input[i]]
+        }
         ans
             
     end
