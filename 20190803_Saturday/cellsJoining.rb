@@ -1,14 +1,21 @@
 require 'colorize'
 class Task
-    def replace(str,width)
-        str = str.gsub(/^(\+-+){#{width}}/,' ')
-        str[0] = ?|
+    def border_replacer(str,left,right,columns_amount)
+        # ^((?:\+-+){1})((?:\+-+){2})
+        regex = /^((?:\+-+){#{left}})((?:\+-+){#{right-left+1}})(.*)/
+        str = str.gsub(regex){|match|
+            $1 + (" " * $2.size) +$3
+            
+        }
+        str[0] = ?| if 0 == left
+        str[str.size - 1] = ?| if right == columns_amount - 1
         str
     end
     def cellsJoining(input,coords)
         
-        get_columns_size = ->arr{arr[0].count(?+)-1}
-        p columns_size = get_columns_size[input]
+        get_columns_amount = ->arr{arr[0].count(?+)-1}
+        columns_amount = get_columns_amount[input]
+        shows_columns_amount columns_amount
         bottom, left = coords[0]
         top, right = coords[1]
 
@@ -30,7 +37,7 @@ class Task
             display = x
 
             if row_index.between?(start, finish) && is_border
-                display = x.red
+                display = border_replacer(x,left,right,columns_amount).red
             end
             if border_index.between?(top,bottom) && (! is_border)
                 display = x.green
@@ -50,6 +57,9 @@ class Task
             "+-------+-----+----+"]
     end
     # ---------------------------------
+    def shows_columns_amount amount
+        puts "columns amount: %s" % [amount.to_s.green]
+    end
     def shows_bounds h
         arr = [h[:top],h[:bottom],h[:left], h[:right]].map(&:to_s).map(&:green)
         puts "top: %s, bottom: %s, left: %s, right: %s" % arr
