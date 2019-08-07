@@ -21,6 +21,9 @@ class Task
             end
         }
     end
+    def bottom_replacer(str)
+        str.gsub(/[^|]/,?-).gsub(?|,?+)
+    end
     def cellsJoining(input,coords)
         
         get_columns_amount = ->arr{arr[0].count(?+)-1}
@@ -54,6 +57,11 @@ class Task
                 input[i] = column_replacer(x,left,right)
                 display = column_replacer(x,left,right).green
             end
+            if row_index == finish+1 && is_border
+                input[i] = bottom_replacer(input[i-1])
+                display = bottom_replacer(input[i-1]).red
+            end
+            
 
 
             puts "%s %s %d %d" % [display, is_border.inspect, border_index, row_index]
@@ -72,7 +80,7 @@ class Task
         ans.each_with_index{|x,i| 
             p [ans[i] == input[i],ans[i],input[i]]
         }
-        ans
+        input
             
     end
     # ---------------------------------
