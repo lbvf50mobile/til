@@ -19,6 +19,7 @@ class Task
         shows_start_finish(start: start, finish: finish)
         border_index = -1
         row_index = -1
+        display = ""
 
         input.each do |x|
             is_border = (?+ == x[0])
@@ -26,7 +27,17 @@ class Task
                 border_index += 1
                 row_index += 1
             end
-            puts "%s %s %d %d" % [x, is_border.inspect, border_index, row_index]
+            display = x
+
+            if row_index.between?(start, finish) && is_border
+                display = x.red
+            end
+            if border_index.between?(top,bottom) && (! is_border)
+                display = x.green
+            end
+
+
+            puts "%s %s %d %d" % [display, is_border.inspect, border_index, row_index]
         end
 
         ["+----+--+-----+----+", 
