@@ -5,8 +5,8 @@ class Task
         str
     end
     def cellsJoining(input)
-        input[2] = replace(input[2],2)
-        p input
+        get_columns_size = ->arr{arr[0].count(?+)-1}
+        p columns_size = get_columns_size[input]
         ["+----+--+-----+----+", 
             "|abcd|56|!@#$%|qwer|", 
             "|1234|78|^&=()|tyui|", 

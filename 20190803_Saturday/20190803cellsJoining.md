@@ -43,7 +43,7 @@ a table in ASCII graphics. `|` and `-` characters represnt borders, and `+` char
 
  *Guaranteed constraints:*
  `3 <= table.lenght <= 25`,  
- `3 <= table[i].length <= 80`,  
+ `3 <= table[i].length <= 80`,   
  `table[i].length == table[j].length`
 
  - **[input] array.array.integer coords**  
@@ -54,6 +54,6 @@ a table in ASCII graphics. `|` and `-` characters represnt borders, and `+` char
 
  *Guaranteed constaints:*  
  `coords.length = 2`, 
- `coords[i].length = 2`,  
- `0 <= coords[1][0] <= coords[0][0] < 10`, 
+ `coords[i].length = 2`,    
+ `0 <= coords[1][0] <= coords[0][0] < 10`,  
  `0 <= coords[0][1] <= coords[1][1] <=25`. 
