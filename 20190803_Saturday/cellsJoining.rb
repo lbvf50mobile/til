@@ -25,18 +25,18 @@ class Task
         str.gsub(/[^|]/,?-).gsub(?|,?+)
     end
     def cellsJoining(input,coords)
-        
+        debbug = true
         get_columns_amount = ->arr{arr[0].count(?+)-1}
         columns_amount = get_columns_amount[input]
-        shows_columns_amount columns_amount
+        shows_columns_amount(columns_amount,debbug)
         bottom, left = coords[0]
         top, right = coords[1]
 
         start, finish = top+1, bottom
         
         hash_positions = {bottom: bottom, top: top, left: left, right: right}
-        shows_bounds hash_positions
-        shows_start_finish(start: start, finish: finish)
+        shows_bounds(hash_positions,debbug)
+        shows_start_finish({start: start, finish: finish},debbug)
         border_index = -1
         row_index = -1
         display = ""
@@ -64,36 +64,23 @@ class Task
             
 
 
-            puts "%s %s %d %d" % [display, is_border.inspect, border_index, row_index]
+            puts "%s %s %d %d" % [display, is_border.inspect, border_index, row_index] if debbug
         end
 
-        input.each{|x| puts x}
-
-        ans = ["+----+--+-----+----+", 
-            "|abcd|56|!@#$%|qwer|", 
-            "|1234|78|^&=()|tyui|", 
-            "+----+--+-----+----+", 
-            "|zxcv 90|77777|stop|", 
-            "|       +-----+----+", 
-            "|asdf ~~|ghjkl|100$|", 
-            "+-------+-----+----+"]
-        ans.each_with_index{|x,i| 
-            p [ans[i] == input[i],ans[i],input[i]]
-        }
         input
             
     end
     # ---------------------------------
-    def shows_columns_amount amount
-        puts "columns amount: %s" % [amount.to_s.green]
+    def shows_columns_amount amount, debbug
+        puts "columns amount: %s" % [amount.to_s.green] if debbug
     end
-    def shows_bounds h
+    def shows_bounds h, debbug
         arr = [h[:top],h[:bottom],h[:left], h[:right]].map(&:to_s).map(&:green)
-        puts "top: %s, bottom: %s, left: %s, right: %s" % arr
+        puts "top: %s, bottom: %s, left: %s, right: %s" % arr if debbug
     end
-    def shows_start_finish h
+    def shows_start_finish h, debbug
         arr = [h[:start],h[:finish]].map(&:to_s).map(&:cyan)
-        puts "start: %s, finish: %s" % arr
+        puts "start: %s, finish: %s" % arr if debbug
     end
     
 end
