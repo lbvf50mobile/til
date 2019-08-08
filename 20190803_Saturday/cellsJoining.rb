@@ -72,14 +72,14 @@ class Task
     end
     # ---------------------------------
     def shows_columns_amount amount, debbug
-        puts "columns amount: %s" % [amount.to_s.green] if debbug
+        puts "columns amount: %s" % [amount.to_s] if debbug
     end
     def shows_bounds h, debbug
-        arr = [h[:top],h[:bottom],h[:left], h[:right]].map(&:to_s).map(&:green)
+        arr = [h[:top],h[:bottom],h[:left], h[:right]].map(&:to_s) # .map(&:green)
         puts "top: %s, bottom: %s, left: %s, right: %s" % arr if debbug
     end
     def shows_start_finish h, debbug
-        arr = [h[:start],h[:finish]].map(&:to_s).map(&:cyan)
+        arr = [h[:start],h[:finish]].map(&:to_s) # .map(&:cyan)
         puts "start: %s, finish: %s" % arr if debbug
     end
     
