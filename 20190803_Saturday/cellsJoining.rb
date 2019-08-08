@@ -9,6 +9,7 @@ class Task
         }
         str[0] = ?| if 0 == left
         str[str.size - 1] = ?| if right == columns_amount - 1
+        str.gsub!(/([^ ])( )/,'\1+') if left != 0
         str
     end
     def column_replacer(str,left,right)
