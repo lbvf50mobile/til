@@ -25,7 +25,7 @@ class Task
         str.gsub(/[^|]/,?-).gsub(?|,?+)
     end
     def cellsJoining(input,coords)
-        debbug = true
+        debbug = false
         get_columns_amount = ->arr{arr[0].count(?+)-1}
         columns_amount = get_columns_amount[input]
         shows_columns_amount(columns_amount,debbug)
@@ -51,15 +51,15 @@ class Task
 
             if row_index.between?(start, finish) && is_border
                 input[i] = border_replacer(x,left,right,columns_amount)
-                display = border_replacer(x,left,right,columns_amount).red
+                display = border_replacer(x,left,right,columns_amount)
             end
             if border_index.between?(top,bottom) && (! is_border)
                 input[i] = column_replacer(x,left,right)
-                display = column_replacer(x,left,right).green
+                display = column_replacer(x,left,right)
             end
             if row_index == finish+1 && is_border
                 input[i] = bottom_replacer(input[i-1])
-                display = bottom_replacer(input[i-1]).red
+                display = bottom_replacer(input[i-1])
             end
             
 
