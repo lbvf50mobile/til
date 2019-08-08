@@ -57,13 +57,16 @@ class Task
                 input[i] = column_replacer(x,left,right)
                 display = column_replacer(x,left,right)
             end
-            if row_index == finish+1 && is_border
+            # The bottom border generate it from cell.
+            if i == (input.size - 1) && is_border
                 input[i] = bottom_replacer(input[i-1])
                 display = bottom_replacer(input[i-1])
             end
-            
-
-
+            # Change the top border
+            if 1 == i && (! is_border)
+                input[0] = bottom_replacer(input[1])
+                display = bottom_replacer(input[1])
+            end
             puts "%s %s %d %d" % [display, is_border.inspect, border_index, row_index] if debbug
         end
 
