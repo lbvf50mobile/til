@@ -29,16 +29,33 @@ class Task
         answer
     end
    def tree_creator arr
-     if 1 == arr.size && arr[0][:type] == 3
+     if 1 == arr.size && (arr[0][:type] == 3 )
         return tree_creator arr[0][:val]
+     end
+     if 1 == arr.size && ( arr[0][:type] == 0)
+        return arr[0][:val]
      end
      if arr.index{|x| x[:type] == 1}
         index = arr.index{|x| x[:type] == 1}
-        []
+        return [tree_creator(arr[0...index]),arr[index],tree_creator(arr[index+1..-1])]
+     end
+     if arr.index{|x| x[:type] == 2}
+        index = arr.index{|x| x[:type] == 2}
+        return [tree_creator(arr[0...index]),arr[index],tree_creator(arr[index+1..-1])]
      end
    end
-
+   def dfs(tree)
+     a = ->x{ x.class ==  Array}
+     na = ->x{ x.class != Array}
+     left,center,right = tree
+    return dfs(right) if( a[left] && a[right])
+    return center[:pos] if (na[left] && na[right])
+    return dfs(left) if (a[left])
+    return dfs(fight) if (a[right])
+   end
     def firstOperationCharacter(expr)
-        3
+        arr = parse_expr(expr)
+        tree = tree_creator(arr)
+        dfs(tree)
     end
 end
