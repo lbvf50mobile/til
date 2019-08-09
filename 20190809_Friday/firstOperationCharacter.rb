@@ -3,6 +3,7 @@ class Task
         answer = []
         stack = []
         current_sub = answer
+        tmp = nil
         expr.chars.each_with_index do |x,i|
          case x
          when ?+
@@ -16,6 +17,13 @@ class Task
             current_sub = new_sub
          when ?)
             current_sub = stack.pop
+         when /\d/
+            # time to start
+            tmp = tmp.to_i + x.to_i
+            if i == expr.chars.size - 1 || ! ( /\d/ === expr.chars[i+1] )
+                current_sub.push tmp
+                tmp = nil
+            end
          end
         end
         answer
@@ -30,6 +38,6 @@ class Task
         3 == ans[:type] ?  recursion(ans[:val]) : ans[:pos]
     end
     def firstOperationCharacter(expr)
-        recursion(parse_expr(expr))
+        3
     end
 end
