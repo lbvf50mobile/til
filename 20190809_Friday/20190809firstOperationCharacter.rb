@@ -13,11 +13,12 @@ describe "firstOperationCharacter" do
                 expr: "(2 + 2) * 2",
                 answer: 3
             }),
-=begin
+
             OpenStruct.new({
                 expr: "((2 + 2) * 2) * 3 + (2 + (2 * 2))",
                 answer: 28
             }),
+=begin
             OpenStruct.new({
                 expr: "2+((22+2222)+(2222+222))",
                 answer: 6

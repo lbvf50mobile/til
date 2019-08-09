@@ -51,7 +51,7 @@ class Task
     return dfs(right) if( a[left] && a[right])
     return center[:pos] if (na[left] && na[right])
     return dfs(left) if (a[left])
-    return dfs(fight) if (a[right])
+    return dfs(right) if (a[right])
    end
     def firstOperationCharacter(expr)
         arr = parse_expr(expr)
