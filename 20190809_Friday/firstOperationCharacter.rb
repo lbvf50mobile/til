@@ -20,6 +20,11 @@ class Task
         end
         answer
     end
+    def selector_hight_prioiry arr
+        sorter = arr.map.with_index{|x,i| [x[:type],x[:pos],i]}.sort{|a,b| a[0] == b[0] ? a[1] - b[1] : a[0] - b[0]}
+        hight = sorter[-1][2]
+        arr[hight]
+    end
     def firstOperationCharacter(expr)
         3
     end

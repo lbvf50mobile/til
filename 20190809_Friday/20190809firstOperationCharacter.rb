@@ -18,4 +18,10 @@ describe "firstOperationCharacter" do
     it "should parse the expression creation the array from it" do
         assert_equal [{type: 3, pos: 0, val: [{type: 1, pos: 3}]}, {type: 2, pos: 8}], Task.new.parse_expr('(2 + 2) * 2')
     end
+    it "should return element with maximum type at the most right position" do
+        ans = {type: 3, pos: 0, val: [{type: 1, pos: 3}]}
+        assert_equal ans , Task.new.selector_hight_prioiry( [{type: 3, pos: 0, val: [{type: 1, pos: 3}]}, {type: 2, pos: 8}])
+        ans = {type: 1, pos: 3}
+        assert_equal ans , Task.new.selector_hight_prioiry(  [{type: 1, pos: 3}])
+    end
 end
