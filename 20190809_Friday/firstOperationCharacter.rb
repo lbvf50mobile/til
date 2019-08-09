@@ -25,7 +25,11 @@ class Task
         hight = sorter[-1][2]
         arr[hight]
     end
+    def  recursion(arr)
+        ans = selector_hight_prioiry(arr)
+        3 == ans[:type] ?  recursion(ans[:val]) : ans[:pos]
+    end
     def firstOperationCharacter(expr)
-        3
+        recursion(parse_expr(expr))
     end
 end
