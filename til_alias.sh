@@ -1,1 +1,1 @@
-alias x='ruby 20190803_Saturday/20190803cellsJoining.rb'
+alias x='ruby 20190809_Friday/20190809firstOperationCharacter.rb'
