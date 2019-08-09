@@ -15,4 +15,7 @@ describe "firstOperationCharacter" do
             }),
         ].each{|x| assert_equal x.answer, Task.new.firstOperationCharacter(x.expr)}
     end
+    it "should parse the expression creation the array from it" do
+        assert_equal [{type: 3, pos: 0, val: [{type: 1, pos: 3}]}, {type: 2, pos: 8}], Task.new.parse_expr('(2 + 2) * 2')
+    end
 end
