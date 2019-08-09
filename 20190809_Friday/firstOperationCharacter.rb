@@ -48,7 +48,12 @@ class Task
      a = ->x{ x.class ==  Array}
      na = ->x{ x.class != Array}
      left,center,right = tree
-    return dfs(right) if( a[left] && a[right])
+    if( a[left] && a[right])
+        # Note that several operations of the same type with equal priority are computed from left to right.
+        return dfs(left) if( left[1][:type] == right[1][:type])
+        return dfs(left) if( left[1][:type] < right[1][:type])
+        return dfs(right) if( left[1][:type] > right[1][:type])
+    end
     return center[:pos] if (na[left] && na[right])
     return dfs(left) if (a[left])
     return dfs(right) if (a[right])
