@@ -23,17 +23,18 @@ describe "firstOperationCharacter" do
                 expr: "2+((22+2222)+(2222+222))",
                 answer: 6
             }),
-
+=begin
             OpenStruct.new({
                 expr: "2 + 3 * 45 * 56 + 198 + 10938 * 102938 + 5",
                 answer: 6
             }),
+=end
 
 
         ].each{|x| assert_equal x.answer, Task.new.firstOperationCharacter(x.expr)}
     end
     it "should parse the expression creation the array from it" do
-        assert_equal [{type: 1, pos: 3, level: 1},{type: 2, pos: 8, level: 0}], Task.new.parse_expr('(2 + 2) * 2')
+        assert_equal [{type: 1, pos: 3, level: 1, group: 1},{type: 2, pos: 8, level: 0, group: 0}], Task.new.parse_expr('(2 + 2) * 2')
     end
 =begin
     it 'should create trees' do
