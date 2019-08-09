@@ -10,9 +10,9 @@ describe "firstOperationCharacter" do
     it "Pass the tests" do
         [
             OpenStruct.new({
-                input: "1",
-                answer: 1
+                expr: "(2 + 2) * 2",
+                answer: 3
             }),
-        ].each{|x| assert_equal x.answer, Task.new.firstOperationCharacter(x.input)}
+        ].each{|x| assert_equal x.answer, Task.new.firstOperationCharacter(x.expr)}
     end
 end

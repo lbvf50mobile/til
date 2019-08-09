@@ -1,5 +1,5 @@
 class Task
-    def firstOperationCharacter(input)
-        1
+    def firstOperationCharacter(expr)
+        3
     end
 end
