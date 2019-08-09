@@ -13,7 +13,7 @@ describe "firstOperationCharacter" do
                 expr: "(2 + 2) * 2",
                 answer: 3
             }),
-=begin
+
             OpenStruct.new({
                 expr: "((2 + 2) * 2) * 3 + (2 + (2 * 2))",
                 answer: 28
@@ -28,7 +28,7 @@ describe "firstOperationCharacter" do
                 expr: "2 + 3 * 45 * 56 + 198 + 10938 * 102938 + 5",
                 answer: 6
             }),
-=end
+
 
         ].each{|x| assert_equal x.answer, Task.new.firstOperationCharacter(x.expr)}
     end
