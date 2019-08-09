@@ -13,6 +13,14 @@ describe "firstOperationCharacter" do
                 expr: "(2 + 2) * 2",
                 answer: 3
             }),
+            OpenStruct.new({
+                expr: "((2 + 2) * 2) * 3 + (2 + (2 * 2))",
+                answer: 28
+            }),
+            OpenStruct.new({
+                expr: "2+((22+2222)+(2222+222))",
+                answer: 6
+            }),
         ].each{|x| assert_equal x.answer, Task.new.firstOperationCharacter(x.expr)}
     end
     it "should parse the expression creation the array from it" do
