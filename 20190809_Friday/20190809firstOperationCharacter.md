@@ -24,5 +24,10 @@ Se the explanation of the third example for more details, about the operations p
 `5 <= expr.length < 45`
 - **[output] integer**
 
+## Comments
+
+- @byteflux Actually, turns out it's because they want you to consider everything at the same parenthetical depth to be grouped together.
+So ((2 + 2) * 2) * 3 + (2 + (2 * 2)) at the deepest level becomes 2+2<magic>2*2, and since * is processed before +, it wants the multiplication first. Completely against real math rules but there ya go. If you're going purely on left/right that might be why your hidden test is failing.
+
 
 

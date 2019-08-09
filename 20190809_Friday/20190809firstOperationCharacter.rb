@@ -24,6 +24,11 @@ describe "firstOperationCharacter" do
                 answer: 6
             }),
 
+            OpenStruct.new({
+                expr: "2 + 3 * 45 * 56 + 198 + 10938 * 102938 + 5",
+                answer: 6
+            }),
+
         ].each{|x| assert_equal x.answer, Task.new.firstOperationCharacter(x.expr)}
     end
     it "should parse the expression creation the array from it" do
