@@ -21,22 +21,23 @@ class Task
             # time to start
             tmp = tmp.to_i + x.to_i
             if i == expr.chars.size - 1 || ! ( /\d/ === expr.chars[i+1] )
-                current_sub.push tmp
+                current_sub.push({type: 0, val: tmp})
                 tmp = nil
             end
          end
         end
         answer
     end
-    def selector_hight_prioiry arr
-        sorter = arr.map.with_index{|x,i| [x[:type],x[:pos],i]}.sort{|a,b| a[0] == b[0] ? a[1] - b[1] : a[0] - b[0]}
-        hight = sorter[-1][2]
-        arr[hight]
-    end
-    def  recursion(arr)
-        ans = selector_hight_prioiry(arr)
-        3 == ans[:type] ?  recursion(ans[:val]) : ans[:pos]
-    end
+   def tree_creator arr
+     if 1 == arr.size && arr[0][:type] == 3
+        return tree_creator arr[0][:val]
+     end
+     if arr.index{|x| x[:type] == 1}
+        index = arr.index{|x| x[:type] == 1}
+        []
+     end
+   end
+
     def firstOperationCharacter(expr)
         3
     end

@@ -26,7 +26,10 @@ describe "firstOperationCharacter" do
         ].each{|x| assert_equal x.answer, Task.new.firstOperationCharacter(x.expr)}
     end
     it "should parse the expression creation the array from it" do
-        assert_equal [{type: 3, pos: 0, val: [2,{type: 1, pos: 3},2]}, {type: 2, pos: 8},2], Task.new.parse_expr('(2 + 2) * 2')
+        assert_equal [{type: 3, pos: 0, val: [{type:0, val:2},{type: 1, pos: 3},{type:0, val:2}]}, {type: 2, pos: 8},{type:0, val:2}], Task.new.parse_expr('(2 + 2) * 2')
+    end
+    it 'should create trees' do
+        # assert_equal [[2,{type: 1, pos: 3},2], {type: 2, pos: 8},2], Task.new.tree_creator([{type: 3, pos: 0, val: [2,{type: 1, pos: 3},2]}, {type: 2, pos: 8},2])
     end
 =begin
     it "should return element with maximum type at the most right position" do
