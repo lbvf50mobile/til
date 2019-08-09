@@ -27,11 +27,10 @@ class Task
  
 
     def firstOperationCharacter(expr)
-        arr = parse_expr(expr)
-        max = arr.max{|x| x[:level]}[:level]
-        arr = arr.select{|x| x[:level] == max}
-        max = arr.max{|x| x[:type]}[:type]
-        arr = arr.select{|x| x[:type] == max}
+        p arr = parse_expr(expr)
+        p level = arr.max_by{|x| x[:level]}[:level]
+        p arr = arr.select{|x| x[:level] == arr.max_by{|x| x[:level]}[:level]}
+        p arr = arr.select{|x| x[:type] == arr.max_by{|x| x[:type]}[:type]}
         arr[0][:pos]
     end
 end

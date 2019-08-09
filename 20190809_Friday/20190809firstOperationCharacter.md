@@ -29,5 +29,14 @@ Se the explanation of the third example for more details, about the operations p
 - @byteflux Actually, turns out it's because they want you to consider everything at the same parenthetical depth to be grouped together.
 So ((2 + 2) * 2) * 3 + (2 + (2 * 2)) at the deepest level becomes 2+2<magic>2*2, and since * is processed before +, it wants the multiplication first. Completely against real math rules but there ya go. If you're going purely on left/right that might be why your hidden test is failing.
 
+- my comment:
+
+Here no need to create tree. Here need to describe each operator, and select one that has maximum priority and stored deep in parentheses.  @mike_m72  thank you for your comments.
+
+1) Create plain array of the objects that describe an operator. Each element contains type (1: +, 2: *), parentheses level, index of an operator.
+2) Filter #1: Select elements with maximum parentheses level.
+3) Filter #2:  Select elements with maximum type.
+4)  Return position of the first element from the filtered array. 
+
 
 

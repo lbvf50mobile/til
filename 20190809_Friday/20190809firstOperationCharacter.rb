@@ -9,6 +9,7 @@ require 'ostruct'
 describe "firstOperationCharacter" do
     it "Pass the tests" do
         [
+
             OpenStruct.new({
                 expr: "(2 + 2) * 2",
                 answer: 3
@@ -23,12 +24,12 @@ describe "firstOperationCharacter" do
                 expr: "2+((22+2222)+(2222+222))",
                 answer: 6
             }),
-=begin
+
             OpenStruct.new({
                 expr: "2 + 3 * 45 * 56 + 198 + 10938 * 102938 + 5",
                 answer: 6
             }),
-=end
+
 
 
         ].each{|x| assert_equal x.answer, Task.new.firstOperationCharacter(x.expr)}
