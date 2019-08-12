@@ -15,4 +15,9 @@ describe "treeBottom" do
             }),
         ].each{|x| assert_equal x.answer, Task.new.treeBottom(x.tree)}
     end
+    it "Shuld extract value and left and right sub tree" do
+        answer = {value: 2, left: '(7 (2 () ()) (6 (5 () ()) (11 () ())))', right: '(5 () (9 (4 () ()) ()))'}
+        tree = "(2 (7 (2 () ()) (6 (5 () ()) (11 () ()))) (5 () (9 (4 () ()) ())))"
+        assert_equal answer, Task.new.extract_vertex(tree)
+    end
 end
