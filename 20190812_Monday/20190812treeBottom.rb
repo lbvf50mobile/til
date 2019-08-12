@@ -23,5 +23,7 @@ describe "treeBottom" do
     it "Shuld undestand when it leaf" do
        tree = "(2 (7 (2 () ()) (6 (5 () ()) (11 () ()))) (5 () (9 (4 () ()) ())))"
        refute Task.new.is_leaf(Task.new.extract_vertex(tree))
+       tree = "(2 () ())"
+       assert Task.new.is_leaf(Task.new.extract_vertex(tree))
     end
 end

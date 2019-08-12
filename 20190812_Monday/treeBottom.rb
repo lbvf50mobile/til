@@ -26,7 +26,19 @@ class Task
     def is_leaf(vertex)
         vertex[:left] == "()" && vertex[:right] == "()"
     end
+    def dfs(tree,depth,leafs)
+        vertex = extract_vertex(tree)
+        if is_leaf(vertex)
+            leafs.push([vertex[:value],depth])
+        else
+            dfs(vertex[:left],depth+1,leafs) if '()' != vertex[:left]
+            dfs(vertex[:right],depth+1,leafs) if '()' != vertex[:right]
+        end
+        leafs
+    end
     def treeBottom(tree)
-        [5, 11, 4]
+        leafs = dfs(tree,0,[])
+        max = leafs.max_by{|val,depth| depth}[1]
+        leafs.select{|val,depth| depth == max }.map{|x,y| x}
     end
 end
