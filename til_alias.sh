@@ -1,1 +1,1 @@
-alias x='ruby 20190812_Monday/20190812treeBottom.rb'
+alias x='ruby 20190812_Monday/20190812.rb'
