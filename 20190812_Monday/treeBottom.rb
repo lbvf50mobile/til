@@ -23,6 +23,9 @@ class Task
         answer[:right] = branches[1]
         answer
     end
+    def is_leaf(vertex)
+        vertex[:left] == "()" && vertex[:right] == "()"
+    end
     def treeBottom(tree)
         [5, 11, 4]
     end
