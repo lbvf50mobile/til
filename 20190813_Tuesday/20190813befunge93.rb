@@ -10,9 +10,13 @@ describe "befunge93" do
     it "Pass the tests" do
         [
             OpenStruct.new({
-                input: "1",
-                answer: 1
+                program: ["               v", 
+                    "v  ,,,,,\"Hello\"<", 
+                    ">48*,          v", 
+                    "\"!dlroW\",,,,,,v>", 
+                    "25*,@         > "],
+                answer: "Hello World!\n"
             }),
-        ].each{|x| assert_equal x.answer, Task.new.befunge93(x.input)}
+        ].each{|x| assert_equal x.answer, Task.new.befunge93(x.program)}
     end
 end

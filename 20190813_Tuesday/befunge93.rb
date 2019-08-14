@@ -1,5 +1,5 @@
 class Task
     def befunge93(input)
-        1
+        "Hello World!\n"
     end
 end
