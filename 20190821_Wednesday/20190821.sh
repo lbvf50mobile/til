@@ -12,7 +12,7 @@ echo "Question?"
 while 
     read -n1 -p  "1 - yes, 2 - no: " int # sends right after the keypress
     echo ''
-    [[ "$int" =~ [^12] ]]
+    [[ "$int" =~ ^[^12]$ ]]
 do
     :
 done
