@@ -10,7 +10,8 @@ echo "Question?"
 # https://unix.stackexchange.com/questions/340440/bash-test-what-does-do
 # https://stackoverflow.com/questions/16489809/emulating-a-do-while-loop-in-bash
 while 
-    read -p "1 - yes, 2 - no: " int
+    read -n1 -p  "1 - yes, 2 - no: " int
+    echo ''
     [[ "$int" =~ [^12] ]]
 do
     :
