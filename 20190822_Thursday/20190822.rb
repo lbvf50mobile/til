@@ -7,3 +7,5 @@ def string_transformer(str)
 end
 
 p string_transformer("This  is the    test.")
+p a = "a a  b   c"
+p a.split(/\b/)
