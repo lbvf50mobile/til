@@ -41,3 +41,15 @@ function sortString(string, ordering) {
 // input [ 'cswnkrfevuo', 'ddenrfp' ]
 
 sortString('cswnkrfevuo', 'ddenrfp')
+
+
+function sortDigits(str){
+    return [...str].sort((a,b) => (parseInt(a) || Infinity) - (parseInt(b) || Infinity)).join(''); 
+}
+function sortDigits1(str){
+    return sortBy(str, x => parseInt(x)|| Infinity).join(''); 
+}
+
+['1a2b3c','asda432','adab23sdss982ads'].forEach(x =>{
+    console.log({input: x, answer_sort: sortDigits(x), answer_sortBy: sortDigits(x)})
+});
