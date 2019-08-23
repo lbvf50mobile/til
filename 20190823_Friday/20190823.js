@@ -11,6 +11,8 @@ let describer = (s,o) =>{
     console.log("Order string ", o.green)
     console.log("Part string for sorting ", s.replace(new RegExp(`[^${o}]`,'g'),'').yellow)
     console.log("Part string for put in to the back ", s.replace(new RegExp(`[${o}]`,'g'),'').red)
+    let arr = [...s].reduce((arr,v) => ( -1 != o.indexOf(v) ? arr.push(v.green) : arr.push(v.red), arr) ,[]);
+    console.log(...arr)
 
 };
 
