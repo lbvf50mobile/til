@@ -1,5 +1,14 @@
-p "[00:12.00] Happy birthday dear coder,".scan(/^\[(\d+):(\d+)\.(\d+)\]( (.*)){0,1}$/)
-p "[00:12.00]".scan(/^\[(\d+):(\d+)\.(\d+)\]( (.*)){0,1}$/)
-p "".scan(/(.*){0,1}$/)
-p "1".scan(/(1)( (2*)){0,1}$/)
-p "1 2".scan(/(1)( (2*)){0,1}$/)
+require 'date'
+start_date = Date.new(2019,8,23)
+finish_date = Date.new(2019,9,23)
+date = start_date.clone
+count_working_days = 0 
+count_working_days += 1 if /[^67]/ === date.strftime('%u') 
+while true do
+    date += 1
+    count_working_days += 1 if /[^67]/ === date.strftime('%u') 
+    break if date == finish_date 
+end
+
+puts "From #{start_date} to #{finish_date} there are #{count_working_days} working days (including)"
+
