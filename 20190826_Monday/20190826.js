@@ -12,3 +12,5 @@ if (maxNumber == Infinity ){
 
 console.log(1 / maxNumber);
 // expected output: 0
+
+console.log( Infinity - Infinity)
