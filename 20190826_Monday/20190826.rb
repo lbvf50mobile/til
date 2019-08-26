@@ -1,6 +1,6 @@
 p "alias x='ruby 20190826_Monday/20190826.rb'" 
 
-# Ruby: Set Intersection and Set Union for remove dublicates.
+# Ruby: Set Intersection and Set Union for remove dublicates. (and Hash[dub.zip(dup)] with GroupBy)
 
 # https://www.codewars.com/kata/remove-duplicates/ruby
 
@@ -16,3 +16,4 @@ dub = [1,1,1,1,2,2,1,2,3,2,1]
 ans = [1,2,3]
 
 p ans == (dub & dub) && ans == ( [] | dub) && ans == dub.uniq && ans == dub.to_set.to_a
+p ans == Hash[dub.zip(dub)].keys && ans == dub.group_by{|i| i}.map(&:first)
