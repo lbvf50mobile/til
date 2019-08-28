@@ -31,3 +31,11 @@ first.stop(); // Timer: [...Array(1000).keys()] finished in 9291 ms
 second = timer('Array.from({length: 1000}, (i,_) => i): only once')
   Array.from({lenght: 1000}, (i,_) => i)
 second.stop(); // Timer: Array.from({length: 1000}, (i,_) => i) finished in 57 ms
+
+first = timer('[...Array(100).keys()]: 1000 * 100');
+for(i = 0; i < 1000; i++) [...Array(100).keys()]
+first.stop(); // Timer: [...Array(1000).keys()] finished in 9291 ms
+
+second = timer('Array.from({length: 100}, (i,_) => i): 1000 * 100')
+for(i = 0; i < 1000; i++) Array.from({lenght: 100}, (i,_) => i)
+second.stop(); // Timer: Array.from({length: 1000}, (i,_) => i) finished in 57 ms
