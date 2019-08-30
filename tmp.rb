@@ -3,9 +3,9 @@ def add_binary(a, b)
     i, j = a.size - 1, b.size - 1
     while i >=0 || j >= 0 do
         first = i >= 0 ? a[i].to_i : 0
-        second = j >= 0 ? a[j].to_i : 0
+        second = j >= 0 ? b[j].to_i : 0
         sum = first + second + prev
-        p "i = #{i} and j = #{j}"
+        p "i = #{i}, a[i] and j = #{j}"
         p [first, second, prev, sum]
         boom = [
             ->{ans = '0' + ans; prev = 0}, # 0
