@@ -1,43 +1,32 @@
-# Problem delivered by @kotsabiukmv
-# Example of similar task by @sanan_yuzb
-
-# Input boolean array. true - space for stand, false - tree.
-# Is it possbile to pass all array if character able to jump in bounds min_jump => max_jump
-
-# Solution:
-# Two loops one inside another and variables that saves index where characther stands.
-# First loop checks that character standing on free space
-# Second loop iteratevly search for place where to put a character from max_jump distance to a min_jump.
-# In case if there is no such place reutrn false
-# In case if ther is such place jump to the next interation of main loop.
-# condition check if we out of border size - then returns true.
-
-def can_jump(arr,min_jump, max_jump)
-    i = 0
-    while arr[i] do
-        find_cell = (i+min_jump..i+max_jump).to_a.reverse.any? do |j|
-            return true if j >= arr.size
-            i = j
-            arr[j] 
-        end
-        return false unless find_cell
+def add_binary(a, b)
+    prev, ans = 0, ''
+    i, j = a.size - 1, b.size - 1
+    while i >=0 || j >= 0 do
+        first = i >= 0 ? a[i].to_i : 0
+        second = j >= 0 ? a[j].to_i : 0
+        sum = first + second + prev
+        p "i = #{i} and j = #{j}"
+        p [first, second, prev, sum]
+        boom = [
+            ->{ans = '0' + ans; prev = 0}, # 0
+            ->{ans = '1' + ans; prev = 0}, # 1
+            ->{ans = '0' + ans; prev = 1}, # 2
+            ->{ans = '1' + ans; prev = 1} # 3
+            ][sum]
+        p boom
+        boom.()
+        i -= 1
+        j -= 1
     end
-    false
-end
+        p ans
+      ans = '1' + ans if 1 == prev
+      ans
+  end
 
 require 'minitest/autorun'
 
-describe "jump " do
-    it "should pass all ture" do
-        assert can_jump([true]*10,3,4)
-    end
-    it 'should fail when first if false' do
-        refute can_jump([false]+[true]*10,3,4)
-    end
-    it "it'should pass if it is possible to jump over" do
-        assert can_jump([true]+[false]*3 + [true],3,4)
-    end
-    it "it should not pass if it is impossibe to jump over" do
-        refute can_jump([true]+[false]*4 + [true],3,4)
+describe 'add_binary' do
+    it "sound 1 + 11" do
+        assert_equal '100', add_binary('1','11')
     end
 end
