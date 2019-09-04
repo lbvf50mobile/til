@@ -17,6 +17,9 @@ class Task
         else raise "There no such direciton"
         end
     end
+    def move_bridge state
+        2.times{ move_pointer state}
+    end
     def befunge93(input)
         "Hello World!\n"
     end

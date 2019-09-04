@@ -74,4 +74,13 @@ describe "befunge93" do
          assert_equal 0, bomba[:y_position]
          assert_equal 2, bomba[:x_position]
     end
+    it "should use bridge left bridge; skip next cell" do
+        bomba = {x_position: 0, y_position: 0, width: 3, height: 4, direction: 'left'}
+        Task.new.move_bridge(bomba)
+        assert_equal 0, bomba[:y_position]
+        assert_equal 2, bomba[:x_position]
+        Task.new.move_bridge(bomba)
+        assert_equal 0, bomba[:y_position]
+        assert_equal 1, bomba[:x_position]
+    end
 end
