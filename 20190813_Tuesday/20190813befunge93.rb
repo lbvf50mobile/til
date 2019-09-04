@@ -21,8 +21,29 @@ describe "befunge93" do
     end
 
     it  "If the stack is empty and it is necessary to pop a value, no exception is raised; instead, 0 is produced." do
-        bomba = {stack: []}
+        bomba = {stack: [1]}
+        assert_equal 1, Task.new.mega_pop(bomba)
+        assert_equal [], bomba[:stack]
         assert_equal 0, Task.new.mega_pop(bomba)
         assert_equal [], bomba[:stack]
+    end
+    it "should move left and right" do
+        bomba = {x_position: 0, y_position: 0, width: 3, direction: 'left'}
+        
+        # moving left
+        Task.new.move_pointer(bomba)
+        assert_equal 1, bomba[:x_position]
+        Task.new.move_pointer(bomba)
+        assert_equal 2, bomba[:x_position]
+        Task.new.move_pointer(bomba)
+        assert_equal 0, bomba[:x_position]
+        bomba[:direction] = 'right'
+        # moving right
+        Task.new.move_pointer(bomba)
+        assert_equal 2, bomba[:x_position]
+        Task.new.move_pointer(bomba)
+        assert_equal 1, bomba[:x_position]
+        Task.new.move_pointer(bomba)
+        assert_equal 0, bomba[:x_position]
     end
 end
