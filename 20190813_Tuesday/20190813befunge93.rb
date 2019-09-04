@@ -19,4 +19,10 @@ describe "befunge93" do
             }),
         ].each{|x| assert_equal x.answer, Task.new.befunge93(x.program)}
     end
+
+    it  "If the stack is empty and it is necessary to pop a value, no exception is raised; instead, 0 is produced." do
+        bomba = {stack: []}
+        assert_equal 0, Task.new.mega_pop(bomba)
+        assert_equal [], bomba[:stack]
+    end
 end
