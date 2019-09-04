@@ -27,23 +27,51 @@ describe "befunge93" do
         assert_equal 0, Task.new.mega_pop(bomba)
         assert_equal [], bomba[:stack]
     end
-    it "should move left and right" do
-        bomba = {x_position: 0, y_position: 0, width: 3, direction: 'left'}
+    it "should move left/rigth/top/bottom" do
+        bomba = {x_position: 0, y_position: 0, width: 3, height: 4, direction: 'left'}
         
         # moving left
+        bomba[:direction] = 'left'
         Task.new.move_pointer(bomba)
         assert_equal 1, bomba[:x_position]
         Task.new.move_pointer(bomba)
         assert_equal 2, bomba[:x_position]
         Task.new.move_pointer(bomba)
         assert_equal 0, bomba[:x_position]
-        bomba[:direction] = 'right'
+        
         # moving right
+        bomba[:direction] = 'right'
         Task.new.move_pointer(bomba)
         assert_equal 2, bomba[:x_position]
         Task.new.move_pointer(bomba)
         assert_equal 1, bomba[:x_position]
         Task.new.move_pointer(bomba)
         assert_equal 0, bomba[:x_position]
+        Task.new.move_pointer(bomba)
+        assert_equal 2, bomba[:x_position]
+
+        # moving down
+        bomba[:direction] = 'down'
+        Task.new.move_pointer(bomba)
+        assert_equal 1, bomba[:y_position]
+        Task.new.move_pointer(bomba)
+        assert_equal 2, bomba[:y_position]
+        Task.new.move_pointer(bomba)
+        assert_equal 3, bomba[:y_position]
+        Task.new.move_pointer(bomba)
+        assert_equal 0, bomba[:y_position]
+        assert_equal 2, bomba[:x_position]
+
+         # moving up
+         bomba[:direction] = 'up'
+         Task.new.move_pointer(bomba)
+         assert_equal 3, bomba[:y_position]
+         Task.new.move_pointer(bomba)
+         assert_equal 2, bomba[:y_position]
+         Task.new.move_pointer(bomba)
+         assert_equal 1, bomba[:y_position]
+         Task.new.move_pointer(bomba)
+         assert_equal 0, bomba[:y_position]
+         assert_equal 2, bomba[:x_position]
     end
 end
