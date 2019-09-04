@@ -92,4 +92,13 @@ describe "befunge93" do
         assert_equal 1, state[:y_position]
         assert_equal 1, state[:x_position]
     end
+    it "should use bridge DOWN bridge; skip next cell" do
+        state = {x_position: 2, y_position: 3, width: 3, height: 4, direction: 'down'}
+        Task.new.move_bridge(state)
+        assert_equal 1, state[:y_position]
+        assert_equal 2, state[:x_position]
+        Task.new.move_bridge(state)
+        assert_equal 3, state[:y_position]
+        assert_equal 2, state[:x_position]
+    end
 end
