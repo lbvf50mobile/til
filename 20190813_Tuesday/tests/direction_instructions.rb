@@ -12,22 +12,22 @@ describe "Befunge-93 Direction instructions" do
         # moving left
         state[:direction] = 'left'
         Task.new.move_pointer(state)
-        assert_equal 1, state[:x_position]
-        Task.new.move_pointer(state)
         assert_equal 2, state[:x_position]
+        Task.new.move_pointer(state)
+        assert_equal 1, state[:x_position]
         Task.new.move_pointer(state)
         assert_equal 0, state[:x_position]
         
         # moving right
         state[:direction] = 'right'
         Task.new.move_pointer(state)
-        assert_equal 2, state[:x_position]
-        Task.new.move_pointer(state)
         assert_equal 1, state[:x_position]
+        Task.new.move_pointer(state)
+        assert_equal 2, state[:x_position]
         Task.new.move_pointer(state)
         assert_equal 0, state[:x_position]
         Task.new.move_pointer(state)
-        assert_equal 2, state[:x_position]
+        assert_equal 1, state[:x_position]
 
         # moving down
         state[:direction] = 'down'
@@ -39,7 +39,7 @@ describe "Befunge-93 Direction instructions" do
         assert_equal 3, state[:y_position]
         Task.new.move_pointer(state)
         assert_equal 0, state[:y_position]
-        assert_equal 2, state[:x_position]
+        assert_equal 1, state[:x_position]
 
          # moving up
          state[:direction] = 'up'
@@ -51,25 +51,25 @@ describe "Befunge-93 Direction instructions" do
          assert_equal 1, state[:y_position]
          Task.new.move_pointer(state)
          assert_equal 0, state[:y_position]
-         assert_equal 2, state[:x_position]
+         assert_equal 1, state[:x_position]
     end
     it "should use bridge left bridge; skip next cell" do
         state = {x_position: 0, y_position: 0, width: 3, height: 4, direction: 'left'}
         Task.new.do_sharp(state)
         assert_equal 0, state[:y_position]
-        assert_equal 1, state[:x_position]
+        assert_equal 2, state[:x_position]
         Task.new.do_sharp(state)
         assert_equal 0, state[:y_position]
-        assert_equal 2, state[:x_position]
+        assert_equal 1, state[:x_position]
     end
     it "should use bridge right bridge; skip next cell" do
         state = {x_position: 2, y_position: 1, width: 3, height: 4, direction: 'right'}
         Task.new.do_sharp(state)
         assert_equal 1, state[:y_position]
-        assert_equal 1, state[:x_position]
+        assert_equal 0, state[:x_position]
         Task.new.do_sharp(state)
         assert_equal 1, state[:y_position]
-        assert_equal 0, state[:x_position]
+        assert_equal 1, state[:x_position]
     end
     it "should use bridge DOWN bridge; skip next cell" do
         state = {x_position: 2, y_position: 3, width: 3, height: 4, direction: 'down'}

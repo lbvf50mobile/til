@@ -6,10 +6,9 @@ class Task
         x, y = state[:x_position], state[:y_position]
         width, height = state[:width], state[:height]
         case state[:direction]
-        when 'left'
-             # ERROR
-             state[:x_position] = (x+1) % width
         when 'right'
+             state[:x_position] = (x+1) % width
+        when 'left'
             state[:x_position] =  x == 0 ? width - 1 : x - 1
         when 'up'
             state[:y_position] =  y == 0 ? height - 1 : y - 1
@@ -24,7 +23,7 @@ class Task
     def do_sharp s; move_pointer(s); end
     # >: start moving right
     def do_greater_than(s); s[:direction] = 'right'; end
-    # <: start moving left: less_than
+    # <: start moving left: less_thanmov
     def do_less_than(s); s[:direction] = 'left'; end
     # v: start moving down: v
     def do_v(s); s[:direction] = 'down'; end
@@ -36,7 +35,6 @@ class Task
     # _: pop a value; move right if value = 0, left otherwise: underscore
     def do_underscore state 
         x = mega_pop state
-        p x
         if 0 == x # move right if value = 0
             state[:x_position] = (state[:x_position]+1) % state[:width]
         else
