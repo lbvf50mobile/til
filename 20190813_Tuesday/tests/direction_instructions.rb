@@ -55,28 +55,28 @@ describe "Befunge-93 Direction instructions" do
     end
     it "should use bridge left bridge; skip next cell" do
         state = {x_position: 0, y_position: 0, width: 3, height: 4, direction: 'left'}
-        Task.new.move_bridge(state)
+        Task.new.do_sharp(state)
         assert_equal 0, state[:y_position]
         assert_equal 1, state[:x_position]
-        Task.new.move_bridge(state)
+        Task.new.do_sharp(state)
         assert_equal 0, state[:y_position]
         assert_equal 2, state[:x_position]
     end
     it "should use bridge right bridge; skip next cell" do
         state = {x_position: 2, y_position: 1, width: 3, height: 4, direction: 'right'}
-        Task.new.move_bridge(state)
+        Task.new.do_sharp(state)
         assert_equal 1, state[:y_position]
         assert_equal 1, state[:x_position]
-        Task.new.move_bridge(state)
+        Task.new.do_sharp(state)
         assert_equal 1, state[:y_position]
         assert_equal 0, state[:x_position]
     end
     it "should use bridge DOWN bridge; skip next cell" do
         state = {x_position: 2, y_position: 3, width: 3, height: 4, direction: 'down'}
-        Task.new.move_bridge(state)
+        Task.new.do_sharp(state)
         assert_equal 0, state[:y_position]
         assert_equal 2, state[:x_position]
-        Task.new.move_bridge(state)
+        Task.new.do_sharp(state)
         assert_equal 1, state[:y_position]
         assert_equal 2, state[:x_position]
     end

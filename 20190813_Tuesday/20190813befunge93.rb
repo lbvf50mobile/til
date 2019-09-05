@@ -7,6 +7,7 @@ require_relative "befunge93.rb"
 require 'ostruct'
 
 require_relative "tests/direction_instructions.rb"
+require_relative "tests/conditional_instructions.rb"
 
 describe "befunge93" do
     it "Pass the tests" do
