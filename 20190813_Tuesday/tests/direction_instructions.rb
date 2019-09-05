@@ -82,11 +82,14 @@ describe "Befunge-93 Direction instructions" do
     end
     it "should use bridge UP bridge; skip next cell" do
         state = {x_position: 2, y_position: 2, width: 3, height: 4, direction: 'up'}
-        Task.new.move_bridge(state)
+        Task.new.do_sharp(state)
         assert_equal 1, state[:y_position]
         assert_equal 2, state[:x_position]
-        Task.new.move_bridge(state)
+        Task.new.do_sharp(state)
         assert_equal 0, state[:y_position]
         assert_equal 2, state[:x_position]
+    end
+
+    it "methods (start moving left), (start moving right), (start moving up)" do
     end
 end
