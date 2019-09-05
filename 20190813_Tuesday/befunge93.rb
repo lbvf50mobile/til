@@ -7,6 +7,7 @@ class Task
         width, height = state[:width], state[:height]
         case state[:direction]
         when 'left'
+             # ERROR
              state[:x_position] = (x+1) % width
         when 'right'
             state[:x_position] =  x == 0 ? width - 1 : x - 1
@@ -29,6 +30,21 @@ class Task
     def do_v(s); s[:direction] = 'down'; end
     # ^: start moving up: carat
     def do_carat(s); s[:direction] = 'up'; end
+
+    # https://coolefriend.com/know-names-of-symbols-in-your-computer-keyboard/
+    # direction instructions:
+    # _: pop a value; move right if value = 0, left otherwise: underscore
+    def do_underscore state 
+        x = mega_pop state
+        p x
+        if 0 == x # move right if value = 0
+            state[:x_position] = (state[:x_position]+1) % state[:width]
+        else
+            state[:x_position] =  state[:x_position] == 0 ? state[:width] - 1 : state[:x_position] - 1
+        end
+    end
+
+
 
     def befunge93(input)
         # Read the symbol
