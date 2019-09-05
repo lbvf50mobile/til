@@ -17,10 +17,19 @@ class Task
         else raise "There no such direciton"
         end
     end
-    def move_bridge state
-        # Just move the intem on one value
-        1.times{ move_pointer state}
-    end
+    # https://coolefriend.com/know-names-of-symbols-in-your-computer-keyboard/
+    # direction instructions:
+    # #: bridge; skip next cell: sharp
+    def do_sharp s; move_pointer(s); end
+    # >: start moving right
+    def do_greater_than(s); s[:direction] = 'right'; end
+    # <: start moving left: less_than
+    def do_less_than(s); s[:direction] = 'left'; end
+    # v: start moving down: v
+    def do_v(s); s[:direction] = 'down'; end
+    # ^: start moving up: carat
+    def do_carat(s); s[:direction] = 'up'; end
+
     def befunge93(input)
         # Read the symbol
 

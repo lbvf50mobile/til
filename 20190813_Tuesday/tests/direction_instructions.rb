@@ -91,5 +91,23 @@ describe "Befunge-93 Direction instructions" do
     end
 
     it "methods (start moving left), (start moving right), (start moving up)" do
+        # https://coolefriend.com/know-names-of-symbols-in-your-computer-keyboard/
+        state = {x_position: 2, y_position: 2, width: 3, height: 4, direction: 'up'}
+
+        # >: start moving right: greater than
+        Task.new.do_greater_than(state)
+        assert_equal 'right', state[:direction]
+
+        # <: start moving left: less than
+        Task.new.do_less_than(state)
+        assert_equal 'left', state[:direction]
+
+        # v: start moving down: v
+        Task.new.do_v(state)
+        assert_equal 'down', state[:direction]
+
+        # ^: start moving up: carat
+        Task.new.do_carat(state)
+        assert_equal 'up', state[:direction]
     end
 end
