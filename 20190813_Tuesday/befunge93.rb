@@ -18,9 +18,17 @@ class Task
         end
     end
     def move_bridge state
-        2.times{ move_pointer state}
+        # Just move the intem on one value
+        1.times{ move_pointer state}
     end
     def befunge93(input)
+        # Read the symbol
+
+        # implement action
+
+        # Exit if time to
+
+        # move pointer
         "Hello World!\n"
     end
 end
