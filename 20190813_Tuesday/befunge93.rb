@@ -43,8 +43,7 @@ class Task
     end
     # |: pop a value; move down if value = 0, up otherwise: bar
     def do_bar state
-        value = mega_pop state
-        y = state[:y_position]
+        value, y = mega_pop(state), state[:y_position]
         height = state[:height]
         if 0 == value # move down if value = 0
             state[:y_position] = (y+1) % height
