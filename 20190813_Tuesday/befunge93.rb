@@ -31,7 +31,7 @@ class Task
     def do_carat(s); s[:direction] = 'up'; end
 
     # https://coolefriend.com/know-names-of-symbols-in-your-computer-keyboard/
-    # direction instructions:
+    # conditional instructions:
     # _: pop a value; move right if value = 0, left otherwise: underscore
     def do_underscore state 
         x = mega_pop state
@@ -41,17 +41,29 @@ class Task
             state[:x_position] =  state[:x_position] == 0 ? state[:width] - 1 : state[:x_position] - 1
         end
     end
+    # |: pop a value; move down if value = 0, up otherwise: bar
+    def do_bar state
+        value = mega_pop state
+        y = state[:y_position]
+        height = state[:height]
+        if 0 == value # move down if value = 0
+            state[:y_position] = (y+1) % height
+        else # up otherwise
+            state[:y_position] =  y == 0 ? height - 1 : y - 1
+        end
+    end
 
 
 
     def befunge93(input)
         # Read the symbol
 
-        # implement action
-
         # Exit if time to
 
-        # move pointer
+        # implement action And Move if needs to! (conditional instructions force move)
+        
+
+        
         "Hello World!\n"
     end
 end
