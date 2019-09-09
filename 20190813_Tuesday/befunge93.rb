@@ -52,6 +52,9 @@ class Task
         end
     end
 
+    # Math Operations
+    # +: addition; pop a, pop b, then push a + b
+    def do_plus s;  a = mega_pop(s); b = mega_pop(s); s[:stack].push(a+b); end
 
 
     def befunge93(input)
