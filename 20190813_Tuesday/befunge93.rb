@@ -55,6 +55,14 @@ class Task
     # Math Operations
     # +: addition; pop a, pop b, then push a + b
     def do_plus s;  a = mega_pop(s); b = mega_pop(s); s[:stack].push(a+b); end
+    # -: subtraction; pop a, pop b, then push b - a
+    def do_minus s;  a = mega_pop(s); b = mega_pop(s); s[:stack].push(b-a); end
+    # *: multiplication; pop a, pop b, then push a * b
+    def do_asterisk s;  a = mega_pop(s); b = mega_pop(s); s[:stack].push(a*b); end
+    # /: integer division; pop a, pop b, then push b / a
+    def do_slash s;  a = mega_pop(s); b = mega_pop(s); s[:stack].push(b/a); end
+    # %: modulo operation; pop a, pop b, then push b % a: percent
+    def do_percent s;  a = mega_pop(s); b = mega_pop(s); s[:stack].push(b%a); end
 
 
     def befunge93(input)
