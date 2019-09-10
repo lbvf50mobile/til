@@ -64,6 +64,11 @@ class Task
     # %: modulo operation; pop a, pop b, then push b % a: percent
     def do_percent s;  a = mega_pop(s); b = mega_pop(s); s[:stack].push(b%a); end
 
+    # Logical Operations
+    # !: logical NOT; pop a value, if the value = 0, push 1, otherwise push 0
+    def do_exclamation s; mega_pop(s) == 0 ? s[:stack].push(1) : s[:stack].push(0) ; end
+
+
 
     def befunge93(input)
         # Read the symbol
