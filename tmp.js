@@ -1,29 +1,19 @@
-// @kotsabiukmv
+// https://www.geeksforgeeks.org/even-fibonacci-numbers-sum/
+// This dose not works because Even Fibonacci Numbers are not indexes of numbers but there values
 
-// Array generator
-let generate = x => Array.from({length: x}, x => Math.random() > 0.5);
+const evenFib = n =>{
+   if(n < 2) return 0;
+   if(2 == n) return 2;
+   ef1 = 0n
+   ef2 = 2n
+   next = 0n
+   counter = 1
+   while( counter < n){
+     next = 4 * ef1 + ef2
+     ef2 = ef1
+     ef1 = next
+     n +=2
+   }
 
-
-// 1) able to jump only over 1 postion
-let check1 = arr => {
-  if(!arr[0]) return false; // need to be able to start.
-  for(var i = 0; i < arr.length ; i++){
-    if(!arr[i] && i+1 < arr.length && !arr[i+1]) return false;
-  }
-  return true;
+   return next
 }
-
-test = [[true,false,true],true]
-console.log(`Array [${String(test[0])}] must be  ${test[1]}: it is ${check1(test[0])}`)
-
-test = [[true,true,true],true]
-console.log(`Array [${String(test[0])}] must be  ${test[1]}: it is ${check1(test[0])}`)
-
-test = [[true,true,false],true]
-console.log(`Array [${String(test[0])}] must be  ${test[1]}: it is ${check1(test[0])}`)
-
-test = [[false,true,false],false]
-console.log(`Array [${String(test[0])}] must be  ${test[1]}: it is ${check1(test[0])}`)
-
-test = [[true,false,false],false]
-console.log(`Array [${String(test[0])}] must be  ${test[1]}: it is ${check1(test[0])}`)

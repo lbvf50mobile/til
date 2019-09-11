@@ -1,4 +1,5 @@
 # https://www.codewars.com/kata/the-millionth-fibonacci-kata/train/javascript
+# https://www.geeksforgeeks.org/even-fibonacci-numbers-sum/
 prev1,prev2,cur = 1,0,0
 open('tmp.txt',?a) {|f|
         f.puts "0n,"
