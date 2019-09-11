@@ -1,32 +1,14 @@
-def add_binary(a, b)
-    prev, ans = 0, ''
-    i, j = a.size - 1, b.size - 1
-    while i >=0 || j >= 0 do
-        first = i >= 0 ? a[i].to_i : 0
-        second = j >= 0 ? b[j].to_i : 0
-        sum = first + second + prev
-        p "i = #{i}, a[i] and j = #{j}"
-        p [first, second, prev, sum]
-        boom = [
-            ->{ans = '0' + ans; prev = 0}, # 0
-            ->{ans = '1' + ans; prev = 0}, # 1
-            ->{ans = '0' + ans; prev = 1}, # 2
-            ->{ans = '1' + ans; prev = 1} # 3
-            ][sum]
-        p boom
-        boom.()
-        i -= 1
-        j -= 1
-    end
-        p ans
-      ans = '1' + ans if 1 == prev
-      ans
-  end
+# https://www.codewars.com/kata/the-millionth-fibonacci-kata/train/javascript
+prev1,prev2,cur = 1,0,0
+open('tmp.txt',?a) {|f|
+        f.puts "0n,"
+        f.puts '1n,' 
+        (2..2_000).each do |x|
+            cur = prev1 + prev2
+            f.puts "#{cur}n,"
+            prev2 = prev1
+            prev1 = cur
+        end
+}
 
-require 'minitest/autorun'
 
-describe 'add_binary' do
-    it "sound 1 + 11" do
-        assert_equal '100', add_binary('1','11')
-    end
-end
