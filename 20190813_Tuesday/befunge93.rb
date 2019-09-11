@@ -67,6 +67,8 @@ class Task
     # Logical Operations
     # !: logical NOT; pop a value, if the value = 0, push 1, otherwise push 0
     def do_exclamation s; mega_pop(s) == 0 ? s[:stack].push(1) : s[:stack].push(0) ; end
+    # \`: greater than; pop a and b, then push 1 if b > a, otherwise 0: back quote
+    def do_back_quote s; a  = mega_pop(s); b = mega_pop(s); b > a ? s[:stack].push(1) : s[:stack].push(0) end
 
 
 
