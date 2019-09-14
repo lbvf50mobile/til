@@ -1,13 +1,16 @@
     // Go: Repeat Type Conversions " " == string(rune). 
+
+    // https://gist.github.com/lbvf50mobile/645c66085305bcc4fb18b06e9fde6f8c
     package main
 
     import (
         "fmt"
     )
 
-    /*
+/*
 Runtime: 0 ms, faster than 100.00% of Go online submissions for Length of Last Word.
 Memory Usage: 2.2 MB, less than 100.00% of Go online submissions for Length of Last Word.
+https://leetcode.com/problems/length-of-last-word/submissions/
 */
 func lengthOfLastWord(s string) int {
     word_starts := false
