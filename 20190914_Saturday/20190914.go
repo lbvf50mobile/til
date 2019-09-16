@@ -1,4 +1,4 @@
-    // Go: Repeat Type Conversions " " == string(rune). 
+    // Go: Repeat Type Conversions " " == string(rune); 
 
     // https://gist.github.com/lbvf50mobile/645c66085305bcc4fb18b06e9fde6f8c
     package main
