@@ -1,1 +1,1 @@
-alias x='go run 20190919_Thursday/20190919.go'
+alias x='ruby 20190920_Friday/20190920.rb'
