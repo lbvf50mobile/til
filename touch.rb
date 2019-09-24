@@ -47,6 +47,15 @@ FILECONTENT
     File.open('til_alias.sh', 'w'){|f| f.write("alias x='go run #{file_path}'") } # Create alias for TIL
 end
 
+if '.sch' == ext
+    file_content = <<-FILECONTENT
+    #lang sicp
+    "alias x='lsp #{file_path}'"
+FILECONTENT
+    File.open(file_path, 'w'){|f| f.write(file_content) }
+    File.open('til_alias.sh', 'w'){|f| f.write("alias x='lsp #{file_path}'") } # Create alias for TIL
+end
+
 # Create Alias
 
 system("chmod u+x #{file_path}")
