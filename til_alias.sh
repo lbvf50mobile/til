@@ -1,1 +1,1 @@
-alias x='go run 20190925_Wednesday/20190925.go'
+alias x='go run 20190926_Thursday/20190926.go'
