@@ -1,11 +1,11 @@
 describe "capitilize_parser" do
     it "Upcase parser should correctly reply on a rule" do
-        assert ExpressionParsers::UpcaseParser.rule('CREDIT:ACHIEVED')
-        refute ExpressionParsers::UpcaseParser.rule('No ')
+        assert ExpressionParsers::CapitalizeParser.rule('Samplebox:APP:[$caption=Нажмите здесь для получения скидки]')
+        refute ExpressionParsers::CapitalizeParser.rule('No')
     end
     it "Upcase parser should return correct value" do
-        answer = {var_name: 'credit', method: 'achieved'}
-        assert_equal  answer, ExpressionParsers::UpcaseParser.parse('CREDIT:ACHIEVED')
+        answer = {modules_chain: ['Samplebox','APP'], params: {caption:"Нажмите здесь для получения скидки"}}
+        assert_equal  answer, ExpressionParsers::CapitalizeParser.parse('Samplebox:APP:[$caption=Нажмите здесь для получения скидки]')
     end
     it "Upcase executor must have a hardcoded elements" do
         [

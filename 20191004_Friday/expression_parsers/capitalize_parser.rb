@@ -16,7 +16,17 @@ module ExpressionParsers
             rule1 && rule2 && rule3 && rule4
         end
         def self.parse str
-           true
+           ans = {modules_chain: [], params:{}}
+           prs = str.split(?:)
+           ans[:modules_chain] = prs[0...-1]
+           params = prs[-1][1...-1].split('$').reject{|x| x.empty?}.reduce({}) do |mem ,val |
+            arr = val.split(?=)
+            mem[arr[0].strip.to_sym] = arr[1].strip
+            mem
+           end
+        
+           ans[:params] = params
+           ans
         end
         def self.executor hash
             true
