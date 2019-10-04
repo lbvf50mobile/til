@@ -9,12 +9,10 @@ describe "capitilize_parser" do
     end
     it "Upcase executor must have a hardcoded elements" do
         [
-            ['CREDIT:ACHIEVED','1234'],
-            ['CREDIT:LEVELUP','15'],
-            ['BADGE:LEVELUP','Silver Badge']
+            ['Samplebox:APP:[$caption=Нажмите здесь для получения скидки]','[Нажмите здесь для получения скидки](https://samplebox.test)'],
         ].each do |input,output|
-                hash = ExpressionParsers::UpcaseParser.parse(input)
-                answer = ExpressionParsers::UpcaseParser.executor(hash)
+                hash = ExpressionParsers::CapitalizeParser.parse(input)
+                answer = ExpressionParsers::CapitalizeParser.executor(hash)
             assert_equal output, answer
         end
     end

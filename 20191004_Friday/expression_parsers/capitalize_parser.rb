@@ -2,9 +2,7 @@ module ExpressionParsers
     class CapitalizeParser
         def self.mockvalues
             {
-                {var_name: 'credit', method: 'achieved' } => '1234',
-                {var_name: 'credit', method: 'levelup' } => '15',
-                {var_name: 'badge', method: 'levelup'} => 'Silver Badge'
+                {modules_chain: ['Samplebox','APP'], params: {caption:"Нажмите здесь для получения скидки"}} => '[Нажмите здесь для получения скидки](https://samplebox.test)',
             } 
         end
         def self.rule str
@@ -29,7 +27,7 @@ module ExpressionParsers
            ans
         end
         def self.executor hash
-            true
+            self.mockvalues[hash]
         end
     end
 end
