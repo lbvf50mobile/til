@@ -1,3 +1,5 @@
+# @Qew7777
+# https://stackoverflow.com/questions/58221715/ruby-why-rescue-block-value-instead-of-ensure-block/58221899#58221899
 def a
     1.some_wierd_method
     "Boom"
