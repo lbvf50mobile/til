@@ -21,3 +21,10 @@ describe "simple_parser" do
     end
 end
 
+describe "upcase_parser" do
+    it "Upcase parser should correctly reply on a rule" do
+        assert ExpressionParsers::UpcaseParser.rule('CREDIT:ACHIEVED')
+        refute ExpressionParsers::UpcaseParser.rule('No ')
+    end
+end
+
