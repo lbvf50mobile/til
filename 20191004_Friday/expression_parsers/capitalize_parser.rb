@@ -8,7 +8,12 @@ module ExpressionParsers
             } 
         end
         def self.rule str
-            true
+            ans = str.split(?:)
+            rule1 = ans.size > 1
+            rule2 = ans.all?{|x| !x.empty?}
+            rule3 = ans[0] == ans[0].capitalize
+            rule4 = ans[-1].strip[0] == ?[ && ans[-1].strip[-1] = ?]
+            rule1 && rule2 && rule3 && rule4
         end
         def self.parse str
            true
