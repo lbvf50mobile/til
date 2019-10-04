@@ -23,5 +23,8 @@ end
 
 # Testing the UpcaseParser
 require_relative 'expression_parsers_tests/upcase_parser_test.rb'
+# Testing the CapitilizeParser
+require_relative 'expression_parsers_tests/capitalize_parser_test.rb'
+
 
 
