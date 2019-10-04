@@ -17,7 +17,7 @@ module ExpressionParsers
             {var_name: ans[0].downcase, method: ans[1].downcase }
         end
         def self.executor hash
-            self.mockvalues hash
+            self.mockvalues[hash]
         end
     end
 end
