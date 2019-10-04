@@ -1,83 +1,64 @@
 # simple_parser
 
-### NOTE! Creding => Credits TODO: plural value
+## Time
 
-Idea of interpolations:
+- [Understanding task](my_drafts.md), create first architecture: 25 minutes
+- Create project from boilerplate code, create fies, create **UpcaseParser**: 1hr
+- Create **CapitilizeParser**: 40minutes
+- Crate string intepolation based on this code: 10 minutes
+- Creating this file: 25 minutes
 
-- Generate method extractor extract values from %{} the code
-- Get the map for the methods, or somethng like it.
-
-Вам начислено **%{CREDIT:ACHIEVED}** баллов. Вам не хватает **%{CREDIT:LEVELUP}** баллов до получения **%{BADGE:LEVELUP}**.\n\n
-**%{Samplebox:APP:[$caption=Нажмите здесь для получения скидки]}**
-
-So here I have two kinds of inputs:
-
-- UpperCase ones: **CREDIT:ACHIEVED** - This related to object memeber and message name to him
-- Capitilizes ones: **Samplebox:APP:[$caption=Нажмите здесь для получения скидки]** - This one has a Modulus chain, and hash we going pass to the object.
-
-The solution
-
- - a) Extract all %{} paranthesized values
- - b) Get a type of instructions **UpperCase** ore **Capitalizes ones**
- - c) Fore **UpperCase** define **var_name** and **method** 
- - d) For **Capitilizes** definde **module_chain** and **params hash** 
-
- Each Class going to have **rule**, **parser**, **executor**
-
-- **rule** is the rule that defines a type of expressions in parantheses
-- **parser** is the way how do I parse the entity inside the brackets
-- **executor** is the  way how to execute data from the **parser**
+Total: aprox **2.5 hrs**
 
 
+## Ahricheture
 
-
+The string intepolation implemented as a simple call of `gsub`, that substitudes expresions between curve brackets, by a appropriate value.
 ```
-class Credits
-  def achieved
-    1234
-  end
-
-  def levelup
-     15
-  end
-end
-
-class Badge
-  def self.levelup
-    "Silver Badge"
-  end
-end
-
-class Samplebox::App
-  attr_accessor :caption
-  def initialize(params)
-    @caption = params[:caption]
-  end
-
-  def to_s
-    "[#{caption}](https://samplebox.test/)"
-  end
-end
-
-class User
-  attr_accessor :credits, :facebook, :badge
-  def initialize
-    @credits  = Credits.new
-    @facebook = Facebook.new
-    @badge    = Badge.new
-  end
-
-  def merge_tags(text)
-  end
-end
-
-# text_parser_spec.rb
-...
-describe "merge_tags" do
-  it "should interpolate" do
-    text = "Вам начислено %{CREDIT:ACHIEVED} баллов. Вам не хватает %{CREDIT:LEVELUP} баллов до получения %{BADGE:LEVELUP}.\n\n%{Samplebox:APP:[$caption=Нажмите здесь для получения скидки]}"
-    expected_result = "Вам начислено 1234 баллов. Вам не хватает 15 баллов до получения Silver Badge.\n\n[Нажмите здесь для получения скидки](https://samplebox.test)"
-    User.new.merge_tags(text).should == expected_result
-  end
+def merge_tags(text)
+    text.gsub(/\%\{([^\}]*)\}/){ parse_element($1) }
 end
 ```
+
+For each kind of expression a class in the system created.
+
+```
+def parsers_set
+    [ExpressionParsers::CapitalizeParser, ExpressionParsers::UpcaseParser] 
+end
+```
+
+I count two types of expressions in the provided example:
+
+- **Upcase** %{CREDIT:ACHIEVED}, that call an method from class varable
+- **Capitilized**  %{Samplebox:APP:[$caption=Нажмите здесь для получения скидки]}, that crate new class instance.
+
+A class for parsing have thee methods:
+
+- **rule** it checks do this class appropriate for parsing
+- **parse** it transfrom a string of expression into the hash with prepared values
+- **executor** this method take a hash and executes the transformation based on this hash
+
+this is how the process lookes like
+
+```
+def parse_element str
+        parser = parsers_set.find{|x| x.rule(str)}
+        raise "$str - incorrect syntax, have no parser for this element" unless parser
+        hash = parser.parse(str)
+        parser.executor(hash)
+end
+```
+
+In case if there no appropriate rule for parsing incoming expression an error raised.
+
+## Files:
+
+- [General tests](20191004simple_parser.rb)
+- [Simple parser class](simple_parser.rb)
+- [Upcase Parser class](expression_parsers/upcase_parser.rb) / [test](expression_parsers_tests/upcase_parser_test.rb)
+- [Capitilize Parser class](expression_parsers/capitalize_parser.rb) / [tests](expression_parsers_tests/upcase_parser_test.rb)
+
+
+
+
