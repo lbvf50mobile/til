@@ -6,6 +6,10 @@ require "minitest/autorun"
 require_relative "simple_parser.rb"
 require 'ostruct'
 
+# Parsers to work with expressions insde the %{}
+require_relative "expression_parsers/upcase_parser.rb"
+require_relative "expression_parsers/capitalize_parser.rb"
+
 describe "simple_parser" do
     it "Pass the tests" do
         [
@@ -16,3 +20,4 @@ describe "simple_parser" do
         ].each{|x| assert_equal x.answer, Task.new.simple_parser(x.input)}
     end
 end
+
