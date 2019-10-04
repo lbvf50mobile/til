@@ -1,5 +1,7 @@
 # simple_parser
 
+### NOTE! Creding => Credits TODO: plural value
+
 Idea of interpolations:
 
 - Generate method extractor extract values from %{} the code
