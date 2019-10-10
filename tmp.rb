@@ -25,23 +25,28 @@ check = [
 
 
 def solution(x,sum)
-    answer = []
     hash = {}
-    used = {}
-    x.each_with_index do |value, new_index|
-        old_index = hash[sum - value] 
-        if old_index && used[new_index].nil? && used[old_index].nil?
-            answer.push([x[old_index],value])
-            used[new_index] = true
-            used[old_index] = true
-        else 
-            hash[value] = new_index
+    answer = []
+
+
+    # Geneerate hash when it has keys ans values and values as array of keys
+    x.each_with_index do |value,index|
+        hash[value] ? hash[value].push(index) : hash[value] = [index]
+    end
+
+
+    # Generate answer by extracting appropriate values from the hash
+    x.each do |value|
+        tmp = hash[sum-value]
+        if tmp && ! tmp.empty?
+            answer.push([value,sum-value]) 
+            tmp.shift
         end
     end
-    answer.sort_by{|x,y| x}
+    
+    answer
 end
 
-p solution([22, 3, 5, 0, 2, 2],sum) # [[3, 2], [5, 0]]
 
 describe "Find sum" do
     it "return right answer" do
