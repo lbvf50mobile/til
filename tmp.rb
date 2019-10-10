@@ -16,9 +16,13 @@ resutls: [[5, 0], [5, 0], [5, 0]]
 
 
 require "minitest/autorun"
+sum = 5
+check = [
+    [[22, 3, 5, 0, 2, 2],[[3, 2], [5, 0]]],
+    [[-5, 33, 2, 2, 3, 5, 0, 10, 3],[[-5, 10], [2, 3], [2, 3], [5, 0]]],
+    [[5, 5, 5, 0, 0, 0, 5],[[5, 0], [5, 0], [5, 0]]],
+] 
 
-input = [22, 3, 5, 0, 2, 2]
-resutls = [[3, 2], [5, 0]]
 
 def solution(x,sum)
     answer = []
@@ -33,14 +37,16 @@ def solution(x,sum)
         else 
             hash[value] = new_index
         end
-        
     end
-    
+    answer.sort_by{|x,y| x}
 end
 
-p solution(input,5)
+p solution([22, 3, 5, 0, 2, 2],sum) # [[5, 0], [3, 2]]
 
 describe "Find sum" do
     it "return right answer" do
+        check.each do |input,output|
+            assert_equal output, solution(input,sum)
+        end
     end
 end
