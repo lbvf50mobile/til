@@ -36,11 +36,11 @@ def solution(x,sum)
 
 
     # Generate answer by extracting appropriate values from the hash
-    x.each do |value|
+    x.each_with_index do |value,index|
         tmp = hash[sum-value]
         if tmp && ! tmp.empty?
-            answer.push([value,sum-value]) 
-            tmp.shift
+            i = tmp.shift 
+            answer.push([value,sum-value])  if i > index
         end
     end
     
