@@ -41,7 +41,7 @@ def solution(x,sum)
     answer.sort_by{|x,y| x}
 end
 
-p solution([22, 3, 5, 0, 2, 2],sum) # [[5, 0], [3, 2]]
+p solution([22, 3, 5, 0, 2, 2],sum) # [[3, 2], [5, 0]]
 
 describe "Find sum" do
     it "return right answer" do
