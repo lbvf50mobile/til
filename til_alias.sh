@@ -1,1 +1,1 @@
-alias x='ruby 20191004_Friday/20191004simple_parser.rb'
+alias x='ruby 20191018_Friday/20191018.rb'
