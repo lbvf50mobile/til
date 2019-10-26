@@ -80,6 +80,26 @@ class Task
     # $: pop value from the stack and discard it
     def do_dollar s; mega_pop(s) end
 
+    # Output Instructions:
+    # .: pop value and output it as an integer followed by a space
+    def do_dot s
+        a = mega_pop(s)
+        if String == a.class
+            s[:output] << "#{a.ord} "
+        else
+            s[:output] << "#{a} "
+        end
+    end
+    # ,: pop value and output it as ASCII character
+    def do_comma s
+        a = mega_pop(s)
+        if String == a.class
+            s[:output] << "#{a}"
+        else
+            s[:output] << "#{a.chr}"
+        end
+    end
+
 
     # Questions:
     # - Stack insturcions: What to do whan have empty stack and need to swap two top elements?

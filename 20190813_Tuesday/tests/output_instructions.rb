@@ -16,9 +16,9 @@ describe "Befunge-93 Output instructions" do
         Task.new.do_dot(state)
         assert_equal "#{?x.ord} 4 ", state[:output]
         Task.new.do_dot(state)
-        assert_equal "#{?x.ord} 4  8 ", state[:output]
+        assert_equal "#{?x.ord} 4 8 ", state[:output]
         Task.new.do_dot(state)
-        assert_equal "#{?x.ord} 4  8 0 ", state[:output]
+        assert_equal "#{?x.ord} 4 8 0 ", state[:output]
        
     end
     it ",: pop value and output it as ASCII character" do
