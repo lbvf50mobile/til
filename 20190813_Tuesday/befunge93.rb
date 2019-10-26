@@ -82,23 +82,9 @@ class Task
 
     # Output Instructions:
     # .: pop value and output it as an integer followed by a space
-    def do_dot s
-        a = mega_pop(s)
-        if String == a.class
-            s[:output] << "#{a.ord} "
-        else
-            s[:output] << "#{a} "
-        end
-    end
+    def do_dot s; a = mega_pop(s); String == a.class ? s[:output] << "#{a.ord} " : s[:output] << "#{a} " end
     # ,: pop value and output it as ASCII character
-    def do_comma s
-        a = mega_pop(s)
-        if String == a.class
-            s[:output] << "#{a}"
-        else
-            s[:output] << "#{a.chr}"
-        end
-    end
+    def do_comma s; a = mega_pop(s); String == a.class ? s[:output] << "#{a}" : s[:output] << "#{a.chr}" end
 
 
     # Questions:
