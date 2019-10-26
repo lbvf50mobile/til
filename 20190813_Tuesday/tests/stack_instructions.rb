@@ -1,4 +1,8 @@
 describe "Befunge-93 Logical stack instructions" do
+    #TODO: Here:
+    # I treat this rule is used here too.
+    # If the stack is empty and it is necessary to pop a value, no exception is raised; instead, 0 is produced
+
     # https://coolefriend.com/know-names-of-symbols-in-your-computer-keyboard/
     it ":: duplicate value on top of the stack" do
         state = {stack: [8,4], direction: 'left', x_position: 0, width: 3}

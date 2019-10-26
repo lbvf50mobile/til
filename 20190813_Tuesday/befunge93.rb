@@ -70,6 +70,16 @@ class Task
     # \`: greater than; pop a and b, then push 1 if b > a, otherwise 0: back quote
     def do_back_quote s; a  = mega_pop(s); b = mega_pop(s); b > a ? s[:stack].push(1) : s[:stack].push(0) end
 
+    # ! TODO: Stack instrucion implemented wia mega_pop, empty stack last value is 0!
+    
+    # Stack Instrutions:
+    # :: duplicate value on top of the stack
+    def do_colon s; a = mega_pop(s); s[:stack] += [a,a] end
+    # \\: swap the top stack value with the second to the top
+    def do_back_slash s;  a = mega_pop(s); b = mega_pop(s); s[:stack] += [a,b] end
+    # $: pop value from the stack and discard it
+    def do_dollar s; mega_pop(s) end
+
 
 
     def befunge93(input)
