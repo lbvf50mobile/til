@@ -81,6 +81,10 @@ class Task
     def do_dollar s; mega_pop(s) end
 
 
+    # Questions:
+    # - Stack insturcions: What to do whan have empty stack and need to swap two top elements?
+    # - Output instructions: Do I need to put ASCII code of char with meet "."?
+    # - " how to treat a  double quoted lintes. and one ocmmand of several commands?
 
     def befunge93(input)
         # Read the symbol
