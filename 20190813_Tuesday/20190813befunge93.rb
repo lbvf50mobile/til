@@ -11,6 +11,7 @@ require_relative "tests/conditional_instructions.rb"
 require_relative "tests/math_operations.rb"
 require_relative "tests/logical_operations.rb"
 require_relative "tests/stack_instructions.rb"
+require_relative "tests/output_instructions.rb"
 
 describe "befunge93" do
     it "Pass the tests" do
