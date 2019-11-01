@@ -1,6 +1,12 @@
 console.log("alias x='node 20191031_Thursday/20191031.js'");
 
-// JS: Find shortest path. (in action)
+// CodeWars, JS: Find shortest path. (in action)
+
+// Tips from @smkheev
+// https://www.twblogs.net/a/5d75719fbd9eee541c342e87
+// ( @smikheev )
+// Minimal Path in Graph
+// Elements of programming interview. Search a maze. 
 
 // https://www.codewars.com/kata/path-finder-number-3-the-alpinist/train/javascript
 // Fails on the last open test.
