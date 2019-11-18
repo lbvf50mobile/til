@@ -2,10 +2,12 @@
 
 p "alias x='ruby 20191118_Monday/20191118.rb'" 
 
+# https://gist.github.com/lbvf50mobile/3113a45aefccaa11b6637658d5ae4bba
+
 x = 1
 
 10.times do
-    p x.to_s(2).rjust(15," ")
+    p x.to_s(3)
     x *= 3
      
 end
