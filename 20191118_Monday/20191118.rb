@@ -1,8 +1,9 @@
-# Leetcode: is power of three?
+# Leetcode: is power of three and four?
 
 p "alias x='ruby 20191118_Monday/20191118.rb'" 
 
-# https://gist.github.com/lbvf50mobile/3113a45aefccaa11b6637658d5ae4bba
+# https://gist.github.com/lbvf50mobile/3113a45aefccaa11b6637658d5ae4bba https://leetcode.com/problems/power-of-three/submissions/
+# https://gist.github.com/lbvf50mobile/c35a44987e6246848b51b2434113d43b https://leetcode.com/problems/power-of-four/submissions/
 
 x = 1
 
