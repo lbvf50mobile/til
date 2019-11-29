@@ -1,7 +1,11 @@
 # https://leetcode.com/problems/nim-game/
-
+# https://gist.github.com/lbvf50mobile/f8b22caacea83b61234f99e025e1ddee
 
 def can_win_nim(n)
+    n % 4 != 0
+end
+
+def can_win_nim1(n)
     @win = false;
     dfs(n,true)
     @win
