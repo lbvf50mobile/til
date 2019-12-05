@@ -17,7 +17,7 @@ def find_removed arr
     hash[arr.reduce(:+)]
 end
 
-# @sanan_yuzb solution
+# solution offered by @sanan_yuzb 
 def find_removed_sanan arr
     (1..9).reduce(:+) - arr.reduce(:+)
 end
