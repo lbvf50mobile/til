@@ -18,7 +18,7 @@ def find_removed arr
 end
 
 # solution offered by @sanan_yuzb 
-def find_removed_sanan arr
+def find_removed_solution_by_sanan arr
     (1..9).reduce(:+) - arr.reduce(:+)
 end
 
@@ -29,7 +29,7 @@ describe "solution" do
         arr = (1..9).to_a
         (1..9).each do |n|
             assert_equal n, find_removed(arr - [n])
-            assert_equal n, find_removed_sanan(arr - [n])
+            assert_equal n, find_removed_solution_by_sanan(arr - [n])
         end
 
     end
