@@ -17,6 +17,11 @@ def find_removed arr
     hash[arr.reduce(:+)]
 end
 
+# @sanan_yuzb solution
+def find_removed_sanan arr
+    (1..9).reduce(:+) - arr.reduce(:+)
+end
+
 require "minitest/autorun"
 
 describe "solution" do
@@ -24,6 +29,7 @@ describe "solution" do
         arr = (1..9).to_a
         (1..9).each do |n|
             assert_equal n, find_removed(arr - [n])
+            assert_equal n, find_removed_sanan(arr - [n])
         end
 
     end
