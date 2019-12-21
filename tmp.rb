@@ -27,6 +27,7 @@ end
 p trr2([1, 2, 3, 5, 6, 6, 10]).size # 20
 
 # https://leetcode.com/problems/valid-triangle-number/submissions/
+# 611. Valid Triangle Number
 # @param {Integer[]} nums
 # @return {Integer}
 # Runtime: 108 ms, faster than 100.00% of Ruby online submissions for Valid Triangle Number.
