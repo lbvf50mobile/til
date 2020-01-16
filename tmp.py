@@ -1,2 +1,3 @@
-a = [ [i*x for x in range(1,6)] for i in range(1,6)]
-print(a)
+a = [[1,2],[3,4]]
+b = [sub_x for x in a for sub_x in x]
+print(b)
