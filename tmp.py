@@ -1,9 +1,7 @@
-a = {'a': 1, 'b':2}
-print(a)
-for k in a:
-    print(k)
+from collections import deque
 
-print(a.items())
-
-print([[a[k],k] for k in a])
-
+print("Greetings.")
+digits = [1,2,3,4,5]
+n = len(digits)
+res = [deque(digits) for _ in range(n)]
+print([(x,y) for x,y in enumerate(res)])
