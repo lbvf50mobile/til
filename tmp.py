@@ -1,7 +1,12 @@
-from collections import deque
+from itertools import dropwhile
+pills = ["Notforgetan", 
+ "Antimoron", 
+ "Rememberin", 
+ "Bestmedicen", 
+ "Superpillsus"]
 
-print("Greetings.")
-digits = [1,2,3,4,5]
-n = len(digits)
-res = [deque(digits) for _ in range(n)]
-print([(x,y) for x,y in enumerate(res)])
+print("greeints?")
+gen = dropwhile(lambda x: 0 != len(x)%2,pills)
+arr = [next(gen) for _ in range(3)]
+print(gen)
+print(arr)
