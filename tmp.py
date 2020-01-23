@@ -1,7 +1,5 @@
-from itertools import permutations
+from itertools import permutations, islice
 
-print("Hi")
-
-players = ["macho", "hero"]
-
-print(permutations(players,2))
+a = [ str(i) for i in range(11)]
+print(sorted(a))
+print(list(islice("abc",0,1))[0])
