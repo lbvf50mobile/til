@@ -1,12 +1,7 @@
-from itertools import dropwhile
-pills = ["Notforgetan", 
- "Antimoron", 
- "Rememberin", 
- "Bestmedicen", 
- "Superpillsus"]
+from itertools import permutations
 
-print("greeints?")
-gen = dropwhile(lambda x: 0 != len(x)%2,pills)
-arr = [next(gen) for _ in range(3)]
-print(gen)
-print(arr)
+print("Hi")
+
+players = ["macho", "hero"]
+
+print(permutations(players,2))
