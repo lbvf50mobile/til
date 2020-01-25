@@ -1,3 +1,5 @@
+# Python: zip, asterix, map, sorted, zip.
+
 # https://stackoverflow.com/a/231855/8574922
 # https://docs.python.org/3.8/library/functions.html#zip
 # https://www.programiz.com/python-programming/methods/built-in/iter
