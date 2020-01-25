@@ -23,3 +23,7 @@ print(list(after_map)) # Empty because generator.
 answer = zip(*map(sorted,zip(morning,evening)))
 print(answer)
 print(list(answer))
+def next(x):
+    return 2
+
+print(next(8))
