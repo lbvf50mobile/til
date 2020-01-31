@@ -1,5 +1,10 @@
-numbers = [1,2,3,4,5,6]
-print(numbers)
+participants = [0, 1, 1, 5, 4, 8]
 
-print(list(zip(numbers,range(len(numbers)))))
-print(list(enumerate(numbers)))
+
+print("This is Check Participants task from app.codesignal.com")
+
+print(list(enumerate(participants)))
+
+answer = [ i for i,x in enumerate(participants) if i > x]
+
+print(answer)
