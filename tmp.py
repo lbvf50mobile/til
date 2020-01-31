@@ -8,3 +8,5 @@ print(list(enumerate(participants)))
 answer = [ i for i,x in enumerate(participants) if i > x]
 
 print(answer)
+
+if 1: print("one")
