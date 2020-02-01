@@ -12,6 +12,6 @@ print(a)
 n  = 7
 
 answer = functools.reduce(lambda acc,_: acc + [sum(acc[-2:])],range(n-2),[0,1])
-print(list(answer))
+print(list(answer),n)
 
 
