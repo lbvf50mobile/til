@@ -1,17 +1,7 @@
-# Fibonacci List
+# Primes Sum
 import functools
-
-test = [0]*0
-
-print(test)
-
-a = list(range(6))
-
-print(a)
-
-n  = 7
-
-answer = functools.reduce(lambda acc,_: acc + [sum(acc[-2:])],range(n-2),[0,1])
-print(list(answer),n)
-
-
+a = 2
+b = 2
+print(list(range(max(2, a), b+1)))
+x = 2
+print([x % i for i in range(2, int(x**0.5) + 1)])
