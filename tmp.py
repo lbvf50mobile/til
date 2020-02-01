@@ -1,12 +1,30 @@
-participants = [0, 1, 1, 5, 4, 8]
+# Debugging what guy from India Wrote
 
+def is_match(text, pattern):
+  i=0 
+  j=0
+  n = len(pattern)
+  m = len(text)
+  prev = ''
+  while(i<n and j<m):
+    if pattern[i]=='.':
+      i+=1
+      j+=1
+    elif pattern[i]=='*':
+      while(j<m and text[j]!=prev):
+        j+=1
+    elif pattern[i]==text[j]:
+      i+=1
+      j+=1
+      prev = pattern[i]
+    else:
+      return False
 
-print("This is Check Participants task from app.codesignal.com")
+  if i==n and j==m:
+    return True
+  return False
 
-print(list(enumerate(participants)))
+print("hi")
 
-answer = [ i for i,x in enumerate(participants) if i > x]
-
+answer = is_match("a","aa")
 print(answer)
-
-if 1: print("one")
