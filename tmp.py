@@ -1,30 +1,17 @@
-# Debugging what guy from India Wrote
+# Fibonacci List
+import functools
 
-def is_match(text, pattern):
-  i=0 
-  j=0
-  n = len(pattern)
-  m = len(text)
-  prev = ''
-  while(i<n and j<m):
-    if pattern[i]=='.':
-      i+=1
-      j+=1
-    elif pattern[i]=='*':
-      while(j<m and text[j]!=prev):
-        j+=1
-    elif pattern[i]==text[j]:
-      i+=1
-      j+=1
-      prev = pattern[i]
-    else:
-      return False
+test = [0]*0
 
-  if i==n and j==m:
-    return True
-  return False
+print(test)
 
-print("hi")
+a = list(range(6))
 
-answer = is_match("a","aa")
-print(answer)
+print(a)
+
+n  = 7
+
+answer = functools.reduce(lambda acc,_: acc + [sum(acc[-2:])],range(n-2),[0,1])
+print(list(answer))
+
+
