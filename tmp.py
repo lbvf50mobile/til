@@ -1,7 +1,17 @@
-# Primes Sum
-import functools
-a = 2
-b = 2
-print(list(range(max(2, a), b+1)))
-x = 2
-print([x % i for i in range(2, int(x**0.5) + 1)])
+# CalcBonuses
+# https://stackoverflow.com/questions/32139885/yield-in-list-comprehensions-and-generator-expressions
+# https://stackoverflow.com/questions/231767/what-does-the-yield-keyword-do/231855#231855
+def calcBonuses(bonuses, n):
+    it = [(yield x) for x in bonuses]
+    res = 0
+
+    try:
+        for _ in range(n):
+            res += next(it)
+    except StopIteration:
+        res = 0
+
+    return res
+
+x = calcBonuses([4,2,4,5],3)
+print(x)
