@@ -1,10 +1,10 @@
-# Calc Final Score
-print("Calc Final Score")
+def fractions():
+        while True:
+            yield [1,1]
 
-scores = [4, 2, 4, 5]
-n = 3
+gen = fractions()
 
-srtd = sorted(scores,reverse = True)
+print(next(gen))
 
-print(scores)
-print(srtd)
+print(next(gen))
+print(next(gen)!= [1,1])
