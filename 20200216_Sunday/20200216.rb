@@ -12,4 +12,4 @@ p "abc"[0...2] == "ab" # true
 
 str = "Abxxx"
 str[2..4] = "cde"
-p str
+p str # Abcde
