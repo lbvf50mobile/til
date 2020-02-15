@@ -9,3 +9,7 @@ p "alias x='ruby 20200216_Sunday/20200216.rb'"
 p "abc"[0..2] == "abc" # true
 p "abc"[0,2] == "ab" # true
 p "abc"[0...2] == "ab" # true
+
+str = "Abxxx"
+str[2..4] = "cde"
+p str
