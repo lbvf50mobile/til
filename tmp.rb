@@ -1,5 +1,8 @@
-# Ruby: 'abc'[0..2] and 'abc'[0...2] and 'abc'[0,2]. 
-# https://ruby-doc.org/core-2.7.0/String.html#method-i-5B-5D
-p "abc"[0..2] == "abc" # true
-p "abc"[0,2] == "ab" # true
-p "abc"[0...2] == "ab" # true
+require "benchmark"
+
+Benchmark.bm do
+    (0...1000).each do |i|
+        (0...1000).each do |j|
+        end
+    end 
+end
