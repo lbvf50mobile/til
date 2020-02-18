@@ -6,3 +6,6 @@ Benchmark.bm do
         end
     end 
 end
+
+
+p (?a..?z).to_a.join
