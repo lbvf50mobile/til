@@ -1,11 +1,8 @@
-require "benchmark"
-
-Benchmark.bm do
-    (0...1000).each do |i|
-        (0...1000).each do |j|
-        end
-    end 
+str = "12345"
+i, j  = 0 , str.size - 1 
+while i < j
+str[i],str[j] = str[j],str[i]
+i +=1
+j -=1
 end
-
-
-p (?a..?z).to_a.join
+p str
