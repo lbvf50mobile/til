@@ -56,6 +56,12 @@ FILECONTENT
     File.open('til_alias.sh', 'w'){|f| f.write("alias x='lsp #{file_path}'") } # Create alias for TIL
 end
 
+
+if '.py' == ext
+    File.open(file_path, 'w'){|f| f.write("print(\"alias x='python #{file_path}'\") ") }
+    File.open('til_alias.sh', 'w'){|f| f.write("alias x='python #{file_path}'") } # Create alias for TIL
+end
+
 # Create Alias
 
 system("chmod u+x #{file_path}")
