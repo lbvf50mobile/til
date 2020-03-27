@@ -1,1 +1,1 @@
-alias x='python 20200324_Tuesday/20200324.py'
+alias x='bash 20200327_Friday/20200327.sh'
