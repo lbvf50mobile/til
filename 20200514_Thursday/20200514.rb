@@ -46,14 +46,15 @@ def create_adjacency()
     return @adjacency
 end
 def fillingBlocks(n)
+    create_adjacency()
     @n = n
     @dp = Array.new(n+1)
     rec(0,0)
 
 end
 def rec(i,number)
-    return 1 if  i == n && 0 == number
-    return 0 if i == n 
+    return 1 if  i == @n && 0 == number
+    return 0 if i == @n 
     return @dp[i] if @dp[i]
     ans = 0
     @adjacency[number].each do |nxt|
@@ -71,4 +72,9 @@ p a2n([1,1,1,1])
 
 p rec_adjacency(n2a(0))
 p create_adjacency()
+
+puts "Filling Blocks."
+p fillingBlocks(1)
+p fillingBlocks(2)
+p fillingBlocks(3) #5 but must be 11
 
