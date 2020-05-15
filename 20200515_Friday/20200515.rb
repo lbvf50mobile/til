@@ -5,6 +5,7 @@ p "alias x='ruby 20200515_Friday/20200515.rb'"
 
 def fillingBlocks(n)
     @n = n
+    @dp = {}
     array = Array.new(2).map{ Array.new(5,0)}
     rec(array,0)
 end
@@ -23,6 +24,8 @@ def rec(array, index)
         new_array = [array[1].clone, Array.new(5,0)]
         return rec(new_array,index+1)
     end
+    key = array.flatten + [index]
+    return @dp[key] if @dp[key]
     first_zero = array[0].index(0)
     horizontal = [array[0].clone, array[1].clone]
     vertical = [array[0].clone, array[1].clone]
@@ -30,7 +33,9 @@ def rec(array, index)
     horizontal[0][first_zero+1] += 1
     vertical[0][first_zero] += 1
     vertical[1][first_zero] += 1
-    rec(horizontal, index) + rec(vertical, index)
+    ans = rec(horizontal, index) + rec(vertical, index)
+    @dp[key] = ans
+    ans
 end
 p fillingBlocks(1)
 p fillingBlocks(2)
@@ -38,4 +43,5 @@ p fillingBlocks(3) # 11
 p fillingBlocks(4) 
 p fillingBlocks(5) # 95 
 p [fillingBlocks(1) == 1,fillingBlocks(2) == 5,fillingBlocks(3) == 11,fillingBlocks(4) == 36, fillingBlocks(5) == 95 ].all?
+
 
