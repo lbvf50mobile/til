@@ -36,5 +36,6 @@ p fillingBlocks(1)
 p fillingBlocks(2)
 p fillingBlocks(3) # 11
 p fillingBlocks(4) 
-p [fillingBlocks(1) == 1,fillingBlocks(2) == 5,fillingBlocks(3) == 11,fillingBlocks(4) == 36 ].all?
+p fillingBlocks(5) # 95 
+p [fillingBlocks(1) == 1,fillingBlocks(2) == 5,fillingBlocks(3) == 11,fillingBlocks(4) == 36, fillingBlocks(5) == 95 ].all?
 
