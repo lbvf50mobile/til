@@ -1,7 +1,9 @@
 p "alias x='ruby 20200520_Wednesday/20200520.rb'" 
 
-# Concatinatons sum.
-puts "Contacitantons sum."
+# Concatenations sum.
+# https://gist.github.com/lbvf50mobile/fa820112523ef79ac8b109ece2502e37
+
+puts "Contacetantions sum."
 
 def str(a)
     sum = 0
