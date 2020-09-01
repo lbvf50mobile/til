@@ -2,6 +2,8 @@ p "alias x='ruby 20200901_Tuesday/20200901.rb'"
 
 # Codewars.com: Texting with an old-school mobile phone.
 # https://www.codewars.com/kata/5ca24526b534ce0018a137b5 Texting with an old-school mobile phone.
+# https://gist.github.com/lbvf50mobile/1b71746e4fc04c53cd1de045efb8be21 js.
+# https://gist.github.com/lbvf50mobile/4c1a1800039cf6d94ca3f14b4b3db220#file-sentmessage-php php.
 
 
 h = {
