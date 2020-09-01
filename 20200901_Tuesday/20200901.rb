@@ -61,3 +61,13 @@ php += "\n];\n"
 
 File.write(__dir__+"/hash.php", php)
 
+# create php string
+js = "const hash = {\n"
+ans.each do |key,value|
+    js += "\"#{key}\": \"#{value}\", "
+end
+js += "\n};\n"
+
+File.write(__dir__+"/hash.js", js)
+
+
