@@ -1,6 +1,7 @@
 p "alias x='ruby 20200901_Tuesday/20200901.rb'" 
 
-#  https://www.codewars.com/kata/5ca24526b534ce0018a137b5 Texting with an old-school mobile phone.
+# Codewars.com: Texting with an old-school mobile phone.
+# https://www.codewars.com/kata/5ca24526b534ce0018a137b5 Texting with an old-school mobile phone.
 
 
 h = {
