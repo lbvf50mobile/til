@@ -34,7 +34,7 @@ ans = {}
     ans[x.upcase] = character * (index +1 )
 end
 # Numbers.
-(?0..?9).each do |x|
+'1234567890#*'.chars.each do |x|
     ans[x] = x + ?-
 end
 # not alphanumberic
