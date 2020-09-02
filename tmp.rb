@@ -1,33 +1,21 @@
-require 'benchmark'
 
+# Each element is a reference to unique object, all references are different:
+a = Array.new(3).map{ " "}
+p a.map{|x| x.object_id} # [14919680, 14919660, 14919620]
+p a # [" ", " ", " "]
+a[0] << "new value."
+p a # [" new value.", " ", " "]
 
-p n = 5000
+# Each element is a reference to single object, all references are the same:
+a = Array.new(3," ")
+p a.map{|x| x.object_id} # [2228180, 2228180, 2228180]
+p a # [" ", " ", " "]
+a[0] << "new value."
+p a # [" new value.", " new value.", " new value."]
 
-arr = Array.new(n).map{
-    subarr = Array.new(n,false)
-    subarr[rand(n)] = true
-    subarr
-}
-
-Benchmark.bm do |x|
-  
- 
-  x.report {
-      arr.each do |a|
-        (0...a.size).each{|i| break if a[i]}
-      end
-  }
-  x.report {
-    arr.each do |a|
-        for i  in 0...a.size
-            break if a[i]
-        end
-    end
-}
-
-  x.report {
-    arr.each do |a|
-        a.index{|elem| elem}
-    end
-  }
-end
+# Each element is a reference to single object, all references are the same:
+a = [" "]*3
+p a.map{|x| x.object_id} # [20764780, 20764780, 20764780]
+p a # [" ", " ", " "]
+a[0] << "new value."
+p a # [" new value.", " new value.", " new value."]
