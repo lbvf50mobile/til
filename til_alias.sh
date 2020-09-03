@@ -1,1 +1,1 @@
-alias x='php 20200903_Thursday/20200903.php'
+alias x='python 20200903_Thursday/20200903.py'
