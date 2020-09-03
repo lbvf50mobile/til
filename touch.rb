@@ -27,7 +27,7 @@ if '.lua' == ext
     File.open('til_alias.sh', 'w'){|f| f.write("alias x='lua #{file_path}'") } # Create alias for TIL
 end
 if '.php' == ext
-    File.open(file_path, 'w'){|f| f.write("<?php\n echo(\"alias x='php #{file_path}'\");") }
+    File.open(file_path, 'w'){|f| f.write("<?php\n echo(\"alias x='php #{file_path}'\");\n") }
     File.open('til_alias.sh', 'w'){|f| f.write("alias x='php #{file_path}'") } # Create alias for TIL
 end
 
