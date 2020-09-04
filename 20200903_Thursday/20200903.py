@@ -7,8 +7,21 @@ print(a)
 def change():
     a = 0
     def  increment():
-        a += 1
+        print("Do increment");
+        pass
+        # a += 1 # Unbound local error. Error A is not defined.
     increment()
     print(a)
 change()
+print(a)
+
+print("Now test with Array or List in Python way of description.")
+# https://docs.python.org/3/tutorial/controlflow.html?highlight=passing%20mutable#id1
+
+a = [1,2,3]
+
+def change_list(x): x[0] = 10
+
+change_list(a)
+
 print(a)
