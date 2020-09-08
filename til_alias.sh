@@ -1,1 +1,1 @@
-alias x='python 20200903_Thursday/20200903.py'
+alias x='ruby 20200909_Wednesday/20200909.rb'
