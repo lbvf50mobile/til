@@ -1,4 +1,4 @@
-// Implementation of sorting array contained two types of entities.
+// Implementation of sorting array that comprises two types of entities.
 let arr = [
   "Name 1",
 "Third",
