@@ -1,1 +1,1 @@
-alias x='ruby 20201116_Monday/20201116.rb'
+alias x='ruby 20201123_Monday/20201123.rb'
