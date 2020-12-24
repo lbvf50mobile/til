@@ -37,32 +37,34 @@ end
 # https://leetcode.com/problems/ways-to-make-a-fair-array/
 # @param {Integer[]} nums
 # @return {Integer}
+# 1664. Ways to Make a Fair Array.
+# https://leetcode.com/problems/ways-to-make-a-fair-array/
+# Runtime: 316 ms, faster than 42.86% of Ruby online submissions for Ways to Make a Fair Array.
+# Memory Usage: 219.2 MB, less than 100.00% of Ruby online submissions for Ways to Make a Fair Array.
+# @param {Integer[]} nums
+# @return {Integer}
 def ways_to_make_fair(nums)
     nums.unshift(0)
     sums = [0,0]
     counter = 0
     nums.each_with_index do |el,i|
         if i.even?
-            sums[0] += el
+            sums[0] += el # ! here was a typo.
         else
-            sums[1] += el
+            sums[1] += el # ! here was a typo.
         end
     end
     e_sum, o_sum = 0,0
-    p sums
     (1...nums.size).each do |i|
         el = nums[i]
-        e_tmp, o_tmp = e_sum,o_sum
+        e_tmp, o_tmp = e_sum,o_sum # ! here was a typo.
         if i.even?
             e_tmp = e_sum + el
         else
             o_tmp = o_sum + el
         end
-        e_rem, o_rem = sums[0] - e_tmp, sums[1] - o_tmp
-        p [i,el,e_sum, o_sum,e_rem,o_rem]
-        p [i,el,e_sum+o_rem, o_sum+e_rem]
         # Prev sum minus reminder.
-        counter += 1 if e_sum + (sums[1] - o_tmp) == o_sum + (sums[0] - e_tmp)
+        counter += 1 if e_sum + (sums[1] - o_tmp) == o_sum + (sums[0] - e_tmp) # ! here was a typo.
         e_sum, o_sum = e_tmp, o_tmp
     end
     counter
