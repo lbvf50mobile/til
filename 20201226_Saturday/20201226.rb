@@ -30,6 +30,8 @@ end
 # https://leetcode.com/problems/counting-bits/
 # @param {Integer} num
 # @return {Integer[]}
+p test(0) == count_bits(0)
+p test(1) == count_bits(1)
 p test(5) == count_bits(5)
 p test(2) == count_bits(2)
 p test(3) == count_bits(3)
