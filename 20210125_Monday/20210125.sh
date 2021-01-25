@@ -13,3 +13,4 @@ echo "${red}Does pipelines run process at the same time or one by one?${reset}"
 
 start=$(date +"%T.%N")
 echo "${green}${start}${reset}"
+pwd
