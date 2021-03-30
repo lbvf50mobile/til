@@ -16,3 +16,5 @@ p [left_col.to_s(2), midle_col.to_s(2),right_col.to_s(2)]
 left_dig = (1 << 8) | (1 << 4) | 1
 right_dig = (1 << 2) | (1 << 4) | (1 << 6)
 p [left_dig.to_s(2), right_dig.to_s(2)]
+
+p [bottom_row, midle_row, top_row, left_col, midle_col, right_col, left_dig, right_dig]
