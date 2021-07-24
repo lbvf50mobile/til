@@ -7,6 +7,7 @@
 def find_ladders(begin_word, end_word, word_list)
   # Check is there end_work in the word_list.
   @i_end = word_list.index(end_word)
+  @i_bgn = word_list.index(begin_word)
   @wl = word_list
   @parent = Array.new(@wl.size)
   @steps = Array.new(@wl.size,0)
@@ -15,6 +16,39 @@ def find_ladders(begin_word, end_word, word_list)
   @wl.each{|w| @adj_list[w] = []}
   create_adj_list()
   # in action. 
+  if @i_bgn
+    ans = []
+    return fill(ans,@i_bgn)
+  end
+  i = find_clothest(begin_word)
+  return [] if ! i
+  ans = [begin_word]
+  return fill(ans,i)
+end
+
+def find_clothest(word)
+  # Find word in worl_list that differs only in one char and nearest to end word.
+  index = nil
+  min = nil
+  @wl.each_with_index{|w,i|
+    if 1 == diff(w,word)
+      if min.nil? || min < @steps[i]
+        min =  @steps
+        index = i
+      end
+    end
+  }
+  return index
+end
+
+def fill(asn, start)
+  i = start
+  ans.push(@wl[i])
+  while @parent[i]
+    i = parent[i]
+    ans.push(@wl[i])
+  end
+  ans
 end
 
 def bfs()
