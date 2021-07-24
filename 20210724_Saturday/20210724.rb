@@ -6,22 +6,24 @@
 # @return {String[][]}
 def find_ladders(begin_word, end_word, word_list)
   # Check is there end_work in the word_list.
-  @i_end = word_list.index(end_word)
-  @i_bgn = word_list.index(begin_word)
-  @wl = word_list
-  @parent = Array.new(@wl.size)
-  @steps = Array.new(@wl.size,0)
-  return [] if ! @i_end
-  @adj_list = {}
-  @wl.each{|w| @adj_list[w] = []}
-  create_adj_list()
-  # in action. 
-  if @i_bgn
+  @i_end = word_list.index(end_word) # Get index of end word in the array.
+  @i_bgn = word_list.index(begin_word) # Get index of beging word in the array.
+  @wl = word_list # Make variable easy to print.
+  return [] if ! @i_end # No end word in the array of word_list.
+
+  @adj_list = {} # Star to prepare adjancency list.
+  @wl.each_with_index{|_,i| @adj_list[i] = []} # To make code easy, add an array to each word.
+  create_adj_list() # Create adjancency list. Fill the hash.
+  @parent = Array.new(@wl.size) # Here will be parents, end word have no parrens so it has nil.
+  @steps = Array.new(@wl.size,0) #  Here will be number of steps till the end word, end word has 0 steps.
+  bfs() # Fill parent and steps
+
+  if @i_bgn # if first word in array just make a way till the end word.
     ans = []
     return fill(ans,@i_bgn)
   end
-  i = find_clothest(begin_word)
-  return [] if ! i
+  i = find_clothest(begin_word) # Find clothest word to begin word.
+  return [] if ! i # No clothest word, return empty list.
   ans = [begin_word]
   return fill(ans,i)
 end
@@ -33,7 +35,7 @@ def find_clothest(word)
   @wl.each_with_index{|w,i|
     if 1 == diff(w,word)
       if min.nil? || min < @steps[i]
-        min =  @steps
+        min =  @steps[i] # Now minimum is minimum steps from curren word till the end word.
         index = i
       end
     end
@@ -45,7 +47,7 @@ def fill(asn, start)
   i = start
   ans.push(@wl[i])
   while @parent[i]
-    i = parent[i]
+    i = @parent[i]
     ans.push(@wl[i])
   end
   ans
@@ -53,18 +55,16 @@ end
 
 def bfs()
   used = Array.new(@wl.size)
-  q = [@i_end]
+  q = [[@i_end,0]]
   used[@i_end] = true
-  level = 0
   while ! q.empty?
-    i = q.shift()
-    level += 1
+    i,level = q.shift()
     @adj_list[i].each do |j|
       if ! used[j]
-        q.push[j]
+        q.push([j,level+1])
         used[j] = true
         @parent[j] = i
-        @steps[j] = level
+        @steps[j] = level+1
       end
     end
   end
