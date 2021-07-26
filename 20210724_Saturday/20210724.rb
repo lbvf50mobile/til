@@ -1,5 +1,6 @@
 # Leetcode: 126. Word Ladder II.
 # https://leetcode.com/explore/challenge/card/july-leetcoding-challenge-2021/611/week-4-july-22nd-july-28th/3825/
+# this code does not works because need back tracking.
 # @param {String} begin_word
 # @param {String} end_word
 # @param {String[]} word_list
@@ -19,13 +20,19 @@ def find_ladders(begin_word, end_word, word_list)
   bfs() # Fill parent and steps
 
   if @i_bgn # if first word in array just make a way till the end word.
-    ans = []
-    return fill(ans,@i_bgn)
+    seq = []
+    fill(seq,@i_bgn)
+    return [seq]
   end
-  i = find_clothest(begin_word) # Find clothest word to begin word.
-  return [] if ! i # No clothest word, return empty list.
-  ans = [begin_word]
-  return fill(ans,i)
+  arr = find_clothest(begin_word) # Retrun array of indices with minumum steps till end word.
+  return [] if ! arr # If there are no words that differs one return empty array.
+  answer = []
+  arr.each do |i|
+    seq = [begin_word]
+    fill(seq,i)
+    answer.push(seq)
+  end
+  return answer
 end
 
 def find_clothest(word)
@@ -40,10 +47,11 @@ def find_clothest(word)
       end
     end
   }
-  return index
+  return [] if min.nil?
+  (0...@wl.size).select{|i| min == @steps[i]}
 end
 
-def fill(asn, start)
+def fill(ans, start)
   i = start
   ans.push(@wl[i])
   while @parent[i]
