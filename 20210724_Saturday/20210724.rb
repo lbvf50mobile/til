@@ -7,6 +7,7 @@
 def find_ladders(begin_word, end_word, word_list)
   @curr_path = []
   @shortest_paths = []
+  @adj_list = {}
 
   # Coping the words into the set of efficient deletion in BFS.
   copied_word_list = Set.new(word_list)
@@ -23,9 +24,9 @@ end
 
 def bfs(begin_word, end_word, word_list)
   q = []
-  a.push(begin_word)
+  q.push(begin_word)
 
-  # revove the root word wich is the first layer in the BFS.
+  # remove the root word wich is the first layer in the BFS.
   word_list.delete?(begin_word)
 
   isEnqueued = {}
@@ -33,10 +34,20 @@ def bfs(begin_word, end_word, word_list)
   while !q.empty?
     visited = []
     q.size.times do
-      curr_word = q.unshift
+      curr_word = q.shift
       # findNeighbor will have the adjacent words of the curr_word.
       neighbors = findNeighbors(curr_word, word_list)
-
-    end
-  end
+      neighbors.each do |word|
+        visited.push[word]
+        @adj_list[curr_word] ||= []
+        @adj_list[curr_word].push(word)
+        if isEnqueued[word].nil?
+          q.push(word)
+          isEnqueued[word] = true
+        end
+      end # neightbors
+    end # q.size
+    # removing the words of the previous layer.
+    visited.each{|wrd| word_list.delete?(wrd)}
+  end # while
 end
