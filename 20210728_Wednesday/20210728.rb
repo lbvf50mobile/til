@@ -1,0 +1,14 @@
+# Leetcode: 932. Beautiful Array.
+# https://leetcode.com/explore/challenge/card/july-leetcoding-challenge-2021/611/week-4-july-22nd-july-28th/3829/
+# https://leetcode.com/problems/beautiful-array/discuss/1368199/Python3-recursive-one-liner
+# Accepted.
+# Thanks God!
+# @param {Integer} n
+# @return {Integer[]}
+def beautiful_array(n)
+  if n < 3
+    return [1,2][0,n]
+  else
+    beautiful_array((n+1)/2).map{|x| x*2 -1} + beautiful_array(n/2).map{|x| x*2}
+  end
+end
