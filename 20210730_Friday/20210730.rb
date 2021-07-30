@@ -1,12 +1,15 @@
 # Leetcode: 677. Map Sum Pairs.
 # https://leetcode.com/explore/challenge/card/july-leetcoding-challenge-2021/612/week-5-july-29th-july-31st/3832/
+# Accepted.
+# Thanks God!
+#
 class MapSum
 
 =begin
     Initialize your data structure here.
 =end
     def initialize()
-        
+      @h = {}
     end
 
 
@@ -16,7 +19,7 @@ class MapSum
     :rtype: Void
 =end
     def insert(key, val)
-        
+      @h[key] = val
     end
 
 
@@ -25,7 +28,7 @@ class MapSum
     :rtype: Integer
 =end
     def sum(prefix)
-        
+      @h.keys.select{|x| Regexp.new('^'+prefix) === x}.map{|x| @h[x]}.sum
     end
 
 
