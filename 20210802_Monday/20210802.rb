@@ -67,3 +67,20 @@ def make_bridge(i,j)
 end
 
 
+# Leetcode: 1. Two Sum.
+# https://leetcode.com/explore/challenge/card/august-leetcoding-challenge-2021/613/week-1-august-1st-august-7th/3836/
+# Accepted.
+# Thanks God!
+# @param {Integer[]} nums
+# @param {Integer} target
+# @return {Integer[]}
+def two_sum(nums, target)
+  h = {}
+  nums.each_with_index do |el,j|
+    prev_value = target - el
+    return [h[prev_value],j] if h[prev_value]
+    h[el] = j # Value as a key, key as index.
+  end
+  raise "Cannot find an answer in this task."
+end
+
