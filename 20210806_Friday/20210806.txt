@@ -1,0 +1,6 @@
+
+**Ruby: BFS and 2 dimensional array.**
+
+Problem solved by the BFS, but in queue stored an element with two fields node value and level. And each time element extracted form the queue it is iserted into appropriate sub array of the input array. Inserted by level value, if level equal to the answer size new sub array would be pushed into the asnwer array and futher just push values of this level into appropriate sub array.
+
+
