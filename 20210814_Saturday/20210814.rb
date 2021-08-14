@@ -3,6 +3,12 @@
 # https://leetcode.com/problems/remove-boxes/
 # https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/546.%20Remove%20Boxes.md
 # https://leetcode.com/problems/remove-boxes/discuss/1402639/Java-Explanation-with-Illustration
+#
+# = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
+#
 # @param {Integer[]} boxes
 # @return {Integer}
 def remove_boxes(boxes)
@@ -16,8 +22,9 @@ def dfs(i,j,k)
   return @dp[i][j][k] if @dp[i][j][k] > 0
   @dp[i][j][k] = dfs(i,j-1,0) + (k+1)*(k+1)
   (i...j).each do |pointer|
-    if @bx[i] == @bx[pointer]
-      @dp[i][j][k] = [@dp[i][j][k],dfs(i,pointer,k+1)+dfs(pointer+1,j-1,0)].max 
+    if @bx[j] == @bx[pointer]
+      tmp = dfs(i,pointer,k+1)+dfs(pointer+1,j-1,0)
+      @dp[i][j][k] = tmp if tmp > @dp[i][j][k]
     end
   end
   return @dp[i][j][k]
