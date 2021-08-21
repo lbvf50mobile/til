@@ -1,10 +1,14 @@
 # Leetcode: 36. Valid Sudoku.
 # https://leetcode.com/problems/valid-sudoku/
-#
+# = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
+# https://leetcode.com/explore/challenge/card/august-leetcoding-challenge-2021/615/week-3-august-15th-august-21st/3904/
+# https://leetcode.com/problems/valid-sudoku/solution/
 # @param {Character[][]} board
 # @return {Boolean}
 def is_valid_sudoku(board)
-  require 'set'
   n = 9
   # Use hast set to record the status.
   rows = Array.new(n).map{ Set.new()}
@@ -17,7 +21,7 @@ def is_valid_sudoku(board)
       return false if rows[r].include?(val)
       rows[r].add(val)
       return false if cols[c].include?(val)
-      cols[r].add(val)
+      cols[c].add(val)
       # Check the box.
       idx = (r/3)*3 + (c/3)
       return false if boxes[idx].include?(val)
