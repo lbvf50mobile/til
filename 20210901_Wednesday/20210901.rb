@@ -4,5 +4,18 @@
 # @param {Integer[]} nums
 # @return {Integer}
 def array_nesting(nums)
-    
+  # https://leetcode.com/problems/array-nesting/solution/
+  # TLE.
+  ans = 0
+  (0...nums.size).each do |i|
+    count = 0
+    j = nums[i]
+    while true
+      j = nums[j]
+      count +=1
+      break if j == nums[i]
+    end
+    ans = count if count > ans
+  end
+  ans
 end
