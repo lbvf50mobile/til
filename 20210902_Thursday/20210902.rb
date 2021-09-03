@@ -18,6 +18,7 @@
 # @param {Integer} n
 # @return {TreeNode[]}
 def generate_trees(n)
+  # https://leetcode.com/problems/unique-binary-search-trees-ii/discuss/31592/Recursive-python-solution
   return [] if 0 == n
   dfs(1,n+1)
 end
