@@ -1,8 +1,32 @@
 # Leetcode: 587. Erect the Fence.
 # https://leetcode.com/problems/erect-the-fence/
+# = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
 # https://leetcode.com/explore/challenge/card/september-leetcoding-challenge-2021/636/week-1-september-1st-september-7th/3962/
 # @param {Integer[][]} trees
 # @return {Integer[][]}
 def outer_trees(trees)
-    
+  # https://leetcode.com/problems/erect-the-fence/solution/
+  trees.sort!{|qu,pe| 0 == qu[0] - pe[0] ? qu[1] - pe[1] : qu[0] - pe[0]}
+  hull = []
+  trees.each do |point|
+    while hull.size >= 2 && orientation(hull[-2],hull[-1],point) > 0
+      hull.pop
+    end
+    hull.push(point)
+  end
+  hull.pop
+  trees.reverse_each do |point|
+    while hull.size >= 2 && orientation(hull[-2],hull[-1],point) > 0
+      hull.pop
+    end
+    hull.push(point)
+  end
+  hull.uniq
+end
+
+def orientation(pe,qu,re)
+  (qu[1] - pe[1])*(re[0] - qu[0]) - (qu[0] - pe[0])*(re[1] - qu[1])
 end
