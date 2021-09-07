@@ -18,16 +18,12 @@
 def reverse_list(head)
   return head if head.nil?
   prev, curr = nil, head
-  while curr
-    if curr.next.nil? # no way to move forward.
-      curr.next = prev
-      return curr # time to return.
-    else
-      tmp = curr.next # it is possible to move forward.
-      curr.next = prev
-      prev = curr
-      curr = tmp # make step foward, next become current.
-    end
+  while curr.next # there is a way to move forward.
+    tmp = curr.next # save next node.
+    curr.next = prev # rotate pointer.
+    prev = curr # define new prev.
+    curr = tmp # make step foward, next become current.
   end
-  raise "This line could not be reached, error in the algorithm or in the input."
+  curr.next = prev
+  return curr 
 end
