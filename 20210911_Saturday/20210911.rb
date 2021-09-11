@@ -18,13 +18,7 @@ def calculate(s)
     elsif " " == char
       ; # do nothin on spacebar;
     elsif is_char[i]
-      # First digit in a number. (I think this might be improved, if current is zero first and not first could be skipped)
-      if 0 == i || ! is_char[i-1]
-        current = char.to_i
-      # Not last digit in a number.
-      else
-        current = current*10 + char.to_i
-      end
+      current = current*10 + char.to_i
       # And time to increase change the total.
       if last == i || ! is_char[i+1]
         raise "At i = #{i} and char = #{char} no sign" if 0 == sign
