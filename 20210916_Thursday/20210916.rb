@@ -47,12 +47,7 @@ def spiral_order(matrix)
         i -= 1
       end
     end
-
-
-
   end
-
-
   ans 
 end
 
