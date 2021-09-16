@@ -51,12 +51,10 @@ def spiral_order(matrix)
   ans 
 end
 
-
 def move(i,j)
   return false if i < 0 || j < 0
   return false if i >= @mx.size
   return false if j >= @mx[0].size
   return @u[i][j]
 end
-
 
