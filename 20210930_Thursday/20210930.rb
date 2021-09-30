@@ -12,12 +12,12 @@ def can_partition_k_subsets(nums, k)
   @n = nums
   return false if @n.any?{|x| x > @chunk} 
 
-  p "Greetings chunk is #{@chunk}"
+  # p "Greetings chunk is #{@chunk}"
   @used = Array.new(nums.size,false)
   @used[0] = true
   @reached = false
 
-  rec(@n,0)
+  rec(@n[0],0)
 
   @reached
 end
@@ -32,7 +32,7 @@ def rec(sum,step)
   if new_step == sum # Reach a step.
     step += 1
     # Now need to check do the aim reached.
-    if @used.all? && @k = step
+    if @used.all? && @k == step
       @reached = true
       return
     end
@@ -46,7 +46,7 @@ def rec(sum,step)
       sum += @n[i]
       rec(sum, step)
       sum -= @n[i]
-      @uesd[i] = false
+      @used[i] = false
     end
   end
 end
