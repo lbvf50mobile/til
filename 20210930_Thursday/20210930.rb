@@ -15,18 +15,27 @@ def can_partition_k_subsets(nums, k)
   # p "Greetings chunk is #{@chunk}"
   @all = 2**(@n.size) - 1
   used = 1
+  @dp = {}
   return rec(@n[0],0,used)
 end
 
 
 def rec(sum,step,used)
+  return @dp[sum][step][used] if @dp[sum] && @dp[step] && (!@dp[used].nil?)
+  @dp[sum] ||= {}
+  @dp[sum][step] ||= {}
   # Check do reach a new step.
   new_step = @chunk * (step+1)
-  return false if sum > new_step # Jump over a step.
+  if sum > new_step # Jump over a step.
+    @dp[sum][step][used] = false
+    return false
+  end
   if new_step == sum # Reach a step.
     step += 1
+    @dp[sum][step] ||={}
     # Now need to check do the aim reached.
     if @all == used && @k == step
+      @dp[sum][step][used] = true
       return true
     end
   end
@@ -37,11 +46,15 @@ def rec(sum,step,used)
       used |= bit
       sum += @n[i]
       ans = rec(sum, step,used)
-      return true if ans
+      if ans
+        @dp[sum][step][used] = true
+        return true
+      end
       sum -= @n[i]
       used &= (@all ^ bit)
     end
   end
+  @dp[sum][step][used] = false
   return false
 end
 
