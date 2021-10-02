@@ -10,7 +10,7 @@ def calculate_minimum_hp(dungeon)
 
   # Idea is to store information in two storages.
   # 1) DP - how many health points in the room.
-  # 2) ADD - number of additionals points, because without enimes he need only 1.
+  # 2) ADD - number of accumulated additionals points, because without enimes he need only 1.
 
   # Return the knight's minimum initial health so that he can rescue the princess.
   (0...h).each do |i|
