@@ -53,7 +53,7 @@ def calculate_minimum_hp(dungeon)
       throw "Undescribed befaviour."
     end
   end
-  1 + add[h-1][w-1]
+  1 + dp_add[h-1][w-1]
 end
 
 def add_and_total(curr, health)
