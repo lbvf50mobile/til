@@ -6,7 +6,7 @@ def calculate_minimum_hp(dungeon)
   # I going to use a PULL DP here.
   w,h = dungeon[0].size, dungeon.size
   dp = Array.new(h).map{ Array.new(w)}
-  add = Array.new(h).map{ Array.new(w)}
+  dp_add = Array.new(h).map{ Array.new(w)}
 
   # Idea is to store information in two storages.
   # 1) DP - how many health points in the room.
@@ -20,7 +20,7 @@ def calculate_minimum_hp(dungeon)
         health = 1 # Minmum value to get pass without monsters.
         total, add = add_and_total(curr,health)
         dp[i][j] = total
-        add[i][j] = add
+        dp_add[i][j] = add
         next
       end
       # Top row. Get only from the left.
@@ -28,7 +28,7 @@ def calculate_minimum_hp(dungeon)
         health = dp[i][j-1]
         total, add = add_and_total(curr,health)
         dp[i][j] = total
-        add[i][j] = add
+        dp_add[i][j] = add
         next
       end
       # Left column. Get only from the top.
@@ -36,7 +36,7 @@ def calculate_minimum_hp(dungeon)
         health = dp[i-1][j]
         total, add = add_and_total(curr,health)
         dp[i][j] = total
-        add[i][j] = add
+        dp_add[i][j] = add
         next
       end
       # Able to get from top or from the left.
@@ -47,7 +47,7 @@ def calculate_minimum_hp(dungeon)
         res = [top,left].sort{|a,b| a[1] == b[1] ? b[0] - a[0] : a[1] - b[1]}[0]
         total, add = res
         dp[i][j] = total
-        add[i][j] = add
+        dp_add[i][j] = add
         next
       end
       throw "Undescribed befaviour."
