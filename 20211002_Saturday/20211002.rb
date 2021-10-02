@@ -56,11 +56,12 @@ def calculate_minimum_hp(dungeon)
   1 + add[h-1][w-1]
 end
 
-def add_and_total(health, curr)
+def add_and_total(curr, health)
     new_health = health + curr
     add = 0
     total = 0
     if new_health <= 0
+      # Adding new health only if the knight dies.
       add = 1 - new_health
       total = health + add
     else
