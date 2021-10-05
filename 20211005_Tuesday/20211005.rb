@@ -1,0 +1,29 @@
+# Leetcode: 70. Climbing Stairs.
+# https://leetcode.com/problems/climbing-stairs/
+# = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
+# Runtime: 60 ms, faster than 44.98% of Ruby online submissions for Climbing Stairs.
+# Memory Usage: 209.8 MB, less than 38.96% of Ruby online submissions for Climbing Stairs.
+# @param {Integer} n
+# @return {Integer}
+def climb_stairs(n)
+  # A climber stands at the level number 0.
+  # he ables to step on a level number 1 or 2.
+  # This means need to have n+1 positions to count.
+  dp = Array.new(n+1,0) # Note! Must be filled by 0 not nil.
+
+  # There is only one way to get at the bench 0.
+  dp[0] = 1
+
+  # Now using PUSH DP technique from each level
+  # Number of ways it could be reached will be
+  # added to the next rechable stairs.
+  (0...n).each do |i|
+    dp[i+1] += dp[i] if i+1 <= n # Need to contol bounds.
+    dp[i+2] += dp[i] if i+2 <= n # There are only n indices.
+  end
+  # An answer is a number of ways the last stair is reached.
+  return dp[n]
+end
