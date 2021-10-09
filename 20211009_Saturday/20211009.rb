@@ -1,8 +1,16 @@
 # Leetcode: 212. Word Search II.
 # https://leetcode.com/problems/word-search-ii/
+# = = = = = = =
+# Algorithm implemented correclty from the first try!
+# Thanks God!
+# = = = = = = =
 # @param {Character[][]} board
 # @param {String[]} words
 # @return {String[]}
+# TLE. But I think as like as with Work Search I, it is impossible to pass by the Ruby using Backtracking of each word.
+# Instead need to use Trie as in the @workcool example: 
+# https://leetcode.com/problems/word-search-ii/discuss/1511657/Python-clean-with-Trie-pruning-optimization-and-code-comments
+# Really appreciate for that article.
 def find_words(board, words)
   @b = board
   ans = []
