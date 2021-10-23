@@ -1,0 +1,29 @@
+# Leetcode: 154. Find Minimum in Rotated Sorted Array II.
+# https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/
+# = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
+# Based on:
+# https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/discuss/1535534/Beats-100-or-Binary-search-with-clear-explanation
+# Runtime: 52 ms, faster than 100.00% of Ruby online submissions for Find Minimum in Rotated Sorted Array II.
+# Memory Usage: 210.2 MB, less than 27.78% of Ruby online submissions for Find Minimum in Rotated Sorted Array II.
+# @param {Integer[]} nums
+# @return {Integer}
+def find_min(nums)
+  # Solution based on:
+  # https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/discuss/1535534/Beats-100-or-Binary-search-with-clear-explanation
+  lo,hi = 0, nums.size - 1
+  while lo < hi
+    mid  = (hi+lo)/2
+    if nums[mid] > nums[hi]
+      lo = mid + 1;
+    elsif nums[mid] < nums[hi]
+      hi = mid
+    else
+      hi -= 1
+    end
+  end
+  nums[hi]
+end
+
