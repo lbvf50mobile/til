@@ -4,13 +4,13 @@
 # Accepted.
 # Thanks God!
 # = = = = = = =
-# Runtime: 102 ms, faster than 66.34% of Ruby online submissions for Min Stack.
-# Memory Usage: 213.6 MB, less than 71.29% of Ruby online submissions for Min Stack.
+# Runtime: 145 ms, faster than 30.69% of Ruby online submissions for Min Stack.
+# Memory Usage: 213.7 MB, less than 54.46% of Ruby online submissions for Min Stack.
 class MinStack
     def initialize()
       @a = []
+      @mins = []
       @min = nil
-        
     end
 
 
@@ -22,7 +22,7 @@ class MinStack
       @min = val if ! @min
       @min = val if val < @min
       @a.push(val)
-        
+      @mins.push(@min)
     end
 
 
@@ -31,11 +31,9 @@ class MinStack
 =end
     def pop()
       return if @a.empty?
-      x = @a.pop()
-      if x == @min
-        @min = @a.min
-      end
-      return x
+      @a.pop
+      @mins.pop
+      @min = @mins.last
     end
 
 
@@ -53,8 +51,6 @@ class MinStack
     def get_min()
       @min
     end
-
-
 end
 
 # Your MinStack object will be instantiated and called as such:
