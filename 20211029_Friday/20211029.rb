@@ -1,7 +1,57 @@
 # Leetcode: 994. Rotting Oranges.
 # https://leetcode.com/problems/rotting-oranges/
+# Runtime: 68 ms, faster than 65.45% of Ruby online submissions for Rotting Oranges.
+# Memory Usage: 210.1 MB, less than 80.00% of Ruby online submissions for Rotting Oranges.
 # @param {Integer[][]} grid
 # @return {Integer}
 def oranges_rotting(grid)
+  # Based on:
+  # https://leetcode.com/problems/rotting-oranges/discuss/563686/Python-Clean-and-Well-Explained-(faster-than-greater-90)
+
+  # number of rows.
+  rows = grid.size
+  return -1 if 0 == rows
+
+  # number of columns.
+  cols = grid[0].size
+
+  # keep trak of fresh oranges.
+  counter = 0
+
+  # queue with rotten oranges (for BFS)
+  rotten = []
+
+  # visit each cell in the grid.
+  (0...rows).each do |r|
+    (0...cols).each do |c|
+      # add the rotten orange coordinates to the queue.
+      rotten.push([r,c]) if 2 == grid[r][c]
+      # update fresh oranges count.
+      counter += 1 if 1 == grid[r][c]
+    end
+  end
+
+  # keep trak of minutes passed.
+  min = 0
+
+  # If there are rotten oranges in the queue and there are still
+  # fresh oranges in the grid keep looping.
+  while (! rotten.empty?) && counter > 0
+    min += 1
+    (0...rotten.size).each do |_|
+      x,y = rotten.shift()
+      [[1,0],[-1,0],[0,1],[0,-1]].each do |(dx,dy)|
+        xx,yy = x+dx, y+dy
+        next if xx < 0 || xx == rows || yy < 0 || yy == cols
+        next if 0 == grid[xx][yy] || 2 == grid[xx][yy]
+        counter -= 1
+        grid[xx][yy] = 2
+        rotten.push([xx,yy])
+      end
+    end
+  end
+
+
+  return 0 == counter ? min : -1
     
 end
