@@ -14,5 +14,17 @@
 # @param {Node} root
 # @return {Node}
 def flatten(root)
-    
+  return root if ! root
+  head = root
+  que = []
+  node = root
+  while node
+    que.unshift(node.child) if node.child
+    if node.next.nil? && (! que.empty?)
+      tmp = que.pop()
+      node.next = tmp
+    end
+    node = node.next
+  end
+  head
 end
