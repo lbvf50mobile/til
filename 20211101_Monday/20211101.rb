@@ -1,7 +1,48 @@
 # Leetcode: 130. Surrounded Regions.
 # https://leetcode.com/problems/surrounded-regions/
+# = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
+# Runtime: 156 ms, faster than 90.63% of Ruby online submissions for Surrounded Regions.
+# Memory Usage: 222.4 MB, less than 56.25% of Ruby online submissions for Surrounded Regions.
 # @param {Character[][]} board
 # @return {Void} Do not return anything, modify board in-place instead.
 def solve(board)
-    
+  @h,@w,@b = board.size, board[0].size, board
+  # Top.
+  (0...@w).each{|i| fill(0,i) if ?O == @b[0][i]}
+  # Bottom. 
+  (0...@w).each{|i| fill(@h-1,i) if ?O == @b[@h-1][i]}
+  # Left.
+  (0...@h).each{|i| fill(i,0) if ?O == @b[i][0]}
+  # Right.
+  (0...@h).each{|i| fill(i,@w-1) if ?O == @b[i][@w-1]}
+  fill_o_x()
+  fill_z_o()
 end
+
+def fill(i,j)
+  return if !(i.between?(0,@h-1) && j.between?(0,@w-1))
+  return if ?O != @b[i][j]
+  @b[i][j] = ?Z
+  [[i+1,j],[i-1,j],[i,j+1],[i,j-1]].each do |(ii,jj)|
+    fill(ii,jj)
+  end
+end
+
+def fill_o_x()
+  (0...@h).each do |i|
+    (0...@w).each do |j|
+      @b[i][j] = ?X if ?Z != @b[i][j]
+    end
+  end
+end
+def fill_z_o()
+  (0...@h).each do |i|
+    (0...@w).each do |j|
+      @b[i][j] = ?O if ?Z == @b[i][j]
+    end
+  end
+end
+
