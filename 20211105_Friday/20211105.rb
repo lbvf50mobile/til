@@ -4,18 +4,21 @@
 # Accepted.
 # Thanks God!
 # = = = = = = =
-# Runtime: 484 ms, faster than 11.76% of Ruby online submissions for Arranging Coins.
-# Memory Usage: 209.8 MB, less than 82.35% of Ruby online submissions for Arranging Coins.
+# Runtime: 94 ms, faster than 75.76% of Ruby online submissions for Arranging Coins.
+# Memory Usage: 209.9 MB, less than 30.30% of Ruby online submissions for Arranging Coins.
 # @param {Integer} n
 # @return {Integer}
 def arrange_coins(n)
-  level = 0
-  next_level_coins = 1
-  while n > 0
-    n -= next_level_coins
-    next_level_coins += 1
-    level += 1 if n >= 0
-    # p [level, n, next_level_coins]
+  l,r = 1,70_000
+  while l <= r
+    mid = (l+r)/2
+    value = mid*(1+mid)/2
+    return mid if value == n
+    if value > n
+      r = mid - 1
+    else
+      l = mid + 1
+    end
   end
-  return level
+  r
 end
