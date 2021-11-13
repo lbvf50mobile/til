@@ -23,6 +23,15 @@ def daily_temperatures(temperatures)
       end
       next
     end
+    # Working with next day warmer.
+    if @tm[i+1] > @tm[i]
+      while i >= 0 && @tmp[i+1] > @tm[i]
+        @map_t_i[@tm[i]] = i
+        @ans[i] = 1
+        i -= 1
+      end
+      next
+    end
     t = @tm[i]
     @map_t_i[t] = i
     j = greate_temp_index(t)
