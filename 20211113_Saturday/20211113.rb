@@ -1,5 +1,11 @@
 # Leetcode: 739. Daily Temperatures.
 # https://leetcode.com/problems/daily-temperatures/
+# = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
+# Runtime: 728 ms, faster than 26.92% of Ruby online submissions for Daily Temperatures.
+# Memory Usage: 230.1 MB, less than 15.38% of Ruby online submissions for Daily Temperatures.
 # @param {Integer[]} temperatures
 # @return {Integer[]}
 def daily_temperatures(temperatures)
