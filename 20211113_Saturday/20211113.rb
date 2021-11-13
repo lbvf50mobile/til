@@ -10,7 +10,7 @@
 # @return {Integer[]}
 def daily_temperatures(temperatures)
   # 102 because if current temp is 100, greate temp would be 
-  # 101 and it would be alway -1. To make agorithm simply.
+  # 101 and it would be always -1. To make agorithm simply.
   @map_t_i = Array.new(102,-1) 
   @tm,@size = temperatures, temperatures.size
   @ans = Array.new(@size,0)
