@@ -4,15 +4,17 @@
 # Accepted.
 # Thanks God!
 # = = = = = = =
-# Runtime: 60 ms, faster than 52.00% of Ruby online submissions for Hamming Distance.
-# Memory Usage: 210 MB, less than 20.00% of Ruby online submissions for Hamming Distance.
+# Runtime: 56 ms, faster than 60.00% of Ruby online submissions for Hamming Distance.
+# Memory Usage: 209.7 MB, less than 52.00% of Ruby online submissions for Hamming Distance.
 # @param {Integer} x
 # @param {Integer} y
 # @return {Integer}
 def hamming_distance(x, y)
-  x,y = x.to_s(2), y.to_s(2)
-  x = x.rjust(40,?0)
-  y = y.rjust(40,?0)
-  x.chars.zip(y.chars).map{|(x,y)| x != y ? 1 : 0}
-    .sum
+  sum = 0
+  while (0 != x) || (0 != y)
+    sum += 1 if (x%2) != (y%2)
+    x = x >> 1
+    y = y >> 1
+  end
+  sum
 end
