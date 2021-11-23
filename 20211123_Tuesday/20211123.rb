@@ -16,7 +16,7 @@ def largest_component_size(nums)
   end
   nums.each do |a|
     pa = uf.find(a)
-    count ||= 0
+    count[pa] ||= 0
     count[pa] += 1
     ans = count[pa] if ans < count[pa]
   end
@@ -25,7 +25,7 @@ end
 
 class Uf
   def initialize(n)
-    @prnt = (1..n).to_a
+    @prnt = (0..n+1).to_a
   end
   def union(u,v)
     pu, pv = find(u), find(v)
@@ -34,7 +34,6 @@ class Uf
     true
   end
   def find(u)
-    p u
     if @prnt[u] != u 
       @prnt[u] = find(@prnt[u])
     end
