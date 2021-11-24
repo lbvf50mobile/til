@@ -3,6 +3,8 @@
 # @param {Integer[]} nums
 # @return {Integer}
 def largest_component_size(nums)
+  # ranslation of code:
+  # https://leetcode.com/problems/largest-component-size-by-common-factor/discuss/1592389/Python
   ans = 0
   uf = Uf.new(nums.max)
   count = {}
