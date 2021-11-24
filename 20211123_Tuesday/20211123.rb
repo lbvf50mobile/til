@@ -3,42 +3,33 @@
 # @param {Integer[]} nums
 # @return {Integer}
 def largest_component_size(nums)
-  # ranslation of code:
-  # https://leetcode.com/problems/largest-component-size-by-common-factor/discuss/1592389/Python
-  ans = 0
-  uf = Uf.new(nums.max)
-  count = {}
-  nums.each do |a|
-    (2..(Math.sqrt(a)+1).to_i).each do |num|
-      if 0 == a%num
-        uf.union(a,num)
-        uf.union(a,a/num)
-      end
+  # Solution would be based on:
+  # https://leetcode.com/problems/largest-component-size-by-common-factor/discuss/819919/Python-Union-find-solution-explained
+  n = nums.size
+  df = DSU.new(n)
+  primes = {}
+  nums.each_with_index do |num,i|
+    pr_set = primes_set(num)
+    pr_set.each{|q| primes[q]||=[], primes[q].push(i)}
+  end
+  primes.values.each do |indices|
+    (0...indices.size-1).each do |i|
+      df.union(indices[i],indices[i+1])
     end
   end
-  nums.each do |a|
-    pa = uf.find(a)
-    count[pa] ||= 0
-    count[pa] += 1
-    ans = count[pa] if ans < count[pa]
-  end
-  ans
+
 end
 
-class Uf
+class DSU
   def initialize(n)
-    @prnt = (0..n+1).to_a
+    @p = Array.new(n.size+2,0)
   end
-  def union(u,v)
-    pu, pv = find(u), find(v)
-    return false if pu == pv
-    @prnt[pu] = pv
-    true
+  def find(x)
+    @p[x] = find(@p[x]) if x != @p[x]
+    @p[x]
   end
-  def find(u)
-    if @prnt[u] != u 
-      @prnt[u] = find(@prnt[u])
-    end
-    @prnt[u]
+  def union(x,y)
+    xr,yr = find(x),find(y)
+    @p[xy] = yr
   end
 end
