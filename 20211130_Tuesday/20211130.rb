@@ -1,5 +1,11 @@
 # Leetcode: 85. Maximal Rectangle.
 # https://leetcode.com/problems/maximal-rectangle/
+# = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
+# Runtime: 188 ms, faster than 80.65% of Ruby online submissions for Maximal Rectangle.
+# Memory Usage: 232.9 MB, less than 6.45% of Ruby online submissions for Maximal Rectangle.
 # @param {Character[][]} matrix
 # @return {Integer}
 def maximal_rectangle(matrix)
@@ -26,26 +32,13 @@ def maximal_rectangle(matrix)
     end
   end
   # Fill rec.
+  @c,@r,@m = col, row, matrix
   (1...matrix.size).each do |i| # Arr cols. All rows.
     (1...matrix[0].size).each do |j|
       next if ?0 == matrix[i][j]
-      rc_width = [row[i][j] - 1, rec[i-1][j-1][:width]].min + 1
-      rc_height = [col[i][j] - 1, rec[i-1][j-1][:height]].min + 1
-      s = rc_width * rc_height 
-      r = row[i][j]; c = col[i][j]
-      a = 0
-      if r >= c && r>= s
-        a = r
-        rec[i][j] = {height: 1, width: r}
-      elsif c >= r && c >= s
-        a = c
-        rec[i][j] = {height: c, width: 1}
-      else
-        a = s
-        rec[i][j] = {height: rc_height, width: rc_width}
-      end
-      squares[i][j] = a
-      max = a if a > max
+      tmp = find_local_max(i,j)
+      squares[i][j] = tmp
+      max = tmp if tmp > max
     end
   end
 =begin
@@ -56,5 +49,29 @@ def maximal_rectangle(matrix)
   puts "Squares"
   (0...matrix.size).each{|i| p col[i]}
 =end
+  max
+end
+
+def find_local_max(i,j)
+  d = false
+  if 3 == i && j == 5
+    # p ?o
+    # d = true
+  end
+  # start walk from i and j.
+  # up  (@c[i][j] - 1) step 
+  up = i - @c[i][j] + 1
+  ii = i
+  width = @r[i][j]
+  max = 0
+  puts "will go up till #{up}" if d
+  while  ii >=  up
+    height = i - ii + 1
+    width = @r[ii][j] if @r[ii][j] < width
+    s = height*width
+    puts "Col=#{jj} height = #{height} w=#{width} s=#{s}" if d
+    max = s if s > max
+    ii -= 1
+  end
   max
 end
