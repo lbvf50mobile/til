@@ -29,12 +29,23 @@ def maximal_rectangle(matrix)
   (1...matrix.size).each do |i| # Arr cols. All rows.
     (1...matrix[0].size).each do |j|
       next if ?0 == matrix[i][j]
-      rec[i][j][:width] = [row[i][j] - 1, rec[i-1][j-1][:width]].min + 1
-      rec[i][j][:height] = [col[i][j] - 1, rec[i-1][j-1][:height]].min + 1
-      tmp = rec[i][j][:width] * rec[i][j][:height]
-      square = [tmp,row[i][j],col[i][j]].max
-      squares[i][j] = [square,row[i][j],col[i][j]].max
-      max = square if square > max
+      rc_width = [row[i][j] - 1, rec[i-1][j-1][:width]].min + 1
+      rc_height = [col[i][j] - 1, rec[i-1][j-1][:height]].min + 1
+      s = rc_width * rc_height 
+      r = row[i][j]; c = col[i][j]
+      a = 0
+      if r >= c && r>= s
+        a = r
+        rec[i][j] = {height: 1, width: r}
+      elsif c >= r && c >= s
+        a = c
+        rec[i][j] = {height: c, width: 1}
+      else
+        a = s
+        rec[i][j] = {height: rc_height, width: rc_width}
+      end
+      squares[i][j] = a
+      max = a if a > max
     end
   end
 =begin
