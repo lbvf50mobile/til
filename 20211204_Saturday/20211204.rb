@@ -20,18 +20,19 @@ class StreamChecker
 =end
   def query(letter)
     # First add new word pointer.
-    @array_of_pointers.push(@trie)
-    new_pointers = []
+    @array_of_pointers.push(@trie) if @trie[letter]
     answer = false
     # Let iterate over pointers.
     # Only a pointer that can be moved further would be saved.
-    @array_of_pointers.each do |pointer|
+    @array_of_pointers.each_with_index do |pointer,i|
+      next if @array_of_pointers[i].nil?
       if pointer[letter]
-          new_pointers.push  pointer[letter]
+          @array_of_pointers[i] = pointer[letter]
           answer = true if pointer[letter][:end]
+      else
+        @array_of_pointers[i] = nil
       end
     end
-    @array_of_pointers = new_pointers
     answer
   end
 
