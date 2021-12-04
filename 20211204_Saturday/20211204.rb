@@ -24,13 +24,15 @@ class StreamChecker
     answer = false
     # Let iterate over pointers.
     # Only a pointer that can be moved further would be saved.
-    @array_of_pointers.each_with_index do |pointer,i|
-      next if @array_of_pointers[i].nil?
+    i = 0
+    while i < @array_of_pointers.size
+      pointer = @array_of_pointers[i]
       if pointer[letter]
           @array_of_pointers[i] = pointer[letter]
           answer = true if pointer[letter][:end]
+          i += 1
       else
-        @array_of_pointers[i] = nil
+        @array_of_pointers.delete_at(i)
       end
     end
     answer
