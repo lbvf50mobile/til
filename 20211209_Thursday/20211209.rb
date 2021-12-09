@@ -1,9 +1,14 @@
 # Leetcode: 1306. Jump Game III.
 # https://leetcode.com/problems/jump-game-iii/
+# = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
+# Runtime: 76 ms, faster than 100.00% of Ruby online submissions for Jump Game III.
+# Memory Usage: 214.5 MB, less than 100.00% of Ruby online submissions for Jump Game III.
 # @param {Integer[]} arr
 # @param {Integer} start
 # @return {Boolean}
-# TLE.
 def can_reach(arr, start)
   df = Array.new(arr.size,false)
   df[start] = true
@@ -21,10 +26,12 @@ def move()
     right = i + @arr[i]
     if (! @df[right]) && right.between?(0,@arr.size-1)
       return true if 0 == @arr[right]
+      @df[right] = true
       q.push(right)
     end
     if (! @df[left]) && left.between?(0,@arr.size-1)
       return true if 0 == @arr[left]
+      @df[left] = true
       q.push(left)
     end
   end
