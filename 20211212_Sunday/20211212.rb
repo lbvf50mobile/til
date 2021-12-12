@@ -1,64 +1,39 @@
 # Leetcode: 416. Partition Equal Subset Sum.
 # https://leetcode.com/problems/partition-equal-subset-sum/
+# = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
+# Runtime: 2692 ms, faster than 5.41% of Ruby online submissions for Partition Equal Subset Sum.
+# Memory Usage: 242.7 MB, less than 40.54% of Ruby online submissions for Partition Equal Subset Sum.
 # @param {Integer[]} nums
 # @return {Boolean}
-# TLE.
+# 01/24/2020 01:33
+# 12/13/2021 03:29
 def can_partition(nums)
-  sum = nums.sum
-  @d = false # debugging
-  return false if sum.odd?
-  # Wrong optimization.
-  # Optimization. Even matches of a same number could be removed, thay have no influes.
-  # That means, if a number has even number of matches into the array just remove it.
-  # If number has odd number of matches, insert only one match into the opimized array.
-  counter = nums.each_with_object(Hash.new){|el,o| o[el] ||= 0; o[el]+=1}
-  nums = []
-  counter.keys.each do |key|
-    nums.push(key) if counter[key].odd?
-  end
-  @dp = {}
-  address = nums.join(?,) + ?| + ?0
-  dfs(address)
-end
-
-
-def dfs(address)
-  puts "I enter the #{address}." if @d
-  return @dp[address] if ! @dp[address].nil?
-  if /^\d+\|\d+/ === address
-    num,sum = address.split(?|)
-    answer = num.to_i == sum.to_i
-    puts "Address #{address} is two digits #{num} and #{sum}, result is #{answer.inspect}" if @d
-    puts "(Digits) Address #{address} is #{answer.inspect}." if @d
-    @dp[address] = answer
-    return answer
-  end
-  puts "Address #{address} contains array and number." if @d
-  arr,sum = address.split(?|)
-  arr = arr.split(?,).map(&:to_i)
-  sum = sum.to_i
-  arr_sum = arr.sum
-  puts "Address #{address} has array #{arr} = #{arr_sum} and a #{sum}" if @d
-  if arr_sum == sum
-    puts "(Sum) Address #{address} is true." if @d
-    @dp[address] = true
-    return true
-  end
-  if arr_sum < sum
-    puts "(Sum) Address #{address} is false." if @d
-    @dp[address] = false
-    return false
-  end
-  (0...arr.size - 1).each do |i|
-    new_address = arr.reject.with_index{|_,j| j == i}.join(?,) + ?| + (sum + arr[i]).to_s
-    if dfs(new_address)
-      @dp[address] = true
-      puts "(Loop) Address #{address} is true." if @d
-      return true
+    sum = nums.sum
+    return false if sum.odd?
+    size = sum/2
+    
+    dp = Array.new(nums.size).map{ Array.new(size+1,0)}
+    
+    (0..size).each do |col|
+        value = nums[0]
+        dp[0][col] = value if value <= col
     end
-  end
-
-  @dp[address] = false
-  puts "(End) Address #{address} is False." if @d
-  return false
+    
+    (1...nums.size).each do |row|
+        value = nums[row]
+        (0..size).each do |col|
+            tmp = []
+            tmp.push dp[row - 1][col]
+            tmp.push(dp[row - 1][col - value] + value) if value <= col
+            dp[row][col] = tmp.max
+        end
+    end
+    
+    # dp.each{|x| puts x.inspect}
+    
+    dp.last.last == size
+    
 end
