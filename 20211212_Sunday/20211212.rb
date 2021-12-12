@@ -7,6 +7,15 @@ def can_partition(nums)
   sum = nums.sum
   @d = false # debugging
   return false if sum.odd?
+  # Wrong optimization.
+  # Optimization. Even matches of a same number could be removed, thay have no influes.
+  # That means, if a number has even number of matches into the array just remove it.
+  # If number has odd number of matches, insert only one match into the opimized array.
+  counter = nums.each_with_object(Hash.new){|el,o| o[el] ||= 0; o[el]+=1}
+  nums = []
+  counter.keys.each do |key|
+    nums.push(key) if counter[key].odd?
+  end
   @dp = {}
   address = nums.join(?,) + ?| + ?0
   dfs(address)
