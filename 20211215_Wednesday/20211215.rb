@@ -19,7 +19,7 @@
 def insertion_sort_list(head)
   return head if head.nil?
   return head if head.next.nil?
-  @d = true
+  @d = false
   @sorted_pointer = head
   @unsorted_pointer = head.next
   @sorted_pointer.next = nil # Most important line!
