@@ -1,10 +1,56 @@
 # Leetcode: 310. Minimum Height Trees.
 # https://leetcode.com/problems/minimum-height-trees/
+# = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
+# Runtime: 124 ms, faster than 50.00% of Ruby online submissions for Minimum Height Trees.
+# Memory Usage: 213.1 MB, less than 60.00% of Ruby online submissions for Minimum Height Trees.
 # @param {Integer} n
 # @param {Integer[][]} edges
 # @return {Integer[]}
 def find_min_height_trees(n, edges)
   # Based on:
   # https://leetcode.com/problems/minimum-height-trees/solution/
-    
+ 
+  # Base cases.
+  return (0...n).to_a if n <= 2
+
+  # Build the grap with the adjacency list.
+  require 'set'
+  neighbors = Array.new(n).map{ Set.new }
+  edges.each do |(start_, end_)|
+    neighbors[start_].add(end_)
+    neighbors[end_].add(start_)
+  end
+
+  # Initialize the first layer of leaves.
+  leaves = []
+  (0...n).each do |i|
+    leaves.push(i) if 1 == neighbors[i].size
+  end
+
+  # Trim the leaves until reaching the centroids.
+  remaining_nodes = n
+  while remaining_nodes > 2
+    remaining_nodes -= leaves.size
+    new_leaves = []
+    # remove the current leaves along with the edges.
+    while ! leaves.empty?
+      leaf = leaves.pop()
+      # The only neighbor left for the leaf node.
+      neighbor = nil
+      neighbors[leaf].each{|x| neighbor = x}
+      # Remove the onle edge left.
+      neighbors[neighbor].delete(leaf)
+      if neighbors[neighbor].size == 1
+        new_leaves.push(neighbor)
+      end
+    end
+    # Prepare for the next round.
+    leaves = new_leaves
+  end
+  # The remaining nodes are the centroidsof the graph.
+  return leaves
 end
+
