@@ -77,4 +77,3 @@ def draw_list(head)
   end
   puts ans.join(?,)
 end
-
