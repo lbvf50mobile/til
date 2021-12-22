@@ -5,7 +5,7 @@
 # Thanks God!
 # = = = = = = =
 # Runtime: 76 ms, faster than 86.96% of Ruby online submissions for Reorder List.
-# Memory Usage: 212.7 MB, less than 91.30% of Ruby online submissions for Reorder List.
+# Memory Usage: 213.5 MB, less than 60.87% of Ruby online submissions for Reorder List.
 # Definition for singly-linked list.
 # class ListNode
 #     attr_accessor :val, :next
@@ -26,8 +26,9 @@ def reorder_list(head)
   # Protection from the dead loops.
   array.each{|x| x.next = nil}
   front, back = 1, array.size - 1
+  i = 1
   tmp = head
-  (1...array.size).each do |i|
+  while front <= back
     if i.odd?
       tmp.next = array[back]
       back -= 1
@@ -36,6 +37,7 @@ def reorder_list(head)
       front += 1
     end
     tmp = tmp.next
+    i += 1
   end
   head
 end
