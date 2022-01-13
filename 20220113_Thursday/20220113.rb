@@ -4,20 +4,18 @@
 # Accepted.
 # Thanks God!
 # = = = = = = =
-# Runtime: 293 ms, faster than 57.14% of Ruby online submissions for Minimum Number of Arrows to Burst Balloons.
-# Memory Usage: 223 MB, less than 28.57% of Ruby online submissions for Minimum Number of Arrows to Burst Balloons.
+# Runtime: 357 ms, faster than 57.14% of Ruby online submissions for Minimum Number of Arrows to Burst Balloons.
+# Memory Usage: 222.8 MB, less than 42.86% of Ruby online submissions for Minimum Number of Arrows to Burst Balloons.
 # @param {Integer[][]} points
 # @return {Integer}
 def find_min_arrow_shots(points)
-  # Solution based on:
-  # https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/discuss/1686627/C%2B%2BJavaPython-6-Lines-oror-Sort-and-Greedy-oror-Image-Explanation
-  x = points.sort_by(&:last)
-  ans, arrow = 0, 0
-  x.each do |(start,finish)|
-    if 0 == ans || start > arrow
-      ans += 1
-      arrow = finish
+  number = 0
+  last_arrow_position = 0
+  points.sort_by(&:last).each do |(left,right)|
+    if 0 == last_arrow_position || last_arrow_position < left
+      number += 1
+      last_arrow_position = right
     end
   end
-  ans
+  number
 end
