@@ -15,7 +15,7 @@ def my_atoi(s)
   negative = false
   # 1. Skip whitespaces.
   while i < s.size && " " == s[i]; i += 1 ; end
-  # 2. Define sign condition.
+  # 2. Define a sign condition.
   if i < s.size && (?- == s[i] || ?+ == s[i])
     negative = true if ?- == s[i]
     i += 1
