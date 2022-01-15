@@ -1,41 +1,52 @@
 # Leetcode: 1345. Jump Game IV.
 # https://leetcode.com/problems/jump-game-iv/
+# = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
+# Runtime: 710 ms, faster than 100.00% of Ruby online submissions for Jump Game IV.
+# Memory Usage: 227.2 MB, less than 100.00% of Ruby online submissions for Jump Game IV.
 # @param {Integer[]} arr
 # @return {Integer}
-# TLE.
 def min_jumps(arr)
+  @d = false
+  puts "input: #{arr}" if @d
   last_index = arr.size - 1
-  common_values = {}
+  return 0 if arr.size <= 1
+  graph = {}
   arr.each_with_index do |value,index|
-    common_values[value] ||= []
-    common_values[value].push(index)
+    graph[value] ||= []
+    graph[value].push(index)
   end
-  steps_queue = [0]
-  index_queue = [0]
+  puts "graph: #{graph.inspect}" if @d
+  layer = [0]
   used = {}
   used[0] = true
-  while ! steps_queue.empty?
-    step = steps_queue.pop()
-    index = index_queue.pop()
-    if last_index == index
-      return step
-    end
-    [index+1,index-1].each do |i|
-      if (! used[i]) && i.between?(0,last_index)
-        used[i] = true
-        steps_queue.unshift(step+1)
-        index_queue.unshift(i)
+  step = 0
+  while ! layer.empty?
+    nxt = []
+    layer.each do |i|
+      puts  "i: #{i}" if @d
+      return step if last_index == i
+      [i+1,i-1].each do |j|
+        if j.between?(0,last_index) && (!used[j])
+          used[j] = true
+          nxt.push(j)
+        end
       end
-    end
-    value = arr[index]
-    next if ! common_values[value]
-    common_values[value].each do |i|
-      if ! used[i]
-        used[i] = true
-        steps_queue.unshift(step+1)
-        index_queue.unshift(i)
+      puts "i=#{i}, arr[i] = #{arr[i]}" if @d
+      graph[arr[i]].each do |j|
+        if ! used[j]
+          used[j] = true
+          nxt.push(j)
+        end
       end
+      # Most important line!
+      graph[arr[i]].clear()
     end
+    puts "step #{step}: #{nxt.inspect}" if @d
+    step += 1
+    layer = nxt
   end
   raise "Must return in the BFS list."
 end
