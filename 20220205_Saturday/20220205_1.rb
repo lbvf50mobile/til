@@ -14,16 +14,11 @@ def can_reorder_doubled(arr)
     puts "return false because #{counter[0]}" if @d
     return false
   end
-  pairs = counter[0] ? counter[0]/2 : 0
-  puts "Number of pairs is #{pairs}." if @d
-  puts "Keys: #{counter.keys.inspect}." if @d
-  counter.keys.each do |el|
-    if 0 != el
-      pairs += 1 if counter[el*2]
-    end
+  counter.keys.select{|x| x != 0}.each do |el|
+    a = counter[el] == counter[el*2] 
+    b = el.abs.even?  && counter[el] == counter[ el/2]
+    puts "#{el}, #{counter[el]}, #{counter[el/2]}, #{a.inspect}, #{b.inspect}" if @d
+    return false if !( a || b )
   end
-  ans = pairs >= arr.size/2
-  puts "Final: pairs = #{pairs}; size/2 = #{arr.size/2};" if @d
-  puts "Return: #{ans.inspect}." if @d
-  return ans
+  true
 end
