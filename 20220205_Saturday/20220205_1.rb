@@ -14,6 +14,7 @@ def can_reorder_doubled(arr)
     puts "return false because #{counter[0]}" if @d
     return false
   end
+  # Need to delete an element on each step. Or something like that.
   counter.keys.select{|x| x != 0}.each do |el|
     a = counter[el] == counter[el*2] 
     b = el.abs.even?  && counter[el] == counter[ el/2]
