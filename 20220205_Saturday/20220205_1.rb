@@ -1,25 +1,23 @@
 # Leetcode: 954. Array of Doubled Pairs.
 # https://leetcode.com/problems/array-of-doubled-pairs/
+# = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
+# Runtime: 662 ms, faster than 50.00% of Ruby online submissions for Array of Doubled Pairs.
+# Memory Usage: 221.9 MB, less than 50.00% of Ruby online submissions for Array of Doubled Pairs.
 # @param {Integer[]} arr
 # @return {Boolean}
 def can_reorder_doubled(arr)
-  @d = true
-  puts "#{arr.inspect}" if @d
-  if arr.size.odd?
-    puts "return false because #{arr.size}." if @d
-    return false
-  end
-  counter = arr.each_with_object(Hash.new){|el,o| o[el]||=0; o[el]+=1;}
-  if counter[0] && counter[0].odd?
-    puts "return false because #{counter[0]}" if @d
-    return false
-  end
-  # Need to delete an element on each step. Or something like that.
-  counter.keys.select{|x| x != 0}.each do |el|
-    a = counter[el] == counter[el*2] 
-    b = el.abs.even?  && counter[el] == counter[ el/2]
-    puts "#{el}, #{counter[el]}, #{counter[el/2]}, #{a.inspect}, #{b.inspect}" if @d
-    return false if !( a || b )
+  return false if arr.size.odd?
+  arr = arr.sort_by{|x| x.abs}
+  counter = arr.each_with_object(Hash.new){|e,o| o[e]||=0; o[e]+=1;}
+  arr.each do |el|
+    next if 0 == counter[el]
+    return false if ! counter[el*2]
+    return false if counter[el*2] <= 0
+    counter[el] -= 1
+    counter[el*2] -= 1
   end
   true
 end
