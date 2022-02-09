@@ -3,7 +3,11 @@
 # @param {Integer[]} nums
 # @param {Integer} k
 # @return {Integer}
+# Fails on: [1,2,1,2,1,2]
+# 1
 def find_pairs(nums, k)
+  @d = true
+  puts "#{nums.inspect} and #{k};" if @d
   hash_counter = {}
   ans_counter = 0
   # |nums[i] - nums[j]| == k;
@@ -12,9 +16,12 @@ def find_pairs(nums, k)
   nums.each do |nj|
     ni_1 = k + nj
     ni_2 = nj - k
-    if 0 == k
+    puts "Wokring with #{nj} looking for #{ni_1} or #{ni_2}." if @d
+    if 0 != k
       ans_counter += hash_counter[ni_1] if hash_counter[ni_1]
       ans_counter += hash_counter[ni_2] if hash_counter[ni_2]
+      puts "#{ni_1} and #{nj}" if hash_counter[ni_1] && @d
+      puts "#{ni_2} and #{nj}" if hash_counter[ni_2] && @d
     else
       ans_counter += hash_counter[ni_1] if hash_counter[ni_1]
     end
