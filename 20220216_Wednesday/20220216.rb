@@ -24,7 +24,7 @@ def swap_pairs(head)
     arr.push tmp
     tmp = tmp.next
   end
-  # Protection againts bugs.
+  # Protection against bugs.
   arr.each{|x| x.next = nil}
   i = 1
   while i < arr.size
