@@ -6,7 +6,6 @@
 # = = = = = = =
 # Runtime: 138 ms, faster than 60.18% of Ruby online submissions for Combination Sum.
 # Memory Usage: 211.1 MB, less than 36.28% of Ruby online submissions for Combination Sum.
-#
 # @param {Integer[]} candidates
 # @param {Integer} target
 # @return {Integer[][]}
