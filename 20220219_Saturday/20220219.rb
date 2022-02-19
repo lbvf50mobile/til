@@ -16,9 +16,22 @@ def minimum_deviation(nums)
       if 2*i > max_odd
         dev.push [2*i-max_odd, max_odd - i]
       else
-        dev.push [Float::INFINITY]
+        dev.push [Float::INFINITY, max_odd-2*i]
+      end
     else
+      if i < max_odd
+        dev.push [Float::INFINITY, max_odd-i]
+      else
+        while i.even? && i > max_odd
+          i = i/2
+        end
+        dev.push( [2*i-max_odd, max_odd - 1]) if i < max_odd
+      end
     end
   end
-    
+  dev = dev.sort.reverse
+  return 0 if dev.empty?
+  max_down = [0] * dev.size
+  curr = 0
+
 end
