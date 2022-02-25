@@ -1,0 +1,37 @@
+# Leetcode: 165. Compare Version Numbers.
+# https://leetcode.com/problems/compare-version-numbers/
+# = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
+# Runtime: 113 ms, faster than 37.93% of Ruby online submissions for Compare Version Numbers.
+# Memory Usage: 211.2 MB, less than 6.90% of Ruby online submissions for Compare Version Numbers.
+# @param {String} version1
+# @param {String} version2
+# @return {Integer}
+def compare_version(version1, version2)
+  @d = false
+  v1,v2 = version1.split(?.), version2.split(?.)
+  v1,v2 = remove_leading_zeros(v1), remove_leading_zeros(v2)
+  puts "v1 = #{v1.inspect}" if @d
+  puts "v2 = #{v2.inspect}" if @d
+  if v1.size < v2.size
+    diff = v2.size - v1.size
+    v1.push(*([?0]*diff))
+  elsif v1.size > v2.size
+    diff = v1.size - v2.size
+    v2.push(*([?0]*diff))
+  end
+  puts "After made size equal." if @d
+  puts "v1 = #{v1.inspect}" if @d
+  puts "v2 = #{v2.inspect}" if @d
+  v1.map(&:to_i).zip(v2.map(&:to_i)).each{|(a,b)|
+    return -1 if a < b
+    return 1 if a > b
+  }
+  return 0
+end
+def remove_leading_zeros(arr)
+  arr.map{|x| x.gsub(/^0+/,"")}.map{|x| x.empty? ? "0" : x}
+end
+
