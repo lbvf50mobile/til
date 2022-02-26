@@ -1,0 +1,40 @@
+# Leetcode: 847. Shortest Path Visiting All Nodes.
+# https://leetcode.com/problems/shortest-path-visiting-all-nodes/
+# = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
+# Runtime: 512 ms, faster than 100.00% of Ruby online submissions for Shortest Path Visiting All Nodes.
+# Memory Usage: 213.7 MB, less than 100.00% of Ruby online submissions for Shortest Path Visiting All Nodes.
+# @param {Integer[][]} graph
+# @return {Integer}
+def shortest_path_length(graph)
+  # Based on: https://leetcode.com/problems/shortest-path-visiting-all-nodes/solution/
+  return 0 if 1 == graph.size
+  n = graph.size
+  ending_mask = (1 << n) - 1
+  queue = []
+  (0...n).each do |node|
+    queue.push [node, 1 << node]
+  end
+  require "set"
+  seen = Set.new(queue)
+  steps = 0
+  while ! queue.empty?
+    next_queue = []
+    queue.each do |(node, mask)|
+      graph[node].each do |neighbor|
+        next_mask = mask | (1 << neighbor)
+        return 1 + steps if next_mask == ending_mask
+        pair = [neighbor, next_mask]
+        if ! seen.include?(pair)
+          seen.add(pair)
+          next_queue.push(pair)
+        end
+      end
+    end
+    steps += 1
+    queue = next_queue
+  end
+  return -1
+end
