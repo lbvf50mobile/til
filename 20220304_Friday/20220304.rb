@@ -1,9 +1,27 @@
 # Leetcode: 799. Champagne Tower.
 # https://leetcode.com/problems/champagne-tower/
+# = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
+# Runtime: 210 ms, faster than 100.00% of Ruby online submissions for Champagne Tower.
+# Memory Usage: 214.1 MB, less than 100.00% of Ruby online submissions for Champagne Tower.
 # @param {Integer} poured
 # @param {Integer} query_row
 # @param {Integer} query_glass
 # @return {Float}
 def champagne_tower(poured, query_row, query_glass)
-    
+  # Based on: https://leetcode.com/problems/champagne-tower/solution/
+  a = Array.new(101).map.with_index{|_,i| Array.new(i+1,0.0)}
+  a[0][0] = poured
+  (0..query_row).each do |r|
+    (0..r).each do |c|
+      q = (a[r][c].to_f - 1.0)/2.0
+      if q > 0
+        a[r+1][c] += q
+        a[r+1][c+1] += q
+      end
+    end
+  end
+  return [1, a[query_row][query_glass]].min
 end
