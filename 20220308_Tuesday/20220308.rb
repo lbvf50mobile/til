@@ -4,8 +4,8 @@
 # Accepted.
 # Thanks God!
 # = = = = = = =
-# Runtime: 167 ms, faster than 21.19% of Ruby online submissions for Linked List Cycle.
-# Memory Usage: 216 MB, less than 11.15% of Ruby online submissions for Linked List Cycle.
+# Runtime: 88 ms, faster than 83.27% of Ruby online submissions for Linked List Cycle.
+# Memory Usage: 212.1 MB, less than 53.16% of Ruby online submissions for Linked List Cycle.
 #
 # Definition for singly-linked list.
 # class ListNode
@@ -20,12 +20,15 @@
 # @return {Boolean}
 def hasCycle(head)
   return false if head.nil?
-  h = {}
-  h[head] = true
-  while head
-    head = head.next
-    return true if head && h[head]
-    h[head] = true if head
+  p1,p2 = head, head
+  while p1 && p2
+    10.times do 
+      break if p1.nil?
+      p1 = p1.next
+      return true if p1 && p2 && p1 == p2
+    end
+    p2 = p2.next
+    return true if p1 && p2 && p1 == p2
   end
   return false
 end
