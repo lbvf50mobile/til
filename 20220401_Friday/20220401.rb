@@ -1,6 +1,9 @@
 # Leetcode: 344. Reverse String. 
 # https://leetcode.com/problems/reverse-string/
 # = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
 # Runtime: 381 ms, faster than 32.13% of Ruby online submissions for Reverse String.
 # Memory Usage: 225.4 MB, less than 90.16% of Ruby online submissions for Reverse String.
 # @param {Character[]} s
