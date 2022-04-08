@@ -1,5 +1,6 @@
 # 703. Kth Largest Element in a Stream.
 # https://leetcode.com/problems/kth-largest-element-in-a-stream/
+# TLE.
 class KthLargest
 
 =begin
@@ -7,8 +8,7 @@ class KthLargest
     :type nums: Integer[]
 =end
     def initialize(k, nums)
-      @k = k
-      @n = nums.uniq.sort
+      @heap = HeapLike.new(k,nums)
     end
 
 
@@ -17,11 +17,28 @@ class KthLargest
     :rtype: Integer
 =end
     def add(val)
-      @n.push(val)
-      @n.sort!
-      @n[-@k] || @n.last
+      @heap.push_and_get(val)
     end
 end
+
+class HeapLike
+  def initialize(k, nums)
+    @d = false
+    @k = k
+    @n = nums.sort
+    if @n.size >  @k
+      @n = @n[-k..-1]
+    end
+    puts "Start: #{@n.inspect}" if @d
+  end
+  def push_and_get(x)
+    @n.push(x)
+    @n.sort!
+    @n.shift if @n.size > @k
+    @n.first
+  end
+end
+
 
 # Your KthLargest object will be instantiated and called as such:
 # obj = KthLargest.new(k, nums)
