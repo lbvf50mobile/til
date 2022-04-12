@@ -1,0 +1,47 @@
+# Leetcode: 289. Game of Life.
+# https://leetcode.com/problems/game-of-life/
+# = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
+# Runtime: 92 ms, faster than 82.05% of Ruby online submissions for Game of Life.
+# Memory Usage: 210.9 MB, less than 64.10% of Ruby online submissions for Game of Life.
+# @param {Integer[][]} board
+# @return {Void} Do not return anything, modify board in-place instead.
+def game_of_life(board)
+  @m,@n = board.size, board[0].size
+  @b = board.flatten.clone.each_slice(@n).to_a
+  (0...@m).each do |i|
+    (0...@n).each do |j|
+      live = statistics(i,j)
+      cell = @b[i][j]
+      # Any live cell with fewer than two live neighbors dies as if caused by under-population.
+      if 1 == cell && live < 2
+        board[i][j] = 0
+      # Any live cell with two or three live neighbors lives on to the next generation.
+      elsif 1 == cell && (2 == live || 3 == live)
+        board[i][j] = 1
+      # Any live cell with more than three live neighbors dies, as if by over-population.
+      elsif 1 == cell && live > 3
+        board[i][j] = 0
+      # Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
+      elsif 0 == cell && 3 == live
+        board[i][j] = 1
+      end
+    end
+  end
+end
+
+# @return {Integer} Live.
+def statistics(i,j)
+  live = 0
+  (-1..1).each do |ii|
+    (-1..1).each do |jj|
+      next if 0 == ii && 0 == jj
+      next if ! (i+ii).between?(0,@m-1)
+      next if ! (j+jj).between?(0,@n-1)
+      live += @b[i+ii][j+jj]
+    end
+  end
+  live
+end
