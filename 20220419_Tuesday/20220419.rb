@@ -11,13 +11,12 @@
 # end
 # @param {TreeNode} root
 # @return {Void} Do not return anything, modify root in-place instead.
+# This solution only work if error in root/child but not a the same level.
+# [2,3,1] - does not works.
 def recover_tree(root)
   return if root.nil?
-  @d = true
-  puts "#{root.val}" if @d
   a,b = find_bigger(root.left, root.val), find_smaller(root.right, root.val)
   if a || b
-    puts "Found for substitute." if @d
     x = a || b
     x.val, root.val = root.val, x.val
   else
@@ -26,17 +25,16 @@ def recover_tree(root)
   end
 end
 
-def find_bigger(node, val)
+def find_bigger(node, current_val)
   return nil if node.nil?
-  return node if val >= node.val
-  if val < node.val
-    return find_bigger(node.right, val)
-  end
+  # Need to find bigger than Current Val.
+  return node if node.val >= current_val
+  return find_bigger(node.right, current_val)
 end
-def find_smaller(node, val)
+def find_smaller(node, current_val)
   return nil if node.nil?
-  return node if val <= node.val
-  if val > node.val
-    return find_smaller(node.left, val)
-  end
+  # Need to find smaller than Current Val.
+  return node if node.val <= current_val
+  return find_smaller(node.left, current_val)
 end
+
