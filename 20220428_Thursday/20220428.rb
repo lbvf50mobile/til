@@ -4,6 +4,8 @@
 # Accepted.
 # Thanks, Jesus Christ!
 # = = = = = = = = = = = =
+# Runtime: 2367 ms, faster than 66.67% of Ruby online submissions for Path With Minimum Effort.
+# Memory Usage: 211.7 MB, less than 100.00% of Ruby online submissions for Path With Minimum Effort.
 # @param {Integer[][]} heights
 # @return {Integer}
 def minimum_effort_path(heights)
