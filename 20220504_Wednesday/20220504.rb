@@ -1,5 +1,11 @@
 # Leetcode: 1679. Max Number of K-Sum Pairs.
 # https://leetcode.com/problems/max-number-of-k-sum-pairs/
+# = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
+# Runtime: 440 ms, faster than 100.00% of Ruby online submissions for Max Number of K-Sum Pairs.
+# Memory Usage: 231.2 MB, less than 100.00% of Ruby online submissions for Max Number of K-Sum Pairs.
 # @param {Integer[]} nums
 # @param {Integer} k
 # @return {Integer}
@@ -13,14 +19,20 @@ def max_operations(nums, k)
   hsh = {}
   # k = a + b; a = k - b;
   nums.each_with_index do |b,i|
+    hsh[b] = i
     a = k - b 
     if hsh[a]
-      amount = min(cnt[a],cnt[b])
-      cnt[a] -= amount
-      cnt[b] -= amount
-      answer += amount
+      if a == b
+        amount = cnt[a]/2
+        cnt[a] -= amount
+        answer += amount
+      else
+        amount = min(cnt[a],cnt[b])
+        cnt[a] -= amount
+        cnt[b] -= amount
+        answer += amount
+      end
     end
-    hsh[b] = i
   end
   answer
 end
