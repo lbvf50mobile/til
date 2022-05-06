@@ -1,0 +1,39 @@
+# Leetcode: 1209. Remove All Adjacent Duplicates in String II.
+# https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/
+# = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
+# Runtime: 233 ms, faster than 50.00% of Ruby online submissions for Remove All Adjacent Duplicates in String II.
+# Memory Usage: 228.3 MB, less than 33.33% of Ruby online submissions for Remove All Adjacent Duplicates in String II.
+# @param {String} s
+# @param {Integer} k
+# @return {String}
+def remove_duplicates(s, k)
+  stack = []
+  counter = 0
+  s.chars.each do |c|
+    if !stack.empty?
+      if 0 == counter
+        counter = 2 if stack.last == c
+      else
+        counter = stack.last == c ? counter + 1 : 0
+      end
+      stack.push c
+      if counter == k
+        stack.pop(k)
+        counter = 0
+        i = stack.size - 2
+        tmp = 0
+        while i >= 0 && stack[i+1] == stack[i]
+          tmp += 1
+          i -= 1
+        end
+        counter =  (tmp + 1) if tmp > 0
+      end
+    else
+      stack.push c
+    end
+  end
+  stack.join
+end
