@@ -2,7 +2,7 @@
 # https://leetcode.com/problems/132-pattern/
 # = = = = = = =
 # Accepted.
-# Thanks Jesus Christ!
+# Thanks, Jesus Christ!
 # = = = = = = =
 # Runtime: 187 ms, faster than 66.67% of Ruby online submissions for 132 Pattern.
 # Memory Usage: 215.2 MB, less than 100.00% of Ruby online submissions for 132 Pattern.
