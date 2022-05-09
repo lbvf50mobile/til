@@ -1,8 +1,15 @@
 # Leetcode: 17. Letter Combinations of a Phone Number.
 # https://leetcode.com/problems/letter-combinations-of-a-phone-number/
+# = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
+# Runtime: 135 ms, faster than 19.58% of Ruby online submissions for Letter Combinations of a Phone Number.
+# Memory Usage: 211 MB, less than 70.37% of Ruby online submissions for Letter Combinations of a Phone Number.
 # @param {String} digits
 # @return {String[]}
 def letter_combinations(digits)
+  return [] if digits.empty?
   @h = {}
   @n = [
     [],
@@ -28,7 +35,7 @@ def rec(digits)
   ans = []
   @n[x]
   @n[x].each do |ch|
-    ans += arr.map{|x| ch+s}
+    ans += arr.map{|s| ch+s}
   end
   @h[digits] = ans
   ans
