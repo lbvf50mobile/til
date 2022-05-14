@@ -4,6 +4,10 @@
 # @param {Integer} n
 # @param {Integer} k
 # @return {Integer}
+# Failed.
+# [[1,2,1],[2,1,3]]
+# 2
+# 2
 def network_delay_time(times, n, k)
   # Using BFS and sum times.
   # Create adjacency list.
