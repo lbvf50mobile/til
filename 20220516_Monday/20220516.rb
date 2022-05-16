@@ -1,0 +1,44 @@
+# Leetcode: 1091. Shortest Path in Binary Matrix.
+# https://leetcode.com/problems/shortest-path-in-binary-matrix/
+# = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
+# Runtime: 798 ms, faster than 26.67% of Ruby online submissions for Shortest Path in Binary Matrix.
+# Memory Usage: 214.4 MB, less than 6.67% of Ruby online submissions for Shortest Path in Binary Matrix.
+# @param {Integer[][]} grid
+# @return {Integer}
+def shortest_path_binary_matrix(grid)
+  @g = grid
+  @rs,@cs = @g.size, @g[0].size
+  
+  q = []
+  if 0 == @g[0][0]
+    q.push( [0,0,1])
+  end
+  while ! q.empty?
+    r,c,s = q.shift
+    return s if home(r,c)
+    (-1..1).each do |dr|
+      (-1..1).each do |dc|
+        next if 0 == dr && 0 == dc
+        nr,nc = r+dr, c+dc
+        next if !in_g(nr,nc)
+        next if 1 == @g[nr][nc]
+        @g[nr][nc] = 1
+        q.push([nr,nc,s+1])
+      end
+    end
+  end
+  return -1
+end
+
+def home(r,c)
+  @rs - 1 == r && @cs - 1 == c
+end
+
+def in_g(r,c)
+  a = r.between?(0,@rs-1)
+  b = c.between?(0,@cs-1)
+  a && b
+end
