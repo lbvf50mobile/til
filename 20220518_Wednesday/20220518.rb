@@ -1,11 +1,19 @@
 # Leetcode: 1192. Critical Connections in a Network.
 # https://leetcode.com/problems/critical-connections-in-a-network/
+# = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
+# Runtime: 1398 ms, faster than 50.00% of Ruby online submissions for Critical Connections in a Network.
+# Memory Usage: 253.4 MB, less than 100.00% of Ruby online submissions for Critical Connections in a Network.
+# Based on:
+# https://leetcode.com/problems/critical-connections-in-a-network/discuss/465923/Simple-Intuitive-Explanation-Beats-99-in-theory-as-well-as-compute-PYTHON
 # @param {Integer} n
 # @param {Integer[][]} connections
 # @return {Integer[][]}
 def critical_connections(n, connections)
   @n = n
-  @d = true
+  @d = false
   # Based on: 
   # https://leetcode.com/problems/critical-connections-in-a-network/discuss/465923/Simple-Intuitive-Explanation-Beats-99-in-theory-as-well-as-compute-PYTHON
   # Node is index, neighbors are in the list.
@@ -16,10 +24,13 @@ def critical_connections(n, connections)
     @graph[n1].push(n2)
     @graph[n2].push(n1)
   end
+  puts @graph.inspect if @d
 
   # min_discovery_time of nodes at respective indices from start node.
   # 1. default to max wich is the depth of continuous graph.
   @lows = [n] * n
+  puts @lows.size if @d
+  puts @lows.inspect if @d
 
   # Critical edges.
   @critical = []
@@ -31,12 +42,13 @@ end
 
 # args: node, node discovery_time in dfs, parent of this node.
 def dfs(node, discovery_time, parent)
-  puts node if @d
+  puts "Enter dfs: node=#{node}, discovery_time=#{discovery_time}, parent=#{parent};" if @d
   # if the low is not yet discovered for this onde
   if @n == @lows[node]
     # 2. default it tot the depth or discovery time of this node.
-    @lows = discovery_time
+    @lows[node] = discovery_time # ! looks like here.
     # iterate over neighbors.
+    puts "Working iwth #{node} and #{@graph[node].inspect};" if @d
     @graph[node].each do |neighbor|
       # all neightbos except parent.
       next if neighbor == parent
