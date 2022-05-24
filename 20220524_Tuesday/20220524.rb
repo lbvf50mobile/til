@@ -4,35 +4,40 @@
 # @return {Integer}
 def longest_valid_parentheses(s)
   @s = s
+  @d = true
   answer = 0
   # Valid parentheses could starts only from "(".
-  (0...@s.size).each do |i|
+  (0...@s.size).reverse_each do |i|
     if ?( == @s[i]
       x = longest(i)
+      puts "#{i} = #{x}" if @d
+      answer = x if x > answer
     end
-    answer = x if x > answer
   end
   answer
 end
 
 def longest(i)
-  l = 0
-  stack = []
-  (i...@s.size).each do |j|
-    c = @s[i]
-    if ?( == c
-      if 0 == l
-        if stack.empty?
-          stack.push [i]
-        elsif stack.last.last == i - 1
-          stack.last.pop
-        else
-          break
-        end
-
-      end
-    else
-
-    end
+  size = 0
+  while true
+    close = false
+    close = find_close(i)
+    break if ! close
+    size += close - i + 1
+    # Starting next turn.
+    i += 1
+    break if ! ?( == @s[i]
   end
+  return size
+end
+
+def find_close(i)
+  l = 1
+  (i+1...@s.size).each do |j|
+    c = @s[j]
+    l += 1 if ?( == c 
+    l -= 1 if ?) == c
+    return j if 0 == l
+  end
+  return false
 end
