@@ -2,6 +2,8 @@
 # https://leetcode.com/problems/longest-valid-parentheses/
 # @param {String} s
 # @return {Integer}
+# Wrong answer.
+# ")(((((()())()()))()(()))("
 def longest_valid_parentheses(s)
   @s = s
   @d = true
