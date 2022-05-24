@@ -7,13 +7,12 @@ def longest_valid_parentheses(s)
   @d = true
   puts @s if @d
   # Index: Open bracket. Value: Close bracket index.
-  @dp = Array.new(s.size,0)
+  @dp = Array.new(s.size,false)
   answer = 0
   # Valid parentheses could starts only from "(".
   (0...@s.size).reverse_each do |i|
     if ?( == @s[i]
-      x = longest(i)
-      puts "s[#{i}] length #{x}" if @d
+      x = longest(i) 
       answer = x if x > answer
     end
   end
@@ -28,7 +27,6 @@ def longest(i)
     close = find_close(i)
     break if ! close
     length = close - i + 1
-    puts "for (#{i} )#{close} = lenght #{length}" if @d
     size += length 
     # Starting next turn.
     i = close + 1
@@ -48,8 +46,14 @@ def find_close(i)
     c = @s[j]
     l += 1 if ?( == c 
     l -= 1 if ?) == c
-    return j if 0 == l
+    if l.zero?
+      # What if there is dp jump?
+      return @dp[j+1] if @dp[j+1]
+      return j
+    end
     j += 1
+    # Next position is start of dp jump.
+    j = @dp[j] + 1 if @dp[j]
   end
   return false
 end
