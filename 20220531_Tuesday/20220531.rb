@@ -11,22 +11,15 @@
 # @return {Boolean}
 def has_all_codes(s, k)
   size = 2**k  
-  # puts "Size"
-  # puts size
   return false if s.size < size
-  # puts "here"
   require 'set'
   storage = Set.new
   str = s[0...k].chars
   storage.add(str.join)
-  # puts str.join
   (k...s.size).each do |i|
     str.shift
     str.push(s[i])
-    # puts str.join
     storage.add(str.join)
-    # puts storage.inspect
-    # puts storage.size
     return true if storage.size == size
   end
   storage.size == size
