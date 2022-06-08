@@ -1,26 +1,19 @@
 # Leetcode: 1332. Remove Palindromic Subsequences.
 # https://leetcode.com/problems/remove-palindromic-subsequences/
+# = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
+# Runtime: 130 ms, faster than 100.00% of Ruby online submissions for Remove Palindromic Subsequences.
+# Memory Usage: 210.9 MB, less than 100.00% of Ruby online submissions for Remove Palindromic Subsequences.
 # @param {String} s
 # @return {Integer}
-# Incorrect.
-# "bbaabaaa"
 def remove_palindrome_sub(s)
-  @s = s
-  @n = s.size
-  @i = 0
-  counter = 0
-  while @i < @n
-    cut_palindrome()
-    counter += 1
-  end
-  counter
-end
-
-def cut_palindrome()
-  last = @i
-  (@i...@n).each do |j|
-    str = @s[@i..j]
-    last = j if str == str.reverse 
-  end
-  @i = last + 1
+  # Any palindrome could be removed in 2 steps.
+  # First all "a", second all "b".
+  # Hint from the:
+  # https://leetcode.com/problems/remove-palindromic-subsequences/discuss/490352/Java-Use-the-Trick-%3A-the-input-string-only-consists-of-letters-'a'-and-'b'!!
+  return 0 if s.empty?
+  return 1 if s == s.reverse
+  return 2
 end
