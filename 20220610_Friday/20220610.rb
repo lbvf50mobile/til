@@ -8,12 +8,27 @@ def length_of_longest_substring(s)
   @ones = 2**30 - 1
   i,j = 0,0
   bit = get_power_of_two(s[0])
-  add_char(s)
+  add_char(bit)
   size = 1
   max_size = 1
   while i < s.size && j < s.size
+    # Here always arrives valid sliding window.
+    # grow while it is possible.
+    while j + 1 < s.size && may_add(s[j+1])
+      j = j + 1
+      size = j - i + 1
+      max_size = size if size < max_size
+      bit = get_power_of_tow(s[j])
+      add_char(bit)
+    end
+    #shrink while
   end
   max_size
+end
+
+def may_add(char)
+  bit = get_power_of_two(char)
+  ! has_duplicates(bit)
 end
 
 def get_power_of_two(char)
