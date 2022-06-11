@@ -1,5 +1,11 @@
 # Leetcode: 1658. Minimum Operations to Reduce X to Zero.
 # https://leetcode.com/problems/minimum-operations-to-reduce-x-to-zero/
+# = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
+# Runtime: 1110 ms, faster than 50.00% of Ruby online submissions for Minimum Operations to Reduce X to Zero.
+# Memory Usage: 264.7 MB, less than 50.00% of Ruby online submissions for Minimum Operations to Reduce X to Zero.
 # @param {Integer[]} nums
 # @param {Integer} x
 # @return {Integer}
@@ -21,7 +27,10 @@ def min_operations(nums, x)
       @ans.push(i+1)
     end
   end
-  if 
+  n = nums.last
+  if @hsh[x-n] && @hsh[x-n] < nums.size-1  
+    @ans.push(1 + @hsh[x-n] + 1)
+  end
   @rl = nums.clone
   (0...(nums.size-1)).reverse_each do |j|
     @rl[j] += @rl[j+1]
