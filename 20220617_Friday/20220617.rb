@@ -11,19 +11,28 @@
 # end
 # @param {TreeNode} root
 # @return {Integer}
-# Error.
 def min_camera_cover(root)
-  return 0 if root.nil?
-  return 1 if root.left.nil? && root.right.nil?
-  @a = [0,0]
-  dfs(root,0)
-  @a.min
+  # Light that lights down.
+  # TODO: Need to fix. Need add light up.
+  # 1 - light
+  # 0 - shadow
+  # -1 - total darknes, need new light.
+  a = dfs(root,-1) # Set camera at root.
+  b = dfs(root, 0) # set camera on second row.
+  a < b ? a : b
 end
 
 
-def dfs(node,color)
-  return if  node.nil?
-  @a[color] += 1
-  dfs(node.left, 1 == color ? 0 : 1)
-  dfs(node.right, 1 == color ? 0 : 1)
+def dfs(node,light)
+  # TODO: Need to check do it possible to light with by a child!
+  return 0 if  node.nil?
+  camera = 0
+  if light < 0
+    light = 1
+    camera = 1
+  end
+  ans = camera
+  ans += dfs(node.left, light-1)
+  ans += dfs(node.right, light-1)
+  return ans
 end
