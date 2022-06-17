@@ -1,36 +1,35 @@
 # Leetcode: 5. Longest Palindromic Substring.
 # https://leetcode.com/problems/longest-palindromic-substring/
+# = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
+# Runtime: 1678 ms, faster than 50.52% of Ruby online submissions for Longest Palindromic Substring.
+# Memory Usage: 211.2 MB, less than 36.98% of Ruby online submissions for Longest Palindromic Substring.
 # @param {String} s
 # @return {String}
-# TLE
 def longest_palindrome(s)
-  max = 1
-  ans = s[0] 
+  max = 0
+  left,right = 0,0 # Need to avoid save strings. 
   (1...s.size).each do |c|
-    # Odd size palindrome.
-    tmp = s[c]
-    i,j = c-1, c+1
+    # Odd size palindrome
+    i,j = c,c
     while i >= 0 && j < s.size && s[i] == s[j]
-      tmp = s[i] + tmp + s[j]
-      tmp_size = j - i + 1
-      if max < tmp_size
-        ans = tmp
-        max = tmp_size
+      if j - i + 1 > max
+        left,right = i,j
+        max = j - i + 1
       end
-      i-=1; j+=1;
+      i -= 1; j += 1;
     end
     # Even size palindrome.
-    tmp = ""
     i,j = c-1, c
-    while i >=0 && j < s.size && s[i] == s[j]
-      tmp = s[i] + tmp + s[j]
-      tmp_size = j-i+1
-      if max < tmp_size
-        ans = tmp
-        max = tmp_size
+    while i >= 0 && j < s.size && s[i] == s[j]
+      if j - i + 1 > max
+        left, right = i,j
+        max = j - i + 1
       end
-      i-=1; j+=1;
+      i -= 1; j += 1;
     end
   end
-  return ans
+  s[left..right]
 end
