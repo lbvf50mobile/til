@@ -8,7 +8,7 @@ class WordFilter
     :type words: String[]
 =end
     def initialize(words)
-      @d = true
+      @d = false
       @w = words
       @answers = [9,4,5,0,8,1,2,5,3,1]
     end
@@ -21,13 +21,18 @@ class WordFilter
 =end
     def f(prefix, suffix)
       hint = @answers.shift
-      regex = Regexp.new("^#{prefix}.*#{suffix}$")
-      puts "#{prefix}, #{suffix}, #{regex.inspect}" if @d
-      puts "Answer string: #{@w[hint]} #{(regex===@w[hint]).inspect}"
+      regex = Regexp.new("^#{prefix}")
+      regex1 = Regexp.new("#{suffix}$")
+      valid = ->(word){ (regex===word) && (regex1 === word)}
+      puts "#{prefix}, #{suffix}, #{regex.inspect} #{regex1.inspect}" if @d
+      puts "Answer string: #{@w[hint]} #{valid[@w[hint]]}" if @d
       ans = @w.each_with_index.select{|x,i| 
-        regex === x}
+        valid[x]}
+      puts ans.inspect if @d
       return -1 if ans.empty?
-      ans.max_by{|x| x[0].size}.last
+      puts ans.sort{|a,b| a[0] <=> b[0]}.last.last if @d
+      puts "=====" if @d
+      ans.sort{|a,b| a[0] <=> b[0]}.last.last 
     end
 
 
