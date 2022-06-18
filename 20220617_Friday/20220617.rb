@@ -16,6 +16,7 @@
 # [0,0,null,null,0,0,null,null,0,0]
 # [0,null,0,null,0,0,0] Error.
 def min_camera_cover(root)
+  # TODO: when -1 need to set camera when two children.
   # Light that lights down and UP.
   # 1 - light
   # 0 - shadow no need camera. The light is enough.
