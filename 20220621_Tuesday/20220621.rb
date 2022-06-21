@@ -4,28 +4,15 @@
 # @param {Integer} bricks
 # @param {Integer} ladders
 # @return {Integer}
-# TLE.
+# Based on: 
+# https://leetcode.com/problems/furthest-building-you-can-reach/discuss/918515/JavaC%2B%2BPython-Priority-Queue
 def furthest_building(heights, bricks, ladders)
-  return 0 if 1 == heights.size
-  total = 0
   heap = MinHeap.new([])
-  heap_sum = 0
-  (1...heights.size).each do |i|
-    delta = heights[i] - heights[i-1]
-    if delta > 0
-      total += delta
-      if heap.size < ladders
-        heap.push(delta)
-        heap_sum += delta 
-      elsif heap.size == ladders && ladders > 0 && heap.min < delta
-        tmp = heap.pop
-        heap.push(delta)
-        heap_sum += (delta - tmp) 
-      end
-      if bricks < (total - heap_sum)
-        return i - 1
-      end
-    end
+  (0...heights.size-1).each do |i|
+    delta = heights[i+1] - heights[i]
+    heap.push(delta) if delta > 0
+    bricks -= heap.pop if heap.size > ladders
+    return i if bricks < 0
   end
   return heights.size - 1
 end
