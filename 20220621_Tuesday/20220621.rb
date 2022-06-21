@@ -6,28 +6,23 @@
 # @return {Integer}
 def furthest_building(heights, bricks, ladders)
   return 0 if 1 == heights.size
-  @d = false
-  puts heights.inspect if @d
-  max = []
   total = 0
+  heap = MinHeap.new([])
+  heap_sum = 0
   (1...heights.size).each do |i|
-    puts "i=#{i} h=#{heights[i]}" if @d
-    if heights[i] > heights[i-1]
-      puts "Need to jump." if @d
-      delta = heights[i] - heights[i-1]
-      puts "delta = #{delta}" if @d
+    delta = heights[i] - heights[i-1]
+    if delta > 0
       total += delta
-      max.push(delta)
-      max.sort! # <= here was an error.
-      sum = 0
-      (0...max.size - ladders).each do |j|
-        sum += max[j]
+      if heap.size < ladders
+        heap_sum += delta
+        heap.push(delta)
+      elsif heap.size == ladders && ladders > 0 && heap.min < delta
+        tmp = heap.pop
+        heap_sum += (delta - tmp)
       end
-      if sum > bricks
-        return i-1
+      if bricks < total - heap_sum
+        return i - 1
       end
-    else
-      puts "no need to jump." if @d
     end
   end
   return heights.size - 1
