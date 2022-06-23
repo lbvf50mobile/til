@@ -10,16 +10,9 @@ def schedule_course(courses)
   h = MaxHeap.new([])
   time = 0
   crs.each do |c|
-    if time + c[0] <= c[1]
-      time += c[0]
-      h.push(c[0])
-    else
-      if h.size != 0 && c[0] < h.max
-        time -= (h.pop)
-        time += c[0]
-        h.push(c[0])
-      end
-    end
+    time += c[0]
+    h.push(c[0])
+    time -= h.pop() if(time > c[1])
   end
   h.size
 end
