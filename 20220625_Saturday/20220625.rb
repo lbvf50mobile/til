@@ -1,37 +1,39 @@
 # Leetcode: 665. Non-decreasing Array.
 # https://leetcode.com/problems/non-decreasing-array/
+# = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
+# Runtime: 161 ms, faster than 25.00% of Ruby online submissions for Non-decreasing Array.
+# Memory Usage: 213.2 MB, less than 50.00% of Ruby online submissions for Non-decreasing Array.
 # @param {Integer[]} nums
 # @return {Boolean}
 # fixed Error: [-1,4,2,3]
-# Error: [5,7,1,8]
+# fixed Error: [5,7,1,8]
 def check_possibility(nums)
-  @d = false
+  # Fine where it is broken.
+  j = nil
   a = nums
-  puts a.inspect if @d
-  counter = 0
-  (1...nums.size).each do |i|
-    puts "a[#{i}]=#{a[i]}" if @d
-    if nums[i-1] <= nums[i]
-      puts "#{a[i-1]} <= #{a[i]}; do nothing." if @d
-      # Just do nothing.
-    elsif 0 == counter
-      if 0 == i-1
-        puts "#{a[i-1]} <= #{a[i]}; First element is too big. Change it." if @d
-        a[i-1] = - (10**7)
-      elsif nums.size-1 == i
-        puts "#{a[i-1]} <= #{a[i]}; Last elemen it too small. Do nothing." if @d
-        # Just do noting.
-      elsif a[i-2] <= a[i] # !
-        puts "#{a[i-2]} <= #{a[i]}; Possible go fix." if @d
-        a[i-1] = a[i]
-      else
-        puts "#{a[i-2]} <= #{a[i]}; ImmPossible go fix." if @d
-        return false
-      end
-      counter += 1
-    else
-      puts "#{a[i-1]} <= #{a[i]}; counter=#{counter} return false." if @d
-      return false
+  (1...a.size).each do |i|
+    if a[i-1] > a[i]
+      j = i
+      break
+    end
+  end
+  return true if !j
+  # Now test is it possible to remove j or j-1.
+  remove(a,j) || remove(a,j-1)
+end
+
+def remove(a,j)
+  (1...a.size).each do |i|
+    if i != j && i != (j+1)
+      return false if a[i-1] > a[i]
+    end
+    next if i == j
+    if j + 1 == i
+      next if 1 == i
+      return false if a[i-2] > a[i]
     end
   end
   return true
