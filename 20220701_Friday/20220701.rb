@@ -12,7 +12,7 @@
 def maximum_units(box_types, truck_size)
   box_types = box_types.sort_by{|x| - x.last}
   p box_types
-  units1 = 0 # ! Variables name confilct! Leadsto dubbuging.
+  units1 = 0 # ! Variables name confilct! Which leads to debbuging.
   box_types.each do |amount, units|
     p [amount, units, truck_size]
     if truck_size > 0
