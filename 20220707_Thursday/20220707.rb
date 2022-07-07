@@ -1,5 +1,11 @@
 # Leetcode: 97. Interleaving String.
 # https://leetcode.com/problems/interleaving-string/
+# = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
+# Runtime: 440 ms, faster than 10.00% of Ruby online submissions for Interleaving String.
+# Memory Usage: 335.6 MB, less than 10.00% of Ruby online submissions for Interleaving String.
 # @param {String} s1
 # @param {String} s2
 # @param {String} s3
@@ -7,7 +13,7 @@
 def is_interleave(s1, s2, s3)
   return false if (s1.size + s2.size) != s3.size
   return false if counter(s1+s2) != counter(s3)
-  @d = true
+  @d = false
   @s1,@s2,@s3 = s1, s2, s3 # Save all varaiables as an object variables.
   # need to flip turns.
   @dp = Array.new(2) # turn 0 - s1, 1 - s2.  
