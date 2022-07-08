@@ -14,7 +14,7 @@ def min_cost(houses, cost, m, n, target)
   minus_counter = 0
   n.times do |color|
     tmp = rec(0, color, target-1)
-    if -1 == counter
+    if -1 == tmp
       minus_counter += 1
     else
       answer = tmp if answer.nil?
