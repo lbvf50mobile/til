@@ -6,14 +6,16 @@
 # @param {Integer} n
 # @param {Integer} target
 # @return {Integer}
+# Need to read description better.
+# I solve other task. One more time. Again.
 def min_cost(houses, cost, m, n, target)
   @h,@c = houses,cost
   @n = n
   # Fist create DP. Three dimensions array. house index, color, target.
-  @dp = Array.new(m).map{ Array.new(n).map{ Array.new(target)}}
+  @dp = Array.new(m).map{ Array.new(n+1).map{ Array.new(target)}}
   answer = nil
   minus_counter = 0
-  n.times do |color|
+  (1..n).each do |color|
     tmp = rec(0, color, target-1)
     if -1 == tmp
       minus_counter += 1
@@ -33,7 +35,8 @@ def rec(i,color,target)
   # Return DP solution if it is already couted.
   return @dp[i][color][target] if @dp[i][color][target]
   #  Get price for color this house.
-  price = @c[i][color]
+  #  Free if a house already colored in this color.
+  price = (@h[i] == color) ? 0 : @c[i][color-1] # In matrix color 1 is under index 0.
   # This is the last house in the city. It must be at the last grout.
   # Otherwise not all groups are filled.
   if i == @h.size - 1
@@ -42,7 +45,7 @@ def rec(i,color,target)
   end
   answer = nil # Minumum for coloring next house.
   minus_counter = 0
-  @n.times do |nc|
+  (1..@n).each do |nc|
     tmp = 0
     if nc == color
       tmp = rec(i+1,color,target) # Same color precerve the tagret.
