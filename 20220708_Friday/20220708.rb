@@ -8,6 +8,7 @@
 # @return {Integer}
 def min_cost(houses, cost, m, n, target)
   @h,@c = houses,cost
+  @n = n
   # Fist create DP. Three dimensions array. house index, color, target.
   @dp = Array.new(m).map{ Array.new(n).map{ Array.new(target)}}
   answer = nil
@@ -41,7 +42,7 @@ def rec(i,color,target)
   end
   answer = nil # Minumum for coloring next house.
   minus_counter = 0
-  n.times do |nc|
+  @n.times do |nc|
     tmp = 0
     if nc == color
       tmp = rec(i+1,color,target) # Same color precerve the tagret.
@@ -55,11 +56,11 @@ def rec(i,color,target)
       answer = tmp if tmp < answer
     end
   end
-  if n == minus_counter
+  if @n == minus_counter
     @dp[i][color][target] = -1
     return -1
   end
-  answer += price
+  answer += price # Add current price to a recursive responce.
   @dp[i][color][target] = answer
   return answer
 end
