@@ -2,14 +2,20 @@
 # https://leetcode.com/problems/matchsticks-to-square/
 # @param {Integer[]} matchsticks
 # @return {Boolean}
+# [5,5,5,5,4,4,4,4,3,3,3,3]
+# [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 # TLE.
 def makesquare(matchsticks)
   @m = matchsticks
+  @sum = @m.sum
+  return false if @sum != ((@sum/4) * 4)
+  @qu = @sum/4
   @dp = {}
   return rec(0,0,0,0,0)
 end
 
 def rec(i,a,b,c,d)
+  return false if a > @qu || b > @qu || c > @qu || d > @qu
   log = [i,a,b,c,d].join(?,)
   return  @dp[log] if @dp[log]
   if @m.size == i
