@@ -1,42 +1,35 @@
 # Leetcode: 792. Number of Matching Subsequences.
 # https://leetcode.com/problems/number-of-matching-subsequences/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 1789 ms, faster than 66.67% of Ruby online submissions for Number of Matching Subsequences.
+# Memory Usage: 223.4 MB, less than 33.33% of Ruby online submissions for Number of Matching Subsequences.
 # @param {String} s
 # @param {String[]} words
 # @return {Integer}
-# TLE.
 def num_matching_subseq(s, words)
-  @d = false
-  sa = create_array(s)
-  wa = words.map{|x| create_array(x)}
+  # Idea from:
+  # https://leetcode.com/problems/number-of-matching-subsequences/discuss/2308747/Bucket-by-character-or-Intuition-explained-with-image
+  bucket = {}
+  words.each do |w|
+    bucket[w[0]] ||= []
+    bucket[w[0]].push(w)
+  end
   answer = 0
-  words.zip(wa).each do |(word,arr)|
-    next if word.size > s.size
-    next if ! (same_set(arr,sa))
-    # Idea from:
-    # https://leetcode.com/problems/number-of-matching-subsequences/discuss/2308747/Bucket-by-character-or-Intuition-explained-with-image
-    j = 0 # Sub string pointer.
-    (0...s.size).each do |i|
-      if s[i] == word[j]
-        j += 1
+  s.chars.each do |c|
+    next if bucket[c].nil?
+    bucket[c].size.times do 
+      tmp = bucket[c].shift
+      if 1 == tmp.size
+        answer += 1
+        next
       end
-      answer += 1 if j == word.size
-      break if j == word.size
+      bucket[tmp[1]] ||= []
+      bucket[tmp[1]].push(tmp[1..-1])
     end
   end
   answer
 end
 
-def create_array(s)
-  answer = Array.new(30,0)
-  s.chars.each do |c|
-    answer[c.ord - ?a.ord] += 1
-  end
-  answer
-end
-
-def same_set(small,big)
-  (0...small.size).each do |i|
-    return false if small[i] > big[i]
-  end
-  return true
-end
