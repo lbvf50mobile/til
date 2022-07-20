@@ -12,20 +12,16 @@ def num_matching_subseq(s, words)
   words.zip(wa).each do |(word,arr)|
     next if word.size > s.size
     next if ! (same_set(arr,sa))
-    i,j = 0,0
-    while i < s.size && j < word.size
-      if s[i] !=  word[j]
-        i += 1
-      else
-        i += 1
+    # Idea from:
+    # https://leetcode.com/problems/number-of-matching-subsequences/discuss/2308747/Bucket-by-character-or-Intuition-explained-with-image
+    j = 0 # Sub string pointer.
+    (0...s.size).each do |i|
+      if s[i] == word[j]
         j += 1
       end
+      answer += 1 if j == word.size
+      break if j == word.size
     end
-    # Need to reach the end of a word.
-    # End of a word is a "terminating zero".
-    # Can not skip chars from a word.
-    puts "#{s} #{word} #{(word.size == j).inspect}" if @d
-    answer += 1 if  word.size == j
   end
   answer
 end
