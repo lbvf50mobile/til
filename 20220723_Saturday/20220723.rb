@@ -1,5 +1,11 @@
 # Leetcode: 315. Count of Smaller Numbers After Self.
 # https://leetcode.com/problems/count-of-smaller-numbers-after-self/
+# = = = = = = =
+# Accepted.
+# Thanks God!
+# = = = = = = =
+# Runtime: 1462 ms, faster than 100.00% of Ruby online submissions for Count of Smaller Numbers After Self.
+# Memory Usage: 232.1 MB, less than 100.00% of Ruby online submissions for Count of Smaller Numbers After Self.
 # @param {Integer[]} nums
 # @return {Integer[]}
 def count_smaller(nums)
@@ -19,9 +25,9 @@ def merge(nums)
   while (!left.empty?) && (!right.empty?)
     if left[0][0] > right[0][0]
       @counts[left[0][1]] += right.size
-      curr_stack.push(left.pop())
+      curr_stack.push(left.shift())
     else
-      curr_stack.push(right.pop())
+      curr_stack.push(right.shift())
     end
   end
   if (!left.empty?)
