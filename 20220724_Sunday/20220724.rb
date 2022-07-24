@@ -10,7 +10,7 @@
 # @param {Integer} target
 # @return {Boolean}
 def search_matrix(matrix, target)
-  @d = true
+  @d = false
   @target = target
   matrix.select{|x| target.between?(x.first, x.last)}
     .any?{|x| check_row(x)}
