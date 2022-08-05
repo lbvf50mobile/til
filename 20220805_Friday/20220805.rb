@@ -4,6 +4,8 @@
 # Accepted.
 # Thanks God, Jesus Christ!
 # = = = = = = = = = = = = = =
+# Runtime: 113 ms
+# Memory Usage: 210.9 MB
 # @param {Integer[]} nums
 # @param {Integer} target
 # @return {Integer}
