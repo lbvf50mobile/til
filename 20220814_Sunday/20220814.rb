@@ -19,6 +19,41 @@ def find_ladders(begin_word, end_word, word_list)
   return path
 end
 
+def bfs(graph, start)
+  # dictionary that maps each node in graph to the shortest disnance away from start.
+  dist = {} 
+  dist[start] = 0
+  parents = {}
+  parents[start] = nil
+
+  (0...graph.size).each do |i|
+    next if start == i
+    dist[i] = Float::INFINITY
+    parents[i] = []
+  end
+
+  queue = [start]
+  while ! queue.empty?
+    node = queue.pop
+    graph[node].each do |neighbor|
+      if Float::INFINITY == dist[neighbor]
+        dist[neighbor] = dist[node] + 1
+        parents[neighbor].push(node)
+        queue.unshift(neighbor)
+      else
+        if dist[node] + 1 == dist[neighbor]
+          parents[neighbor].push(node)
+        elsif dist[node] + 1 < dist[neighbor]
+          dist[neighbor] = dist[node] + 1
+          parents[neighbor].clear()
+          parents[neighbor].push(node)
+        end
+      end
+    end
+  end
+  return parents
+end
+
 def convert(words)
   edges = []
   graph = Array.new(words.size).map{ Array.new }
