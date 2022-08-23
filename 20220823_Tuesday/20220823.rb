@@ -4,8 +4,8 @@
 # Accepted.
 # Thanks God, Jesus Christ!
 # = = = = = = = = = = = = = =
-# Runtime: 723 ms, faster than 25.77% of Ruby online submissions for Palindrome Linked List.
-# Memory Usage: 226.5 MB, less than 22.70% of Ruby online submissions for Palindrome Linked List.
+# Runtime: 438 ms, faster than 80.98% of Ruby online submissions for Palindrome Linked List.
+# Memory Usage: 221 MB, less than 88.34% of Ruby online submissions for Palindrome Linked List.
 # Definition for singly-linked list.
 # class ListNode
 #     attr_accessor :val, :next
@@ -17,7 +17,7 @@
 # @param {ListNode} head
 # @return {Boolean}
 def is_palindrome(head)
-  @d = true
+  @d = false
   # Solve task in O(n) time and O(1) space.
   size = get_size(head)
   puts "size = #{size}" if @d
