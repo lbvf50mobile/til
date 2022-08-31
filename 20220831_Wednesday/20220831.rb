@@ -6,6 +6,7 @@
 def pacific_atlantic(heights)
   @h = heights
   @d = true
+  @dp = Array.new(@h.size).map{ Array.new(@h[0].size,false)}
   # 1 - Pacific.
   # 2 - Atlantic.
   # 0 - Nothing.
@@ -19,6 +20,7 @@ def pacific_atlantic(heights)
       # Error here. Instad of Infinity pass curent value.
       # Always return 0.
       tmp = dfs(i,j, Float::INFINITY) # Water come frome the sky. 
+      @dp[i][j] = tmp
       # The sky is a hightes point.
       # p [i,j,tmp] if @d
       answer.push([i,j]) if 3 == tmp 
@@ -38,6 +40,7 @@ def dfs(i,j,value)
   return 2 if j == @h[0].size
   return 0 if @h[i][j] > value
   return 0 if @v[i][j]
+  return @dp[i][j] if @dp[i][j]
   # p [i,j,value, "dfs"] if @d
   val = @h[i][j]
   answer = 0
