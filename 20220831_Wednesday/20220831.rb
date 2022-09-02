@@ -4,23 +4,21 @@
 # Accepted. 
 # Thanks God, Jesus Christ!
 # = = = = = = = = = = = = = =
-# Runtime: 2140 ms, faster than 6.00% of Ruby online submissions for Pacific Atlantic Water Flow.
-# Memory Usage: 218.9 MB, less than 10.00% of Ruby online submissions for Pacific Atlantic Water Flow.
+# Runtime: 188 ms, faster than 78.00% of Ruby online submissions for Pacific Atlantic Water Flow.
+# Memory Usage: 213.5 MB, less than 20.00% of Ruby online submissions for Pacific Atlantic Water Flow.
 # @param {Integer[][]} heights
 # @return {Integer[][]}
-# Fails:
-# [[2,1],[1,2]]
 def pacific_atlantic(heights)
   @h = heights
   @d = false
   require 'set'
-  pasific_set = Set.new([])
-  set = pasific_set
+  pacific_set = Set.new([])
+  set = pacific_set
+  @used = get_used
   puts "Empty Pasific Left side:" if @d
   print_set(set) if @d
   # Left side.
   (0...@h.size).each do |i|
-    @used = get_used
     dfs(i,0,set)
     p [i,0] if @d
     print_set(set) if @d
@@ -28,24 +26,22 @@ def pacific_atlantic(heights)
   # Top.
   puts "Pasific Top:" if @d
   (0...@h[0].size).each do |j| # Error was here. Incorect range.
-    @used = get_used
     dfs(0,j,set)
     p [0,j] if @d
     print_set(set) if @d
   end
   atlantic_set = Set.new([])
   set = atlantic_set
+  @used = get_used
   # Right side.
   (0...@h.size).each do |i|
-    @used = get_used
     dfs(i,@h[0].size-1,set)
   end
   # Bottom.
   (0...@h[0].size).each do |j| # Copied error. Icorrect range.
-    @used = get_used
     dfs(@h.size-1,j,set)
   end
-  (pasific_set & atlantic_set).to_a
+  (pacific_set & atlantic_set).to_a
 end
 
 def get_used
