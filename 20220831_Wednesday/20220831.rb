@@ -1,5 +1,11 @@
 # Leetcode: 417. Pacific Atlantic Water Flow.
 # https://leetcode.com/problems/pacific-atlantic-water-flow/
+# = = = = = = = = = = = = = =
+# Accepted. 
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 2140 ms, faster than 6.00% of Ruby online submissions for Pacific Atlantic Water Flow.
+# Memory Usage: 218.9 MB, less than 10.00% of Ruby online submissions for Pacific Atlantic Water Flow.
 # @param {Integer[][]} heights
 # @return {Integer[][]}
 # Fails:
@@ -20,9 +26,12 @@ def pacific_atlantic(heights)
     print_set(set) if @d
   end
   # Top.
-  (0...@h[0].size-1).each do |j|
+  puts "Pasific Top:" if @d
+  (0...@h[0].size).each do |j| # Error was here. Incorect range.
     @used = get_used
     dfs(0,j,set)
+    p [0,j] if @d
+    print_set(set) if @d
   end
   atlantic_set = Set.new([])
   set = atlantic_set
@@ -32,7 +41,7 @@ def pacific_atlantic(heights)
     dfs(i,@h[0].size-1,set)
   end
   # Bottom.
-  (0...@h[0].size-1).each do |j|
+  (0...@h[0].size).each do |j| # Copied error. Icorrect range.
     @used = get_used
     dfs(@h.size-1,j,set)
   end
