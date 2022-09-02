@@ -2,50 +2,71 @@
 # https://leetcode.com/problems/pacific-atlantic-water-flow/
 # @param {Integer[][]} heights
 # @return {Integer[][]}
-# TLE.
+# Fails:
+# [[2,1],[1,2]]
 def pacific_atlantic(heights)
   @h = heights
-  @d = true
-  @dp = Array.new(@h.size).map{ Array.new(@h[0].size,false)}
-  # 1 - Pacific.
-  # 2 - Atlantic.
-  # 0 - Nothing.
-  # 3 = (1|2) Both.
-  answer = []
+  @d = false
+  require 'set'
+  pasific_set = Set.new([])
+  set = pasific_set
+  puts "Empty Pasific Left side:" if @d
+  print_set(set) if @d
+  # Left side.
   (0...@h.size).each do |i|
-    (0...@h[0].size).each do |j|
-      if @dp[i][j]
-        tmp = @dp[i][j]
-      else
-        @v = get_visited
-        tmp = dfs(i,j, Float::INFINITY) # Water come frome the sky. 
-        @dp[i][j] = tmp
-      end
-      answer.push([i,j]) if 3 == tmp 
-    end
+    @used = get_used
+    dfs(i,0,set)
+    p [i,0] if @d
+    print_set(set) if @d
   end
-  return answer
+  # Top.
+  (0...@h[0].size-1).each do |j|
+    @used = get_used
+    dfs(0,j,set)
+  end
+  atlantic_set = Set.new([])
+  set = atlantic_set
+  # Right side.
+  (0...@h.size).each do |i|
+    @used = get_used
+    dfs(i,@h[0].size-1,set)
+  end
+  # Bottom.
+  (0...@h[0].size-1).each do |j|
+    @used = get_used
+    dfs(@h.size-1,j,set)
+  end
+  (pasific_set & atlantic_set).to_a
 end
 
-def get_visited
+def get_used
   Array.new(@h.size).map{ Array.new(@h[0].size,false)}
 end
 
-def dfs(i,j,value)
-  return 1 if 0 > i
-  return 1 if 0 > j
-  return 2 if i == @h.size
-  return 2 if j == @h[0].size
-  return 0 if @h[i][j] > value
-  return 0 if @v[i][j]
-  return @dp[i][j] if @dp[i][j]
-  val = @h[i][j]
-  answer = 0
-  @v[i][j] = true
-  [[i+1,j],[i-1,j],[i,j+1],[i,j-1]].each do |ii,jj|
-    answer |= dfs(ii,jj,val)
-  end
-  return answer
+def inside(i,j)
+  i.between?(0,@h.size-1) && j.between?(0,@h[0].size-1)
 end
 
+def dfs(i,j,set)
+  @used[i][j] = true
+  set.add([i,j])
+  [
+    [i+1,j],
+    [i-1,j],
+    [i,j+1],
+    [i,j-1]
+  ].each do |ii,jj|
+    next if ! inside(ii,jj)
+    next if @used[ii][jj] # Error was here, incorrect NOT. Fixed.
+    next if @h[i][j] > @h[ii][jj] # Moving UP only!
+    dfs(ii,jj,set)
+  end
+end
 
+def print_set(set)
+  field = Array.new(@h.size).map{ Array.new(@h[0].size,?.)}
+  set.to_a.each do |i,j|
+    field[i][j] = @h[i][j].to_s
+  end
+  field.map{|x| x.join(" ")}.each{|row| puts row}
+end
