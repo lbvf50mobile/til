@@ -3,18 +3,20 @@
 # @param {Integer[]} nums
 # @param {Integer[]} multipliers
 # @return {Integer}
-# MLE. Memory Limit Exeed.
+# TLE.
 def maximum_score(nums, multipliers)
-  @n, @m = nums, multipliers
-  @dp = Array.new(@m.size).map{ Array.new(@n.size).map{ Array.new(@n.size,false)}}
-  rec(0,0,@n.size-1)
+  # Based on.
+  # https://leetcode.com/problems/maximum-score-from-performing-multiplication-operations/solution/
+  @m,@n = multipliers, nums
+  m,n = multipliers.size, nums.size
+  dp = [0] * (m+1)
+  (0...m).reverse_each do |op|
+    next_row = dp.clone
+    # Present Row is now next_row because we are moving upwards.
+    (0..op).reverse_each do |left|
+      dp[left] = [@m[op]*@n[left] + next_row[left+1], @m[op] * @n[n-1-(op-left)] + next_row[left]].max
+    end
+  end
+  dp[0]
 end
 
-def rec(i,j,k)
-  return 0 if (k < 0) || (i >= @m.size) || (j >= @n.size)
-  return 0 if j > k # Add this line to be sure.
-  return @dp[i][j][k] if @dp[i][j][k]
-  max = [@m[i]*@n[j] + rec(i+1,j+1,k), @m[i]*@n[k] + rec(i+1,j,k-1)].max
-  @dp[i][j][k] = max
-  return max
-end
