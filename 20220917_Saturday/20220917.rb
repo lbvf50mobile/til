@@ -27,13 +27,14 @@ def palindrome_pairs(words)
     (0...w.size).each do |j|
       tail = w[j..-1]
       head = w[0...j]
-      if b[tail] && head == head.reverse && (! head.empty?)
+      next if tail.empty? || head.empty?
+      if b[tail] && head == head.reverse
         puts "3. head=#{head} tail=#{tail}" if @d
         v =  [b[tail],i]
         r.push(v)
         puts "3. push #{v.inspect} #{tail} #{head}." if @d
       end
-      if b[head] && tail == tail.reverse && (! tail.empty?)
+      if b[head] && tail == tail.reverse
         puts "4. head=#{head} tail=#{tail}" if @d
         v = [i,b[head]]
         r.push(v)
@@ -41,5 +42,5 @@ def palindrome_pairs(words)
       end
     end
   end
-  r.uniq
+  r
 end
