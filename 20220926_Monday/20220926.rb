@@ -1,30 +1,32 @@
 # Leetcode: 990. Satisfiability of Equality Equations.
 # https://leetcode.com/problems/satisfiability-of-equality-equations/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Chist!
+# = = = = = = = = = = = = = =
+# Runtime: 123 ms, faster than 100.00% of Ruby online submissions for Satisfiability of Equality Equations.
+# Memory Usage: 211.1 MB, less than 100.00% of Ruby online submissions for Satisfiability of Equality Equations.
 # @param {String[]} equations
 # @return {Boolean}
-# Fail: 
-# ["c==c","b==d","x!=z"]
 def equations_possible(equations)
   require 'set'
   e = equations
   # 1. Create adjacency list.
-  hash = {}
+  @h = {}
+  e.map{|x| [x[0],x[3]]}.flatten.uniq.each do |x|
+    @h[x] = {x=>true}
+  end
   e.select{ |x| "==" == x[1..2]}.each do |x|
     a,b = x[0],x[3]
-    hash[a] ||= {a => true}
-    hash[b] ||= {b => true}
-    hash[a][b] = true
-    hash[b][a] = true
+    @h[a][b] = true
+    @h[b][a] = true
   end
-  # 2. Get list of chars.
-  chars = e.map{|x| [x[0],x[3]]}.flatten.uniq
   # 3. Connected components. 
   # Hash-map for components, node is a key, value is
   # a componennt hash.
   @visited = {}
-  @h = hash
   @map = {}
-  chars.each do |x|
+  @h.keys.each do |x|
     next if @visited[x]
     bfs(x,Set.new)
   end
