@@ -1,6 +1,11 @@
 // Leetcode: 838. Push Dominoes.
 // https://leetcode.com/problems/push-dominoes/
-// Error: ".L.R."
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 33 ms, faster than 41.67% of Go online submissions for Push Dominoes.
+// Memory Usage: 7.2 MB, less than 83.33% of Go online submissions for Push Dominoes.
 func pushDominoes(dominoes string) string {
   ans := make([]rune,len(dominoes))
   do := []rune(dominoes)
@@ -43,7 +48,7 @@ func find_r(i int,do []rune)(int,int){
 
 func color(i int, j int, val int, ans []rune){
   for k := i; k <= j; k+=1{
-    ans[i] = rune(val);
+    ans[k] = rune(val); // Fixed an amazing error! Here was [i] instead of [k]!
   }
 }
 func color_half(i int, j int, ans []rune){
