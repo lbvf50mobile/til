@@ -1,5 +1,6 @@
 // Leetcode: 838. Push Dominoes.
 // https://leetcode.com/problems/push-dominoes/
+// Error: ".L.R."
 func pushDominoes(dominoes string) string {
   ans := make([]rune,len(dominoes))
   do := []rune(dominoes)
@@ -13,7 +14,7 @@ func pushDominoes(dominoes string) string {
       } else if 'L' == c { 
         color(i,j,'L',ans)
       } else if 'R' == c { 
-        color(i,j-1,'R',ans)
+        color(i,j-1,'.',ans)
       }
     } else if 'L' == val {
       ans[i] = 'L'
@@ -49,7 +50,7 @@ func color_half(i int, j int, ans []rune){
   l := j - i + 1
   half := l/2
   for k := i; k < i+half; k+=1 { ans[k] = 'R'}
-  if 0 == half%2{
+  if 0 == l%2{
     for k := i+half; k <= j; k+=1 { ans[k] = 'L'}
   }else{
     for k := i+half+1; k <= j; k+=1 { ans[k] = 'L'}
