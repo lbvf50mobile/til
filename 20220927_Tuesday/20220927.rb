@@ -5,42 +5,42 @@
 def push_dominoes(dominoes)
   @d = dominoes
   @ans = " " * d.size
-
-  # Working with left side.
-  i = 0
-  if ?. == @d[i]
-    c,j = find_r(i+1)
-    if ?E == c
-      color_with_dots(i,j)
-    elsif ?L == c
-      # All fall left including j.
-      color_with_l(i,j)
-    elsif ?R == c
-      # All stay the same excluding j.
-      color_with_dots(i,j-1)
+  (0...@d.size).each do |i|
+    next if " " != @ans[i]
+    if ?. == @d[i]
+      c,j = find_r(i+1)
+      if ?E == c
+        color_with_dots(i,j)
+      elsif ?L == c
+        # All fall left including j.
+        color_with_l(i,j)
+      elsif ?R == c
+        # All stay the same excluding j.
+        color_with_dots(i,j-1)
+      else
+        raise "Start dot, unknown end."
+      end
+    elsif ?L == @d[i]
+      @ans[i] = ?L
+    elsif ?R == @d[i]
+      c,j = find_r(i+1)
+      if ?E == c
+        # Fall right till the end.
+        color_with_r(i,j)
+      elsif ?L == c
+        # Half with L and half with R. 
+        color_half(i,j)
+      elsif ?R == c
+        # All all fall right excluding j.
+        color_with_r(i,j-1)
+      else
+        raise "Start R, unknown end."
+      end
     else
-      raise "Start dot, unknown end."
+      raise "Unkonws Start."
     end
-  elsif ?L == @d[i]
-    @ans[i] = ?L
-  elsif ?R == @d[i]
-    c,j = find_r(i+1)
-    if ?E == c
-      # Fall right till the end.
-      color_with_r(i,j)
-    elsif ?L == c
-      # Half with L and half with R. 
-      color_half(i,j)
-    elsif ?R == c
-      # All all fall right excluding j.
-      color_with_r(i,j-1)
-    else
-      raise "Start dot, unknown end."
-    end
-  else
-    raise "Unkonws Start."
   end
-    
+  return @ans
 end
 
 def find_r(i)
