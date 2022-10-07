@@ -6,6 +6,8 @@
 // = = = = = = = = = = = = = =
 // Runtime: 3 ms, faster than 51.49% of Go online submissions for Longest Common Prefix.
 // Memory Usage: 2.4 MB, less than 54.17% of Go online submissions for Longest Common Prefix.
+// https://leetcode.com/problems/longest-common-prefix/discuss/2673956/Go%3A-Two-loops.
+// https://gist.github.com/lbvf50mobile/59fb8f286bc292c0d2af359c00c0a9d2
 func longestCommonPrefix(strs []string) string {
     answer := ""
     for i := 0; i <= 200; i += 1{
