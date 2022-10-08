@@ -10,6 +10,8 @@
 # @param {Integer} target
 # @return {Integer}
 def three_sum_closest(nums, target)
+  # The algorithm from:
+  # https://leetcode.com/problems/3sum-closest/discuss/7871/Python-O(N2)-solution
   nums.sort! # Forgot to sort. Fixed.
   ans = nums[0] + nums[1] + nums[2]
   ans_abs = (target - ans).abs
