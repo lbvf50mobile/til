@@ -6,7 +6,7 @@
 // = = = = = = = = = = = = = =
 // Runtime: 95 ms, faster than 53.85% of Go online submissions for 3Sum Closest.
 // Memory Usage: 5.8 MB, less than 34.96% of Go online submissions for 3Sum Closest.
-// 2022.10.08 Saturday;
+// Daily Contest of 2022.10.08 Saturday;
 import "sort"
 func abs_diff(a int, b int) int{
   answer := a - b
