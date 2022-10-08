@@ -9,9 +9,8 @@
 # @param {Integer[]} nums
 # @param {Integer} target
 # @return {Integer}
-# FAIL
 def three_sum_closest(nums, target)
-  nums.sort! # Forget to sort. Fixed.
+  nums.sort! # Forgot to sort. Fixed.
   ans = nums[0] + nums[1] + nums[2]
   ans_abs = (target - ans).abs
   (0...(nums.size-2)).each do |i|
