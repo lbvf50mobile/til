@@ -2,7 +2,9 @@
 # https://leetcode.com/problems/increasing-triplet-subsequence/
 # @param {Integer[]} nums
 # @return {Boolean}
+# TLE.
 def increasing_triplet(nums)
+  @n = nums
   (0...@n.size-2).each do |i|
     (i+1...@n.size-1).each do |j|
       (j+1...@n.size).each do |k|
