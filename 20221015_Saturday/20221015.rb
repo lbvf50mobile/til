@@ -6,6 +6,7 @@
 # = = = = = = = = = = = = = =
 # Runtime: 2146 ms, faster than 100.00% of Ruby online submissions for String Compression II.
 # Memory Usage: 212.5 MB, less than 100.00% of Ruby online submissions for String Compression II.
+# 2022.10.15 Daily Challenge.
 # @param {String} s
 # @param {Integer} k
 # @return {Integer}
