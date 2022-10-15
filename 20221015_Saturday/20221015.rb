@@ -1,5 +1,11 @@
 # Leetcode: 1531. String Compression II.
 # https://leetcode.com/problems/string-compression-ii/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 2146 ms, faster than 100.00% of Ruby online submissions for String Compression II.
+# Memory Usage: 212.5 MB, less than 100.00% of Ruby online submissions for String Compression II.
 # @param {String} s
 # @param {Integer} k
 # @return {Integer}
@@ -16,8 +22,9 @@ def get_length_of_optimal_compression(s, k)
       (1..i).reverse_each do |pe|
         if s[pe-1] == s[i-1]
           cnt += 1
-        elsif (removed + 1) > j
-          break
+        else 
+          removed += 1
+          break if removed > j
         end
         dp[i][j] = [dp[i][j], dp[pe-1][j-removed] + calclen(cnt)].min
       end
