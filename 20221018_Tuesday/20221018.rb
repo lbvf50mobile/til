@@ -6,6 +6,7 @@
 # = = = = = = = = = = = = = =
 # Runtime: 302 ms, faster than 9.68% of Ruby online submissions for Count and Say.
 # Memory Usage: 215.2 MB, less than 61.29% of Ruby online submissions for Count and Say.
+# 2022.10.18 Daily Challenge.
 # @param {Integer} n
 # @return {String}
 def count_and_say(n)
