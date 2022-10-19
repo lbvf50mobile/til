@@ -6,6 +6,7 @@
 # = = = = = = = = = = = = = =
 # Runtime: 87 ms, faster than 100.00% of Ruby online submissions for Top K Frequent Words.
 # Memory Usage: 211.2 MB, less than 21.57% of Ruby online submissions for Top K Frequent Words.
+# 2022.10.19 Daily Challenge.
 # @param {String[]} words
 # @param {Integer} k
 # @return {String[]}
