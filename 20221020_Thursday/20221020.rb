@@ -1,86 +1,58 @@
 # Leetcode: 12. Integer to Roman.
 # https://leetcode.com/problems/integer-to-roman/
-# @param {Integer} num
-# @return {String}
-# Solving Another Task.
-# Leetcode: 13. Roman to Integer.
-# It is: https://leetcode.com/problems/roman-to-integer/
 # = = = = = = = = = = = = = =
 # Accepted.
 # Thanks God, Jesus Christ!
 # = = = = = = = = = = = = = =
-# Runtime: 264 ms, faster than 13.51% of Ruby online submissions for Roman to Integer.
-# Memory Usage: 210.9 MB, less than 93.73% of Ruby online submissions for Roman to Integer.
-# 2022.10.20 Daily Challange. Solve another task.
-def roman_to_int(num)
-# def int_to_roman(num)
-  answer = 0
-  skip = false
-  num.chars.each_with_index do |char,i|
-    # p [char,i, skip]
-    if skip
-      skip = false
-      next
+# Runtime: 215 ms, faster than 44.78% of Ruby online submissions for Integer to Roman.
+# Memory Usage: 211.2 MB, less than 15.34% of Ruby online submissions for Integer to Roman.
+# @param {Integer} num
+# @return {String}
+# @param {Integer} num
+# @return {String}
+def int_to_roman(num)
+  ans = ""
+  while num > 0
+    if 1000 <= num
+      num -= 1000
+      ans += ?M
+    elsif 900 <= num
+      num -= 900
+      ans += 'CM'
+    elsif 500 <= num
+      num -= 500
+      ans += ?D
+    elsif 400 <= num
+      num -= 400
+      ans += 'CD'
+    elsif 100 <= num
+      num -= 100
+      ans += ?C
+    elsif 90 <= num
+      num -= 90
+      ans += 'XC'
+    elsif 50 <= num
+      num -= 50
+      ans += ?L 
+    elsif 40 <= num
+      num -= 40
+      ans += 'XL'
+    elsif 10 <= num
+      num -= 10
+      ans += ?X
+    elsif 9 <= num
+      num -= 9
+      ans += 'IX'
+    elsif 5 <= num
+      num -= 5
+      ans += ?V
+    elsif 4 <= num
+      num -= 4
+      ans += "IV"
+    elsif 1 <= num
+      num -= 1
+      ans += ?I
     end
-    if ?I == char
-      if i < num.size - 1 && ?V == num[i+1]
-        answer += 4
-        skip = true
-        next
-      end
-      if i < num.size - 1 && ?X == num[i+1]
-        answer += 9
-        skip = true
-        next
-      end
-      answer += 1
-      skip = false
-    end
-    if ?V == char
-      answer += 5
-      skip = false
-    end
-    if ?X == char
-      if i < num.size - 1 && ?L == num[i+1]
-        answer += 40
-        skip = true
-        next
-      end
-      if i < num.size - 1 && ?C == num[i+1]
-        answer += 90
-        skip = true
-        next
-      end
-      answer += 10
-      skip = false
-    end
-    if ?L == char
-      answer += 50
-      skip = false
-    end
-    if ?C == char
-      if i < num.size - 1 && ?D == num[i+1]
-        answer += 400
-        skip = true
-        next
-      end
-      if i < num.size - 1 && ?M == num[i+1]
-        answer += 900
-        skip = true
-        next
-      end
-      answer += 100
-      skip = false
-    end
-    if ?D == char
-      answer += 500
-      skip = false
-    end
-    if ?M == char
-      answer += 1000
-      skip = false
-    end
-    skip = false # This does not always work.
   end
-  return answer
+  return ans
 end
