@@ -6,7 +6,7 @@
 // = = = = = = = = = = = = = =
 // Runtime: 238 ms, faster than 41.89% of Go online submissions for Contains Duplicate II.
 // Memory Usage: 14.2 MB, less than 18.92% of Go online submissions for Contains Duplicate II.
-// 2022.10.21 Daily Challange.
+// 2022.10.21 Daily Challenge.
 func containsNearbyDuplicate(nums []int, k int) bool {
   hash := make(map[int]int)
   for j,el := range nums{
