@@ -1,11 +1,16 @@
 # Leetcode: 645. Set Mismatch.
 # https://leetcode.com/problems/set-mismatch/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 246 ms, faster than 100.00% of Ruby online submissions for Set Mismatch.
+# Memory Usage: 214 MB, less than 100.00% of Ruby online submissions for Set Mismatch.
+# 20221023 Daily Challenge.
 # @param {Integer[]} nums
 # @return {Integer[]}
-# Fail.
-# [1,5,3,2,2,7,6,4,8,9]
 def find_error_nums(nums)
-  max = nums.max
+  max = nums.size 
   counter = Array.new(max+1,0)
   duplicate = 0
   nums.each do |el|
@@ -14,13 +19,12 @@ def find_error_nums(nums)
       duplicate = el
     end
   end
-  missed = 0
+  substituted = 0
   (1..max).each do |i|
     if 0 == counter[i]
-      missed = i
+      substituted = i
       break
     end
   end
-  return [max, max + 1] if 0 == missed
-  return [duplicate, missed]
+  return [duplicate, substituted]
 end
