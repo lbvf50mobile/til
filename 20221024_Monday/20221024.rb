@@ -2,32 +2,48 @@
 # https://leetcode.com/problems/maximum-length-of-a-concatenated-string-with-unique-characters/
 # @param {String[]} arr
 # @return {Integer}
-# TLE
 def max_length(arr)
-  # All string must have uniq characters.
-  # Create array of elements.
-  @a = arr.select{|x| x == x.chars.uniq.join}.
-    map{|x| [x.size,x, x.chars.tally]}
-  # Create answer max.
+  @d = true
   @max = 0
-  # Iterate over all elements.
-  @a.each_with_index{|el,i|
-    @max = el[0] if el[0] > @max
-    back(i, i+1, el[0],el[1])
-  }
+  # Filter string with duplicates.
+  @a = arr.select{|x| x.chars.size == x.chars.uniq.size}
+  @masks = @a.map{|x| str2mask(x)}
+  @lens = @a.map(&:size)
+  (0...@a.size).each do |i|
+    dfs(i,0,0,"")
+  end
   return @max
 end
-def back(prev, current, size, str)
-  return if current >= @a.size
-  return if ! check(@a[prev][2], @a[current][2])
-  return if str != str.chars.uniq.join
-  size += @a[current][0]
-  @max = size if size > @max
-  (size+1...@a.size).each do |i|
-    back(current,i, size, str + @a[current][1])
+
+def dfs(i,total_mask, total_size, str)
+  puts "#{i} #{@a[i]}"
+  total_mask |= @masks[i]
+  total_size += @lens[i]
+  str = str + @a[i]
+  if @max < total_size
+    @max = total_size
+    p [str,total_size] if @d
+  end
+  (i+1...@a.size).each do |j|
+    check = 0 == (total_mask & @masks[j])
+    puts "i=#{i} j=#{j} str=#{str} check=#{check.inspect}" if @d
+    puts "#{str_mask(total_mask)} : #{str}" if @d
+    puts "#{str_mask(@masks[j])} : #{@a[j]}" if @d
+    puts "#{str_mask(total_mask & @masks[j])} : #{str + "&" + @a[j]}" if @d
+    # Fix! Need to have j instead of i.
+    dfs(j,total_mask, total_size, str) if 0 == (total_mask & @masks[j]) 
   end
 end
 
-def check(a,b)
-  a.keys.all?{|key| ! b[key]}
+def str_mask(mask)
+  mask.to_s(2).rjust(26,?0)
+end
+
+def str2mask(str)
+  mask = 0
+  str.chars.each do |x|
+    # Fix! Forget to move one.
+    mask = mask | (1 << (x.ord - ?a.ord)) # Fix!
+  end
+  return mask
 end
