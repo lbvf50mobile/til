@@ -3,6 +3,7 @@
 # @param {Integer[][]} img1
 # @param {Integer[][]} img2
 # @return {Integer}
+# Fails bottom right.
 def largest_overlap(img1, img2)
   @img1, @img2 = img1, img2
   @n = @img1.size
