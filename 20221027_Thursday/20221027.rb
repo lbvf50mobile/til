@@ -49,7 +49,7 @@ def upright(i,j)
     (0...dj_limit).each do |dj|
       cell1 = @img1[i1+di][j1 - dj]
       cell2 = @img2[i2+di][j2 - dj]
-      ans += 1 if 1 == cell1 && 2 == cell2
+      ans += 1 if 1 == cell1 && 1 == cell2 # Fix!
     end
   end
   return ans
