@@ -16,6 +16,7 @@ def earliest_full_bloom(plant_time, grow_time)
   cur_plant_time = 0
   result = 0
   indices = grow_time.map.with_index{|x,i| [x,i]}.sort_by{|x| -x[0]}.map(&:last)
+  p indices
   indices.each do |i|
     cur_plant_time += plant_time[i]
     result = [result, cur_plant_time + grow_time[i]].max
