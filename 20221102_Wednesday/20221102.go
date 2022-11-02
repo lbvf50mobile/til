@@ -7,6 +7,8 @@
 // Runtime: 20 ms, faster than 38.52% of Go online submissions for Remove Duplicates from Sorted Array.
 // Memory Usage: 4.6 MB, less than 10.58% of Go online submissions for Remove Duplicates from Sorted Array.
 // 2022.11.03 Thursday;
+// https://gist.github.com/lbvf50mobile/8038bfafc923fe44b511ffc4251be6ea
+// https://leetcode.com/problems/remove-duplicates-from-sorted-array/discuss/2771555/Go%3A-Two-pointers.
 func removeDuplicates(nums []int) int {
   if 1 == len(nums){
     return 1
