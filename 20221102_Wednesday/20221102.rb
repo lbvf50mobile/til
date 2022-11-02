@@ -1,0 +1,52 @@
+# Leetcode: 433. Minimum Genetic Mutation.
+# https://leetcode.com/problems/minimum-genetic-mutation/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 173 ms, faster than 20.00% of Ruby online submissions for Minimum Genetic Mutation.
+# Memory Usage: 211.2 MB, less than 20.00% of Ruby online submissions for Minimum Genetic Mutation.
+# 2022.11.02 Daily Challenge.
+# @param {String} start
+# @param {String} end1
+# @param {String[]} bank
+# @return {Integer}
+def min_mutation(start, end1, bank)
+  return 0 if start == end1
+  return -1 if bank.empty?
+  return -1 if ! bank.include?(end1)
+  lst = create_adjacency_list([start]+bank)
+  q = [[start,0]]
+  visited = {}
+  visited[start] = true
+  while ! q.empty?
+    word, level = q.shift
+    return level if word == end1
+    lst[word].each do |nxt|
+      next if visited[nxt]
+      q.push([nxt,level + 1])
+      visited[nxt] = true
+    end
+  end
+  return -1
+end
+
+def create_adjacency_list(arr)
+  list = {}
+  (0...arr.size).each do |i|
+    (i+1...arr.size).each do |j|
+      s1,s2 = arr[i],arr[j]
+      list[s1] ||= []
+      list[s2] ||= []
+      if is_mutation(s1,s2)
+        list[s1].push(s2)
+        list[s2].push(s1)
+      end
+    end
+  end
+  return list
+end
+
+def is_mutation(str1, str2)
+  1 == str1.chars.zip(str2.chars).count{|x,y| x != y}
+end
