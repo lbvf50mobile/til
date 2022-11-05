@@ -10,15 +10,29 @@ def find_words(board, words)
   words.each do |w|
     write_in_trie(w)
   end
-  @used = {}
+  @used = set_used
   (0...board.size).each do |i|
     (0...board[0].size).each do |j|
-      @used = {}
-      @used[i.to_s+j.to_s] = true
       backtracking(i,j,@tire_head)
     end
   end
   return @answer
+end
+
+def backtracking(i,j,trie)
+  @used[i][j] = true
+  @answer.push(trie[1]) if trie[1]
+  [[i+1,j],[i-1,j],[i,j+1],[i,j-1]].each do |ni,nj|
+    next if !(ni.between?(0,@b.size-1) && nj.between?(0,@b[0].size-1))
+    next if @used[ni][nj]
+    next if ! trie[0][@b[ni][nj]]
+    backtracking(ni,nj,trie[0][@b[ni][nj]])
+  end
+  @used[i][j] = false
+end
+
+def set_used
+  Array.new(@b.size).map{ Array.new(@b[0].size,false)}
 end
 
 def write_in_trie(w)
