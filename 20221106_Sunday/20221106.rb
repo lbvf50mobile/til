@@ -6,6 +6,7 @@
 # = = = = = = = = = = = = = =
 # Runtime: 315 ms, faster than 100.00% of Ruby online submissions for Orderly Queue.
 # Memory Usage: 221.2 MB, less than 100.00% of Ruby online submissions for Orderly Queue.
+# 2022.11.06 Daily Challenge.
 # @param {String} s
 # @param {Integer} k
 # @return {String}
