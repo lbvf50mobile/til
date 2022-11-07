@@ -1,10 +1,14 @@
 // Leetcode: 1323. Maximum 69 Number.
 // https://leetcode.com/problems/maximum-69-number/
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 0 ms, faster than 100.00% of Go online submissions for Maximum 69 Number.
+// Memory Usage: 1.8 MB, less than 96.23% of Go online submissions for Maximum 69 Number.
+// 2022.11.07 Daily Challenge.
 import "math"
-import "fmt"
-var p = fmt.Println
 func maximum69Number (num int) int {
-  p(num,"num")
   pos := -1
   tmp := num
   // Find left most six in Positional notation.
@@ -16,7 +20,6 @@ func maximum69Number (num int) int {
     tmp = tmp - tmp%10
     tmp = tmp/10
   }
-  p(pos,"pos")
   // Remove this six and add nine.
   if -1 != pos {
     // Fix: 1 is 10**0; Pos must start from 0.
