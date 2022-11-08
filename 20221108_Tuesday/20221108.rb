@@ -6,6 +6,7 @@
 # = = = = = = = = = = = = = =
 # Runtime: 247 ms, faster than 11.11% of Ruby online submissions for Make The String Great.
 # Memory Usage: 211.1 MB, less than 33.33% of Ruby online submissions for Make The String Great.
+# 2022.11.08 Daily Challenge.
 # @param {String} s
 # @return {String}
 def make_good(s)
