@@ -1,5 +1,8 @@
 # Leetcode: 901. Online Stock Span.
 # https://leetcode.com/problems/online-stock-span/
+# Fails:
+# ["StockSpanner","next","next","next","next","next"]
+# [[],[31],[41],[48],[59],[79]]
 class StockSpanner
     def initialize()
       @sv = [] # stack values.
