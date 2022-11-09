@@ -1,13 +1,17 @@
 # Leetcode: 901. Online Stock Span.
 # https://leetcode.com/problems/online-stock-span/
-# Fails:
-# ["StockSpanner","next","next","next","next","next"]
-# [[],[31],[41],[48],[59],[79]]
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 248 ms, faster than 92.31% of Ruby online submissions for Online Stock Span.
+# Memory Usage: 215.3 MB, less than 15.38% of Ruby online submissions for Online Stock Span.
+# 2022.11.09 Daily Challenge.
 class StockSpanner
     def initialize()
-      @sv = [] # stack values.
-      @si = [] # stack indices.
-      @i = -1
+      @sv = [10**7] # stack values.
+      @si = [0] # stack indices.
+      @i = 0
     end
 
 
