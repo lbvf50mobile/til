@@ -1,8 +1,13 @@
 // Leetcode: 901. Online Stock Span.
 // https://leetcode.com/problems/online-stock-span/
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 250 ms, faster than 76.62% of Go online submissions for Online Stock Span.
+// Memory Usage: 9.1 MB, less than 24.68% of Go online submissions for Online Stock Span.
+// 2022.10.11 Daily Challenge.
 import "math"
-import "fmt"
-var p = fmt.Println
 type StockSpanner struct {
   i int // inedex of last element. Number of an input price.
   sv []int // stack values.
@@ -22,7 +27,6 @@ func Constructor() StockSpanner {
 
 
 func (this *StockSpanner) Next(price int) int {
- p(price) 
   this.i += 1
   last := len(this.sv) - 1
   for ; 0 < len(this.sv) && this.sv[last] <= price ; last -= 1 {
@@ -31,10 +35,8 @@ func (this *StockSpanner) Next(price int) int {
   }
   this.sv = append(this.sv,price)
   this.si = append(this.si,this.i)
- p(this.sv)
   s := len(this.si)
   return  this.i - this.si[s-2]
-  
 }
 
 
