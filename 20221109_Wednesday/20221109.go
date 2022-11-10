@@ -4,8 +4,8 @@
 // Accepted.
 // Thanks God, Jesus Christ!
 // = = = = = = = = = = = = = =
-// Runtime: 250 ms, faster than 76.62% of Go online submissions for Online Stock Span.
-// Memory Usage: 9.1 MB, less than 24.68% of Go online submissions for Online Stock Span.
+// Runtime: 196 ms, faster than 77.92% of Go online submissions for Online Stock Span.
+// Memory Usage: 10.4 MB, less than 6.49% of Go online submissions for Online Stock Span.
 // 2022.11.09 Daily Challenge.
 import "math"
 type StockSpanner struct {
@@ -18,8 +18,8 @@ type StockSpanner struct {
 func Constructor() StockSpanner {
   data := StockSpanner{i:0}
   data.i = 0
-  data.sv = make([]int,1)
-  data.si = make([]int,1) 
+  data.sv = make([]int,1,int(math.Pow10(5))) // Capacity to allocate once.
+  data.si = make([]int,1,int(math.Pow10(5))) 
   data.sv[0] = int(math.Pow10(7))
   data.si[0] = 0
   return data
