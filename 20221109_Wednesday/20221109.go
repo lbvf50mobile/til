@@ -6,7 +6,7 @@
 // = = = = = = = = = = = = = =
 // Runtime: 250 ms, faster than 76.62% of Go online submissions for Online Stock Span.
 // Memory Usage: 9.1 MB, less than 24.68% of Go online submissions for Online Stock Span.
-// 2022.10.11 Daily Challenge.
+// 2022.11.09 Daily Challenge.
 import "math"
 type StockSpanner struct {
   i int // inedex of last element. Number of an input price.
