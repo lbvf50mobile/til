@@ -6,6 +6,7 @@
 # = = = = = = = = = = = = = =
 # Runtime: 182 ms, faster than 45.75% of Ruby online submissions for Remove Duplicates from Sorted Array.
 # Memory Usage: 211.8 MB, less than 42.82% of Ruby online submissions for Remove Duplicates from Sorted Array.
+# 2022.11.11 Daily Challenge.
 # @param {Integer[]} nums
 # @return {Integer}
 def remove_duplicates(nums)
