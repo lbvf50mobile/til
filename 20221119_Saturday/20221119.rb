@@ -18,10 +18,26 @@ def outer_trees(trees)
   i = trees.size - 1
   while i >= 0 && orientation(bm,trees.last, trees(i)) == i
     i -= 1
-    
-
   end
-    
+  l = i + 1
+  h = trees.size - 1
+  while l < h
+    tree[l],tree[h] = tree[h],tree[l]
+    l += 1
+    h -= 1
+  end
+  stack = []
+  stack.push(trees[0])
+  stack.push(trees[1])
+  (2...trees.size).each do |j|
+    top = stack.pop
+    while orientation(stack.last, top, points[j]) > 0
+      top = stack.pop
+    end
+    stack.push(top)
+    stack.push(points[j])
+  end
+  return stack
 end
 
 def orientation(pe, q, r)
