@@ -1,6 +1,7 @@
 # Leetcode: 224. Basic Calculator.
 # https://leetcode.com/problems/basic-calculator/
 # = = = = = = = = = = = = = =
+# Accepted.
 # Thanks God, Jesus Christ!
 # = = = = = = = = = = = = = =
 # Runtime: 283 ms, faster than 54.55% of Ruby online submissions for Basic Calculator.
