@@ -6,13 +6,17 @@
 # = = = = = = = = = = = = = =
 # Runtime: 697 ms, faster than 10.00% of Ruby online submissions for Basic Calculator.
 # Memory Usage: 212.2 MB, less than 40.00% of Ruby online submissions for Basic Calculator.
+# 2022.11.20 Daily Challenge.
 # @param {String} s
 # @return {Integer}
 def calculate(s)
   # Based on:
   # https://leetcode.com/problems/basic-calculator/discuss/62344/Easy-18-lines-C%2B%2B-16-lines-Python
+  # Original code solution do not pass: 
   # But with: 
   # https://leetcode.com/problems/basic-calculator/discuss/62344/Easy-18-lines-C++-16-lines-Python/1674262
+  # Added comment:
+  # https://leetcode.com/problems/basic-calculator/discuss/62344/Easy-18-lines-C++-16-lines-Python/1690945
   total = 0
   stack = [1,1]
   i = 0
