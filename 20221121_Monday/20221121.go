@@ -1,5 +1,12 @@
 // Leetcode: 1926. Nearest Exit from Entrance in Maze.
 // https://leetcode.com/problems/nearest-exit-from-entrance-in-maze/
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 15 ms, faster than 81.82% of Go online submissions for Nearest Exit from Entrance in Maze.
+// Memory Usage: 6.9 MB, less than 90.91% of Go online submissions for Nearest Exit from Entrance in Maze.
+// 2022.11.21 Daily Challenge.
 type element struct{
   i int
   j int
@@ -8,19 +15,19 @@ type element struct{
 type queue struct {
   data []*element
 }
-func (q queue) init(){
+func (q * queue) init(){
   q.data = make([]*element,0)
 }
-func (q queue) push(x *element){
+func (q * queue) push(x *element){
   q.data = append(q.data,x)
 }
-func (q queue) shift() *element{
+func (q * queue) shift() *element{
   x := q.data[0]
-  q.data =q.data[1:]
+  q.data = q.data[1:]
   return x
 }
-func (q queue) empty() bool{
-  return 0 != len(q.data)
+func (q * queue) empty() bool{
+  return 0 == len(q.data)
 }
 var n, m int
 var used [][]bool
@@ -39,7 +46,7 @@ func nearestExit(maze [][]byte, entrance []int) int {
   init_used()
   i,j := entrance[0],entrance[1]
   used[i][j] = true
-  q.push(&element{i,j,0}
+  q.push(&element{i,j,0})
   for ; ! q.empty() ; {
     x := q.shift()
     i,j,l := x.i, x.j, x.l
