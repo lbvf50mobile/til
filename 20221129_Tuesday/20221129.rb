@@ -1,37 +1,43 @@
-# Leetcode: 380. Insert Delete GetRandom O(1).
+# Leetcode: 380. Insert Delete GetRandom O(2).
 # https://leetcode.com/problems/insert-delete-getrandom-o1/
 # = = = = = = = = = = = = = =
 # Accepted.
 # Thanks God, Jesus Christ!
 # = = = = = = = = = = = = = =
-# Runtime: 428 ms, faster than 87.50% of Ruby online submissions for Insert Delete GetRandom O(1).
-# Memory Usage: 285.8 MB, less than 12.50% of Ruby online submissions for Insert Delete GetRandom O(1).
 # 2022.11.29 Daily Challenge.
+# 2022.12.01 Updated.
+# Error.
+# ["RandomizedSet","insert","insert","remove","insert","remove","getRandom"]
+# [[],[0],[1],[0],[2],[1],[]]
 class RandomizedSet
     def initialize()
-      require 'set'
-      @set = Set.new
+      @h = {}
+      @a = []
     end
-
-
 =begin
     :type val: Integer
     :rtype: Boolean
 =end
     def insert(val)
-      return false if @set.include?(val)
-      @set.add(val)
+      return false if @h[val]
+      @a.push(val)
+      @h[val] = @a.size - 1
       return true
     end
-
-
 =begin
     :type val: Integer
     :rtype: Boolean
 =end
     def remove(val)
-      return false if ! @set.include?(val)
-      @set.delete(val)
+      return false if ! @h[val]
+      # Swap in the array last element
+      # and elemet to be delted.
+      i,j = @h[val], @a.size - 1
+      a,b = val,@h[j]
+      @h[a],@h[b] = @h[b],@h[j]
+      @a[i],@a[j] = @a[j],@a[i]
+      @a.pop
+      @h[val] = nil
       return true
     end
 
@@ -40,7 +46,7 @@ class RandomizedSet
     :rtype: Integer
 =end
     def get_random()
-      @set.to_a.sample
+      @a.sample
     end
 
 
