@@ -30,7 +30,7 @@ def range_sum_bst(root, low, high)
   elsif high < x
     return range_sum_bst(root.left, low, high)
   else
-    raise "Unknown poistion."
+    raise "Unknown position."
   end
 end
 
