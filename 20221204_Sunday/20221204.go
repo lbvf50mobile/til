@@ -1,42 +1,46 @@
 // Leetcode: 2256. Minimum Average Difference.
 // https://leetcode.com/problems/minimum-average-difference/
-import "fmt"
-var p = fmt.Println;
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 259 ms, faster than 23.49% of Go online submissions for Minimum Average Difference.
+// Memory Usage: 10.6 MB, less than 11.36% of Go online submissions for Minimum Average Difference.
+// 2022.12.04 Daily Challenge.
+// 2022.12.08 Updated.
 func minimumAverageDifference(nums []int) int {
-  pfx := make([]int,len(nums)) // prefix_sum
+  n := len(nums)
+  pfx := make([]int,n) // prefix_sum
   pfx[0] = nums[0]
-  for i := 1 ; i < len(nums) ; i += 1 {
+  for i := 1 ; i < n ; i += 1 {
     pfx[i] = nums[i] + pfx[i-1]
   }
-  sfx := make([]int, len(nums)+1) // suffix_sum
-  for j := len(nums)-1 ; 0 <= j ; j -= 1 {
+  sfx := make([]int, n+1) // suffix_sum
+  for j := n-1 ; 0 <= j ; j -= 1 {
     sfx[j] = nums[j] + sfx[j+1]
   }
-  p(nums)
-  p(pfx)
-  p(sfx)
-  avg := pfx[0] + sfx[1]
+  sfx_part := 0
+  if  n > 1 {
+    sfx_part = sfx[1]/(n-1)
+  }
+  avg := abs(pfx[0]/1 - sfx_part)
   min := avg
   ans := 0
-  p(avg,pfx[0],sfx[1],0)
-  /*
-[2 5 3 9 5 3]
-[2 7 10 19 24 27]
-[27 25 20 17 8 3 0]
-27 2 25 0
-27 7 20 1
-27 10 17 2
-27 19 8 3
-27 24 3 4
-27 27 0 5
-  */
-  for i := 1; i < len(nums); i += 1{
-    avg = pfx[i] + sfx[i+1]
-    p(avg,pfx[i],sfx[i+1],i)
+  for i := 1; i < n; i += 1{
+    sfx_part = 0
+    if i < (n-1) {
+      sfx_part = sfx[i+1]/(n-i-1)
+    }
+    avg = abs(pfx[i]/(i+1)-sfx_part)
     if avg < min {
       min = avg
       ans = i
     }
   }
   return ans
+}
+
+func abs(x int) int{
+  if x < 0 { return - x}
+  return x
 }
