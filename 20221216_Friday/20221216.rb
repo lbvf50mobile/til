@@ -4,14 +4,13 @@
 # Accepted.
 # Thanks God, Jesus Christ!
 # = = = = = = = = = = = = = =
-# Runtime: 90 ms, faster than 86.44% of Ruby online submissions for Implement Queue using Stacks.
-# Memory Usage: 211.1 MB, less than 47.46% of Ruby online submissions for Implement Queue using Stacks
+# Runtime: 84 ms, faster than 88.14% of Ruby online submissions for Implement Queue using Stacks.
+# Memory Usage: 210.8 MB, less than 88.14% of Ruby online submissions for Implement Queue using Stacks.
 # 2022.12.16 Daily Challenge.
-#
 class MyQueue
     def initialize()
-      @a = []
-      @b = []
+      @tmp = []
+      @rv = []
         
     end
 
@@ -21,7 +20,15 @@ class MyQueue
     :rtype: Void
 =end
     def push(x)
-      @a.push(x)
+      n = @rv.size
+      n.times do 
+        @tmp.push(@rv.pop())
+      end
+      @tmp.push(x)
+      n = @tmp.size
+      n.times do 
+        @rv.push(@tmp.pop())
+      end
     end
 
 
@@ -29,7 +36,7 @@ class MyQueue
     :rtype: Integer
 =end
     def pop()
-      @a.shift()
+      @rv.pop()
     end
 
 
@@ -37,8 +44,7 @@ class MyQueue
     :rtype: Integer
 =end
     def peek()
-      @a[0]
-        
+      @rv.last()
     end
 
 
@@ -46,10 +52,8 @@ class MyQueue
     :rtype: Boolean
 =end
     def empty()
-      @a.empty?
+      @rv.empty?
     end
-
-
 end
 
 # Your MyQueue object will be instantiated and called as such:
