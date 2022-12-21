@@ -1,32 +1,38 @@
 # Leetcode: 886. Possible Bipartition.
 # https://leetcode.com/problems/possible-bipartition/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 412 ms, faster than 40.74% of Ruby online submissions for Possible Bipartition.
+# Memory Usage: 215 MB, less than 18.52% of Ruby online submissions for Possible Bipartitio
+# 2022.12.21 Daily Challenge.
 # @param {Integer} n
 # @param {Integer[][]} dislikes
 # @return {Boolean}
 def possible_bipartition(n, dislikes)
-  return false if 1 == n
-  # Number of components must be more then 1.
-  @aj = Array.new(n).map{ [] }
-  @u = Array.new(n,false)
+  # Based on hints:
+  # https://leetcode.com/problems/possible-bipartition/solution/
+  @aj = Array.new(n).map{ Array.new(0) }
   dislikes.each do |a,b|
     @aj[a-1].push(b-1)
     @aj[b-1].push(a-1)
   end
-  components = 0
-  (0...n-1).each do |i|
-    next if @u[i]
-    components += 1
-    p [i, components]
-    q = [i]
-    @u[i] = true
+  colors = Array.new(n,0)
+  (0...n).each do |i|
+    next if 0 != colors[i]
+    q = [[i,1]]
+    colors[i] = 1
     while ! q.empty?
-      x = q.shift()
+      x,c = q.shift()
+      nc = (c == 1) ? 2 : 1
       @aj[x].each do |y|
-        next if @u[y]
-        @u[y] = true
-        q.push(y)
+        return false if c == colors[y]
+        next if nc == colors[y]
+        colors[y] = nc
+        q.push([y,nc])
       end
     end
   end
-  components > 1
+  return true
 end
