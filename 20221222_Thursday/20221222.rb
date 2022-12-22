@@ -1,8 +1,45 @@
 # Leetcode: 834. Sum of Distances in Tree.
 # https://leetcode.com/problems/sum-of-distances-in-tree/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 322 ms, faster than 100.00% of Ruby online submissions for Sum of Distances in Tree.
+# Memory Usage: 235.6 MB, less than 100.00% of Ruby online submissions for Sum of Distances in Tree.
 # @param {Integer} n
 # @param {Integer[][]} edges
 # @return {Integer[]}
 def sum_of_distances_in_tree(n, edges)
-    
+  # Based on:
+  # https://leetcode.com/problems/sum-of-distances-in-tree/solution/
+  # Create adjacency list.
+  @n = n
+  @aj = Array.new(n).map{ Array.new(0)}
+  edges.each do |a,b|
+    @aj[a].push(b)
+    @aj[b].push(a)
+  end
+  @count = Array.new(n,1)
+  @ans = Array.new(n,0)
+  dfs(0,0)
+  dfs2(0,0)
+  return @ans
 end
+
+def dfs(i, pt)
+  @aj[i].each do |j|
+    next if pt == j
+    dfs(j,i)
+    @count[i] += @count[j]
+    @ans[i] += @ans[j] + @count[j]
+  end
+end
+
+def dfs2(i,pt)
+  @aj[i].each do |j|
+    next if pt == j
+    @ans[j] = @ans[i] - @count[j] + @n - @count[j]
+    dfs2(j,i)
+  end
+end
+
