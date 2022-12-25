@@ -1,11 +1,11 @@
 // Leetcode: 2391. Longest Subsequence With Limited Sum.
-// https://leetcode.com/problems/longest-subsequenc
+// https://leetcode.com/problems/longest-subsequence-with-limited-sum/
 // = = = = = = = = = = = = = =
 // Accepted.
 // Thanks God, Jesus Christ!
 // = = = = = = = = = = = = = =
 // Runtime: 15 ms, faster than 93.33% of Go online submissions for Longest Subsequence With Limited Sum.
-// Memory Usage: 6.2 MB, less than 22.22% of Go online submissions for Longest Subsequence With Limited Sum.e-with-limited-sum/
+// Memory Usage: 6.2 MB, less than 22.22% of Go online submissions for Longest Subsequence With Limited Sum.
 // 2022.12.25 Daily Challenge.
 import "sort"
 import "fmt"
