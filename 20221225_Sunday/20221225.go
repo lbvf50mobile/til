@@ -1,8 +1,12 @@
 // Leetcode: 2391. Longest Subsequence With Limited Sum.
-// https://leetcode.com/problems/longest-subsequence-with-limited-sum/
-// Fails.
-// [624082]
-// [972985,564269,607119,693641,787608,46517,500857,140097]
+// https://leetcode.com/problems/longest-subsequenc
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 15 ms, faster than 93.33% of Go online submissions for Longest Subsequence With Limited Sum.
+// Memory Usage: 6.2 MB, less than 22.22% of Go online submissions for Longest Subsequence With Limited Sum.e-with-limited-sum/
+// 2022.12.25 Daily Challenge.
 import "sort"
 import "fmt"
 var p = fmt.Println
@@ -38,7 +42,7 @@ func answerQueries(nums []int, queries []int) []int {
     //p(j, "j")
     j -= 1
     answer[i] = j + 1
-    if -1 == j { j = 1}
+    if -1 == j { j = 0} // Fix error: 1; must be 0;
   }
   return answer
 }
