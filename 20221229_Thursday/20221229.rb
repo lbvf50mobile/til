@@ -3,6 +3,7 @@
 # @param {Integer[][]} tasks
 # @return {Integer[]}
 
+# https://github.com/kanwei/algorithms/blob/master/lib/containers/heap.rb#L475
 class Containers::MinHeap < Containers::Heap
   def initialize(ary=[])
     super(ary) { |x, y| x[1] == y[1]? (x[0] <=> y[0]) == -1: (x[1] <=> y[1]) == -1 }
@@ -16,7 +17,15 @@ def get_order(tasks)
   answer = []
   tsks = tasks.map.with_index{|(a,b),i|
     [a,b,i]
-  }.sort_by{|x| x[0]}
+  }.sort{|a,b|
+    if a[0] == b[0] && a[1] == b[1]
+      a[2] <=> b[2]
+    elsif a[0] == b[0]
+      a[1] <=> b[2]
+    else
+      a[0] <=> b[0]
+    end
+  }
   heap = MinHeap.new()  
   while answer.size < n
     # Add processes into the heap.
