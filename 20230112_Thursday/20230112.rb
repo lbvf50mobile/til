@@ -1,5 +1,12 @@
 # Leetcode: 1519. Number of Nodes in the Sub-Tree With the Same Label.
 # https://leetcode.com/problems/number-of-nodes-in-the-sub-tree-with-the-same-label/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 1312 ms, faster than 60.00% of Ruby online submissions for Number of Nodes in the Sub-Tree With the Same Label.
+# Memory Usage: 362 MB, less than 10.00% of Ruby online submissions for Number of Nodes in the Sub-Tree With the Same Label.
+# 2023.01.12 Daily Challenge.
 # @param {Integer} n
 # @param {Integer[][]} edges
 # @param {String} labels
