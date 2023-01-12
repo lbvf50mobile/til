@@ -4,11 +4,23 @@
 # @param {Integer[][]} edges
 # @param {String} labels
 # @return {Integer[]}
-# TLE
 def count_sub_trees(n, edges, labels)
-  @n, @l = n, labels.chars
+  @n, @m = n, labels.chars.uniq.size
+  @char_number = {}
+  @last_number = 0
+  @l = Array.new(@n)
+  @n.times do |i|
+    x = @char_number[labels[i]]
+    if x
+      @l[i] = x
+    else
+      @char_number[labels[i]] = @last_number
+      @l[i] = @last_number
+      @last_number += 1
+    end
+  end
   @al = {}
-  @cnt = Array.new(@n).map{ Hash.new(0)}
+  @cnt = Array.new(@n).map{ Array.new(@m,0)}
   @v = Array.new(@n,false)
   edges.each do |a,b|
     @al[a] ||= []; @al[b] ||= []
@@ -29,7 +41,7 @@ def dfs(i)
   @al[i].each do |j|
     if ! @v[j]
       dfs(j)
-      (?a..?z).each do |c|
+      @m.times do |c|
         @cnt[i][c] += @cnt[j][c]
       end
     end
