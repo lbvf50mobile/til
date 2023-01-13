@@ -23,6 +23,9 @@ def dfs(i,prev)
   max, max1 = 0,0
   @ch[i].each do |j|
     tmp = dfs(j,char)
+    # Add this line from the Leetcode's solution.
+    # And it is no surprice that still TLE.
+    next if @s[i] == @s[j]
     if tmp > max
       max,max1 = tmp, max
     elsif tmp > max1
