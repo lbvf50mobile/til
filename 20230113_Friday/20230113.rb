@@ -1,12 +1,22 @@
 # Leetcode: 2246. Longest Path With Different Adjacent Characters.
 # https://leetcode.com/problems/longest-path-with-different-adjacent-characters/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 712 ms, faster than 100.00% of Ruby online submissions for Longest Path With Different Adjacent Characters.
+# Memory Usage: 310.8 MB, less than 100.00% of Ruby online submissions for Longest Path With Different Adjacent Characters.
+# 2023.01.13 Daily Challenge.
 # @param {Integer[]} parent
 # @param {String} s
 # @return {Integer}
-# TLE.
 def longest_path(parent, s)
   @n = parent.size
-  @s = s
+  # https://leetcode.com/problems/longest-path-with-different-adjacent-characters/discuss/3045037/Ruby.-DFS-without-Time-Limit-Exceeded-(714-ms-274-MB-Beats-100)/1755867
+  # After this fix 100%/100%.
+  # https://leetcode.com/0x81/
+  # https://leetcode.com/blrB/
+  @s = s.chars
   @ch = Array.new(@n).map{[]}
   @max = 0
   (1...@n).each do |i|
