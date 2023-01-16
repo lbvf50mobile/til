@@ -1,26 +1,31 @@
 # Leetcode: 57. Insert Interval.
 # https://leetcode.com/problems/insert-interval/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 91 ms, faster than 85.00% of Ruby online submissions for Insert Interval.
+# Memory Usage: 212 MB, less than 8.33% of Ruby online submissions for Insert Interval.
+# 2023.01.16 Daily Challenge.
 # @param {Integer[][]} intervals
 # @param {Integer[]} new_interval
 # @return {Integer[][]}
 def insert(intervals, new_interval)
-  answer = []
-  b = new_interval
+  ans = []
+  ans.push(new_interval)
   intervals.each do |a|
-    ol = overlap(a,b)
-    insert = a
-    # Check overlap with insert one.
-    if ol
-      insert = merge(a,b)
+    b = ans.pop
+    if overlap(a,b)
+      ans.push(merge(a,b))
+    elsif a[0] < b[0]
+      ans.push(a)
+      ans.push(b)
+    else
+      ans.push(b)
+      ans.push(a)
     end
-    # Check do need to overlap with previous.
-    if (!answer.empty?) && overlap(answer.last,insert)
-      x = answer.pop()
-      insert = merge(insert,x)
-    end
-    answer.push(insert)
   end
-  return answer
+  return ans
 end
 
 def overlap(a,b)
