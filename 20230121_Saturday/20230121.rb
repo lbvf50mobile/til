@@ -4,9 +4,10 @@
 # Accepted.
 # Thanks God, Jesus Christ!
 # = = = = = = = = = = = = = =
-# Runtime: 104 ms, faster than 50.00% of Ruby online submissions for Restore IP Addresses.
-# Memory Usage: 211.2 MB, less than 10.00% of Ruby online submissions for Restore IP Addresses.
+# Runtime: 90 ms, faster than 80.00% of Ruby online submissions for Restore IP Addresses.
+# Memory Usage: 211.1 MB, less than 10.00% of Ruby online submissions for Restore IP Addresse
 # 2023.01.21 Daily Challange.
+# 104 ms with a Regex, 90ms without a Regex. 
 # @param {String} s
 # @return {String[]}
 def restore_ip_addresses(s)
@@ -27,7 +28,7 @@ def dfs(i)
   old_num, old_str = @arr_num.last, @arr_str.last
   new_num, new_str = old_num*10 + @s[i], old_str + @s[i].to_s
   return if 255 < new_num
-  return if /^0./ === new_str
+  return if 1 < new_str.size && ?0 == new_str[0]
   j = @arr_num.size - 1 # Fixed error. It is an index, need to decrease by one.
   # Extend and let next call continue extending.
   @arr_num[j],@arr_str[j] = new_num, new_str
