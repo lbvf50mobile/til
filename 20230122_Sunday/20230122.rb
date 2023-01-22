@@ -1,4 +1,4 @@
-# Leetcod: 131. Palindrome Partitioning.
+# Leetcode: 131. Palindrome Partitioning.
 # https://leetcode.com/problems/palindrome-partitioning/
 # = = = = = = = = = = = = = =
 # Accepted.
