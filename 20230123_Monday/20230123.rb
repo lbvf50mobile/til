@@ -11,7 +11,7 @@
 # @param {Integer[][]} trust
 # @return {Integer}
 def find_judge(n, trust)
-  # Create array of counters.
+  # Create an array of counters.
   counters = Array.new(n+1).map{ [0,0] }
   trust.each do |a,b|
     counters[a][0] += 1
