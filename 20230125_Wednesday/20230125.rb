@@ -1,12 +1,16 @@
 # Leetcode: 2359. Find Closest Node to Given Two Nodes.
 # https://leetcode.com/problems/find-closest-node-to-given-two-nodes/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 296 ms, faster than 100.00% of Ruby online submissions for Find Closest Node to Given Two Nodes.
+# Memory Usage: 231.5 MB, less than 100.00% of Ruby online submissions for Find Closest Node to Given Two Nodes.
+# 2023.01.25 Daily Challenge.
 # @param {Integer[]} edges
 # @param {Integer} node1
 # @param {Integer} node2
 # @return {Integer}
-# Fails:
-# [5,3,1,0,2,4,5]
-# 3
 def closest_meeting_node(edges, node1, node2)
   v1 = [false] * edges.size
   d1 = [0] * edges.size
@@ -38,7 +42,7 @@ def closest_meeting_node(edges, node1, node2)
   min = edges.size * 10
   edges.size.times do |i|
     if v1[i] && v2[i]
-      tmp = [d1[i],d2[i]].min
+      tmp = [d1[i],d2[i]].max # Error fixed here! Was min.
       if tmp < min
         min = tmp
         answer = i
