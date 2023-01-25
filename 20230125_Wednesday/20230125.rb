@@ -4,6 +4,9 @@
 # @param {Integer} node1
 # @param {Integer} node2
 # @return {Integer}
+# Fails:
+# [5,3,1,0,2,4,5]
+# 3
 def closest_meeting_node(edges, node1, node2)
   v1 = [false] * edges.size
   d1 = [0] * edges.size
