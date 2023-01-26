@@ -6,31 +6,37 @@
 # @param {Integer} dst
 # @param {Integer} k
 # @return {Integer}
-# Error.
+# TLE.
 def find_cheapest_price(n, flights, src, dst, k)
   # Based on:
   # https://leetcode.com/problems/cheapest-flights-within-k-stops/discuss/686906/Python-Multipass-BFS-O(V2)-%2B-Dijkstra-with-SortedList-explained
   g = {}
-  v = [[src,0,0]]
-  mp = Float::INFINITY
-  visited = {}
-  visited[src] = true
-  flights.each do |i,j,w|
-    g[i] ||= []
-    g[i].push([j,w])
+  q = [[src,0,0]]
+  ans = Float::INFINITY
+  # visited = {}
+  # visited[src] = true
+  flights.each do |from,to,price|
+    g[from] ||= []
+    g[from].push([to,price])
   end
-  while ! v.empty?
-    c,vis,pr = v.shift()
-    if pr <= mp && vis <= k && c != dst
-      g[c].each do |j,np|
-        next if visited[j]
-        v.push([j,vis+1,pr + np])
+  while ! q.empty?
+    i,n,pr = q.shift()
+    if pr <= ans && n <= k && i != dst
+      (g[i] || []).each do |j,np|
+        # Why need to comment this line?
+        # How it happens that it is possible
+        # to visit a city twice?
+        # Because with this line a city could be already
+        # wisited from a more expencive one during BFS.
+        # next if visited[j]
+        q.push([j,n+1,pr + np])
+        # visited[j] = true
       end
     end
-    if dst == c
-      mp = [mp,pr].min
+    if dst == i
+      ans = [ans,pr].min
     end
   end
-  mp = -1 if Float::INFINITY == mp
-  return mp
+  ans = -1 if Float::INFINITY == ans
+  return ans
 end
