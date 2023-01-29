@@ -10,8 +10,8 @@ class LFUCache
     def initialize(capacity)
       require 'set'
       @cap = 0
-      @csh = {}
-      @fr = {}
+      @c = {}
+      @f = {}
       @minf = 0
     end
 
@@ -30,7 +30,11 @@ class LFUCache
     :rtype: Void
 =end
     def put(key, value)
-      if @k
+      return if @cap <= 0
+      fav = @c[key]
+      if fav
+        return
+      end
         
     end
 
