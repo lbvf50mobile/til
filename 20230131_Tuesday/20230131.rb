@@ -3,11 +3,15 @@
 # @param {Integer[]} scores
 # @param {Integer[]} ages
 # @return {Integer}
-# Fail.
-# [1,3,7,3,2,4,10,7,5]
-# [4,5,2,1,1,2,4,1,4]
 def best_team_score(scores, ages)
-  @data = ages.zip(scores).sort_by{|x| x[0]}
+  # Hints from:
+  # https://leetcode.com/problems/best-team-with-no-conflicts/solution/
+  # - - - - - - -
+  # Last element of the same adge must have maximum score.
+  # Because if that would not happen it could happens
+  # That highest score, small score, and older with middle score.
+  # In this case middle score do not see user with a highest score.
+  @data = ages.zip(scores).sort{|a,b| a[0] == b[0] ? a[1] <=> b[1] : a[0] <=> b[0]}
   @dp = {}
   @max = 0
   dfs(-1,0)
