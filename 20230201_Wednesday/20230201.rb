@@ -6,6 +6,7 @@
 # = = = = = = = = = = = = = =
 # Runtime: 463 ms, faster than 100.00% of Ruby online submissions for Greatest Common Divisor of Strings.
 # Memory Usage: 214.3 MB, less than 100.00% of Ruby online submissions for Greatest Common Divisor of Strings.
+# 2023.02.01 Daily Challenge.
 # @param {String} str1
 # @param {String} str2
 # @return {String}
