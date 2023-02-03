@@ -11,27 +11,26 @@ def convert(s, num_rows)
   k = 0
   i,j = 0,0
   while k < s.size
-    char = s[k]
-    mt[i][j] = char
+    mt[i][j] = s[k]
     k += 1
-    ni, nj = i,j
     if dr
-      ni += 1
+      i += 1
     else
-      ni -= 1
-      nj += 1
+      i -= 1
+      j += 1
     end
-    if !ni.between?(0,num_rows-1) 
+    if -1 == i
+      i = 1
+      j -= 1
       dr = !dr
-      ni,nj = i,j
-      if dr
-        ni += 1
-      else
-        ni -= 1
-        nj += 1
-      end
+      next
     end
-    i,j = ni, nj
+    if num_rows == i
+      dr = !dr
+      i = num_rows - 2
+      j += 1
+      next
+    end
   end
   mt.flatten.select{|x| x != " "}.join
 end
