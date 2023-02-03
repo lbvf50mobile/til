@@ -1,36 +1,36 @@
 # Leetcode: 6. Zigzag Conversion.
 # https://leetcode.com/problems/zigzag-conversion/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 108 ms, faster than 100.00% of Ruby online submissions for Zigzag Conversion.
+# Memory Usage: 211 MB, less than 87.32% of Ruby online submissions for Zigzag Conversion.
+# 2023.02.03 Daily Challenge.
 # @param {String} s
 # @param {Integer} num_rows
 # @return {String}
-# TLE.
 def convert(s, num_rows)
+  # Based on:
+  # https://leetcode.com/problems/zigzag-conversion/solution/
   return s if 1 == num_rows
-  dr = true # true - down, false - up;
-  mt = Array.new(num_rows).map{ Array.new(s.size," ")}
-  k = 0
-  i,j = 0,0
-  while k < s.size
-    mt[i][j] = s[k]
-    k += 1
-    if dr
-      i += 1
-    else
-      i -= 1
-      j += 1
-    end
-    if -1 == i
-      i = 1
-      j -= 1
-      dr = !dr
-      next
-    end
-    if num_rows == i
-      dr = !dr
-      i = num_rows - 2
-      j += 1
-      next
+  answer = []
+  n = s.size
+  chars_in_section = 2 * (num_rows-1)
+  num_rows.times do |curr_row|
+    index = curr_row
+    while index < n
+      answer.push(s[index])
+      # If curr_row is not the first or last row,
+      # then we have to add one more characterof a
+      # current section.
+      if 0 != curr_row && num_rows - 1 != curr_row
+        chars_in_between = chars_in_section - 2*curr_row
+        second_index = index + chars_in_between
+        answer.push(s[second_index]) if second_index < n
+      end
+      index += chars_in_section
     end
   end
-  mt.flatten.select{|x| x != " "}.join
+  return answer.join
 end
