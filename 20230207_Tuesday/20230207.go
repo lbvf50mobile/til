@@ -20,7 +20,6 @@ func totalFruit(fruits []int) int {
     // Update max.
     if total <= 2 && max < (j-i) {
       max = j-i
-      
     }
     // Extend.
     if total <= 2 && j < n {
