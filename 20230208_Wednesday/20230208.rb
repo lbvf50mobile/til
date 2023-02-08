@@ -1,21 +1,29 @@
 # Leetcode: 45. Jump Game II.
 # https://leetcode.com/problems/jump-game-ii/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 96 ms, faster than 78.95% of Ruby online submissions for Jump Game II.
+# Memory Usage: 211.9 MB, less than 94.74% of Ruby online submissions for Jump Game II.
+# 2023.02.08 Daily Challenge.
 # @param {Integer[]} nums
 # @return {Integer}
-# Fails.
-# [7,0,9,6,9,6,1,7,9,0,1,2,9,0,3]
 def jump(nums)
-  # Hint from the Leetcode's solution.
+  # Based on:
+  # https://leetcode.com/problems/jump-game-ii/
   return 0 if 1 == nums.size
-  farest, steps = -1, 0
-  nums.each_with_index do |i,range|
-    if i+range > farest
-      farest = i + range
+  steps = 0
+  cur,pos = 0, 0
+  (0...nums.size-1).each do |i|
+    jump = nums[i]
+    pos = [pos, jump + i].max
+    if i == cur
+      # Step only when current range is 
+      # finised.
+      cur = pos
       steps += 1
     end
-    if farest >= nums.size - 1
-      return steps
-    end
   end
-  raise "This line could not be implmeneted."
+  return steps
 end
