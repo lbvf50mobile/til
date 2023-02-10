@@ -1,8 +1,17 @@
 # Leetcode: 1162. As Far from Land as Possible.
 # https://leetcode.com/problems/as-far-from-land-as-possible/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 187 ms, faster than 100.00% of Ruby online submissions for As Far from Land as Possible.
+# Memory Usage: 219.5 MB, less than 8.33% of Ruby online submissions for As Far from Land as Possible.
+# 2023.02.10 Daily Challenge.
 # @param {Integer[][]} grid
 # @return {Integer}
 def max_distance(grid)
+  # Based on:
+  # https://leetcode.com/problems/as-far-from-land-as-possible/solution/
   rows = grid.size
   cols = grid[0].size
   md = rows + cols + 1
@@ -12,14 +21,27 @@ def max_distance(grid)
       if 1 == grid[i][j]
         dist[i][j] = 0
       else
-        dist[i][j] = [ dist[i][j],
-                       [i>0 ? dist[i-1][j]+1 : md, j > 0 ? dist[i][j-1] : md]
-        ].min
+        vrt = md
+        hrz = md
+        hrz = 1 + dist[i][j-1] if j > 0
+        vrt = 1 + dist[i-1][j] if i > 0
+        mn1 = [vrt,hrz].min
+        dist[i][j] = [dist[i][j],mn1].min
       end
     end
   end
   ans = -100_000
   (0...rows).reverse_each do |i|
+    (0...cols).reverse_each do |j|
+      vt = md
+      hz = md
+      vt = 1 + dist[i+1][j] if i < (rows - 1)
+      hz = 1 + dist[i][j+1] if j < (cols - 1)
+      mn = [vt,hz].min
+      dist[i][j] = [dist[i][j],mn].min
+      ans = [ans,dist[i][j]].max
+    end
   end
+  return -1 if 0 == ans || ans == md
   return ans
 end
