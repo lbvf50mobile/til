@@ -1,0 +1,41 @@
+# Leetcode: 652. Find Duplicate Subtrees.
+# https://leetcode.com/problems/find-duplicate-subtrees/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 111 ms, faster than 100.00% of Ruby online submissions for Find Duplicate Subtrees.
+# Memory Usage: 219.4 MB, less than 50.00% of Ruby online submissions for Find Duplicate Subtrees.
+# 2023.02.28 Daily Challenge.
+#
+# Definition for a binary tree node.
+# class TreeNode
+#     attr_accessor :val, :left, :right
+#     def initialize(val = 0, left = nil, right = nil)
+#         @val = val
+#         @left = left
+#         @right = right
+#     end
+# end
+# @param {TreeNode} root
+# @return {TreeNode[]}
+def find_duplicate_subtrees(root)
+  # Based on:
+  # https://leetcode.com/problems/find-duplicate-subtrees/solution/
+  @cnt = {}
+  @ans = []
+  trv(root)
+  return @ans
+end
+
+def trv(x)
+  return "" if  !x
+  rep = "(#{trv(x.left)})#{x.val}(#{trv(x.right)})"
+  @cnt[rep] ||= 0
+  @cnt[rep] += 1
+  if 2 == @cnt[rep]
+    @ans.push(x)
+  end
+  return rep
+end
+
