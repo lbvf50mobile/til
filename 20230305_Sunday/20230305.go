@@ -10,6 +10,8 @@
 import "fmt"
 var p = fmt.Println
 func minJumps(arr []int) int {
+  // Based on:
+  // https://leetcode.com/problems/jump-game-iv/solution/
   n := len(arr)
   // p("n is",n,arr)
   if n <= 1 {
