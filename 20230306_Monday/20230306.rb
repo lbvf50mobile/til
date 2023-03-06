@@ -6,6 +6,7 @@
 # = = = = = = = = = = = = = =
 # Runtime: 75 ms, faster than 86.36% of Ruby online submissions for Kth Missing Positive Number.
 # Memory Usage: 211.3 MB, less than 77.27% of Ruby online submissions for Kth Missing Positive Number.
+# 2023.03.06 Daily Challenge.
 # @param {Integer[]} arr
 # @param {Integer} k
 # @return {Integer}
