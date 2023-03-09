@@ -30,6 +30,5 @@ def detectCycle(head)
     end
     head = head.next
   end
-  return -1
+  return nil
 end
-
