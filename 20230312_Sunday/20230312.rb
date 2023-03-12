@@ -30,17 +30,19 @@ def merge_k_lists(lists)
   curr = nil
   prev.next = curr
   curr_i = -1
-  new_lists = []
+  new_lists =  lists.clone
+  size = lists.size
   while true
     # Need to remove nil's from the array.
     # Fill a new array if an element is not nil.
     # Save index of last element of not_nil array in `i` var.
     i = -1
-    lists.each do |x|
+    (0...size).each do |index|
+      x = lists[index]
       # Remove nils from the list.
       if x
-        new_lists.push(x)
         i += 1
+        new_lists[i] = x
       else
         next # it is nil, no need to check seek for minimum.
       end
@@ -62,8 +64,9 @@ def merge_k_lists(lists)
     curr = nil
     prev.next = curr # Nill new added next pointer.
     curr_i = -1
+    # Swap two arays.
     # Use two lists. Without adding new one.
-    lists.clear()
+    size = i + 1
     lists, new_lists = new_lists, lists
   end
   return head
