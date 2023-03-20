@@ -15,7 +15,7 @@ def can_place_flowers(flowerbed, n)
   f = flowerbed
   # Plant flower during the loop.
   (0...f.size).each do |i|
-    # Onemediumelement.
+    # One middle element.
     if 0 == f[i] && 0 == i && f.size - 1 == i
       counter += 1
       f[i] = 1
