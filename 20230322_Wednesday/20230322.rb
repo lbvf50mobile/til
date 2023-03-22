@@ -1,0 +1,62 @@
+# Leetcode: 2492. Minimum Score of a Path Between Two Cities.
+# https://leetcode.com/problems/minimum-score-of-a-path-between-two-cities/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 518 ms, faster than 100.00% of Ruby online submissions for Minimum
+# Score of a Path Between Two Cities.
+# Memory Usage: 263.3 MB, less than 100.00% of Ruby online submissions for
+# Minimum Score of a Path Between Two Cities.
+# 2023.03.22 Daily Challenge.
+# @param {Integer} n
+# @param {Integer[][]} roads
+# @return {Integer}
+def min_score(n, roads)
+  # Based on:
+  # https://leetcode.com/problems/minimum-score-of-a-path-between-two-cities/solution/
+
+  # 1. Create an adjacency list adj that contais a list of pairs of integers such
+  # that adj[node] contails all node's neighbors in the form of (neighbor,
+  # weight) where neighbor is the neighboring node of node and weight denotes
+  # the weight of the edge that connects node and neighbor.
+  @adj = Array.new(n+1).map{ [] }
+  roads.each do |a,b,w|
+    @adj[a].push([b,w])
+    @adj[b].push([a,w])
+  end
+  # 2. Return bfs(n,adj).
+  return bfs(n)
+end
+
+def bfs(n)
+  # 2. BFS words as following.
+
+  # Create a visit array to keep trak of visited nodes. Wealso create queue a
+  # and a wariable answer sot to the maximum integer value.
+  visited = Array.new(n+1, false)
+  answer = 2**32
+  q = []
+  # We beging by pushin node 1 and marking it as visited.
+  q.push(1)
+  visited[1] = true
+  # We now loop untill the que ue is empty. The queue's first element, node, is
+  # popped out. We iterate over all the edges connected to node and for each
+  # endge, update answer to the minimum of answer and edge weight. We also check
+  # whether or not the node connected to the other end of the edge is visited.
+  # If it has not been visited, we visit it and add it to the queue.
+  while ! q.empty?
+    node = q.shift
+    @adj[node].each do |a,w|
+      # It is the most tricky part!
+      # Need to check every edge,
+      # even it leads to visited node.
+      answer = w if w < answer
+      next if visited[a]
+      visited[a] = true
+      p w
+      q.push(a)
+    end
+  end
+  return answer
+end
