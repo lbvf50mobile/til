@@ -1,5 +1,14 @@
 # Leetcode: 1319. Number of Operations to Make Network Connected.
 # https://leetcode.com/problems/number-of-operations-to-make-network-connected/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 166 ms, faster than 100.00% of Ruby online submissions for Number of
+# Operations to Make Network Connected.
+# Memory Usage: 222.1 MB, less than 100.00% of Ruby online submissions for
+# Number of Operations to Make Network Connected.
+# 2023.03.23 Daily Challenge.
 # @param {Integer} n
 # @param {Integer[][]} connections
 # @return {Integer}
@@ -19,7 +28,7 @@ def make_connected(n, connections)
     cmp += 1
     bfs(i)
   end
-  return cmp
+  return cmp - 1 # Important!
 end
 def bfs(i)
   q = [i]
