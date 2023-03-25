@@ -1,17 +1,30 @@
 # Leetcode: 2316. Count Unreachable Pairs of Nodes in an Undirected Graph.
 # https://leetcode.com/problems/count-unreachable-pairs-of-nodes-in-an-undirected-graph/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 403 ms, faster than 100.00% of Ruby online submissions for Count
+# Unreachable Pairs of Nodes in an Undirected Graph.
+# Memory Usage: 247.1 MB, less than 100.00% of Ruby online submissions for Count
+# Unreachable Pairs of Nodes in an Undirected Graph.
+# 2023.03.25 Daily Challenge.
 # @param {Integer} n
 # @param {Integer[][]} edges
 # @return {Integer}
-# TLE.
 def count_pairs(n, edges)
   # Need to calulate combinations
   # of nodes from all components. 
   # Where first elment of a pairt is from one component.
   # And second element is from an anothe component.
+  # #
+  # Optimization. For current component there is no difference
+  # other part of pair is in single component or in several ones.
+  # So with `total` var it is possible to increase the answer inside the BFS.
   @adj = Array.new(n+1).map{ [] }
   @v = Array.new(n+1,false)
-  @comps = [] # Number of nodes in a component.
+  @total = 0
+  @ans = 0
   edges.each do |a,b|
     @adj[a].push(b)
     @adj[b].push(a)
@@ -20,13 +33,7 @@ def count_pairs(n, edges)
     next if @v[i]
     bfs(i)
   end
-  ans = 0
-  (0...@comps.size).each do |i|
-    (i+1...@comps.size).each do |j|
-      ans += @comps[i]*@comps[j]
-    end
-  end
-  return ans
+  return @ans
 end
 
 def bfs(i)
@@ -37,13 +44,14 @@ def bfs(i)
   while !q.empty?
     x = q.shift
     count += 1
+    @ans += @total
     @adj[x].each do |j|
       next if @v[j]
       @v[j] = true
       q.push(j)
     end
   end
-  @comps.push(count)
+  @total += count
 end
 
 
