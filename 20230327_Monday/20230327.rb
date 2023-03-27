@@ -1,5 +1,14 @@
 # Leetcode: 64. Minimum Path Sum.
 # https://leetcode.com/problems/minimum-path-sum/
+# = = = = = = = = = = = = = =
+# Accpted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 134 ms, faster than 12.12% of Ruby online submissions for Minimum
+# Path Sum.
+# Memory Usage: 211.9 MB, less than 100.00% of Ruby online submissions for
+# Minimum Path Sum.
+# 2023.03.27 Daily Challenge.
 # @param {Integer[][]} grid
 # @return {Integer}
 def min_path_sum(grid)
@@ -22,12 +31,12 @@ def min_path_sum(grid)
   show()
   # Third. Take care about the rest of the matrix.
   # Select minimum between left and top cells.
-  p 1
+  # p 1
   (1...grid.size).each do |i|
-    p 11
+    # p 11
     (1...grid[0].size).each do |j|
-      p 2
-      p[i,j]
+      # p 2
+      # p[i,j]
       grid[i][j] += [grid[i-1][j],grid[i][j-1]].min
     end
   end
