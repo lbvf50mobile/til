@@ -15,17 +15,17 @@ def ways(pizza, k)
     end
   end
   dp = Array.new(k).map{ Array.new(r).map{ Array.new(c,0)}}
-  dp[0] = Array.new(r).map{|i| Array.new(c).map{|j| ap[i][j] > 0 ? 1 : 0}} 
+  dp[0] = Array.new(r).map.with_index{|_,i| Array.new(c).map.with_index{|_,j| ap[i][j] > 0 ? 1 : 0}} 
   mod = 1000000007
   (1...k).each do |rmn|
     (0...r).each do |i|
       (0...c).each do |j|
         val = 0
         (i+1...r).each do |ni|
-          val += dp[rm-1][ni][j] if ap[i][j] - ap[ni][j] > 0
+          val += dp[rmn-1][ni][j] if ap[i][j] - ap[ni][j] > 0
         end
         (j+1...c).each do |nj|
-          val += dp[rm-1][i][nj] if ap[i][j] - ap[i][nj] > 0
+          val += dp[rmn-1][i][nj] if ap[i][j] - ap[i][nj] > 0
         end
         dp[rmn][i][j] = val % mod
       end
