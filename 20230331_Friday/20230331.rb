@@ -1,17 +1,26 @@
 # Leetcode: 1444. Number of Ways of Cutting a Pizza.
 # https://leetcode.com/problems/number-of-ways-of-cutting-a-pizza/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 186 ms, faster than 100.00% of Ruby online submissions for Number of
+# Ways of Cutting a Pizza.
+# Memory Usage: 211 MB, less than 100.00% of Ruby online submissions for Number
+# of Ways of Cutting a Pizza.
+# 2023.03.31 Daily Challenge.
 # @param {String[]} pizza
 # @param {Integer} k
 # @return {Integer}
 def ways(pizza, k)
   # Based on:
-  # https://leetcode.com/problems/number-of-ways-of-cutting-a-pizza/
+  # https://leetcode.com/problems/number-of-ways-of-cutting-a-pizza/solution/
   r,c = pizza.size, pizza[0].size
   ap = Array.new(r+1).map{ Array.new(c+1,0) }
   (0...r).reverse_each do |i|
     (0...c).reverse_each do |j|
-      x = pizza[i][j] ? 1 : 0
-      ap[i][j] = x + ap[i+1][j] + ap[i][j+1] + ap[i+1][j+1]
+      x = ?A == pizza[i][j] ? 1 : 0
+      ap[i][j] = x + ap[i+1][j] + ap[i][j+1] - ap[i+1][j+1]
     end
   end
   dp = Array.new(k).map{ Array.new(r).map{ Array.new(c,0)}}
