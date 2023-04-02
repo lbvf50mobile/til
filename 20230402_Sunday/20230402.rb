@@ -1,0 +1,28 @@
+# Leetcode: 2300. Successful Pairs of Spells and Potions.
+# https://leetcode.com/problems/successful-pairs-of-spells-and-potions/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 576 ms, faster than 100.00% of Ruby online submissions for Successful Pairs of Spells and Potions.
+# Memory Usage: 230.8 MB, less than 100.00% of Ruby online submissions for Successful Pairs of Spells and Potions.
+# @param {Integer[]} spells
+# @param {Integer[]} potions
+# @param {Integer} success
+# @return {Integer[]}
+def successful_pairs(spells, potions, success)
+  # Based on:
+  # https://leetcode.com/problems/successful-pairs-of-spells-and-potions/solution/
+  sspll = spells.each_with_index.to_a.sort_by{|a,b| a}
+  pts = potions.sort
+  ans = Array.new(spells.size,0)
+  m = potions.size
+  pi = m - 1
+  sspll.each do |s,i|
+    while pi >= 0 && s*pts[pi] >= success
+      pi -= 1
+    end
+    ans[i] = m - (pi+1)
+  end
+  return ans
+end
