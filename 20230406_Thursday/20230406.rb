@@ -1,5 +1,14 @@
 # Leetcode: 1254. Number of Closed Islands.
 # https://leetcode.com/problems/number-of-closed-islands/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 99 ms, faster than 100.00% of Ruby online submissions for Number of
+# Closed Islands.
+# Memory Usage: 211.6 MB, less than 71.43% of Ruby online submissions for Number
+# of Closed Islands.
+# 2023.04.06 Daily Challenge.
 # @param {Integer[][]} grid
 # @return {Integer}
 def closed_island(grid)
