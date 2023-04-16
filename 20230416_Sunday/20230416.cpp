@@ -1,5 +1,14 @@
 // Leetcode: 1639. Number of Ways to Form a Target String Given a Dictionary.
 // https://leetcode.com/problems/number-of-ways-to-form-a-target-string-given-a-dictionary/
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 371 ms, faster than 38.80% of C++ online submissions for Number of
+// Ways to Form a Target String Given a Dictionary.
+// Memory Usage: 79 MB, less than 31.90% of C++ online submissions for Number of
+// Ways to Form a Target String Given a Dictionary.
+// 2023.04.16 Daily Challenge.
 class Solution {
 public:
     int numWays(vector<string>& words, string target) {
