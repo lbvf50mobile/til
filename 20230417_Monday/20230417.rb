@@ -6,8 +6,8 @@
 # = = = = = = = = = = = = = =
 # Runtime: 105 ms, faster than 6.67% of Ruby online submissions for Kids With
 # the Greatest Number of Candies. 
-# Memory Usage: 211.1 MB, less than 60.00% of
-# Ruby online submissions for Kids With the Greatest Number of Candies.
+# Memory Usage: 211.1 MB, less than 60.00% of Ruby online submissions for Kids
+# With the Greatest Number of Candies.
 # 2023.04.17 Daily Challenge.
 # @param {Integer[]} candies
 # @param {Integer} extra_candies
