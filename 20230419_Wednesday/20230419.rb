@@ -21,7 +21,7 @@
 # @param {TreeNode} root
 # @return {Integer}
 def longest_zig_zag(root)
-  # Based on @longluo's solution.
+  # Based on Frank's Luo (https://leetcode.com/longluo/) solution.
   # https://leetcode.com/problems/longest-zigzag-path-in-a-binary-tree/solution/1868016
   # From DFS to BFS.
   @max = 0
@@ -36,5 +36,3 @@ def longest_zig_zag(root)
   end
   return @max
 end
-
-
