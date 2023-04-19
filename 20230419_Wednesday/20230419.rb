@@ -4,9 +4,9 @@
 # Accepted.
 # Thanks God, Jesus Christ!
 # = = = = = = = = = = = = = =
-# Runtime: 310 ms, faster than 100.00% of Ruby online submissions for Longest
+# Runtime: 279 ms, faster than 100.00% of Ruby online submissions for Longest
 # ZigZag Path in a Binary Tree.
-# Memory Usage: 222.1 MB, less than 100.00% of Ruby online submissions for
+# Memory Usage: 215.3 MB, less than 100.00% of Ruby online submissions for
 # Longest ZigZag Path in a Binary Tree.
 # 2023.04.19 Daily Challenge.
 # Definition for a binary tree node.
@@ -21,22 +21,20 @@
 # @param {TreeNode} root
 # @return {Integer}
 def longest_zig_zag(root)
-  # Based on Leetcode's solution.
+  # Based on @longluo's solution.
+  # https://leetcode.com/problems/longest-zigzag-path-in-a-binary-tree/solution/1868016
+  # From DFS to BFS.
   @max = 0
-  dfs(root,false,0)
-  dfs(root,true,0)
-  return @max
-end
-def dfs(x,lft,n)
-  return if !x
-  @max = [@max,n].max
-  if lft
-    dfs(x.left,false,n+1)
-    dfs(x.right,true,1)
-  else
-    dfs(x.left,false,1)
-    dfs(x.right,true,n+1)
+  q = [[root,0,0]]
+  while !q.empty?
+    x,l,r = q.shift
+    next if !x
+    @max = l if l > @max
+    @max = r if r > @max
+    q.push([x.left,r+1,0]) if x.left
+    q.push([x.right,0,l+1]) if x.right
   end
+  return @max
 end
 
 
