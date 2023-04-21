@@ -1,0 +1,38 @@
+# Leetcode: 879. Profitable Schemes.
+# https://leetcode.com/problems/profitable-schemes/
+# @param {Integer} n
+# @param {Integer} min_profit
+# @param {Integer[]} group
+# @param {Integer[]} profit
+# @return {Integer}
+def profitable_schemes(n, min_profit, group, profit)
+  # Based on:
+  # https://leetcode.com/problems/profitable-schemes/solution/
+
+  # Initialize the array memo with -1; this array will keep the calculated
+  # results, and -1 represents that the answer has not been calculated for these
+  # states yet.
+  @mod = 10**9 + 7
+  @memo = Array.new(101){ Array.new(101){ Array.new(101,-1)}}
+  @mp,@pr,@gr, @n = min_profit, group, profit, n
+  find(0,0,0)
+end
+
+def find(pos, count, profit)
+  if pos == @gr.size
+    # If profit exceeds the minimum required; it's a profitable scheme.
+    return profit >= @mp ? 1 : 0
+  end
+  if -1 != @memo[pos][count][profit]
+    #  Repeated subproblem, return the stored answer.
+    return @memo[pos][count][profit]
+  end
+  # Ways to get a profitable scheme withou this crime.
+  total_ways = find(pos+1, count, profit)
+  if count + @gr[pos] <= @n
+    # Adding ways to get profitable schemes, including this crime.
+    total_ways += find(pos+1, count + @gr[pos], [@mp,profit+@pr[pos]].min)
+  end
+  @memo[pos][count][profit] = total_ways % @mod
+  return @memo[pos][count][profit]
+end
