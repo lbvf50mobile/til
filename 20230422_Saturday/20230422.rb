@@ -4,21 +4,22 @@
 # Accepted.
 # Thanks God, Jesus Christ!
 # = = = = = = = = = = = = = =
-# Runtime: 1457 ms, faster than 100.00% of Ruby online submissions for Minimum
+# Runtime: 1474 ms, faster than 100.00% of Ruby online submissions for Minimum
 # Insertion Steps to Make a String Palindrome.
-# Memory Usage: 225.9 MB, less than 100.00% of Ruby online submissions for
+# Memory Usage: 224.7 MB, less than 100.00% of Ruby online submissions for
 # Minimum Insertion Steps to Make a String Palindrome.
+# 2023.04.22 Daily Challenge.
 # @param {String} s
 # @return {Integer}
 def min_insertions(s)
   # Based on the Leetcode's solution.
   n = s.size
   sr = s.reverse
-  return n - lcs(s,sr,n,n)
+  return n - lcs(s,sr,n)
 end
-def lcs(s1,s2,m,n)
+def lcs(s1,s2,n)
   dp = Array.new(n+1){ Array.new(n+1,0)}
-  (0..m).each do |i|
+  (0..n).each do |i|
     (0..n).each do |j|
       if 0 == i || j == 0
           dp[i][j] = 0
@@ -29,5 +30,5 @@ def lcs(s1,s2,m,n)
       end
     end
   end
-  return dp[m][n]
+  return dp[n][n]
 end
