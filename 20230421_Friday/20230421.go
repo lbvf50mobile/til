@@ -30,25 +30,6 @@ func profitableSchemes(n int, minProfit int, group []int, profit []int) int {
 	dpInit()
 	return find(0, 0, 0)
 }
-func find(pos, count, prf int) int {
-	if pos == len(gr) {
-		if prf >= mp {
-			return 1
-		} else {
-			return 0
-		}
-	}
-	if -1 != dp[pos][count][prf] {
-		return dp[pos][count][prf]
-	}
-	tw := find(pos+1, count, prf) // Total Ways.
-	if count+gr[pos] <= nn {
-		tw += find(pos+1, count+gr[pos], min(prf+pr[pos], mp))
-	}
-	ans := tw % mod
-	dp[pos][count][prf] = ans
-	return ans
-}
 func dpInit() {
 	dp = make([][][]int, 101)
 	for i := 0; i < 101; i += 1 {
@@ -56,10 +37,13 @@ func dpInit() {
 		for j := 0; j < 101; j += 1 {
 			dp[i][j] = make([]int, 101)
 			for k := 0; k < 101; k += 1 {
-				dp[i][j][k] = -1
+				dp[i][j][k] = 0
 			}
 		}
 	}
+    for cnt := 0; cnt <= nn ; cnt += 1 {
+      dp[len(gr)][cnt][mp] = 1
+    }
 }
 func min(a, b int) int {
 	if a < b {
