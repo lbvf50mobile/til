@@ -2,31 +2,28 @@
 class Solution {
 public:
     int mod = 1e9 + 7;
-    int memo[101][101][101];
-    
-    int find(int pos, int count, int profit, int n, int minProfit, vector<int>& group, vector<int>& profits) {
-        if (pos == group.size()) {
-            // If profit exceeds the minimum required; it's a profitable scheme.
-            return profit >= minProfit;
+    int dp[101][101][101];
+          
+    int profitableSchemes(int n, int minProfit, vector<int>& group, vector<int>& profits) {
+        // Initializing the base case.
+        for (int count = 0; count <= n; count++) {
+            dp[group.size()][count][minProfit] = 1;
+         }
+        
+        for (int index = group.size() - 1; index >= 0; index--) {
+            for (int count = 0; count <= n; count++) {
+                for(int profit = 0; profit <= minProfit; profit++) {
+                    // Ways to get a profitable scheme without this crime.
+                    dp[index][count][profit] = dp[index + 1][count][profit];
+                    if (count + group[index] <= n) {
+                        // Adding ways to get profitable schemes, including this crime.
+                        dp[index][count][profit] 
+                            = (dp[index][count][profit] + dp[index + 1][count + group[index]][min(minProfit, profit + profits[index])]) % mod;
+                    }
+                }
+            }
         }
         
-        if (memo[pos][count][profit] != -1) {
-            // Repeated subproblem, return the stored answer.
-            return memo[pos][count][profit];
-        }
-        
-        // Ways to get a profitable scheme without this crime.
-        int totalWays = find(pos + 1, count, profit, n, minProfit, group, profits);
-        if (count + group[pos] <= n) {
-            // Adding ways to get profitable schemes, including this crime.
-            totalWays += find(pos + 1, count + group[pos], min(minProfit, profit + profits[pos]), n, minProfit, group, profits);
-        }
-        
-        return memo[pos][count][profit] = totalWays % mod;
-    }
-             
-    int profitableSchemes(int n, int minProfit, vector<int>& group, vector<int>& profit) {
-        memset(memo, -1,sizeof(memo));
-        return find(0, 0, 0, n, minProfit, group, profit);
+        return dp[0][0][0];
     }
 };

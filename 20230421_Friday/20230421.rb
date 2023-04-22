@@ -4,11 +4,11 @@
 # Accepted.
 # Thanks God, Jesus Christ!
 # = = = = = = = = = = = = = =
-# Runtime: 1584 ms, faster than 100.00% of Ruby online submissions for
+# Runtime: 1977 ms, faster than 100.00% of Ruby online submissions for
 # Profitable Schemes.
-# Memory Usage: 309.5 MB, less than 100.00% of Ruby online submissions for
+# Memory Usage: 248 MB, less than 100.00% of Ruby online submissions for
 # Profitable Schemes.
-# 2023.04.21 Daily Challenge.
+# 2023.04.22 Updated.
 
 # @param {Integer} n
 # @param {Integer} min_profit
@@ -19,30 +19,27 @@ def profitable_schemes(n, min_profit, group, profit)
   # Based on:
   # https://leetcode.com/problems/profitable-schemes/solution/
 
-  # Initialize the array memo with -1; this array will keep the calculated
-  # results, and -1 represents that the answer has not been calculated for these
-  # states yet.
   @mod = 10**9 + 7
-  @memo = Array.new(101){ Array.new(101){ Array.new(101,-1)}}
+  dp = Array.new(101){ Array.new(101){ Array.new(101,0)}}
   @mp,@gr,@pr, @n = min_profit, group, profit, n # Fixed Error! Wrong order.
-  find(0,0,0)
-end
 
-def find(pos, count, profit)
-  if pos == @gr.size
-    # If profit exceeds the minimum required; it's a profitable scheme.
-    return profit >= @mp ? 1 : 0
+  # Initializing the base case.
+  (0..n).each do |cnt| # Fixed Error! Need to be inclusive.
+    dp[@gr.size][cnt][@mp] = 1
   end
-  if -1 != @memo[pos][count][profit]
-    #  Repeated subproblem, return the stored answer.
-    return @memo[pos][count][profit]
+
+  (0...@gr.size).reverse_each do |i|
+    (0..n).each do |cnt|
+      (0..@mp).each do |prf|
+        # Ways to get a profitable scheme without this crime.
+        dp[i][cnt][prf] = dp[i+1][cnt][prf]
+        if cnt + @gr[i] <= n
+          min = [@mp,prf+@pr[i]].min
+          dp[i][cnt][prf] += dp[i+1][cnt+@gr[i]][min]
+          dp[i][cnt][prf] %= @mod
+        end
+      end
+    end
   end
-  # Ways to get a profitable scheme withou this crime.
-  total_ways = find(pos+1, count, profit)
-  if count + @gr[pos] <= @n
-    # Adding ways to get profitable schemes, including this crime.
-    total_ways += find(pos+1, count + @gr[pos], [@mp,profit+@pr[pos]].min)
-  end
-  @memo[pos][count][profit] = total_ways % @mod
-  return @memo[pos][count][profit]
+  return dp[0][0][0]
 end
