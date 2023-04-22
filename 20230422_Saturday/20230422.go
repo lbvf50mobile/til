@@ -4,7 +4,6 @@
 // Accepted.
 // Thanks God, Jesus Christ!
 // = = = = = = = = = = = = = =
-//
 // Runtime: 16 ms, faster than 66.67% of Go online submissions for Minimum
 // Insertion Steps to Make a String Palindrome.
 // Memory Usage: 9.5 MB, less than 33.33% of Go online submissions for Minimum
