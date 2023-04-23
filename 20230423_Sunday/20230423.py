@@ -1,3 +1,13 @@
+# Leetcode: 1416. Restore The Array.
+# https://leetcode.com/problems/restore-the-array/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 2798 ms, faster than 8.22% of Python3 online submissions for Restore
+# The Array.
+# Memory Usage: 122.5 MB, less than 39.73% of Python3 online submissions for
+# Restore The Array.
 # Leetcode's soltuion.
 class Solution:
     def numberOfArrays(self, s: str, k: int) -> int:
@@ -9,6 +19,7 @@ class Solution:
         
         # Number of possible splits for s[start ~ m-1].
         def dfs(start):
+            print(start)
             # If we have already updated dp[start], return it.
             if dp[start]:
                 return dp[start]
