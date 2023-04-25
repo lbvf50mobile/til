@@ -1,5 +1,14 @@
 # Leetcode: 2336. Smallest Number in Infinite Set.
 # https://leetcode.com/problems/smallest-number-in-infinite-set/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 114 ms, faster than 100.00% of Ruby online submissions for Smallest
+# Number in Infinite Set.
+# Memory Usage: 211.5 MB, less than 100.00% of Ruby online submissions for
+# Smallest Number in Infinite Set.
+# 2023.04.25 Daily Challenge.
 
 class SmallestInfiniteSet
     def initialize()
@@ -32,7 +41,7 @@ class SmallestInfiniteSet
         @i -= 1
       else
         @b.push(num)
-        @b.sort
+        @b.sort! # Fixed bug. Did not change the array.
       end
       @h[num] = false
     end
