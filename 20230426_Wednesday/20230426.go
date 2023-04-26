@@ -4,28 +4,16 @@
 // Accepted.
 // Thanks God, Jesus Christ!
 // = = = = = = = = = = = = = =
-// Runtime: 7 ms, faster than 12.58% of Go online submissions for Add Digits.
-// Memory Usage: 2.1 MB, less than 98.11% of Go online submissions for Add
-// Digits.
 // 2023.04.26 Daily Challenge.
 
 package main
 
-import (
-	"strconv"
-)
-
 func addDigits(num int) int {
-	for num >= 10 {
-		num = sumDigits(num)
+	if 0 == num {
+		return 0
 	}
-	return num
-}
-
-func sumDigits(x int) int {
-	str, sum := strconv.Itoa(x), 0
-	for _, x := range str {
-		sum += int(x - '0')
+	if 0 == num%9 {
+		return 9
 	}
-	return sum
+	return num % 9
 }
