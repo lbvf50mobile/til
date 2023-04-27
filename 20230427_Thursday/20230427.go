@@ -13,5 +13,7 @@ package main
 import "math"
 
 func bulbSwitch(n int) int {
+	// Based on:
+	// https://leetcode.com/problems/bulb-switcher/solution/
 	return int(math.Sqrt(float64(n)))
 }
