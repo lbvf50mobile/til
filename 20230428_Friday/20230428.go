@@ -5,8 +5,9 @@
 // Thanks God, Jesus Christ!
 // = = = = = = = = = = = = = =
 // Runtime: 11 ms, faster than 81.25% of Go online submissions for Similar
-// String Groups. Memory Usage: 4.6 MB, less than 37.50% of Go online
-// submissions for Similar String Groups.
+// String Groups.
+// Memory Usage: 4.6 MB, less than 37.50% of Go online submissions for Similar
+// String Groups.
 // 2023.04.28 Daily Challenge.
 package main
 

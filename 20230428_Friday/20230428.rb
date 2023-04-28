@@ -5,8 +5,9 @@
 # Thanks God, Jesus Christ!
 # = = = = = = = = = = = = = =
 # Runtime: 850 ms, faster than 100.00% of Ruby online submissions for Similar
-# String Groups. Memory Usage: 211.1 MB, less than 100.00% of Ruby online
-# submissions for Similar String Groups.
+# String Groups.
+# Memory Usage: 211.1 MB, less than 100.00% of Ruby online submissions for
+# Similar String Groups.
 # 2023.04.28 Daily Challenge.
 # @param {String[]} strs
 # @return {Integer}
