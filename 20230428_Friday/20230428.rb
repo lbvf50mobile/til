@@ -1,10 +1,12 @@
 # Leetcode: 839. Similar String Groups.
 # https://leetcode.com/problems/similar-string-groups/
 # = = = = = = = = = = = = = =
-# TLE. But correct.
+# Accepted.
 # Thanks God, Jesus Christ!
 # = = = = = = = = = = = = = =
-# TLE.
+# Runtime: 850 ms, faster than 100.00% of Ruby online submissions for Similar
+# String Groups. Memory Usage: 211.1 MB, less than 100.00% of Ruby online
+# submissions for Similar String Groups.
 # 2023.04.28 Daily Challenge.
 # @param {String[]} strs
 # @return {Integer}
@@ -42,6 +44,7 @@ def similar(a,b)
   (0...@n).each do |i|
     if a[i] != b[i]
       cnt += 1
+      return false if 2 < cnt
     end
   end
   return 2 == cnt || 0 == cnt
