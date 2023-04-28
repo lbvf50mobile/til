@@ -23,17 +23,11 @@ def dfs(i)
   end
 end
 def similar(a,b)
-  return false if a.size != b.size
-  inds = []
+  cnt = 0
   (0...a.size).each do |i|
     if a[i] != b[i]
-      inds.push(i)
-      return false if 2 < inds.size
+      cnt += 1
     end
   end
-  return false if ! (2 == inds.size || 0 == inds.size)
-  return true if 0 == inds.size
-  i,j = inds
-  return true if a[i] == b[j] &&  a[j] == b[i]
-  return false
+  return 2 == cnt || 0 == cnt
 end
