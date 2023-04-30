@@ -8,6 +8,7 @@
 // Existence of Edge Length Limited Paths.
 // Memory Usage: 17.6 MB, less than 33.33% of Go online submissions for Checking
 // Existence of Edge Length Limited Paths.
+// 2023.04.30 Updated.
 package main
 
 // import "sort"
