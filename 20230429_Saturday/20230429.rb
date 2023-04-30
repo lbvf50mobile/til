@@ -53,7 +53,7 @@ def distance_limited_paths_exist(n, edge_list, queries)
   qc = queries.size
   ans = Array.new(qc,false)
 
-  # Store original inicies with all queries.
+  # Store original indices with all queries.
   qwi = [] # Queries with index.
   qc.times do |i|
     qwi[i] = queries[i]
