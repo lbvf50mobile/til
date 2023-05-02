@@ -4,7 +4,7 @@
 // Accepted.
 // Thanks God, Jesus Christ!
 // = = = = = = = = = = = = = =
-// Runtime: 7 ms, faster than 50.47% of Go online submissions for Sign of the
+// Runtime: 3 ms, faster than 87.85% of Go online submissions for Sign of the
 // Product of an Array.
 // Memory Usage: 3.3 MB, less than 98.13% of Go online submissions for Sign of
 // the Product of an Array.
@@ -18,7 +18,7 @@ func arraySign(nums []int) int {
     if v < 0 {
       x = -1
     } else if 0 == v {
-      x = 0
+      return 0 // After reading the Leetcode's solution.
     } else {
       x = 1
     }
