@@ -29,36 +29,36 @@ func predictPartyVictory(senate string) string {
 			d += 1
 		}
 	}
-    // While any party has eligible Sentaors.
-    for r > 0 && d > 0 {
-      // Shift the senator with turn.
-      curr := q[0]
-      q = q[1:]
-      // If eligible float a ban on the other party.
-      // enqueue again. If not, decrement the floating ban
-      // and count the other party.
-      if 'R' == curr {
-        if rb > 0 {
-          r -= 1
-          rb -= 1
-        } else {
-          q = append(q, 'R')
-          db += 1
-        }
-      } else {
-        if db > 0 {
-          d -= 1
-          db -= 1
-        } else {
-          q = append(q,'D')
-          rb += 1
-        }
-      }
-    }
-    // Return the party with eligible senators.
-    if r > 0 {
-      return "Radiant"
-    } else {
-      return "Dire"
-    }
+	// While any party has eligible Sentaors.
+	for r > 0 && d > 0 {
+		// Shift the senator with turn.
+		curr := q[0]
+		q = q[1:]
+		// If eligible float a ban on the other party.
+		// enqueue again. If not, decrement the floating ban
+		// and count the other party.
+		if 'R' == curr {
+			if rb > 0 {
+				r -= 1
+				rb -= 1
+			} else {
+				q = append(q, 'R')
+				db += 1
+			}
+		} else {
+			if db > 0 {
+				d -= 1
+				db -= 1
+			} else {
+				q = append(q, 'D')
+				rb += 1
+			}
+		}
+	}
+	// Return the party with eligible senators.
+	if r > 0 {
+		return "Radiant"
+	} else {
+		return "Dire"
+	}
 }
