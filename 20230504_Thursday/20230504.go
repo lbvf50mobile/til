@@ -13,7 +13,7 @@ package main
 func predictPartyVictory(senate string) string {
 	// Based on the Leetcode's soltion.
 
-	// Number of senators of each parting.
+	// Number of senators of each party.
 	r, d := 0, 0
 
 	// Floating ban count.
@@ -34,7 +34,7 @@ func predictPartyVictory(senate string) string {
 		// Shift the senator with turn.
 		curr := q[0]
 		q = q[1:]
-		// If eligible float a ban on the other party.
+		// If eligible float a ban on the other party,
 		// enqueue again. If not, decrement the floating ban
 		// and count the other party.
 		if 'R' == curr {
