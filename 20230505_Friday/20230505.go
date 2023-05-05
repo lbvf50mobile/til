@@ -1,7 +1,7 @@
 // Leetcode: 1456. Maximum Number of Vowels in a Substring of Given Length.
 // https://leetcode.com/problems/maximum-number-of-vowels-in-a-substring-of-given-length/
 // = = = = = = = = = = = = = = 
-// Accpeted.
+// Accepted.
 // Thanks God, Jesus Christ!
 // = = = = = = = = = = = = = =
 // Runtime: 10 ms, faster than 66.67% of Go online submissions for Maximum
