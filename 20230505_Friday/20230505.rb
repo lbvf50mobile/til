@@ -13,7 +13,7 @@
 # @param {Integer} k
 # @return {Integer}
 def max_vowels(s, k)
-  #Vowel letters in English are 'a', 'e', 'i', 'o', and 'u'.
+  # Vowel letters in English are 'a', 'e', 'i', 'o', and 'u'.
   r = /[aeiou]/
   max = 0
   (0...k).each do |i|
