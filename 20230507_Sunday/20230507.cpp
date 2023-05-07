@@ -12,6 +12,7 @@
 class Solution {
 public:
     vector<int> longestObstacleCourseAtEachPosition(vector<int>& obstacles) {
+      // Based on the Leetcode's solution.
         int n = obstacles.size();
         
         // lis[i] records the lowest increasing sequence of length i + 1.
