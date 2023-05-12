@@ -1,7 +1,7 @@
 // Leetcode: 2140. Solving Questions With Brainpower.
 // https://leetcode.com/problems/solving-questions-with-brainpower/
 // = = = = = = = = = = = = = =
-// Accepted,
+// Accepted.
 // Thanks God, Jesus Christ!
 // = = = = = = = = = = = = = =
 // Runtime: 256 ms, faster than 64.71% of Go online submissions for Solving
