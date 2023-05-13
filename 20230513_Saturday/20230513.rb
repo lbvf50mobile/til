@@ -14,6 +14,7 @@ def count_good_strings(low, high, zero, one)
   dp = Array.new(1 + high, 0)
   dp[0] = 1
   mod = (10**9) + 7
+  sum = 0
 
   # I terate over each lenght.
   (1..high).each do |nd|
@@ -24,6 +25,10 @@ def count_good_strings(low, high, zero, one)
     if nd >= one
       dp[nd] += dp[nd - one]
     end
+    if nd.between?(low,high)
+      sum += dp[nd]
+      sum %= mod
+    end
   end
-  return dp[low..high].sum % mod
+  sum
 end
