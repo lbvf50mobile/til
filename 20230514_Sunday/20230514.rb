@@ -1,0 +1,51 @@
+# Leetcode: 1799. Maximize Score After N Operations.
+# https://leetcode.com/problems/maximize-score-after-n-operations/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 1937 ms, faster than 100.00% of Ruby online submissions for Maximize
+# Score After N Operations.
+# Memory Usage: 214.8 MB, less than 100.00% of Ruby online submissions for
+# Maximize Score After N Operations.
+# 2023.05.14 Daily Challenge.
+# @param {Integer[]} nums
+# @return {Integer}
+def max_score(nums)
+  # Based on:
+  # https://leetcode.com/problems/maximize-score-after-n-operations/solution/
+  #
+  ms = 1 << nums.size # Max states.
+  fm = ms - 1 # Final mask.
+  # dp[i] stores max score we can get after picking remaingin numbers reresented
+  # by `i`.
+  dp = Array.new(ms,0)
+  # Iterate on all possbile states one ba one.
+  (0..fm).reverse_each do |s| # s means State.
+    # If we have picked all numbers, we know we can't get more score as no
+    # number is remaining.
+    if fm == s
+      dp[s] = 0
+      next
+    end
+    nt = s.to_s(2).count(?1) # numbers taken.
+    pf = nt/2 # pairs formed.
+    # States representin even numbers are taken are only valid.
+    next if nt.odd?
+    # We have picked `pf` pairs fromed paris, we try all combinations of one
+    # more pair now. We iterate on two numbers using two nested for loops. 
+    (0...nums.size).each do |i|
+      (i+1...nums.size).each do |j|
+        # We only choose numbers wich were not already picked.
+        a = 1 == ((s >> i) & 1)
+        b = 1 == ((s >> j) & 1)
+        next if a || b
+        cs = (pf+1) * nums[i].gcd(nums[j]) # current score.
+        sa = s | (1 << i) | (1 << j) # State after picking curren pair.
+        rs = dp[sa] # remainint score.
+        dp[s] = cs + rs if dp[s] < cs + rs
+      end
+    end
+  end
+  dp[0]
+end
