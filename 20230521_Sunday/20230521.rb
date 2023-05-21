@@ -1,0 +1,66 @@
+# Leetcode: 934. Shortest Bridge.
+# https://leetcode.com/problems/shortest-bridge/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 247 ms, faster than 80.00% of Ruby online submissions for Shortest
+# Bridge.
+# Memory Usage: 211.7 MB, less than 100.00% of Ruby online submissions for
+# Shortest Bridge.
+# 2023.05.21 Daily Challenge.
+# @param {Integer[][]} grid
+# @return {Integer}
+def shortest_bridge(grid)
+  # Based on:
+  # https://leetcode.com/problems/shortest-bridge/solution/
+  g = grid
+  n = g.size
+  fx, fy = -1, -1 # First x, first y.
+  # Find any land cells, and we treat it as a sell of island A.
+  n.times do |i|
+    n.times do |j|
+      fx, fy = i, j if 1 == g[i][j]
+    end
+  end
+  # bfsQueue for BFS on land sels of isldand A;
+  # secondBFSQueue for bfs on water cells.
+  fbq = [[fx,fy]]
+  sbq = [[fx,fy]]
+  g[fx][fy] = 2
+  # BFS for all lans cells of island A and add them to second bfs queue.
+  while ! fbq.empty?
+    nb = [] # new bfs.
+    fbq.each do |x,y|
+      [[x+1,y],[x-1,y],[x,y+1],[x,y-1]].each do |cx,cy| # Current x and y.
+        if cx.between?(0,n-1) && cy.between?(0,n-1) && 1 == g[cx][cy]
+          nb.push([cx,cy])
+          sbq.push([cx,cy])
+          g[cx][cy] = 2
+        end
+      end
+    end
+    fbq = nb
+  end
+  d = 0
+  while ! sbq.empty?
+    nb = []
+    sbq.each do |x,y|
+      #
+      [[x+1,y],[x-1,y],[x,y+1],[x,y-1]].each do |cx,cy|
+        if cx.between?(0,n-1) && cy.between?(0,n-1)
+          if 1 == g[cx][cy]
+            return d
+          elsif 0 == g[cx][cy]
+            nb.push([cx,cy])
+            g[cx][cy] = -1
+          end
+        end
+      end
+      #
+    end
+    sbq = nb
+    d += 1
+  end
+  return d
+end
