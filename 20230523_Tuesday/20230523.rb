@@ -1,5 +1,10 @@
 # Leetcode: 703. Kth Largest Element in a Stream.
 # https://leetcode.com/problems/kth-largest-element-in-a-stream/
+# = = = = = = = = = = = = = =
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# TLE. Leetcode's HEAP implementation always leads to TLE.
+# This result could be treated as correct solution.
 
 class KthLargest
 
@@ -9,8 +14,7 @@ class KthLargest
 =end
     def initialize(k, nums)
       @k = k
-      @mh = MinHeap.new(nums[0...k] || [])
-        
+      @mh = MinHeap.new(nums)
     end
 
 
@@ -19,21 +23,16 @@ class KthLargest
     :rtype: Integer
 =end
     def add(val)
-      if @mh.size < @k
-        @mh.push val
-      end
-       # It is guaranteed that there will be at least k elements in the array when you search for the kth element.
+      # Allways add.
+      @mh.push val
+      # Raise exception if there are not enought elements.
+      raise "Not enought elements #{val} => size #{@mg.size}" if @mh.size < @k
+      # Pop til there are @k elements.
+      while @k < @mh.size; @mh.pop; end
+      # Now get it!
       x = @mh.pop
-      p "Add #{val} and top is #{x}"
-      if val >= x
-        @mh.push val
-      else
-        @mh.push x
-        return x
-      end
-      ans = @mh.pop
       @mh.push x
-      return ans
+      return x
     end
 
 
