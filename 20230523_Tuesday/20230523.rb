@@ -1,15 +1,14 @@
 # Leetcode: 703. Kth Largest Element in a Stream.
 # https://leetcode.com/problems/kth-largest-element-in-a-stream/
 # = = = = = = = = = = = = = =
+# Accepted.
 # Thanks God, Jesus Christ!
 # = = = = = = = = = = = = = =
-# TLE. Leetcode's HEAP implementation always leads to TLE.
-# This result could be treated as correct solution.
-# ! ! ! ! !
-# But POP from Head is O(NLogN), and because in the Kanwei there is not Heap.top
-# have to solve like this.
-# This is to time consuming solution.
-# ! ! ! ! !
+# Runtime: 2819 ms, faster than 6.67% of Ruby online submissions for Kth Largest
+# Element in a Stream.
+# Memory Usage: 213.7 MB, less than 6.67% of Ruby online submissions for Kth
+# Largest Element in a Stream.
+# 2023.05.23 Daily Challenge.
 
 class KthLargest
 
@@ -19,7 +18,10 @@ class KthLargest
 =end
     def initialize(k, nums)
       @k = k
-      @mh = MinHeap.new(nums)
+      @a = nums.sort 
+      if @a.size > k
+        @a = @a[-k..-1]
+      end
     end
 
 
@@ -28,18 +30,22 @@ class KthLargest
     :rtype: Integer
 =end
     def add(val)
-      # Allways add.
-      @mh.push val
-      # Raise exception if there are not enought elements.
-      raise "Not enought elements #{val} => size #{@mg.size}" if @mh.size < @k
-      # Pop til there are @k elements.
-      while @k < @mh.size; @mh.pop; end
-      # Now get it!
-      x = @mh.pop
-      @mh.push x
-      return x
+      if @a.size < @k
+        @a.push val
+        raise "To small." if @a.size < @k
+        @a.sort!
+        return @a.first
+      end
+      raise "Incorrect size." if @a.size != @k
+      if @a.first >= val
+        return @a.first
+      else
+        @a.shift
+        @a.unshift val
+        @a.sort!
+        return @a.first
+      end
     end
-
 
 end
 
