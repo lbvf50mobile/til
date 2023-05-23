@@ -5,6 +5,11 @@
 # = = = = = = = = = = = = = =
 # TLE. Leetcode's HEAP implementation always leads to TLE.
 # This result could be treated as correct solution.
+# ! ! ! ! !
+# But POP from Head is O(NLogN), and because in the Kanwei there is not Heap.top
+# have to solve like this.
+# This is to time consuming solution.
+# ! ! ! ! !
 
 class KthLargest
 
