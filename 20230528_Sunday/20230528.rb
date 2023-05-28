@@ -1,0 +1,33 @@
+# Leetcode: 1547. Minimum Cost to Cut a Stick.
+# https://leetcode.com/problems/minimum-cost-to-cut-a-stick/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 370 ms, faster than 100.00% of Ruby online submissions for Minimum
+# Cost to Cut a Stick.
+# Memory Usage: 210.9 MB, less than 100.00% of Ruby online submissions for
+# Minimum Cost to Cut a Stick.
+# 2023.05.28 Daily Challenge.
+# @param {Integer} n
+# @param {Integer[]} cuts
+# @return {Integer}
+def min_cost(n, cuts)
+  # Based on:
+  # https://leetcode.com/problems/minimum-cost-to-cut-a-stick/solution/
+  m = cuts.size
+  c = [0] + cuts.sort + [n]
+  dp = Array.new(m+2){ Array.new(m+2,0)}
+  (2...m+2).each do |diff|
+    (0...m+2-diff).each do |l|
+      r = l + diff
+      ans = Float::INFINITY
+      (l+1...r).each do |m|
+        x = dp[l][m] + dp[m][r] + c[r] - c[l]
+        ans = x if x < ans
+      end
+      dp[l][r] = ans
+    end
+  end
+  dp[0][m+1]
+end
