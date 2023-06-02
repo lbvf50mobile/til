@@ -1,3 +1,7 @@
+# Leecode: 2101. Detonate the Maximum Bombs.
+# https://leetcode.com/problems/detonate-the-maximum-bombs/
+# Code from the Leetcode's sotluiont.
+# https://leetcode.com/problems/detonate-the-maximum-bombs/solution/
 class Solution:
     def maximumDetonation(self, bombs: List[List[int]]) -> int:
         graph = collections.defaultdict(list)
