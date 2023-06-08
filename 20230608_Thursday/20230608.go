@@ -17,10 +17,10 @@ func countNegatives(grid [][]int) int {
 	a, b := len(grid), len(grid[0])
 	border := 0
 	ans := 0
-	// All negative element are in bottom-right part.
+	// All negative element are in a bottom-right part.
 	// Iterate over rows.
 	for i := a - 1; 0 <= i; i -= 1 {
-		// Because non-icreasing order move from right.
+		// Because of non-icreasing order move from right.
 		for j := b - 1; border <= j; j -= 1 {
 			if g[i][j] < 0 {
 				ans += 1
