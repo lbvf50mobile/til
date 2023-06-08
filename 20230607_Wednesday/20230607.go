@@ -11,7 +11,6 @@
 // 2023.06.08 Update.
 package main
 
-
 func minFlips(a int, b int, c int) int {
 	ans := 0
 	for 0 != a || 0 != b || 0 != c {
