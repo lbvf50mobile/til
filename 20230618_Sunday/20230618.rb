@@ -12,7 +12,7 @@
 # @param {Integer[][]} grid
 # @return {Integer}
 def count_paths(grid)
-  # Based on the Leetcode's soluton.
+  # Based on the Leetcode's solution.
   # https://leetcode.com/problems/number-of-increasing-paths-in-a-grid/solution/
   @g = grid
   @m, @n = @g.size, @g[0].size
