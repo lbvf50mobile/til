@@ -1,5 +1,9 @@
+# Leetcode: 956. Tallest Billboard.
+# https://leetcode.com/problems/tallest-billboard/
 class Solution:
     def tallestBillboard(self, rods: List[int]) -> int:
+        # Copied from:
+        # https://leetcode.com/problems/tallest-billboard/solution/
         # dp[taller - shorter] = taller
         dp = {0:0}
         
