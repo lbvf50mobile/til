@@ -12,6 +12,8 @@
 # @return {Integer}
 # TLE.
 def count_routes(locations, start, finish, fuel)
+  # Based on:
+  # https://leetcode.com/problems/count-all-possible-routes/solution/
   @lc, @st, @fn, @fl = locations, start, finish, fuel
   @n = @lc.size
   @dp = {}
