@@ -1,13 +1,14 @@
 # Leetcode: 2462. Total Cost to Hire K Workers.
 # https://leetcode.com/problems/total-cost-to-hire-k-workers/
+# = = = = = = = = = = = = = =
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# 2023.06.26 Daily Challenge.
 # @param {Integer[]} costs
 # @param {Integer} k
 # @param {Integer} candidates
 # @return {Integer}
-# Error:
-# [31,25,72,79,74,65,84,91,18,59,27,9,81,33,17,58]
-# 11
-# 2
+# TLE.
 def total_cost(costs, k, candidates)
   # Hint from:
   # https://leetcode.com/problems/total-cost-to-hire-k-workers/solution/
@@ -34,15 +35,13 @@ def total_cost(costs, k, candidates)
       next
     end
     if a.min <= b.min
-      ans += a.min
-      a.pop
+      ans += a.pop
       a.push(costs[i])
       i += 1
     else
-      ans += a.min
-      a.pop
-      a.push(costs[i])
-      i += 1
+      ans += b.pop
+      b.push(costs[j])
+      j -= 1
     end
   end
   return ans
