@@ -1,5 +1,9 @@
+# Leetcode: 1514. Path with Maximum Probability. 
+# https://leetcode.com/problems/path-with-maximum-probability/
 class Solution:
     def maxProbability(self, n: int, edges: List[List[int]], succProb: List[float], start: int, end: int) -> float:
+        # Copied from:
+        # https://leetcode.com/problems/path-with-maximum-probability/solution/
         max_prob = [0] * n
         max_prob[start] = 1
         

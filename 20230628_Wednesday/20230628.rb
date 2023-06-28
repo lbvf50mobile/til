@@ -1,15 +1,19 @@
 # Leetcode: 1514. Path with Maximum Probability. 
 # https://leetcode.com/problems/path-with-maximum-probability/
 # = = = = = = = = = = = = = =
+# Accepted.
 # Thanks God, Jesus Christ!
 # = = = = = = = = = = = = = =
+# Runtime: 341 ms, faster than 100.00% of Ruby online submissions for Path with
+# Maximum Probability.
+# Memory Usage: 213.9 MB, less than 100.00% of Ruby online submissions for Path
+# with Maximum Probability.
 # @param {Integer} n
 # @param {Integer[][]} edges
 # @param {Float[]} succ_prob
 # @param {Integer} start
 # @param {Integer} end
 # @return {Float}
-# TLE.
 def max_probability(n, edges, succ_prob, start, end1)
   # Based on:
   # https://leetcode.com/problems/path-with-maximum-probability/solution/
@@ -29,6 +33,7 @@ def max_probability(n, edges, succ_prob, start, end1)
         hupd = 1
       end
     end
+    break if 0 == hupd
   end
   return mp[end1]
 end
