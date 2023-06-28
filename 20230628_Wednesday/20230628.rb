@@ -8,6 +8,7 @@
 # Maximum Probability.
 # Memory Usage: 213.9 MB, less than 100.00% of Ruby online submissions for Path
 # with Maximum Probability.
+# 2023.06.28 Daily Challenge.
 # @param {Integer} n
 # @param {Integer[][]} edges
 # @param {Float[]} succ_prob
