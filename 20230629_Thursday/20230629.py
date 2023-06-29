@@ -1,7 +1,18 @@
 # Leetcode: 864. Shortest Path to Get All Keys.
 # https://leetcode.com/problems/shortest-path-to-get-all-keys/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 276 ms, faster than 90.79% of Python3 online submissions for Shortest
+# Path to Get All Keys.
+# Memory Usage: 19.9 MB, less than 95.87% of Python3 online submissions for
+# Shortest Path to Get All Keys.
+# 2023.06.29 Daily Challenge.
 class Solution:
     def shortestPathAllKeys(self, grid: List[str]) -> int:
+        # Copied from:
+        # https://leetcode.com/problems/shortest-path-to-get-all-keys/solution/
         m, n = len(grid), len(grid[0])
         queue = collections.deque()
         
