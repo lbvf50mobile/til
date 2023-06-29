@@ -11,7 +11,7 @@
 # 2023.06.29 Daily Challenge.
 class Solution:
     def shortestPathAllKeys(self, grid: List[str]) -> int:
-        # Copied from:
+        # Copied from the Leetcode's solution:
         # https://leetcode.com/problems/shortest-path-to-get-all-keys/solution/
         m, n = len(grid), len(grid[0])
         queue = collections.deque()
