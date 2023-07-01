@@ -3,12 +3,11 @@
 # = = = = = = = = = = = = = =
 # Thanks God, Jesus Christ!
 # = = = = = = = = = = = = = =
+# TLE 2;
 # @param {Integer[]} cookies
 # @param {Integer} k
 # @return {Integer}
-# TLE.
 def distribute_cookies(cookies, k)
-  @dp = {}
   @key = Array.new(k+2,0) # index, max
   @c = cookies
   @k = k
@@ -23,7 +22,6 @@ def dfs
     @min = @key[1] if @key[1] < @min
     return
   end
-  return @dp[@key] if @dp[@key]
   (0...@k).each do |j|
     j = j + 2 # Offset from i and max;
 
@@ -46,5 +44,4 @@ def dfs
     @key[j] = old_val # 2) Restore pocket.
     @key[1] = old_max # 3) Restore max.
   end
-  @dp[@key.clone] = true
 end
