@@ -10,6 +10,8 @@
 // Maximum Number of Achievable Transfer Requests.
 // 2023.07.02 Daily Challenge.
 class Solution {
+  // Copied from:
+  // https://leetcode.com/problems/maximum-number-of-achievable-transfer-requests/solution/
     public int maximumRequests(int n, int[][] requests) {
         int answer = 0;
 
