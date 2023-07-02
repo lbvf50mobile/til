@@ -3,6 +3,7 @@
 # @param {Integer} n
 # @param {Integer[][]} requests
 # @return {Integer}
+# In action.
 def maximum_requests(n, requests)
   # Based on:
   # https://leetcode.com/problems/maximum-number-of-achievable-transfer-requests/solution/
