@@ -3,6 +3,7 @@
 # @param {String} answer_key
 # @param {Integer} k
 # @return {Integer}
+# TLE.
 def max_consecutive_answers(answer_key, k)
   # Based on:
   # https://leetcode.com/problems/maximize-the-confusion-of-an-exam/solution/
@@ -21,7 +22,7 @@ def max_consecutive_answers(answer_key, k)
 end
 
 def is_valid(s)
-  c = @ak.split[0...s].tally
+  c = @ak.chars[0...s].tally
   c.default = 0
   return true if [c[?T],c[?F]].min <= @k
   (s...@n).each do |i|
