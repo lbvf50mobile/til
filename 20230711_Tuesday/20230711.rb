@@ -1,5 +1,14 @@
 # Leetcode: 863. All Nodes Distance K in Binary Tree.
 # https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 80 ms, faster than 100.00% of Ruby online submissions for All Nodes
+# Distance K in Binary Tree.
+# Memory Usage: 211.5 MB, less than 25.00% of Ruby online submissions for All
+# Nodes Distance K in Binary Tree.
+# 2023.07.12 Updated.
 # Definition for a binary tree node.
 # class TreeNode
 #     attr_accessor :val, :left, :right
@@ -23,20 +32,21 @@ def distance_k(root, target, k)
   # Debugging summary.
   # 1. Read types.
   # 2. Graph need visited map for BFS.
+  # 3. Vairable with a method name.
   @root, @target, @k = root, target, k
   p [@root.nil?, @target.nil?, @k, "Begining."] if @d
   # Target node.
   @tn = nil
   # Build tree.
   p "Start bulid tree." if @d
-  bt(root,nil)
+  build_t(root,nil)
   p "Tree is builded." if @d
   ans = []
   # No target in the tree.
   p [@tn.nil?, "target node"] if @d
   return ans if @tn.nil?
   if 0 == @k
-    ans.push bt.v
+    ans.push @tn.v # here was an error!
     return ans
   end
   # Start Layerd BFS.
@@ -67,15 +77,16 @@ def distance_k(root, target, k)
 end
 
 # Build tree.
-def bt(node,t = nil)
+def build_t(node,t = nil)
+  p [node.nil? ? "nil" : node.val, t.nil? ? "nil" : t.v] if @d
   return nil if node.nil?
   l = node.left
   r = node.right
   v = node.val
   p v if @d
   nd = Tn.new(v,nil,nil,t)
-  nd.l = bt(l,nd)
-  nd.r = bt(r,nd)
+  nd.l = build_t(l,nd)
+  nd.r = build_t(r,nd)
   @tn = nd if node == @target
   return nd
 end
