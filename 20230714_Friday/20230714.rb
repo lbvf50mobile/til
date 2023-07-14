@@ -1,0 +1,32 @@
+# Leetcode: 1218. Longest Arithmetic Subsequence of Given Difference.
+# https://leetcode.com/problems/longest-arithmetic-subsequence-of-given-difference/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 182 ms, faster than 25.00% of Ruby online submissions for Longest
+# Arithmetic Subsequence of Given Difference.
+# Memory Usage: 223 MB, less than 50.00% of Ruby online submissions for Longest
+# Arithmetic Subsequence of Given Difference.
+# 2023.07.14 Daily Challenge.
+# @param {Integer[]} arr
+# @param {Integer} difference
+# @return {Integer}
+def longest_subsequence(arr, difference)
+  hsh = {}
+  ans = 0 
+  (0...arr.size).reverse_each do |i|
+    el = arr[i]
+    prev = el + difference
+    curr = 1
+    # Look for the previous elment.
+    if hsh[prev]
+      curr = 1 + hsh[prev]
+    end
+    # Set length for the current element.
+    hsh[el] ||= 1
+    hsh[el] = curr if curr > hsh[el]
+    ans = curr if curr > ans
+  end
+  return ans
+end
