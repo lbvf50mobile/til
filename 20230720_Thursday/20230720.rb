@@ -1,32 +1,38 @@
 # Leetcode: 735. Asteroid Collision.
 # https://leetcode.com/problems/asteroid-collision/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 90 ms, faster than 91.30% of Ruby online submissions for Asteroid
+# Collision.
+# Memory Usage: 211.9 MB, less than 28.26% of Ruby online submissions for
+# Asteroid Collision.
+# 2023.07.20 Daily Challenge.
 # @param {Integer[]} asteroids
 # @return {Integer[]}
-# Error.
-# [-2,-1,1,2]
 def asteroid_collision(asteroids)
   a = asteroids
-  plus, minus = [], []
+  plus, ans = [], []
   a.each do |x|
     if x > 0
-      plus.push(x)
-    else
-      minus.push(x)
+      plus.push x
+      next
+    end
+    # Remove smaller ones.
+    while !plus.empty? && plus.last < (-1 * x)
+      plus.pop
+    end
+    # Both deleted when similar.
+    if !plus.empty? && plus.last == (-1 * x)
+      plus.pop
+      next
+    end
+    # Negative are in the answer.
+    if plus.empty?
+      ans.push x
     end
   end
-  while !plus.empty? && !minus.empty?
-    y = plus.pop
-    x = minus.pop
-    z = y + x 
-    next if 0 == z
-    plus.push(y) if z > 0
-    minus.push(x) if z < 0
-  end
-  if plus.empty? && minus.empty?
-    return []
-  elsif plus.empty?
-    return minus
-  else
-    return plus
-  end
+  ans += plus
+  return ans
 end
