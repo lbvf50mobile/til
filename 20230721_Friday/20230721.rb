@@ -1,5 +1,14 @@
 # Leetcode: 673. Number of Longest Increasing Subsequence.
 # https://leetcode.com/problems/number-of-longest-increasing-subsequence/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 1140 ms, faster than 100.00% of Ruby online submissions for Number of
+# Longest Increasing Subsequence.
+# Memory Usage: 211.4 MB, less than 100.00% of Ruby online submissions for
+# Number of Longest Increasing Subsequence.
+# 2023.07.21 Daily Challenge.
 # @param {Integer[]} nums
 # @return {Integer}
 def find_number_of_lis(nums)
@@ -8,7 +17,8 @@ def find_number_of_lis(nums)
   n = nums.size
   l = Array.new(n,1) # Length.
   c = Array.new(n,1) # Count
-  ml = 0 # Max length.
+  ml = 1 # Max length. Error was here! (minimum lenght is 1).
+  # And in case [2,2,2,2] conditions from the loops do not work.
   n.times do |i|
     (0...i).each do |j|
       if nums[j] < nums[i]
