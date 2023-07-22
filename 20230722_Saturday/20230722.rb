@@ -1,0 +1,52 @@
+# Leetcode: 688. Knight Probability in Chessboard.
+# https://leetcode.com/problems/knight-probability-in-chessboard/ 
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 555 ms, faster than 100.00% of Ruby online submissions for Knight
+# Probability in Chessboard.
+# Memory Usage: 212 MB, less than 66.67% of Ruby online submissions for Knight
+# Probability in Chessboard.
+# 2023.07.22 Daily Challenge.
+# @param {Integer} n
+# @param {Integer} k
+# @param {Integer} row
+# @param {Integer} column
+# @return {Float}
+def knight_probability(n, k, row, column)
+  # Based on:
+  # https://leetcode.com/problems/knight-probability-in-chessboard/solution/
+  dr = [
+    [1,2],
+    [1,-2],
+    [-1,2],
+    [-1,-2],
+    [2,1],
+    [2,-1],
+    [-2,1],
+    [-2,-1]
+  ]
+  dp = Array.new(k+1){ Array.new(n){ Array.new(n,0)}}
+  dp[0][row][column] = 1
+  (1...k+1).each do |mv|
+    n.times do |i|
+      n.times do |j|
+        dr.each do |d|
+          pi, pj = i - d[0], j - d[1]
+          if pi.between?(0,n-1) && pj.between?(0,n-1)
+            dp[mv][i][j] += dp[mv-1][pi][pj]
+          end
+        end
+        dp[mv][i][j] = dp[mv][i][j].fdiv(8)
+      end
+    end
+  end
+  ans = 0
+  n.times do |i|
+    n.times do |j|
+      ans += dp[k][i][j]
+    end
+  end
+  return ans
+end
