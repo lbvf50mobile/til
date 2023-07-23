@@ -1,0 +1,44 @@
+# Leetcode: 894. All Possible Full Binary Trees.
+# https://leetcode.com/problems/all-possible-full-binary-trees/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 191 ms, faster than 100.00% of Ruby online submissions for All
+# Possible Full Binary Trees.
+# Memory Usage: 214.1 MB, less than 100.00% of Ruby online submissions for All
+# Possible Full Binary Trees.
+# 2023.07.23 Daily Challenge.
+# Definition for a binary tree node.
+# class TreeNode
+#     attr_accessor :val, :left, :right
+#     def initialize(val = 0, left = nil, right = nil)
+#         @val = val
+#         @left = left
+#         @right = right
+#     end
+# end
+# @param {Integer} n
+# @return {TreeNode[]}
+def all_possible_fbt(n)
+  # Based on the Leetcode's solution.
+  # https://leetcode.com/problems/all-possible-full-binary-trees/solution/
+  return [] if n.even?
+  dp = Array.new(n+1){ Array.new()}
+  dp[1].push(TreeNode.new(0))
+  # count => c;
+  (3...n+1).step(2).each do |c|
+    (1...c-1).step(2).each do |i|
+      j = c - 1 - i
+      # left => l;
+      dp[i].each do |l|
+        # right => r;
+        dp[j].each do |r|
+          r = TreeNode.new(0,l,r)
+          dp[c].push(r)
+        end
+      end
+    end
+  end
+  return dp[n]
+end
