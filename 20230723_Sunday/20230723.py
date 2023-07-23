@@ -1,3 +1,5 @@
+# Leetcode: 894. All Possible Full Binary Trees.
+# https://leetcode.com/problems/all-possible-full-binary-trees/
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -5,6 +7,8 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+    # Leetcode's solution.
+    # https://leetcode.com/problems/all-possible-full-binary-trees/solution/
     def allPossibleFBT(self, n: int) -> List[TreeNode]:
         if n % 2 == 0:
             return []
