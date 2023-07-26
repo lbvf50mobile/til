@@ -1,5 +1,14 @@
 // Leetcode: 1870. Minimum Speed to Arrive on Time.
 // https://leetcode.com/problems/minimum-speed-to-arrive-on-time/
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 221 ms, faster than 49.83% of Java online submissions for Minimum
+// Speed to Arrive on Time.
+// Memory Usage: 59.3 MB, less than 25.95% of Java online submissions for
+// Minimum Speed to Arrive on Time.
+// 2023.07.26 Daily Challenge.
 class Solution {
     double timeRequired(int[] dist, int speed) {
       // Copied from:
