@@ -7,7 +7,7 @@
 def min_speed_on_time(dist, hour)
   # Based on:
   # https://leetcode.com/problems/minimum-speed-to-arrive-on-time/solution/
-  l, r = 1, 10**8
+  l, r = 1, 10**7
   @d = dist
   ms = -1
   while l <= r
