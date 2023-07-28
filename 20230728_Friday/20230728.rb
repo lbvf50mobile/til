@@ -1,4 +1,4 @@
-# Leetcode:486. Predict the Winner.
+# Leetcode: 486. Predict the Winner.
 # https://leetcode.com/problems/predict-the-winner/
 # = = = = = = = = = = = = = =
 # Accepted.
@@ -13,6 +13,7 @@
 # @return {Boolean}
 def predict_the_winner(nums)
   # Based on the Leetcode's solution.
+  # https://leetcode.com/problems/predict-the-winner/solution/
   n = nums.size
   dp = Array.new(n){ Array.new(n,0)}
   n.times do |i|
