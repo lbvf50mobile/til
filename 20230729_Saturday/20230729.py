@@ -13,8 +13,11 @@ class Solution:
             dp[0][k] = 1
             dp[k] = {0: 0}
             for j in range(1, k + 1):
+                print((k,j))
                 dp[j][k] = calculate_dp(j, k)
                 dp[k][j] = calculate_dp(k, j)
+                print(dp[j][k])
+                print(dp[k][j])
             if dp[k][k] > 1 - 1e-5:
                 return 1
         return dp[m][m]
