@@ -1,5 +1,9 @@
+# Leetcode: 664. Strange Printer.
+# https://leetcode.com/problems/strange-printer/
 class Solution:
     def strangePrinter(self, s: str) -> int:
+    # Copied from:
+    # https://leetcode.com/problems/strange-printer/solution/
         n = len(s)
         dp = [[n] * n for _ in range(n)]
         for length in range(1, n + 1):
