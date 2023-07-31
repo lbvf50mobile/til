@@ -1,0 +1,38 @@
+# Leetcode: 712. Minimum ASCII Delete Sum for Two Strings.
+# https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 747 ms, faster than 33.33% of Ruby online submissions for Minimum
+# ASCII Delete Sum for Two Strings.
+# Memory Usage: 218.2 MB, less than 33.33% of Ruby online submissions for
+# Minimum ASCII Delete Sum for Two Strings.
+# 2023.07.31 Daily Challenge.
+# @param {String} s1
+# @param {String} s2
+# @return {Integer}
+def minimum_delete_sum(s1, s2)
+  # Based on:
+  # https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/solution/
+  m,n = s1.size, s2.size
+  dp = Array.new(m+1){ Array.new(n+1,0)}
+  (1..m).each do |i|
+    dp[i][0] = dp[i-1][0] + s1[i-1].ord
+  end
+  (1..n).each do |j|
+    dp[0][j] = dp[0][j-1] + s2[j-1].ord
+  end
+  (1..m).each do |i|
+    (1..n).each do |j|
+      if s1[i-1] == s2[j-1]
+        dp[i][j] = dp[i-1][j-1]
+      else
+        a = s1[i-1].ord + dp[i-1][j]
+        b = s2[j-1].ord + dp[i][j-1]
+        dp[i][j] = [a,b].min
+      end
+    end
+  end
+  return dp[m][n]
+end
