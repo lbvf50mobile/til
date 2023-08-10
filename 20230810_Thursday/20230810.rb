@@ -4,14 +4,41 @@
 # Accepted.
 # Thanks God, Jesus Christ!
 # = = = = = = = = = = = = = =
-# Runtime: 60 ms, faster than 33.33% of Ruby online submissions for Search in
+# Runtime: 47 ms, faster than 100.00% of Ruby online submissions for Search in
 # Rotated Sorted Array II.
-# Memory Usage: 211.3 MB, less than 33.33% of Ruby online submissions for Search
+# Memory Usage: 211.5 MB, less than 33.33% of Ruby online submissions for Search
 # in Rotated Sorted Array II.
 # 2023.08.10 Daily Challenge.
 # @param {Integer[]} nums
 # @param {Integer} target
 # @return {Boolean}
 def search(nums, target)
-  nums.include?(target)
+  # Based on:
+  # https://leetcode.com/problems/search-in-rotated-sorted-array-ii/discuss/1891315/Python-or-binary-search
+  n,t = nums, target
+  l, r = 0, n.size - 1
+  while l <= r
+    m = l + (r - l)/2
+    return true if t == n[l]
+    return true if t == n[r]
+    return true if t == n[m]
+    if n[m] == n[l] || n[m] == n[r]
+      l += 1
+      r -= 1
+    elsif n[l] <= n[m]
+      if n[l] < t && t < n[m]
+        r = m - 1
+      else
+        l = m + 1
+      end
+      next
+    else
+      if n[m] < t && t < n[r]
+        l = m + 1
+      else
+        r = m - 1
+      end
+    end
+  end
+  return false
 end
