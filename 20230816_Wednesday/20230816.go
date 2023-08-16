@@ -54,7 +54,7 @@ func maxSlidingWindow(nums []int, k int) []int {
 		for 0 != h.Len() && 0 == used[h.top()] {
 			heap.Pop(h)
 		}
-		// If it is a new value ad it to the heap.
+		// If it is a new value add it to the heap.
 		if 1 == used[curr] {
 			heap.Push(h, curr)
 		}
