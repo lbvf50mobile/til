@@ -11,6 +11,8 @@
 # @param {Integer[][]} mat
 # @return {Integer[][]}
 def update_matrix(mat)
+  # Based on:
+  # https://leetcode.com/problems/01-matrix/discuss/1373388/Python-DP-with-white-board-explanation-EASY
   rows = mat.size
   cols = mat[0].size
   rows.times do |i|
