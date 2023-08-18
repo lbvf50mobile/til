@@ -1,0 +1,34 @@
+# Leetcode: 1615. Maximal Network Rank.
+# https://leetcode.com/problems/maximal-network-rank/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 128 ms, faster than 100.00% of Ruby online submissions for Maximal
+# Network Rank.
+# Memory Usage: 212.1 MB, less than 100.00% of Ruby online submissions for
+# Maximal Network Rank.
+# 2023.08.18 Daily Challenge.
+# @param {Integer} n
+# @param {Integer[][]} roads
+# @return {Integer}
+require "set"
+def maximal_network_rank(n, roads)
+  # Based on:
+  # https://leetcode.com/problems/maximal-network-rank/solution/
+  mr = 0 # Max rank.
+  adj = Hash.new{ |h,k| h[k] = Set.new}
+  roads.each do |r|
+    adj[r[0]].add(r[1])
+    adj[r[1]].add(r[0])
+  end
+  n.times do |n1|
+    (n1+1...n).each do |n2|
+      # cr - current rank.
+      cr  = adj[n1].size + adj[n2].size
+      cr -= 1 if adj[n1].include?(n2)
+      mr = cr if cr > mr
+    end
+  end
+  return mr
+end
