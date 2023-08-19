@@ -1,5 +1,9 @@
 # Leetcode: 1489. Find Critical and Pseudo-Critical Edges in Minimum Spanning Tree.
 # https://leetcode.com/problems/find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
 # Runtime: 1114 ms, faster than 65.38% of Python3 online submissions for Find
 # Critical and Pseudo-Critical Edges in Minimum Spanning Tree.
 # Memory Usage: 16.6 MB, less than 40.66% of Python3 online submissions for Find
