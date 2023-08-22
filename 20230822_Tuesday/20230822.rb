@@ -1,20 +1,25 @@
 # Leetcode: 168. Excel Sheet Column Title.
 # https://leetcode.com/problems/excel-sheet-column-title/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 76 ms, faster than 57.89% of Ruby online submissions for Excel Sheet
+# Column Title.
+# Memory Usage: 211 MB, less than 18.42% of Ruby online submissions for Excel
+# Sheet Column Title.
+# 2023.08.22 Daily Challenge.
 # @param {Integer} column_number
 # @return {String}
 def convert_to_title(column_number)
-  cn = column_number
-  min = 1
-  top = 27
-  ans = []
-  while cn >= min
-    area = cn % top
-    ans.unshift(area/min)
-    min = top
-    top *= 26
+  # Based on:
+  # https://leetcode.com/problems/excel-sheet-column-title/solution/
+  c = column_number 
+  ans = ""
+  while c > 0
+    c -= 1
+    ans = (?A.ord + c%26).chr + ans
+    c /= 26
   end
-  ans.map{|x| (?A.ord + (x-1)).chr}.join
+  return ans
 end
-# 1 - 26  [A - Z] 
-# 26*26 [A* - B*]
-# 26*26*26 [A** - B**]
