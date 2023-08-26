@@ -1,0 +1,37 @@
+# Leetcode: 646. Maximum Length of Pair Chain.
+# https://leetcode.com/problems/maximum-length-of-pair-chain/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 1490 ms, faster than 100.00% of Ruby online submissions for Maximum
+# Length of Pair Chain.
+# Memory Usage: 211.2 MB, less than 100.00% of Ruby online submissions for
+# Maximum Length of Pair Chain.
+# 2023.08.26 Daily Challenge.
+# @param {Integer[][]} pairs
+# @return {Integer}
+def find_longest_chain(pairs)
+  # Based on:
+  # https://leetcode.com/problems/maximum-length-of-pair-chain/solution/
+  @p = pairs.sort_by!{|x| x[0]}
+  @n = @p.size
+  @m = Array.new(@n,0)
+  ans = 0
+  @n.times do |i|
+    tmp = lpc(i)
+    ans = tmp if tmp > ans
+  end
+  return ans
+end
+
+def lpc(i)
+  return @m[i] if 0 != @m[i]
+  @m[i] = 1
+  (i+1...@n).each do|j|
+    if @p[i][1] < @p[j][0]
+      @m[i] = [@m[i],1+lpc(j)].max
+    end
+  end
+  return @m[i]
+end
