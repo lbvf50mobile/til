@@ -11,8 +11,8 @@
 # 2023.08.28 Daily Challenge.
 
 class MyStack
-  # Based on:
-  # https://leetcode.com/problems/implement-stack-using-queues/solution/
+    # Based on:
+    # https://leetcode.com/problems/implement-stack-using-queues/solution/
     def initialize()
       
       @q1 = []
