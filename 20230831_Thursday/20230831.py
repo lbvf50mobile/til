@@ -1,4 +1,8 @@
+# Leetcode: 1326. Minimum Number of Taps to Open to Water a Garden.
+# https://leetcode.com/problems/minimum-number-of-taps-to-open-to-water-a-garden/
 class Solution:
+    # Based on:
+    # https://leetcode.com/problems/minimum-number-of-taps-to-open-to-water-a-garden/solution/
     def minTaps(self, n: int, ranges: List[int]) -> int:
         # Define an infinite value
         INF = int(1e9)

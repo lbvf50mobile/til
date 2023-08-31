@@ -13,6 +13,8 @@
 # @param {Integer[]} ranges
 # @return {Integer}
 def min_taps(n, ranges)
+  # Based on:
+  # https://leetcode.com/problems/minimum-number-of-taps-to-open-to-water-a-garden/solution/
   inf = 10**9
   dp = Array.new(n+1,inf)
   dp[0] = 0
