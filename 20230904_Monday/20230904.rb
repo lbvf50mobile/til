@@ -4,9 +4,9 @@
 # Accepted.
 # Thanks God, Jesus Christ!
 # = = = = = = = = = = = = = =
-# Runtime: 71 ms, faster than 77.61% of Ruby online submissions for Linked List
+# Runtime: 88 ms, faster than 39.00% of Ruby online submissions for Linked List
 # Cycle.
-# Memory Usage: 216.6 MB, less than 10.81% of Ruby online submissions for Linked
+# Memory Usage: 213.8 MB, less than 21.24% of Ruby online submissions for Linked
 # List Cycle.
 # 2023.09.04 Daily Challenge.
 # Definition for singly-linked list.
@@ -21,12 +21,13 @@
 # @param {ListNode} head
 # @return {Boolean}
 def hasCycle(head)
-  h = {}
-  tmp = head
-  while tmp
-    return true if h[tmp]
-    h[tmp] = true
-    tmp = tmp.next
+  return false if head.nil?
+  a = head
+  b = head.next
+  while (!a.nil?) && (!b.nil?)
+    return true if a.object_id == b.object_id
+    a = a.next
+    b = b.next ? b.next.next : nil
   end
   return false
 end
