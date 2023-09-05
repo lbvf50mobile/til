@@ -26,7 +26,7 @@ def copyRandomList(head)
   # May be just use an array?
   # Yes that would be rather simple and fast.
   # But also I need a hash to have a map between element and index.
-  h2 = {} # key old, key new
+  h2 = {} # key old, value new.
   a1 = [] # old
   a2 = [] # new
   tmp = head
