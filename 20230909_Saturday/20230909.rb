@@ -13,6 +13,8 @@
 # @param {Integer} target
 # @return {Integer}
 def combination_sum4(nums, target)
+  # Based on:
+  # https://leetcode.com/problems/combination-sum-iv/discuss/85041/7-liner-in-Python-and-follow-up-question
   nums, combs = nums.sort, [1] + [0]*target
   (0..target).each do |i|
     nums.each do |num|
