@@ -4,8 +4,12 @@
 # Accepted.
 # Thanks God, Jesus Christ!
 # = = = = = = = = = = = = = =
-# Runtime: 85 ms, faster than 57.14% of Ruby online submissions for Candy.
-# Memory Usage: 213.7 MB, less than 17.14% of Ruby online submissions for Candy.
+# Fixed.
+# Runtime: 77 ms, faster than 77.14% of Ruby online submissions for Candy.
+# Memory Usage: 213.7 MB, less than 22.86% of Ruby online submissions for Candy.
+# Test.
+# Faild: Input
+# [1,3,4,5,2]
 # 2023.09.13 Daily Challenge.
 # @param {Integer[]} ratings
 # @return {Integer}
@@ -16,15 +20,26 @@ def candy(ratings)
   rt = ratings
   cs = Array.new(n,1) # Candies.
   # Moving forward.
-  (1...n).each do |i|
-    if rt[i-1] < rt[i] # Bigger than left. 
-      cs[i] = cs[i-1] + 1 # More ratings, more candies.
+  (1...n).each do |j|
+    i = j - 1
+    if rt[i] < rt[j] # Bigger than left. 
+      # i always smaller than j=i+1. Because
+      # cs[j] = cs[i] + 1.
+      # Right position bigger than left.
+      # ! Error in do not thinking about picks: grow grow, decrease drecrease.
+      cs[j] = cs[i] + 1 # More ratings, more candies.
     end
   end
   # Moving back.
   (0...(n-1)).reverse_each do |i|
-    if rt[i] > rt[i+1] # Bigger than right.
-      cs[i] = [cs[i],cs[i+1]+1].max
+    j = i + 1
+    if rt[i] > rt[j] # Bigger than right.
+      # Here left postions i. Cold not be bigger than.
+      # Right.
+      # cs[i] = cs[j]+1 # Faild test.
+      # ! Error in do not thinking about picks: grow grow, decrease drecrease.
+      cs[i] = [cs[i],cs[j]+1].max
+
     end
   end
   cs.sum
