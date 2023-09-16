@@ -1,19 +1,28 @@
 # Leetcode: 1631. Path With Minimum Effort.
 # https://leetcode.com/problems/path-with-minimum-effort/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 2653 ms, faster than 100.00% of Ruby online submissions for Path With
+# Minimum Effort.
+# Memory Usage: 218.4 MB, less than 100.00% of Ruby online submissions for Path
+# With Minimum Effort.
+# 2023.09.16 Daily Challenge.
 # @param {Integer[][]} heights
 # @return {Integer}
-# TLE.
 def minimum_effort_path(heights)
   # Based on:
   # https://leetcode.com/problems/path-with-minimum-effort/discuss/4049595/Graph-oror-Binary-Search-oror-Medium-greaterEasy-oror-Easy-to-understand-oror-Beginner
   @h = heights
-  @v = Array.new(105){ Array.new(105,false)}
   @d = [[1,0],[-1,0],[0,-1],[0,1]]
   @m,@n = @h.size, @h[0].size
-  l,r = 0, (10**9)+2
+  @v = Array.new(@m){ Array.new(@n,false)}
+  min,max = @h.flatten.minmax
+  l,r = 0, max-min 
   while l < r
     mid = l + (r-l)/2 # <= Fixed here.
-    @v = Array.new(105){ Array.new(105,false)}
+    @v = Array.new(@m){ Array.new(@n,false)}
     ok(0,0,mid)
     if @v[@m-1][@n-1]
       r = mid
