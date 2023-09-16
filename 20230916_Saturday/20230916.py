@@ -10,6 +10,8 @@
 # With Minimum Effort.
 # 2023.09.16 Daily Challenge.
 class Solution:
+  # Copied from:
+  # https://leetcode.com/problems/path-with-minimum-effort/discuss/4049595/Graph-oror-Binary-Search-oror-Medium-greaterEasy-oror-Easy-to-understand-oror-Beginner
     def __init__(self):
         self.vis = [[0] * 105 for _ in range(105)]
         self.dir = [(1, 0), (-1, 0), (0, -1), (0, 1)]

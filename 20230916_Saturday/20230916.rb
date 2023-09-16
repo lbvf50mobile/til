@@ -4,6 +4,8 @@
 # @return {Integer}
 # TLE.
 def minimum_effort_path(heights)
+  # Based on:
+  # https://leetcode.com/problems/path-with-minimum-effort/discuss/4049595/Graph-oror-Binary-Search-oror-Medium-greaterEasy-oror-Easy-to-understand-oror-Beginner
   @h = heights
   @v = Array.new(105){ Array.new(105,false)}
   @d = [[1,0],[-1,0],[0,-1],[0,1]]
