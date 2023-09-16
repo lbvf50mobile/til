@@ -2,6 +2,7 @@
 # https://leetcode.com/problems/path-with-minimum-effort/
 # @param {Integer[][]} heights
 # @return {Integer}
+# TLE.
 def minimum_effort_path(heights)
   @h = heights
   @v = Array.new(105){ Array.new(105,false)}
@@ -9,7 +10,7 @@ def minimum_effort_path(heights)
   @m,@n = @h.size, @h[0].size
   l,r = 0, (10**9)+2
   while l < r
-    mid = r + (r-l)/2
+    mid = l + (r-l)/2 # <= Fixed here.
     @v = Array.new(105){ Array.new(105,false)}
     ok(0,0,mid)
     if @v[@m-1][@n-1]
