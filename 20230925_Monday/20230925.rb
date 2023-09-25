@@ -4,7 +4,9 @@
 # @param {String} t
 # @return {Character}
 # Wrong soluition.
-require "set"
 def find_the_difference(s, t)
-  (Set.new(t.chars) - Set.new(s.chars)).to_a[0]
+  s.size.times do |i|
+    return t[i] if s[i] != t[i]
+  end
+  return t[-1]
 end
