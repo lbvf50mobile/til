@@ -10,10 +10,11 @@
 // Array By Parity.
 // 2023.09.28 Daily Challenge.
 package main
+
 func sortArrayByParity(nums []int) []int {
-	e,o := 0, len(nums) - 1 // even, odd;
+	e, o := 0, len(nums)-1 // even, odd;
 	ans := make([]int, len(nums))
-	for _,v := range nums {
+	for _, v := range nums {
 		if e > o {
 			break
 		}
