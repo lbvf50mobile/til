@@ -4,28 +4,21 @@
 # Accepted.
 # Thanks God, Jesus Christ!
 # = = = = = = = = = = = = = =
-# Runtime: 59 ms, faster than 70.00% of Ruby online submissions for Number of
+# Runtime: 60 ms, faster than 62.50% of Ruby online submissions for Number of
 # Good Pairs.
-# Memory Usage: 210.9 MB, less than 95.00% of Ruby online submissions for Number
+# Memory Usage: 211.2 MB, less than 10.00% of Ruby online submissions for Number
 # of Good Pairs.
 # 2023.10.03 Daily Challenge.
 # @param {Integer[]} nums
 # @return {Integer}
 def num_identical_pairs(nums)
- nums.tally.map{|k,v| v}
-   .select{|v| v >= 2}
-   .sum{|x| comb(x)}
-end
-
-def comb(n)
-  return fct(n)/(2*fct(n-2))
-end
-
-def fct(x)
-  return 1 if 0 == x
-  ans = 1
-  x.times do |i|
-    ans *= (i+1)
+  h = {}
+  ans = 0
+  nums.each do |x|
+    h[x] ||= 0
+    ans += h[x]
+    h[x] += 1
   end
   return ans
 end
+
