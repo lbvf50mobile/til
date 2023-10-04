@@ -4,7 +4,7 @@
 # Accepted.
 # Thanks God, Jesus Christ!
 # = = = = = = = = = = = = = =
-# Runtime: 127 ms, faster than 41.67% of Ruby online submissions for Design
+# Runtime: 116 ms, faster than 58.33% of Ruby online submissions for Design
 # HashMap.
 # Memory Usage: 296.9 MB, less than 8.33% of Ruby online submissions for Design
 # HashMap.
@@ -12,7 +12,7 @@
 
 class MyHashMap
     def initialize()
-      @a = Array.new(10**6,-1)
+      @a = Array.new(10**6+1,-1)
     end
 
 
