@@ -12,8 +12,8 @@
 # @param {Integer[]} cost
 # @return {Integer}
 def min_cost_climbing_stairs(cost)
-  # Pull DP. Inplace solutinon.
-  # Select minimum from i-1 and i-2 plus current.
+  # Pull DP. Inplace solution.
+  # Select minimum from i-1 and i-2, plus current.
   
   # If less then three elements no need to count.
   return cost.min if 2 >= cost.size
