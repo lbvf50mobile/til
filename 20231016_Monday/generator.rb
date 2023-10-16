@@ -12,9 +12,20 @@ ans[1][1] = 1
     ans[i][j] = ans[i-1][j-1] + ans[i-1][j]
   end
 end
+# Ruby generator.
+if false
+  puts "# Start data."
+  puts  "["
+  ans.each{ |x| puts "[" + x.join(?,) + "],"}
+  puts  "]"
+  puts "# End data."
+end
 
-puts "# Start data."
-puts  "["
-ans.each{ |x| puts "[" + x.join(?,) + "],"}
-puts  "]"
-puts "# End data."
+# Go generator.
+if true
+  puts "// Start data."
+  puts  "var data = [][]int{"
+  ans.each{ |x| puts "{" + x.join(?,) + "},"}
+  puts  "}"
+  puts "// End data."
+end
