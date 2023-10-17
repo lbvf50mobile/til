@@ -12,8 +12,13 @@ def validate_binary_tree_nodes(n, left_child, right_child)
   @v = Array.new(n,0)
   @l, @r = left_child, right_child
   @valid = true
-  dfs(0)
-  return false if ! @valid
+  (0...n).each do |i|
+    if 0 == @v[i]
+      dfs(i)
+      return false if ! @valid
+    end
+  end
+  p @v
   (0...n).each do |i|
     return false if 1 != @v[i]
   end
