@@ -6,39 +6,30 @@
 # @return {Boolean}
 # It action. Not correct yet.
 def validate_binary_tree_nodes(n, left_child, right_child)
+  # There n nodes indexed from 0 til n-1 inclusive.
   # Every one is visited.
   # Every one visited ones.
-  @counter = {}
-  @counter[0] = 1
+  @v = Array.new(n,0)
+  @l, @r = left_child, right_child
   @valid = true
-  @n, @l, @r = n, left_child, right_child
   dfs(0)
   return false if ! @valid
-  # All except -1 must be visted.
   (0...n).each do |i|
-    a,b = @l[i], r[i]
-    # Return if node itself is unvisited.
-    return false if @counter[i]
-    if -1 != a 
-      # Unvisited return false.
-      return false if ! @counter[a]
-    end
-    if -1 != b
-      # Unvisted return false.
-      return false if ! @counter[b]
-    end
+    return false if 1 != @v[i]
   end
   return true
 end
 
 def dfs(i)
+  return if -1 == i
   return if ! @valid
-  if @counter[i]
+  @v[i] += 1
+  if @v[i] > 1
     @valid = false
     return
   end
-  @counter[i] = 1
-  a, b = @l[i], @r[i]
-  dfs(a) if -1 != a
-  dfs(b) if -1 != b
+  a,b = @l[i], @r[i]
+  dfs(a)
+  dfs(b)
 end
+
