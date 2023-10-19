@@ -25,7 +25,7 @@ func backspaceCompare(s string, t string) bool {
 
 func (s *bstring) perform() {
 	// W is index of last written.
-	w := -1 // -1 meand did not write at all.
+	w := -1 // -1 means did not write at all.
 	for r := 0; r < s.size; r += 1 {
 		x := s.chrs[r]
 		if '#' == x {
