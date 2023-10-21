@@ -30,6 +30,13 @@ func constrainedSubsetSum(nums []int, k int) int {
 		}
 		dp[i] = tmp + nums[i]
 		// Fails if instead of len(q)-1 a variable is used.
+		p("---------------------")
+		p("length:", len(q))
+		p("last:", len(q)- 1)
+		p("Not zero:", 0 < len(q))
+		l := len(q)-1
+		p("L var:",l)
+		p(0 < len(q) && dp[q[l]] < dp[i])
 		for 0 < len(q) && dp[q[len(q)-1]] < dp[i] {
 			q = q[0 : len(q)-1]
 		}
