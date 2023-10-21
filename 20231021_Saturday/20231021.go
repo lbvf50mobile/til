@@ -12,36 +12,37 @@
 package main
 
 import "fmt"
+
 var p = fmt.Println
 
 func constrainedSubsetSum(nums []int, k int) int {
-  // Based on:
-  // https://leetcode.com/problems/constrained-subsequence-sum/solution/
-  q := make([]int,0)
-  dp := make([]int, len(nums))
-  for i,_ := range nums {
-	  if 0 < len(q) && (i-q[0]) > k {
-		  q = q[1:]
-	  }
-	  tmp := 0
-	  if  0 < len(q) {
-		  tmp = dp[q[0]]
-	  }
-	  dp[i] = tmp + nums[i]
-	  // Fails if instead of len(q)-1 a variable is used.
-	  for 0 < len(q) && dp[q[len(q)-1]] < dp[i] {
-		  q = q[0:len(q)-1]
-	  }
-	  if dp[i] > 0 {
-		  q = append(q,i)
-	  }
-  }
-  return max(dp)
+	// Based on:
+	// https://leetcode.com/problems/constrained-subsequence-sum/solution/
+	q := make([]int, 0)
+	dp := make([]int, len(nums))
+	for i, _ := range nums {
+		if 0 < len(q) && (i-q[0]) > k {
+			q = q[1:]
+		}
+		tmp := 0
+		if 0 < len(q) {
+			tmp = dp[q[0]]
+		}
+		dp[i] = tmp + nums[i]
+		// Fails if instead of len(q)-1 a variable is used.
+		for 0 < len(q) && dp[q[len(q)-1]] < dp[i] {
+			q = q[0 : len(q)-1]
+		}
+		if dp[i] > 0 {
+			q = append(q, i)
+		}
+	}
+	return max(dp)
 }
 
 func max(x []int) int {
 	ans := x[0]
-	for _,v := range x {
+	for _, v := range x {
 		if ans < v {
 			ans = v
 		}
