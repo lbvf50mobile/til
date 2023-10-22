@@ -15,35 +15,35 @@ func maximumScore(nums []int, k int) int {
 	// Based on:
 	// https://leetcode.com/problems/maximum-score-of-a-good-subarray/solution/
 	n := len(nums)
-	l,r := k, k
+	l, r := k, k
 	ans, cr := nums[k], nums[k]
-	for l > 0 || r < n - 1{
+	for l > 0 || r < n-1 {
 		tmp1, tmp2 := 0, 0
 		if 0 < l {
 			tmp1 = nums[l-1]
 		}
-		if r < n - 1 {
+		if r < n-1 {
 			tmp2 = nums[r+1]
 		}
 		if tmp1 < tmp2 {
 			r += 1
-			cr = min(cr,nums[r])
+			cr = min(cr, nums[r])
 		} else {
 			l -= 1
-			cr = min(cr,nums[l])
+			cr = min(cr, nums[l])
 		}
-		ans = max(ans, cr * (r-l+1))
+		ans = max(ans, cr*(r-l+1))
 	}
 	return ans
 }
 
-func min(a,b int) int {
+func min(a, b int) int {
 	if a < b {
 		return a
 	}
 	return b
 }
-func max(a,b int) int {
+func max(a, b int) int {
 	if a > b {
 		return a
 	}
