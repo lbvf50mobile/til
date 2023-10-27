@@ -1,9 +1,16 @@
 # Leetcode: 5. Longest Palindromic Substring.
 # https://leetcode.com/problems/longest-palindromic-substring/
+# = = = = = = = = = = = = = =
+# Correct.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# TLE.
+# 2023.10.27 Daily Challenge.
 # @param {String} s
 # @return {String}
-# TLE.
 def longest_palindrome(s)
+  # Based on:
+  # https://leetcode.com/problems/longest-palindromic-substring/solution/
   n = s.size
   dp = Array.new(n){ Array.new(n, false)}
   ans = [0,0]
