@@ -28,20 +28,20 @@ def count_vowel_permutation(n)
     # i = 2
     # o = 3
     # u = 4
-    # Each vowel 'a' may only be folloed by an 'e'
+    # Each vowel 'a' may only be followed by an 'e'.
     dp[nxt][e] = (dp[nxt][e] + dp[curr][a]) % mod
-    # Each vowel 'e' my only be folled by 'a' or an 'i'.
+    # Each vowel 'e' my only be followed by 'a' or an 'i'.
     dp[nxt][i] = (dp[nxt][i] + dp[curr][e]) % mod
     dp[nxt][a] = (dp[nxt][a] + dp[curr][e]) % mod
-    # EAch vowel 'i' may not be folled by 'i'
+    # Each vowel 'i' may not be followed by 'i'.
     dp[nxt][a] = (dp[nxt][a] + dp[curr][i]) % mod
     dp[nxt][e] = (dp[nxt][e] + dp[curr][i]) % mod
     dp[nxt][o] = (dp[nxt][o] + dp[curr][i]) % mod
     dp[nxt][u] = (dp[nxt][u] + dp[curr][i]) % mod
-    # Each vowel 'o' may be followed by i or a 'u'.
+    # Each vowel 'o' may be followed by 'i' or a 'u'.
     dp[nxt][i] = (dp[nxt][i] + dp[curr][o]) % mod
     dp[nxt][u] = (dp[nxt][u] + dp[curr][o]) % mod
-    # EAch vowel u my be follewed by a
+    # Each vowel 'u' my be follewed by 'a'.
     dp[nxt][a] = (dp[nxt][a] + dp[curr][u]) % mod
     if 0 == curr
       curr = 1
