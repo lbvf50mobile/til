@@ -41,7 +41,7 @@ def count_vowel_permutation(n)
     # Each vowel 'o' may be followed by 'i' or a 'u'.
     dp[nxt][i] = (dp[nxt][i] + dp[curr][o]) % mod
     dp[nxt][u] = (dp[nxt][u] + dp[curr][o]) % mod
-    # Each vowel 'u' my be follewed by 'a'.
+    # Each vowel 'u' my be followed by 'a'.
     dp[nxt][a] = (dp[nxt][a] + dp[curr][u]) % mod
     if 0 == curr
       curr = 1
