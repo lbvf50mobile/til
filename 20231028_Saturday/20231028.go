@@ -4,6 +4,10 @@
 // Accepted.
 // Thanks God, Jesus Christ!
 // = = = = = = = = = = = = = =
+// Runtime: 5 ms, faster than 50.00% of Go online submissions for Count Vowels
+// Permutation.
+// Memory Usage: 1.9 MB, less than 50.00% of Go online submissions for Count
+// Vowels Permutation.
 // 2023.10.28 Daily Challenge.
 package main
 
