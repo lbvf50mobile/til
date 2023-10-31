@@ -12,6 +12,8 @@
 package main
 
 func findArray(pref []int) []int {
+	// Got tip from the Leetcode's solution:
+	// https://leetcode.com/problems/find-the-original-array-of-prefix-xor/solution/
 	n := len(pref)
 	ans := make([]int, n)
 	ans[0] = pref[0]
