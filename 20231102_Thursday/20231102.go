@@ -33,7 +33,7 @@ func dfs(x *TreeNode) (int, int, int) {
 	}
 	s1, na1, ans1 := dfs(x.Left)
 	s2, na2, ans2 := dfs(x.Right)
-	s := s1 + s2 + x.Val 
+	s := s1 + s2 + x.Val
 	na := na1 + na2 + 1
 	av := s / na
 	ans := ans1 + ans2
