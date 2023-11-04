@@ -12,9 +12,9 @@
 package main
 
 func getLastMoment(n int, left []int, right []int) int {
-	// If two ants change direction when they mean that means NOTHING for the
+	// If two ants change direction when they meet that means NOTHING for the
 	// problem. It is the same if they keep wallking without any noticing each
-	// other. Because time they reach the ends would be the same, only changes
+	// other. Because time they reach the edges would be the same, only changes
 	// the aint who reachs an edge.
 	ans := 0
 
