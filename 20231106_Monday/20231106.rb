@@ -7,6 +7,7 @@
 # TLE.
 # I treat TLE as a normal result when working with Containers::MinHeap in
 # Leetcode. Ruby implementation of MinHeap is tremendously slow.
+# 2023.11.06 Daily Challenge.
 class SeatManager
 
 =begin
