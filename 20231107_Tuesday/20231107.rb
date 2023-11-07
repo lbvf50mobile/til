@@ -14,7 +14,7 @@
 # @return {Integer}
 def eliminate_maximum(dist, speed)
   # Based on:
-  # https://leetcode.com/problems/eliminate-maximum-number-of-monsters/
+  # https://leetcode.com/problems/eliminate-maximum-number-of-monsters/solution/
   arrival = []
   dist.size.times do |i|
     arrival.push(dist[i].fdiv(speed[i]))

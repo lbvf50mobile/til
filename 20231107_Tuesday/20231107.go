@@ -17,7 +17,7 @@ import (
 
 func eliminateMaximum(dist []int, speed []int) int {
 	// Based on:
-	// https://leetcode.com/problems/eliminate-maximum-number-of-monsters/
+	// https://leetcode.com/problems/eliminate-maximum-number-of-monsters/solution/
 	arrival := make([]float64, len(dist))
 	ans := 0
 	for i, v := range dist {
