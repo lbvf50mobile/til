@@ -12,7 +12,7 @@
 # @param {Integer[][]} adjacent_pairs
 # @return {Integer[]}
 def restore_array(adjacent_pairs)
-  # 1. Creat adjacency list.
+  # 1. Create adjacency list.
   al = {}
   adjacent_pairs.each do |a,b|
     al[a] ||= []
@@ -20,7 +20,7 @@ def restore_array(adjacent_pairs)
     al[a].push(b)
     al[b].push(a)
   end
-  # 2. Prepeare queue for DFS.
+  # 2. Prepare queue for DFS.
   # 2.1. Prepare visited map.
   v = {}
   ans = []
@@ -34,7 +34,7 @@ def restore_array(adjacent_pairs)
   end
   v[start] = true
   q = [start]
-  # 3. Start mail loop.
+  # 3. Start main loop.
   while ! q.empty?
     # 4. Add element to answer.
     e = q.pop
