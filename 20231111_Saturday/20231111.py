@@ -1,5 +1,14 @@
 # Leetcode: 2643. Design Graph With Shortest Path Calculator.
 # https://leetcode.com/problems/design-graph-with-shortest-path-calculator/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 552 ms, faster than 82.94% of Python3 online submissions for Design
+# Graph With Shortest Path Calculator.
+# Memory Usage: 19.6 MB, less than 42.35% of Python3 online submissions for
+# Design Graph With Shortest Path Calculator.
+# 2023.11.11 Daily Challenge.
 
 class Graph:
     # Copied from:
