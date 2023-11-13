@@ -12,17 +12,17 @@
 # @return {String}
 def sort_vowels(s)
   initial_array = s.chars
-  indicies = []
+  indices = []
   values = []
   initial_array.each_with_index do |char, i|
     if /[aeiouAEIOU]/ === char
-      indicies.push(i)
+      indices.push(i)
       values.push(char)
     end
   end
   values.sort!
-  indicies.size.times do |i|
-    arr_i = indicies[i]
+  indices.size.times do |i|
+    arr_i = indices[i]
     val = values[i]
     initial_array[arr_i] = val
   end
