@@ -8,6 +8,7 @@
 # Element After Decreasing and Rearranging.
 # Memory Usage: 218.6 MB, less than 100.00% of Ruby online submissions for
 # Maximum Element After Decreasing and Rearranging.
+# 2023.11.15 Daily Challenge.
 # @param {Integer[]} arr
 # @return {Integer}
 def maximum_element_after_decrementing_and_rearranging(arr)

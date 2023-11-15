@@ -8,6 +8,7 @@
 // Element After Decreasing and Rearranging.
 // Memory Usage: 7.6 MB, less than 100.00% of Go online submissions for
 // Maximum Element After Decreasing and Rearranging.
+// 2023.11.15 Daily Challenge.
 package main
 
 import (
