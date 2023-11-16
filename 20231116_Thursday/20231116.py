@@ -1,3 +1,4 @@
+# https://leetcode.com/problems/find-unique-binary-string/solution/
 class Solution:
     def findDifferentBinaryString(self, nums: List[str]) -> str:
         integers = set()
