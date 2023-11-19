@@ -20,7 +20,7 @@ func reductionOperations(nums []int) int {
 		return 0
 	}
 	// 1. Generate a Counter.
-	// 2. Find minimum.
+	// 2. Find the minimum.
 	min := nums[0]
 	counter := make(map[int]int)
 	for _, v := range nums {
@@ -41,7 +41,7 @@ func reductionOperations(nums []int) int {
 	sort.SliceStable(pairs, func(i, j int) bool {
 		return pairs[i][0] > pairs[j][0]
 	})
-	// 5. Loop over an slice, compute totalMax and ans variables.
+	// 5. Loop over the slice, compute totalMax and ans variables.
 	totalMax, ans := 0, 0
 	for _, v := range pairs {
 		amount := v[1]

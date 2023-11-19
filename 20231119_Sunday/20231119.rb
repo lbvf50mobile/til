@@ -19,7 +19,7 @@ def reduction_operations(nums)
   # 2. Find Minimum in key.
   min = counter.keys.min
   # 3. Sort descending and Sum all non-minimum key's values.
-  # Sum in a tricky way. Need to take in to account amount of previous values
+  # Sum in a tricky way. Need to take into account amount of previous values
   # that had been decreased to a current one.
   counter.to_a.sort_by(&:first).reverse.each do |i,v|
     if i != min
