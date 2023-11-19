@@ -19,9 +19,8 @@ def reduction_operations(nums)
   # 2. Find Minimum in key.
   min = counter.keys.min
   # 3. Sort descending and Sum all non-minimum key's values.
-  # Sum in a tricky way. Every time add an ans one more time. Because on every
-  # step amount of next largest equals to it's value plus previous decireased
-  # values.
+  # Sum in a tricky way. Need to take in to account amount of previous values
+  # that had been decreased to a current one.
   counter.to_a.sort_by(&:first).reverse.each do |i,v|
     if i != min
       prev_max_amount += v
