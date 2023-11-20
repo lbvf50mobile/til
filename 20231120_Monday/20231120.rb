@@ -1,5 +1,14 @@
 # Leetcode: 2391. Minimum Amount of Time to Collect Garbage.
 # https://leetcode.com/problems/minimum-amount-of-time-to-collect-garbage/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 327 ms, faster than 25.00% of Ruby online submissions for Minimum
+# Amount of Time to Collect Garbage.
+# Memory Usage: 233.1 MB, less than 25.00% of Ruby online submissions for
+# Minimum Amount of Time to Collect Garbage.
+# 2023.11.20 Daily Challenge.
 # @param {String[]} garbage
 # @param {Integer[]} travel
 # @return {Integer}
@@ -7,18 +16,43 @@ def garbage_collection(garbage, travel)
   # Using 3 tracks.
   @g, @t  = garbage, travel
   ans = 0
-  # ! Need to calculate last point!
+  # Right Border for a type.
+  @rb = {?M=>-1, ?P=>-1, ?G=>-1}
+  define_right_border
   [?M, ?P, ?G].each do |tp|
      tmp = calc_for_type(tp)
-     p [tp, tmp]
      ans += tmp
   end
   return ans
 end
 
+def define_right_border
+  counter = 0
+  m,pe,g = false, false, false
+  (0...@g.size).reverse_each do |j|
+    break if 3 == counter
+    if !m && /M/ === @g[j]
+      m = true
+      counter += 1
+      @rb[?M] = j
+    end
+    if !pe && /P/ === @g[j]
+      pe = true
+      counter += 1
+      @rb[?P] = j
+    end
+    if !g && /G/ === @g[j]
+      g = true
+      counter += 1
+      @rb[?G] = j
+    end
+  end
+end
+
 def calc_for_type(tp)
   time = 0
   @g.each_with_index do |v, i|
+    return time if i > @rb[tp]
     time += v.count(tp)
     if i > 0 
       time += @t[i-1]
