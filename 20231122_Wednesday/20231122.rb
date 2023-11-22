@@ -4,7 +4,7 @@
 # Correct.
 # Thanks God, Jesus Christ!
 # = = = = = = = = = = = = = =
-# TLE.
+# One more TLE.
 # 2023.11.22 Daily Challenge.
 # @param {Integer[][]} nums
 # @return {Integer[]}
@@ -13,6 +13,7 @@ def find_diagonal_order(nums)
   # First iterate over all lines.
   # Even unexisted ones.
   i = 0
+  max_col_index = nums.map(&:size).max - 1
   while true
     touched = false
     j = 0 # Start from first column.
@@ -24,6 +25,7 @@ def find_diagonal_order(nums)
       diff = bt - (nums.size - 1) 
       j += diff
       bt = nums.size - 1
+      break if j > max_col_index
     end
     (0..bt).reverse_each do |ii|
       if ii < nums.size && j < nums[ii].size # Column must be in this row.
