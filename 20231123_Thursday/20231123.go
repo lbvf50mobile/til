@@ -1,0 +1,46 @@
+// Leetcode: 1630. Arithmetic Subarrays.
+// https://leetcode.com/problems/arithmetic-subarrays/
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 62 ms, faster than 5.45% of Go online submissions for Arithmetic
+// Subarrays.
+// Memory Usage: 6.9 MB, less than 90.91% of Go online submissions for
+// Arithmetic Subarrays.
+// 2023.11.23 Daily Challenge.
+package main
+
+import (
+	"sort"
+)
+
+func checkArithmeticSubarrays(nums []int, l []int, r []int) []bool {
+	answer := make([]bool, len(l)) // Answer is an array of m booleans.
+	// Iterate over all ranges.
+	m := len(l)
+	for i := 0; i < m; i += 1 {
+		seqLen := r[i] - l[i] + 1
+		seq := nums[l[i] : r[i]+1]
+		seqSorted := make([]int, seqLen)
+		copy(seqSorted, seq)
+		sort.Ints(seqSorted)
+		answer[i] = check(seqSorted)
+	}
+	return answer
+}
+
+func check(x []int) bool {
+	if 2 > len(x) {
+		return false
+	}
+	diff := x[1] - x[0]
+	n := len(x)
+	for i := 2; i < n; i += 1 {
+		newDiff := x[i] - x[i-1]
+		if newDiff != diff {
+			return false
+		}
+	}
+	return true
+}
