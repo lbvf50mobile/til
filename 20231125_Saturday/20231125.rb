@@ -1,0 +1,39 @@
+# Leetcode: 1685. Sum of Absolute Differences in a Sorted Array.
+# https://leetcode.com/problems/sum-of-absolute-differences-in-a-sorted-array/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 347 ms, faster than 100.00% of Ruby online submissions for Sum of
+# Absolute Differences in a Sorted Array.
+# Memory Usage: 231.1 MB, less than 100.00% of Ruby online submissions for Sum
+# of Absolute Differences in a Sorted Array.
+# 2023.11.25 Daily Challenge.
+# @param {Integer[]} nums
+# @return {Integer[]}
+def get_sum_absolute_differences(nums)
+  # Based on:
+  # https://leetcode.com/problems/sum-of-absolute-differences-in-a-sorted-array/solution/
+  n = nums.size
+  prf = [nums[0]]
+  (1...n).each do |i|
+    prf.push(prf[-1]  + nums[i])
+  end
+  ans = []
+  n.times do |i|
+    # Sum.
+    ls = prf[i] - nums[i]
+    rs = prf[-1] - prf[i]
+
+    # Count.
+    lc = i
+    rc = n - 1 - i
+
+    # Total.
+    lt = lc * nums[i] - ls
+    rt = rs - rc * nums[i]
+
+    ans.push(lt + rt)
+  end
+  return ans
+end
