@@ -1,0 +1,32 @@
+# Leetcode: 1727. Largest Submatrix With Rearrangements.
+# https://leetcode.com/problems/largest-submatrix-with-rearrangements/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 353 ms, faster than 100.00% of Ruby online submissions for Largest
+# Submatrix With Rearrangements.
+# Memory Usage: 227.5 MB, less than 100.00% of Ruby online submissions for
+# Largest Submatrix With Rearrangements.
+# 2023.11.26 Daily Challenge.
+# @param {Integer[][]} matrix
+# @return {Integer}
+def largest_submatrix(matrix)
+  n, m = matrix.size, matrix[0].size
+  # Sum columns.
+  (0...m).each do |j|
+    (1...n).each do |i|
+      next if 0 == matrix[i][j]
+      matrix[i][j] += matrix[i-1][j]
+    end
+  end
+  ans = 0
+  (0...n).each do |i|
+    srt_row = matrix[i].sort_by{|x| -x}
+    (0...m).each do |j|
+      tmp = srt_row[j] * (j+1)
+      ans = tmp if tmp > ans
+    end
+  end
+  return ans
+end
