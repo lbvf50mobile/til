@@ -12,7 +12,7 @@
 # @param {Integer} n
 # @return {Integer}
 def knight_dialer(n)
-  # Based on third Leetcode's solution.
+  # Based on the third Leetcode's solution.
   jumps = [
       [4, 6],
       [6, 8],
