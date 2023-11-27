@@ -1,4 +1,4 @@
-# Approach 3: Space-Optimized Dynamic Programming.
+# Approach 2: Approach 2: Bottom-Up Dynamic Programming.
 # https://leetcode.com/problems/knight-dialer/solution/ 
 class Solution:
     def knightDialer(self, n: int) -> int:
@@ -16,22 +16,20 @@ class Solution:
         ]
         
         MOD = 10 ** 9 + 7
-        dp = [0] * 10
-        prev_dp = [1] * 10
-        
+        dp = [[0] * 10 for _ in range(n + 1)]
+        for square in range(10):
+            dp[0][square] = 1
+
         for remain in range(1, n):
-            dp = [0] * 10
             for square in range(10):
                 ans = 0
                 for next_square in jumps[square]:
-                    ans = (ans + prev_dp[next_square]) % MOD
+                    ans = (ans + dp[remain - 1][next_square]) % MOD
                 
-                dp[square] = ans
-                
-            prev_dp = dp
+                dp[remain][square] = ans
 
         ans = 0
         for square in range(10):
-            ans = (ans + prev_dp[square]) % MOD
+            ans = (ans + dp[n - 1][square]) % MOD
         
         return ans
