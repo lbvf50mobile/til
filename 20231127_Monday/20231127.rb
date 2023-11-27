@@ -1,0 +1,47 @@
+# Leetcode: 935. Knight Dialer.
+# https://leetcode.com/problems/knight-dialer/
+# = = = = = = = = = = = = = =
+# Accepted.
+# Thanks God, Jesus Christ!
+# = = = = = = = = = = = = = =
+# Runtime: 602 ms, faster than 100.00% of Ruby online submissions for Knight
+# Dialer.
+# Memory Usage: 211.3 MB, less than 100.00% of Ruby online submissions for
+# Knight Dialer.
+# 2023.11.27 Daily Challenge.
+# @param {Integer} n
+# @return {Integer}
+def knight_dialer(n)
+  # Based on third Leetcode's solution.
+  jumps = [
+      [4, 6],
+      [6, 8],
+      [7, 9],
+      [4, 8],
+      [3, 9, 0],
+      [],
+      [1, 7, 0],
+      [2, 6],
+      [1, 3],
+      [2, 4]
+  ]
+  mod = (10**9) + 7
+  dp = Array.new(10,0)
+  pdp = Array.new(10,1)
+  (1...n).each do |rmn|
+    dp = [0] * 10
+    10.times do |sq|
+      ans = 0
+      jumps[sq].each do |ns|
+        ans = (ans + pdp[ns]) % mod
+      end
+      dp[sq] = ans
+    end
+    pdp = dp
+  end
+  ans = 0
+  10.times do |sq|
+    ans = (ans + pdp[sq]) % mod
+  end
+  return ans
+end
