@@ -1,3 +1,5 @@
+# Approach 3: Space-Optimized Dynamic Programming.
+# https://leetcode.com/problems/knight-dialer/solution/ 
 class Solution:
     def knightDialer(self, n: int) -> int:
         jumps = [
