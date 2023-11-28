@@ -1,0 +1,77 @@
+https://leetcode.com/problems/number-of-ways-to-divide-a-long-corridor/solution/
+
+Initially, we have a pre-installed divider before index 0, and we are in the
+first section, which we can close only when we find a pair of S while scanning
+from left to right.
+
+Thus, for formulating, let's use
+
+- index to denote the index of the current element in the corridor, and
+- seats to denote the number of S in the current section. The seats can take
+  only a limited number of values.
+
+  - 0 if there is no S in the current section
+  - 1 if there is only one S in the current section
+  - 2 if there are two S in the current section.
+    - if we close the section here, it means that for the next section, we
+      will have 0 S remaining.
+    - if we don't close, then we can keep growing the section until we find
+      another S, then the moment we find more than two S in the current
+      section, we have to start a new section, and the S in the new section
+      will be 1.
+- Thus, because of formulation, we can say that the seats can take only three
+  values, 0, 1, and 2.
+
+Thus, with these notations, let's try to compute the number of ways to divide
+the corridor as a function of index and seats.
+
+More precisely, we will define a function count(index, seats) to denote the
+number of ways to divide the corridor starting from index index to the last
+index, with seats number of S in the current section.
+
+- if index reaches n (the corridor.length()), then the current section is
+  valid only if seats == 2.
+
+  Thus, if index == n, we can return 1 if seats == 2, otherwise we can return
+  0. This additional 1 implies that we have found a valid way to divide the
+  corridor. We will ensure not to count the same way again, by ensuring that
+  the (i1, s1) pair calls count(i2, s2) not more than once.
+
+  now if we are on a valid index, and the number of seats in the current
+  sections is exactly 2, then we either can close the section, or we can keep
+  growing the section. It depends on whether corridor[index] is S or P.
+
+  if corridor[index] is S, then we have to close the section and start a new
+  section from this index. Thus, we need to call count for the next index,
+  with seats = 1. Hence, return count(index + 1, 1)
+
+  if corridor[index] is P, then we have two options, and both of these options
+  will generate different ways to divide the corridor.
+
+  close the section: then at the next index, we will have seats = 0.
+  keep growing the section: then at the next index, we will have seats = 2
+  only.
+
+  Hence, return count(index + 1, 0) + count(index + 1, 2)
+
+lastly, if we are on a valid index, but number of seats in the current section
+is less than 2, then we don't have any option but to keep growing the section.
+
+if corridor[index] is S, the number of seats in the section will be
+incremented. Hence, return count(index + 1, seats + 1)
+
+if corridor[index] is P, then return count(index + 1, seats)
+
+We would call count(0, 0) to compute the number of ways to divide the corridor
+starting from index 0 to the last index, with 0 number of S in the current
+section.
+
+Now, we can see that the function count is a recursive function. There might
+be a case when one sub-problem is called multiple times. The following tree
+illustrates one such case for corridor as "SSPPSPS"
+
+
+
+
+
+
