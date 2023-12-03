@@ -1,0 +1,45 @@
+// Leetcode: 1266. Minimum Time Visiting All Points.
+// https://leetcode.com/problems/minimum-time-visiting-all-points/
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 5 ms, faster than 68.89% of Go online submissions for Minimum Time
+// Visiting All Points.
+// Memory Usage: 3 MB, less than 60.00% of Go online submissions for Minimum
+// Time Visiting All Points.
+// 2023.12.03 Daily Challenge.
+
+package main
+
+func minTimeToVisitAllPoints(points [][]int) int {
+	// Cherbyshev distance.
+	// Solution based on the Leetcode's solution first approach.
+	ans := 0
+	n := len(points)
+	for i := 0; i < (n - 1); i += 1 {
+		j := i + 1
+		xCurr, yCurr := points[i][0], points[i][1]
+		xNext, yNext := points[j][0], points[j][1]
+		x := abs(xCurr - xNext)
+		y := abs(yCurr - yNext)
+		ans += max(x, y)
+	}
+	return ans
+}
+
+func abs(x int) int {
+	if x >= 0 {
+		return x
+	} else {
+		return -x
+	}
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	} else {
+		return b
+	}
+}
