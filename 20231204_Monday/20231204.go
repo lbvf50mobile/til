@@ -17,7 +17,7 @@ import (
 )
 
 func largestGoodInteger(num string) string {
-	// Numbers going to store flags "does a good digit occures?".
+	// Numbers going to store flags "does a good number occures?".
 	// 0 -> 999
 	// 1 -> 888
 	// 9 -> 000
