@@ -15,7 +15,7 @@ package main
 func largestOddNumber(num string) string {
 	left := 0
 	right := -1
-	// Left must not be not zero.
+	// Left must be not zero.
 	for i, v := range num {
 		if '0' != v {
 			left = i
