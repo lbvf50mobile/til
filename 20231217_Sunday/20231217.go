@@ -1,5 +1,14 @@
 // Leetcode: 2353. Design a Food Rating System.
 // https://leetcode.com/problems/design-a-food-rating-system/
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 383 ms, faster than 50.00% of Go online submissions for Design a
+// Food Rating System.
+// Memory Usage: 21.7 MB, less than 66.67% of Go online submissions for Design
+// a Food Rating System.
+// 2023.12.17 Daily Challenge.
 
 package main
 
@@ -99,10 +108,8 @@ func (this *FoodRatings) ChangeRating(food string, newRating int) {
 
 func (this *FoodRatings) HighestRated(cuisine string) string {
 	cu := this.theCuisines[cuisine]
-	tmp := cu[0]
-	el := *tmp
-	return el.food
-
+	rcu := *cu
+	return rcu[0].food
 }
 
 /**
