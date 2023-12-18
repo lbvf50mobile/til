@@ -1,6 +1,7 @@
 // Leetcode: 1913. Maximum Product Difference Between Two Pairs.
 // https://leetcode.com/problems/maximum-product-difference-between-two-pairs/
 // = = = = = = = = = = = = = =
+// Accepted.
 // Thanks God, Jesus Christ!
 // = = = = = = = = = = = = = =
 // Runtime: 20 ms, faster than 77.92% of Go online submissions for Maximum
