@@ -8,7 +8,7 @@
 // Product Difference Between Two Pairs.
 // Memory Usage: 6.3 MB, less than 72.73% of Go online submissions for Maximum
 // Product Difference Between Two Pairs.
-// 2023.12.17 Daily Challenge.
+// 2023.12.18 Daily Challenge.
 
 package main
 

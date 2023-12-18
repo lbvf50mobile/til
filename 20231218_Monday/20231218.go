@@ -1,40 +1,29 @@
 // Leetcode: 1913. Maximum Product Difference Between Two Pairs.
 // https://leetcode.com/problems/maximum-product-difference-between-two-pairs/
 // = = = = = = = = = = = = = =
-// Accepted.
 // Thanks God, Jesus Christ!
 // = = = = = = = = = = = = = =
-// Runtime: 20 ms, faster than 77.92% of Go online submissions for Maximum
-// Product Difference Between Two Pairs.
-// Memory Usage: 6.2 MB, less than 85.71% of Go online submissions for Maximum
-// Product Difference Between Two Pairs.
-// 2023.12.17 Daily Challenge.
+// 2023.12.18 Daily Challenge.
 
 package main
 
+type minHeap []int
+
+func (h minHeap) Len() in            { return len(h) }
+func (h minHeap) Less(i, j int) bool { return h[i] < h[j] }
+func (h minHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
+func (h *minHeap) Push(x any) {
+	*h = append(*h, x.(int))
+}
+func (h *minHeap) Pop() any {
+	old := *h
+	n := len(old)
+	x := old[n-1]
+	*h = old[0 : n-1]
+	return x
+}
+
 func maxProductDifference(nums []int) int {
-	var max1, max2, min1, min2 int
-	a, b := nums[0], nums[1]
-	if a > b {
-		max1, max2 = a, b
-		min1, min2 = b, a
-	} else {
-		max1, max2 = b, a
-		min1, min2 = a, b
-	}
-	for _, v := range nums[2:] {
-		if v > max1 {
-			max2 = max1
-			max1 = v
-		} else if v > max2 {
-			max2 = v
-		}
-		if v < min1 {
-			min2 = min1
-			min1 = v
-		} else if v < min2 {
-			min2 = v
-		}
-	}
-	return (max1 * max2) - (min1 * min2)
+	// MinHeap fill if bigger. Smallest on the top. Store BIG.
+	// MaxHeap fill if smaller. Biggest on the top. Store SMALL.
 }
