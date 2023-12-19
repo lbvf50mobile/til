@@ -22,7 +22,7 @@ func imageSmoother(img [][]int) [][]int {
 	// Iterate over all cells of the input.
 	for i := 0; i < m; i += 1 {
 		for j := 0; j < n; j += 1 {
-			// Moving around the current cell.
+			// Moving around the neighbors of the current cell (inclusive).
 			count := 0
 			sum := 0
 			is := i - 1 // i start.
