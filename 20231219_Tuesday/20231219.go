@@ -1,0 +1,55 @@
+// Leetcode: 661. Image Smoother.
+// https://leetcode.com/problems/image-smoother/
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 41 ms, faster than 27.78% of Go online submissions for Image
+// Smoother.
+// Memory Usage: 7.6 MB, less than 27.78% of Go online submissions for Image
+// Smoother.
+// 2023.12.19 Daily Challenge.
+
+package main
+
+func imageSmoother(img [][]int) [][]int {
+	// Create an answer.
+	m, n := len(img), len(img[0])
+	ans := make([][]int, m)
+	for i := 0; i < m; i += 1 {
+		ans[i] = make([]int, n)
+	}
+	// Iterate over all cells of the input.
+	for i := 0; i < m; i += 1 {
+		for j := 0; j < n; j += 1 {
+			// Moving around the current cell.
+			count := 0
+			sum := 0
+			is := i - 1 // i start.
+			js := j - 1 // j start.
+			ib := i + 2 // i border.
+			jb := j + 2 // j border.
+			if is < 0 {
+				is = 0
+			}
+			if js < 0 {
+				js = 0
+			}
+			if ib > m {
+				ib = m
+			}
+			if jb > n {
+				jb = n
+			}
+			for ii := is; ii < ib; ii += 1 {
+				for jj := js; jj < jb; jj += 1 {
+					count += 1
+					sum += img[ii][jj]
+				}
+			}
+			ans[i][j] = sum / count
+		}
+	}
+	// Return the answer.
+	return ans
+}
