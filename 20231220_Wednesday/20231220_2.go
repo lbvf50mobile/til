@@ -11,7 +11,6 @@
 
 package main
 
-
 func buyChoco(prices []int, money int) int {
 	var a, b int
 	if prices[0] < prices[1] {
