@@ -1,8 +1,20 @@
 // Leetcode: 1531. String Compression II.
 // https://leetcode.com/problems/string-compression-ii/
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 32 ms, faster than 100.00% of Go online submissions for String
+// Compression II.
+// Memory Usage: 4.7 MB, less than 100.00% of Go online submissions for String
+// Compression II.
+// 2023.12.28 Daily Challenge.
+
 package main
 
 func getLengthOfOptimalCompression(s string, k int) int {
+	// Based on:
+	// https://leetcode.com/problems/string-compression-ii/discuss/757506/Detailed-Explanation-Two-ways-of-DP-from-33-to-100
 	n := len(s)
 	dp := make([][]int, n+1)
 	dp[0] = make([]int, k+1)
@@ -13,8 +25,25 @@ func getLengthOfOptimalCompression(s string, k int) int {
 			dp[i][j] = val
 		}
 	}
-	for i :=1; i < n+1; i +=1 {
-		for j := 0; j < k + 1; j += 1 {
+	for i := 1; i < n+1; i += 1 {
+		for j := 0; j < k+1; j += 1 {
+			if j > 0 {
+				dp[i][j] = dp[i-1][j-1]
+			}
+			rm, cnt := 0, 0
+			for pe := i; pe >= 1; pe -= 1 {
+				if s[pe-1] == s[i-1] {
+					cnt += 1
+				} else {
+					rm += 1
+					if rm > j {
+						break
+					}
+				}
+				a := dp[i][j]
+				b := dp[pe-1][j-rm] + calcLen(cnt)
+				dp[i][j] = min(a, b)
+			}
 		}
 	}
 	return dp[n][k]
