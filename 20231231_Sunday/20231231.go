@@ -10,7 +10,6 @@
 // Substring Between Two Equal Characters.
 // 2023.12.31 Daily Challenge.
 
-
 package main
 
 func maxLengthBetweenEqualCharacters(s string) int {
