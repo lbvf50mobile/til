@@ -4,10 +4,10 @@
 // Accepted.
 // Thanks God, Jesus Christ!
 // = = = = = = = = = = = = = =
-// Runtime: 141 ms, faster than 14.81% of Go online submissions for Minimum
+// Runtime: 91 ms, faster than 100.00% of Go online submissions for Minimum
 // Number of Operations to Make Array Empty.
-// Memory Usage: 11.3 MB, less than 25.93% of Go online submissions for
-// Minimum Number of Operations to Make Array Empty.
+// Memory Usage: 9.9 MB, less than 51.85% of Go online submissions for Minimum
+// Number of Operations to Make Array Empty.
 // 2024.01.04 Daily Challenge.
 
 package main
@@ -35,6 +35,13 @@ func minOperations(nums []int) int {
 			ans += (v-4)/3 + 2
 			continue
 		}
+		if 0 == v%2 {
+			ans += (v / 2)
+		}
+		return -1
+	}
+	// There must by at least one operation.
+	if 0 == ans {
 		return -1
 	}
 	return ans
