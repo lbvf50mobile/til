@@ -29,7 +29,7 @@ func numberOfArithmeticSlices(nums []int) int {
 		}
 		total += sum(dp[i])
 	}
-	return total - ((n-1)*n/2) // <= Here.
+	return total - ((n - 1) * n / 2) // <= Here.
 }
 
 func sum(x map[int]int) int {
