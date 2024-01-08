@@ -32,13 +32,13 @@ func rangeSumBST(root *TreeNode, low int, high int) int {
 	}
 	// Do move left?
 	// Move left only if curr is bigger then the low.
-	// Otherwise no need to move left.
+	// Otherwise, no need to move left.
 	if nil != root.Left && low < curr {
 		ans += rangeSumBST(root.Left, low, high)
 	}
 	// Do move right?
 	// Move right only if curr is less then the high.
-	// Otherwise no need to move right.
+	// Otherwise, no need to move right.
 	if nil != root.Right && curr < high {
 		ans += rangeSumBST(root.Right, low, high)
 	}
