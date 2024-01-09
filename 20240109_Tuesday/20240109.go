@@ -21,33 +21,29 @@ package main
  * }
  */
 
-type Leafs struct {
-	values []int
-}
-
 var a, b []int
 
 func leafSimilar(root1 *TreeNode, root2 *TreeNode) bool {
-	aLeafs, bLeafs := Leafs{make([]int, 0)}, Leafs{make([]int, 0)}
-	inorder(root1, &aLeafs)
-	inorder(root2, &bLeafs)
-	a, b = aLeafs.values, bLeafs.values
+	a, b = make([]int, 0), make([]int, 0)
+	a = inorder(root1, a)
+	b = inorder(root2, b)
 	return compare()
 }
 
-func inorder(root *TreeNode, leafs *Leafs) {
+func inorder(root *TreeNode, leafs []int) []int {
 	if nil == root {
-		return
+		return leafs
 	}
 	if nil != root.Left {
-		inorder(root.Left, leafs)
+		leafs = inorder(root.Left, leafs)
 	}
 	if nil == root.Left && nil == root.Right {
-		leafs.values = append(leafs.values, root.Val)
+		leafs = append(leafs, root.Val)
 	}
 	if nil != root.Right {
-		inorder(root.Right, leafs)
+		leafs = inorder(root.Right, leafs)
 	}
+	return leafs
 }
 
 func compare() bool {
