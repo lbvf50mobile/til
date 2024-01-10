@@ -1,6 +1,7 @@
 // Leetcode: 236. Lowest Common Ancestor of a Binary Tree.
 // https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
 // https://leetcode.com/discuss/interview-question/4519498/some-simple-but-impt-interview-topics-for-2024
+// https://gist.github.com/lbvf50mobile/93939738b60c4ee4648a5b0d5d5b9b82
 // = = = = = = = = = = = = = =
 // Accepted.
 // Thanks God, Jesus Christ!
