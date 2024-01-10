@@ -1,6 +1,7 @@
 // Leetcode: 628. Maximum Product of Three Numbers.
 // https://leetcode.com/problems/maximum-product-of-three-numbers/
 // https://leetcode.com/discuss/interview-question/4519498/some-simple-but-impt-interview-topics-for-2024
+// https://gist.github.com/lbvf50mobile/4537fb2b0ff2bf112ed5206c7040c508
 // = = = = = = = = = = = = = =
 // Accepted.
 // Thanks God, Jesus Christ!
