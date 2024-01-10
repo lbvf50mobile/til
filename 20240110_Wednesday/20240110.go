@@ -1,5 +1,14 @@
 // Leetcode: 2385. Amount of Time for Binary Tree to Be Infected.
 // https://leetcode.com/problems/amount-of-time-for-binary-tree-to-be-infected/
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 327 ms, faster than 44.44% of Go online submissions for Amount of
+// Time for Binary Tree to Be Infected.
+// Memory Usage: 29.5 MB, less than 83.33% of Go online submissions for Amount
+// of Time for Binary Tree to Be Infected.
+// 2024.01.10 Daily Challenge.
 
 package main
 
@@ -57,7 +66,7 @@ func graphGenerator(root *TreeNode, start int) {
 			}
 		}
 		if nil == theRoot {
-			threRoot = node
+			theRoot = node
 		}
 		if start == node.Val {
 			theStart = node
@@ -67,7 +76,7 @@ func graphGenerator(root *TreeNode, start int) {
 			q = append(q, pair)
 		}
 		if nil != current.Right {
-			pair := &Pair{node, current.Rigt, false}
+			pair := &Pair{node, current.Right, false}
 			q = append(q, pair)
 		}
 	}
@@ -83,15 +92,15 @@ func layers() int {
 		nq := make([]*Node, 0)
 		ans += 1
 		for _, v := range q {
-			if nil != v.Top && (!visied[v.Top]) {
+			if nil != v.Top && (!visited[v.Top]) {
 				visited[v.Top] = true
 				nq = append(nq, v.Top)
 			}
-			if nil != v.Left && (!visied[v.Left]) {
+			if nil != v.Left && (!visited[v.Left]) {
 				visited[v.Left] = true
 				nq = append(nq, v.Left)
 			}
-			if nil != v.Right && (!visied[v.Right]) {
+			if nil != v.Right && (!visited[v.Right]) {
 				visited[v.Right] = true
 				nq = append(nq, v.Right)
 			}
