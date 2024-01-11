@@ -1,0 +1,81 @@
+// Leetcode: 1026. Maximum Difference Between Node and Ancestor.
+// https://leetcode.com/problems/maximum-difference-between-node-and-ancestor
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 2 ms, faster than 75.00% of Go online submissions for Maximum
+// Difference Between Node and Ancestor.
+// Memory Usage: 3.5 MB, less than 100.00% of Go online submissions for
+// Maximum Difference Between Node and Ancestor.
+// 2024.01.11 Daily Challenge.
+
+package main
+
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+
+type El struct {
+	Node    *TreeNode
+	Min     int  // Min for the previos part of a path.
+	Max     int  // Max fot the previos part of a path.
+	Updated bool // If false need to set min and max from the curr val.
+}
+
+func maxAncestorDiff(root *TreeNode) int {
+	if nil == root {
+		return 0
+	}
+	// Need to save min and max for a path.
+	// A path from the root to a leaf.
+	// Difference is an answer.
+	// Update answer.
+	ans := 0
+	// Create a BFS.
+	q := make([]*El, 1)
+	q[0] = &El{root, 0, 0, false}
+	for 0 != len(q) {
+		node := q[0]
+		q = q[1:]
+		val := node.Node.Val
+		// Recalculate new min and max.
+		if !node.Updated {
+			node.Min, node.Max = val, val
+		}
+		min, max := node.Min, node.Max
+		if val < min {
+			min = val
+		}
+		if val > max {
+			max = val
+		}
+		diff := abs(max - min)
+		if diff > ans {
+			ans = diff
+		}
+
+		if nil != node.Node.Left {
+			q = append(q, &El{node.Node.Left, min, max, true})
+
+		}
+		if nil != node.Node.Right {
+			q = append(q, &El{node.Node.Right, min, max, true})
+		}
+
+	}
+
+	return ans
+}
+
+func abs(x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
+}
