@@ -8,6 +8,7 @@
 // in Pairs.
 // Memory Usage: 2.1 MB, less than 96.12% of Go online submissions for Swap
 // Nodes in Pairs.
+// https://gist.github.com/lbvf50mobile/7329075aec517ec0d42c793053fc1645
 
 package main
 
