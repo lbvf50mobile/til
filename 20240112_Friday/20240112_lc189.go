@@ -8,6 +8,7 @@
 // Array.
 // Memory Usage: 7.5 MB, less than 53.63% of Go online submissions for Rotate
 // Array.
+// https://gist.github.com/lbvf50mobile/dc02b80614d403e5d8a27f6eb5e67d30
 
 package main
 
