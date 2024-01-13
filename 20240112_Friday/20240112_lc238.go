@@ -8,6 +8,7 @@
 // Array Except Self.
 // Memory Usage: 7.9 MB, less than 19.07% of Go online submissions for Product
 // of Array Except Self.
+// https://gist.github.com/lbvf50mobile/2e6c736576fc2737dfb7f9af40007648
 
 
 package main
