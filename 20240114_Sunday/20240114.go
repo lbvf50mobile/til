@@ -44,7 +44,7 @@ func sameSet(count1, count2 []int) bool {
 	return true
 }
 
-// Counter maker. Map of occurences.
+// Counter maker. Map of occurrences.
 func getCounter(s string, count []int) {
 	for _, v := range s {
 		count[int(v-'a')] += 1
