@@ -8,6 +8,7 @@
 // in a Linked List.
 // Memory Usage: 2.8 MB, less than 12.89% of Go online submissions for Delete
 // Node in a Linked List.
+// https://gist.github.com/lbvf50mobile/a632eb884c9444614c96d406d3a5c723
 
 package main
 
