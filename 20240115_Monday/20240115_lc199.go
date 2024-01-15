@@ -9,6 +9,7 @@
 // Memory Usage: 2.3 MB, less than 14.84% of Go online submissions for Binary
 // Tree Right Side View.
 // 2024.01.15.
+// https://gist.github.com/lbvf50mobile/c7b2768e28ed94a8531f38bedc444d31
 
 package main
 
