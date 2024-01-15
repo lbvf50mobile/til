@@ -9,6 +9,7 @@
 // Memory Usage: 2.2 MB, less than 18.33% of Go online submissions for Remove
 // Nth Node From End of List.
 // 2024.01.15.
+// https://gist.github.com/lbvf50mobile/01b43dc9c099e96160614f281ecb05f9
 
 package main
 
