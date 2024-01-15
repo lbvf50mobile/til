@@ -9,6 +9,7 @@
 // Memory Usage: 6.5 MB, less than 38.57% of Go online submissions for Single
 // Number
 // 2024.01.15.
+// https://gist.github.com/lbvf50mobile/7c2eba643cf605660d2adb14f9d8be32
 
 package main
 
