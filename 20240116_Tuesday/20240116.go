@@ -1,5 +1,14 @@
 // Leetcode: 380. Insert Delete GetRandom O(1).
 // https://leetcode.com/problems/insert-delete-getrandom-o1/
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 195 ms, faster than 38.80% of Go online submissions for Insert
+// Delete GetRandom O(1).
+// Memory Usage: 322.9 MB, less than 5.05% of Go online submissions for Insert
+// Delete GetRandom O(1).
+// 2024.01.16 Daily Challenge.
 
 // Finish as soon as possiple.
 // Do once.
