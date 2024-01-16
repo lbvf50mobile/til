@@ -85,27 +85,21 @@ func (this *RandomizedSet) Remove(val int) bool {
 
 // Swap val with with end.
 func (this *RandomizedSet) Swap(el *El) {
-	// a swaps with b.
-	a, b := el, this.tail.p
+	if -1 == this.index {
+		panic("Swap -1")
+	}
+	if nil == el {
+		panic("Swap nil")
+	}
+	// Lets swap in the hash.
 	s := this.slice
-
-	ap, an, bp, bn := a.p, a.n, b.p, b.n
-
-	a.n = bn
-	a.p = bp
-
-	b.n = an
-	b.p = ap
-
-	ap.n = b
-	an.p = b
-
-	bp.n = a
-	bn.p = a
-
-	ai, bi := a.i, b.i
-	s[ai], s[bi] = s[bi], s[ai]
-	a.i, b.i = b.i, a.i
+	a,b := el, this.tail.p
+	ai,bi := a.i, b.i
+	av,bv := s[ai],s[bi]
+	this.used[av] = b
+	this.used[bv] = a
+	s[ai],s[bi] = s[bi],s[ai] // swap in slice.
+	a.i, b.i = bi, ai
 }
 
 func (this *RandomizedSet) RemoveLast() {
