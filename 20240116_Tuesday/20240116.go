@@ -43,6 +43,7 @@ func Constructor() RandomizedSet {
 }
 
 func (this *RandomizedSet) Insert(val int) bool {
+	//p("Insert", val, this.slice[:this.index+1])
 	el := this.used[val]
 	// Start from the FUSES.
 	if nil != el {
@@ -66,10 +67,12 @@ func (this *RandomizedSet) Insert(val int) bool {
 	b.i = this.index
 	this.used[val] = b
 	this.slice[b.i] = val
+	//p("After insert", val, this.slice[:this.index+1])
 	return true
 }
 
 func (this *RandomizedSet) Remove(val int) bool {
+	//p("Remove", val, this.slice[:this.index+1])
 	// Fuces.
 	if -1 == this.index {
 		return false
@@ -78,28 +81,36 @@ func (this *RandomizedSet) Remove(val int) bool {
 	if nil == el {
 		return false
 	}
-	this.Swap(el)
+	this.SwapWithLast(el)
 	this.RemoveLast()
+	//p("After Remove", val, this.slice[:this.index+1])
 	return true
 }
 
 // Swap val with with end.
-func (this *RandomizedSet) Swap(el *El) {
+func (this *RandomizedSet) SwapWithLast(el *El) {
+	//p("Swap")
 	if -1 == this.index {
 		panic("Swap -1")
 	}
 	if nil == el {
 		panic("Swap nil")
 	}
-	// Lets swap in the hash.
 	s := this.slice
-	a,b := el, this.tail.p
-	ai,bi := a.i, b.i
-	av,bv := s[ai],s[bi]
-	this.used[av] = b
-	this.used[bv] = a
-	s[ai],s[bi] = s[bi],s[ai] // swap in slice.
-	a.i, b.i = bi, ai
+	// What is the task of this swap?
+	// The last element would be deleted.
+	del := this.tail.p
+	// Del would be deleted!
+	// And it's index would be delted!
+	// Need to swap values, and hash ponters.
+	di, ei := del.i, el.i // Do not touch indices!
+	dv, ev := s[di], s[ei]
+	// Now need to swap values in the slice.
+	s[di], s[ei] = s[ei], s[di] // Values are changed.
+	// value for delete is at the last index element.
+	// Now time to swap hash.
+	this.used[ev] = del
+	this.used[dv] = el // El vould not be deleted.
 }
 
 func (this *RandomizedSet) RemoveLast() {
@@ -110,6 +121,8 @@ func (this *RandomizedSet) RemoveLast() {
 	b.n = nil
 	b.p = nil
 	val := this.slice[b.i]
+	//p("Removing last",val,"index",b.i)
+	//p(this.slice[:this.index+2])
 	this.used[val] = nil
 }
 
