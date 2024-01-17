@@ -9,6 +9,7 @@
 // Memory Usage: 4 MB, less than 40.58% of Go online submissions for Number of
 // Islands.
 // 2024.01.17.
+// https://gist.github.com/lbvf50mobile/b5a24a9eb7f303d2c862fdc3ce2ffbf2
 
 package main
 
