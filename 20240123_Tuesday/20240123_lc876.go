@@ -9,6 +9,7 @@
 // Memory Usage: 2 MB, less than 77.87% of Go online submissions for Middle of
 // the Linked List.
 // 2024.01.23.
+// https://gist.github.com/lbvf50mobile/ce80f631aa57ebbd8bc7ab66a048f5b6
 
 
 package main
