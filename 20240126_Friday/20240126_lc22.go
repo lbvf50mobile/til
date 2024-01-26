@@ -9,6 +9,7 @@
 // Memory Usage: 2.6 MB, less than 97.86% of Go online submissions for
 // Generate Parentheses.
 // 2023.01.26.
+// https://gist.github.com/lbvf50mobile/49e6c02c57e8749f7abbfa2be864a6ae
 
 package main
 
