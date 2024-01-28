@@ -9,6 +9,7 @@
 // Memory Usage: 7.7 MB, less than 28.31% of Go online submissions for
 // Subarray Sum Equals K.
 // 2024.01.28.
+// https://gist.github.com/lbvf50mobile/8d44736070fe05b273adfcf12a9554d8
 
 package main
 
