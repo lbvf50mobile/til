@@ -10,5 +10,10 @@ def num(s,l)
   return ans
 end
 
-p num(1,2)
-p num(2,2)
+(1..9).each do |l|
+  # when 1 => 9
+  # when 9 => 1
+  (1..(10-l)).each do |s|
+    puts "#{num(s,l)},"
+  end
+end
