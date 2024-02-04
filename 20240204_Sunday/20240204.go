@@ -3,6 +3,9 @@
 
 package main
 
+import "fmt"
+var p = fmt.Println
+
 func minWindow(s string, t string) string {
 	if len(s) < len(t) {
 		return ""
