@@ -7,9 +7,11 @@ import "fmt"
 var p = fmt.Println
 
 func minWindow(s string, t string) string {
-	if len(s) < len(t) {
+	s,t = t,s // Hack.
+	if len(s) > len(t) {
 		return ""
 	}
+	p(1)
 	// ------ Preparation.
 	min := 10_000_000_0
 	pair := []int{-1, -1}
@@ -17,7 +19,9 @@ func minWindow(s string, t string) string {
 	test := getPattern(string(t[0]))
 	i, j := 0, 1
 	for j < len(t) {
+		p(t[i:j],s)
 		if valid(test, pattern) {
+			p("valid")
 			// Save
 			if (j - i) == 1 {
 				return s
@@ -37,6 +41,7 @@ func minWindow(s string, t string) string {
 				}
 			}
 		} else {
+			p("ivalid")
 			j += 1
 			if j < len(t) {
 				setCounter(test, int(t[j]))
@@ -52,9 +57,14 @@ func minWindow(s string, t string) string {
 }
 
 func getPattern(s string) []int {
-	ans := make([]int, 26)
+	ans := make([]int, 52)
 	for _, v := range s {
-		ans[int(v-'a')] += 1
+		x := int(v)
+		if 97 <= x && x <= 122 {
+			ans[int(v-'a')] += 1
+		} else {
+			ans[26+int(v-'A')] += 1
+		}
 	}
 	return ans
 }
@@ -69,8 +79,16 @@ func valid(test, pattern []int) bool {
 }
 
 func setCounter(cnt []int, ch int) {
-	cnt[int(ch-'a')] += 1
+	if 97 <= ch && ch <= 122 {
+		cnt[int(ch-'a')] += 1
+	} else {
+		cnt[26+int(ch-'A')] += 1
+	}
 }
 func resetCounter(cnt []int, ch int) {
-	cnt[int(ch-'a')] -= 1
+	if 97 <= ch && ch <= 122 {
+		cnt[int(ch-'a')] -= 1
+	} else {
+		cnt[26+int(ch-'A')] -= 1
+	}
 }
