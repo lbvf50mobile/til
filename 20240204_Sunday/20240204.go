@@ -1,51 +1,47 @@
 // Leetcode: 76. Minimum Window Substring.
 // https://leetcode.com/problems/minimum-window-substring/
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 0 ms, faster than 100.00% of Go online submissions for Minimum
+// Window Substring.
+// Memory Usage: 3 MB, less than 97.34% of Go online submissions for Minimum
+// Window Substring.
+// 2024.02.04 Daily Challenge.
 
 package main
 
 import "fmt"
+
 var p = fmt.Println
 
 func minWindow(s string, t string) string {
-	s,t = t,s // Hack.
-	if len(s) > len(t) {
+	// Clarification.
+	needle := t
+	stack := s
+	pattern := getPattern(needle)
+	test := getPattern(stack[:1])
+	if len(stack) < len(needle) {
 		return ""
 	}
-	p(1)
-	// ------ Preparation.
-	min := 10_000_000_0
 	pair := []int{-1, -1}
-	pattern := getPattern(s)
-	test := getPattern(string(t[0]))
+	min := 10_000_000_000
+	if 1 == len(needle) && one(int(needle[0]), stack) {
+		return needle
+	}
 	i, j := 0, 1
-	for j < len(t) {
-		p(t[i:j],s)
-		if valid(test, pattern) {
-			p("valid")
-			// Save
-			if (j - i) == 1 {
-				return s
-			}
+	for j = 1; j <= len(stack); j += 1 {
+		for valid(test, pattern) {
 			if (j - i) < min {
 				min = (j - i)
 				pair[0], pair[1] = i, j
 			}
-			// Shrink.
-			resetCounter(test, int(t[i]))
+			reset(test, int(stack[i]))
 			i += 1
-			// Case i == j.
-			if i == j {
-				j += 1
-				if i < len(t) {
-					setCounter(test, int(t[i]))
-				}
-			}
-		} else {
-			p("ivalid")
-			j += 1
-			if j < len(t) {
-				setCounter(test, int(t[j]))
-			}
+		}
+		if j < len(stack) {
+			set(test, int(stack[j]))
 		}
 	}
 
@@ -53,7 +49,16 @@ func minWindow(s string, t string) string {
 	if -1 == pair[0] && -1 == pair[1] {
 		return ""
 	}
-	return t[pair[0]:pair[1]]
+	return stack[pair[0]:pair[1]]
+}
+
+func one(n int, stack string) bool {
+	for _, v := range stack {
+		if n == int(v) {
+			return true
+		}
+	}
+	return false
 }
 
 func getPattern(s string) []int {
@@ -78,14 +83,14 @@ func valid(test, pattern []int) bool {
 	return true
 }
 
-func setCounter(cnt []int, ch int) {
+func set(cnt []int, ch int) {
 	if 97 <= ch && ch <= 122 {
 		cnt[int(ch-'a')] += 1
 	} else {
 		cnt[26+int(ch-'A')] += 1
 	}
 }
-func resetCounter(cnt []int, ch int) {
+func reset(cnt []int, ch int) {
 	if 97 <= ch && ch <= 122 {
 		cnt[int(ch-'a')] -= 1
 	} else {
