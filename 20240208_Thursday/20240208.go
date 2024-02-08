@@ -1,0 +1,49 @@
+// Leetcode: 279. Perfect Squares.
+// https://leetcode.com/problems/perfect-squares/
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 0 ms, faster than 100.00% of Go online submissions for Perfect
+// Squares.
+// Memory Usage: 2 MB, less than 94.95% of Go online submissions for Perfect
+// Squares.
+// 2024.02.08 Daily Challenge.
+
+package main
+
+import "math"
+
+func numSquares(n int) int {
+	// Based on:
+	// https://leetcode.com/problems/perfect-squares/discuss/707526/Python-Fastest-O(sqrt(n))-solution-with-math-explanied.
+
+	// If just a square.
+	if n == pow2(sqrt(n)) {
+		return 1
+	}
+	// If there are two squares.
+	limit := sqrt(n) + 1 // <= Here.
+	for j := 0; j < limit; j += 1 {
+		sq := j * j
+		if pow2(sqrt(n-sq)) == n-sq {
+			return 2
+		}
+	}
+	// Grand reduce.
+	for 0 == n%4 {
+		n >>= 2
+	}
+	// Some magic.
+	if 7 == n%8 {
+		return 4
+	}
+	return 3
+}
+
+func pow2(x int) int {
+	return x * x
+}
+func sqrt(x int) int {
+	return int(math.Sqrt(float64(x)))
+}
