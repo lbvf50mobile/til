@@ -1,0 +1,84 @@
+// Leetcode: 1463. Cherry Pickup II.
+// https://leetcode.com/problems/cherry-pickup-ii/
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 16 ms, faster than 100.00% of Go online submissions for Cherry
+// Pickup II.
+// Memory Usage: 7.6 MB, less than 20.00% of Go online submissions for Cherry
+// Pickup II.
+// 2024.02.11 Daily Challenge.
+
+package main
+
+// import "fmt"
+
+// var p = fmt.Println
+
+var m, n int
+var g [][]int
+var dp [][][]int
+
+func cherryPickup(grid [][]int) int {
+	// Top Down DP. In fact memoization.
+	// Sub problem key is row, i pos, j pos.
+	g = grid
+	m, n = len(g), len(g[0])
+	// Fill dp with -1. Means does not set.
+	dp = make([][][]int, m)
+	for r := 0; r < m; r += 1 {
+		dp[r] = make([][]int, n)
+		for i := 0; i < n; i += 1 {
+			dp[r][i] = make([]int, n)
+			for j := 0; j < n; j += 1 {
+				dp[r][i][j] = -1
+			}
+		}
+	}
+	return rec(0, 0, n-1)
+}
+
+func rec(r, i, j int) int {
+	// The last row.
+	if r >= m {
+		return 0
+	}
+	if i < 0 || i >= n {
+		return -100000
+	}
+	if j < 0 || j >= n {
+		return -100000
+	}
+	// Swap to avoid duplication.
+	if i > j {
+		i, j = j, i
+	}
+	// Return pre saved max for this position in the row.
+	if -1 != dp[r][i][j] {
+		return dp[r][i][j]
+	}
+	curr := 0
+	if i == j {
+		curr = g[r][i]
+	} else {
+		curr = g[r][i] + g[r][j]
+	}
+	// Ok let's calculate curr.
+	// p(r, i, j, "row", curr)
+	add, tmp := 0, 0 // HERE! I had a cummulitive CURR :)!
+	for di := -1; di <= 1; di += 1 {
+		for dj := -1; dj <= 1; dj += 1 {
+			ii := di + i
+			jj := dj + j
+			tmp = rec(r+1, ii, jj)
+			if tmp > add {
+				add = tmp
+			}
+		}
+	}
+	// Ok let's calculate curr.
+	// p(r, "row", i, j, "i,j", curr, add, "curr, add")
+	dp[r][i][j] = curr + add
+	return curr + add
+}
