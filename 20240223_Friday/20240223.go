@@ -1,0 +1,49 @@
+// Leetcode: 787. Cheapest Flights Within K Stops.
+// https://leetcode.com/problems/cheapest-flights-within-k-stops/
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 11 ms, faster than 51.22% of Go online submissions for Cheapest
+// Flights Within K Stops.
+// Memory Usage: 4.9 MB, less than 70.73% of Go online submissions for
+// Cheapest Flights Within K Stops.
+// 2024.02.23 Daily Challenge.
+
+package main
+
+var max int = 9223372036854775807
+
+func findCheapestPrice(n int, flights [][]int, src int, dst int, k int) int {
+	// Based on:
+	// https://leetcode.com/problems/cheapest-flights-within-k-stops/discuss/340911/Understanding-Bellman-Ford
+
+	dp := make([][]int, k+2)
+	for i, _ := range dp {
+		dp[i] = make([]int, n)
+		for j, _ := range dp[i] {
+			dp[i][j] = max
+		}
+		dp[i][src] = 0
+		if i > 0 {
+			for _, f := range flights {
+				u, v, w := f[0], f[1], f[2]
+				if max != dp[i-1][u] {
+					dp[i][v] = min(dp[i][v], dp[i-1][u]+w)
+				}
+			}
+		}
+	}
+	if max == dp[k+1][dst] {
+		return -1
+	}
+	return dp[k+1][dst]
+
+}
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
