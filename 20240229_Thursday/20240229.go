@@ -1,0 +1,106 @@
+// Leetcode: 1609. Even Odd Tree.
+// https://leetcode.com/problems/even-odd-tree/
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 208 ms, faster than 17.07% of Go online submissions for Even Odd
+// Tree.
+// Memory Usage: 24.1 MB, less than 12.20% of Go online submissions for Even
+// Odd Tree.
+// 2024.02.29 Daily Challenge.
+
+package main
+
+// import "fmt"
+
+// var p = fmt.Println
+
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+func isEvenOddTree(root *TreeNode) bool {
+	if nil == root {
+		return true
+	}
+	row := make([]*TreeNode, 1)
+	if !odd(root.Val) {
+		return false
+	}
+	row[0] = root
+	level := 1
+
+	for 0 < len(row) {
+		rowNew := make([]*TreeNode, 0)
+		test := make([]int, 0)
+		for _, v := range row {
+			if nil != v.Left {
+				rowNew = append(rowNew, v.Left)
+				test = append(test, v.Left.Val)
+			}
+			if nil != v.Right {
+				rowNew = append(rowNew, v.Right)
+				test = append(test, v.Right.Val)
+			}
+		}
+		// p(test)
+		if even(level) {
+			// p("even")
+			if !oddInc(test) {
+				// p("bam")
+				return false
+			}
+		} else {
+			// p("Odd")
+			if !evenDec(test) {
+				// p("boom")
+				return false
+			}
+		}
+		level += 1
+		row = rowNew
+	}
+
+	return true
+}
+
+func oddInc(sl []int) bool {
+	if 0 == len(sl) {
+		return true
+	}
+	if !odd(sl[0]) {
+		return false
+	}
+	for i := 1; i < len(sl); i += 1 {
+		if (!odd(sl[i])) || sl[i-1] >= sl[i] {
+			return false
+		}
+	}
+	return true
+}
+func evenDec(sl []int) bool {
+	if 0 == len(sl) {
+		return true
+	}
+	if !even(sl[0]) {
+		return false
+	}
+	for i := 1; i < len(sl); i += 1 {
+		if (!even(sl[i])) || sl[i-1] <= sl[i] {
+			return false
+		}
+	}
+	return true
+}
+
+func odd(x int) bool {
+	return 1 == x%2
+}
+func even(x int) bool {
+	return !odd(x)
+}
