@@ -1,0 +1,67 @@
+// Leetcode: 977. Squares of a Sorted Array.
+// https://leetcode.com/problems/squares-of-a-sorted-array/
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 27 ms, faster than 55.82% of Go online submissions for Squares of
+// a Sorted Array.
+// Memory Usage: 7.2 MB, less than 21.30% of Go online submissions for Squares
+// of a Sorted Array.
+// 2024.03.02 Daily Challenge.
+
+package main
+
+func sortedSquares(nums []int) []int {
+	// Save positive and negative squares.
+	// Postitve from left to right, negative from right to left.
+
+	n := len(nums)
+	po, ne := make([]int, n), make([]int, n)
+	pA, nA := 0, 0 // Positive amount, Negative amount.
+
+	for _, v := range nums {
+		if v < 0 {
+			ne[nA] = v * v
+			nA += 1 // Negative.
+		} else {
+			po[pA] = v * v
+			pA += 1 // Positive.
+		}
+	}
+
+	ans := make([]int, n)
+	pR, nR := pA, nA  // Rest of positive and Negative.
+	pI, nI := 0, nA-1 // Pointers.
+	for i := 0; i < n; i += 1 {
+		if 0 < pR && 0 < nR {
+			a, b := po[pI], ne[nI]
+			if a < b {
+				ans[i] = a
+				pI += 1 // Move right. Positive.
+				pR -= 1 // Reduce. Positive.
+			} else {
+				ans[i] = b // Negaitve.
+				nI -= 1    // Move left.  Negative.
+				nR -= 1    // Reduce. Negative.
+			}
+			continue
+		}
+		if 0 < pR && 0 >= nR {
+			a := po[pI] // Positive.
+			ans[i] = a
+			pI += 1 // Move right.
+			pR -= 1 // Reduce.
+			continue
+		}
+		if 0 >= pR && 0 < nR {
+			b := ne[nI] // Negative.
+			ans[i] = b
+			nI -= 1 // Move Left. Negative.
+			nR -= 1 // Reduce. Negative.
+			continue
+		}
+		panic("Unknown position.")
+	}
+	return ans
+}
