@@ -1,5 +1,14 @@
 // Leetcode: 948. Bag of Tokens.
 // https://leetcode.com/problems/bag-of-tokens/
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 5 ms, faster than 61.54% of Go online submissions for Bag of
+// Tokens.
+// Memory Usage: 2.9 MB, less than 69.23% of Go online submissions for Bag of
+// Tokens.
+// 2024.03.04 Daily Challenge.
 
 package main
 
@@ -7,51 +16,29 @@ import "sort"
 
 func bagOfTokensScore(tokens []int, power int) int {
 	sort.Ints(tokens)
-	score := 0
+	ans, tmp := 0, 0
 	i, j := 0, len(tokens)-1
-	for i <= j {
-		// Face Up.
-		if 0 == tokens[i] {
+	p, t := power, tokens
+	for i <= j && (p >= t[i] || tmp > 0) {
+		// Buy when it is possible.
+		for i <= j && p >= t[i] {
+			p -= t[i]
+			tmp += 1
 			i += 1
-			score += 1
-			continue
 		}
-		// Face Up.
-		if i == j && tokens[i] <= power {
-			power -= tokens[i]
-			i += 1
-			score += 1
-			continue
-		}
-		if i <= j && tokens[i] < power {
-			power -= tokens[i]
-			i += 1
-			score += 1
-			continue
-		}
-		// Face down.
-		iv, jv := tokens[i], tokens[j]
-		// There is a reason to sell.
-		if i+1 < j && score >= 1 && power <= iv && power+jv >= (iv+tokens[i+1]) {
+		ans = max(tmp, ans)
+		if (i <= j) && (tmp > 0) {
+			p += t[j]
 			j -= 1
-			score -= 1
-			power += tokens[j]
-			continue
+			tmp -= 1
 		}
-		if i < j && score >= 1 && power < iv && power+jv >= iv {
-			j -= 1
-			score -= 1
-			power += tokens[j]
-			continue
-		}
-		// Face up.
-		if i <= j && tokens[i] <= power {
-			power -= tokens[i]
-			i += 1
-			score += 1
-			continue
-		}
-		break
 	}
-	return score
+	return ans
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
 }
