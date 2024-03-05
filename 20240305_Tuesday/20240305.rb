@@ -1,0 +1,1 @@
+p "alias x='ruby 20240305_Tuesday/20240305.rb'" 
