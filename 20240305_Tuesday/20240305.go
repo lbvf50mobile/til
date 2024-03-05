@@ -7,7 +7,7 @@
 // Runtime: 9 ms, faster than 36.36% of Go online submissions for Minimum
 // Length of String After Deleting Similar Ends.
 // Memory Usage: 6.3 MB, less than 72.73% of Go online submissions for Minimum
-// Length of String After Deleting Similar End
+// Length of String After Deleting Similar Ends.
 // 2024.03.05 Daily Challenge.
 
 package main
