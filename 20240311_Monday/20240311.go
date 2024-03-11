@@ -4,28 +4,23 @@
 package main
 
 import "sort"
-import "fmt"
-var p = fmt.Println
 
 func customSortString(order string, s string) string {
-	orderS := []byte(order)
-	normaS := []byte(order)
+	h := make(map[byte]int)
+	ord := []byte(order)
+	for i, v := range ord {
+		h[byte(v)] = i
+	}
 	str := []byte(s)
-	sort.Slice(normaS, func(i, j int) bool { return normaS[i] < normaS[j] })
-	sort.Slice(str, func(i, j int) bool { return str[i] < str[j] })
-	h := make(map[byte]byte)
-	p(orderS, normaS)
-	for i, v := range normaS {
-		n, o := v, orderS[i]
-		h[n] = o
-	}
-	ans := ""
-	for _, v := range str {
-		if ch, ok := h[v]; ok {
-			ans += string(ch)
+	sort.Slice(str, func(i, j int) bool {
+		a, b := str[i], str[j]
+		aI, okA := h[a]
+		bI, okB := h[b]
+		if okA && okB {
+			return aI < bI
 		} else {
-			ans += string(v)
+			return a < b
 		}
-	}
-	return ans
+	})
+	return string(str)
 }
