@@ -16,7 +16,6 @@ package main
 // var p = fmt.Println
 
 func numSubarraysWithSum(nums []int, goal int) int {
-	// Take look prev_sum
 	// Hint here.
 	// https://leetcode.com/problems/binary-subarrays-with-sum/solution/
 	h := make(map[int]int)
