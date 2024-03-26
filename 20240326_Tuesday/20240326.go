@@ -4,17 +4,16 @@
 // Accepted.
 // Thanks God, Jesus Christ!
 // = = = = = = = = = = = = = =
-// With print.
-// Runtime: 90 ms, faster than 5.00% of Go online submissions for First
+// Runtime: 34 ms, faster than 96.96% of Go online submissions for First
 // Missing Positive.
-// Memory Usage: 8.7 MB, less than 29.64% of Go online submissions for First
+// Memory Usage: 9.3 MB, less than 26.79% of Go online submissions for First
 // Missing Positive.
 // 2024.03.26 Daily Challenge.
 
 package main
 
-import "fmt"
-var p = fmt.Println
+// import "fmt"
+// var p = fmt.Println
 
 
 var n []int
@@ -31,12 +30,12 @@ func firstMissingPositive(nums []int) int {
 	// 2. Data clean up: replace negative numbers, zeros and number lager than
 	// size by 1.
 	cleanUp()
-	p(n)
+	// p(n)
 
 	// 3. Walk along the array. Change the sign of ath element if meet
 	// numbera. Be careful with duplicates.
 	walk()
-	p(n)
+	// p(n)
 
 	// 4. Return the index of the fixt positive element.
 
