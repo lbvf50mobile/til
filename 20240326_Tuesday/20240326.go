@@ -15,7 +15,6 @@ package main
 // import "fmt"
 // var p = fmt.Println
 
-
 var n []int
 
 func firstMissingPositive(nums []int) int {
