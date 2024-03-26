@@ -1,0 +1,90 @@
+// Leetcode:  41. First Missing Positive.
+// https://leetcode.com/problems/first-missing-positive/
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// With print.
+// Runtime: 90 ms, faster than 5.00% of Go online submissions for First
+// Missing Positive.
+// Memory Usage: 8.7 MB, less than 29.64% of Go online submissions for First
+// Missing Positive.
+// 2024.03.26 Daily Challenge.
+
+package main
+
+import "fmt"
+var p = fmt.Println
+
+
+var n []int
+
+func firstMissingPositive(nums []int) int {
+	n = nums
+
+	// Hints from the Leetcode's solution.
+
+	// 1. Check if 1 is present in nums.
+	if !onePresents() {
+		return 1
+	}
+	// 2. Data clean up: replace negative numbers, zeros and number lager than
+	// size by 1.
+	cleanUp()
+	p(n)
+
+	// 3. Walk along the array. Change the sign of ath element if meet
+	// numbera. Be careful with duplicates.
+	walk()
+	p(n)
+
+	// 4. Return the index of the fixt positive element.
+
+	// Here. Order.
+	for i := 1; i < len(n); i += 1 {
+		if 0 < n[i] {
+			return i
+		}
+	}
+	if n[0] > 0 {
+		return len(n)
+	}
+	return len(n) + 1
+}
+
+func onePresents() bool {
+	for _, v := range n {
+		if 1 == v {
+			return true
+		}
+	}
+	return false
+}
+
+func cleanUp() {
+	size := len(n)
+	for i, v := range n { // <= Here.
+		if v <= 0 || v > size {
+			n[i] = 1
+		}
+	}
+}
+
+func walk() {
+	size := len(n)
+	for _, v := range n {
+		val := abs(v)
+		if size == val {
+			n[0] = -abs(n[0])
+		} else {
+			n[val] = -abs(n[val])
+		}
+	}
+}
+
+func abs(x int) int {
+	if x <= 0 {
+		return -x
+	}
+	return x
+}
