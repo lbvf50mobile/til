@@ -13,7 +13,7 @@
 package main
 
 func subarraysWithKDistinct(nums []int, k int) int {
-	// Based on Leetcode's solution.
+	// Based on the Leetcode's solution.
 
 	// Map to store the count of distinct values encountered.
 	dstCount := make(map[int]int)
