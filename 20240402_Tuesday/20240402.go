@@ -21,7 +21,7 @@ func isIsomorphic(s string, t string) bool {
 		tC = t[i]
 		tmp1, ok1 := mp1[sC]
 		tmp2, ok2 := mp2[tC]
-		// Two condition to continue.
+		// Two conditions to continue.
 		// 1) Both unknown.
 		// 2) Both known and match.
 		if (!ok1) && (!ok2) {
