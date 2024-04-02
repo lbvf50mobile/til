@@ -13,8 +13,8 @@
 package main
 
 func isIsomorphic(s string, t string) bool {
-	mp1 := make(map[byte]byte) // Mappin s to t.
-	mp2 := make(map[byte]byte) // Mappint t to s.
+	mp1 := make(map[byte]byte) // Mapping s to t.
+	mp2 := make(map[byte]byte) // Mapping t to s.
 	var sC, tC byte            // sChar, tChar
 	for i, v := range s {
 		sC = byte(v)
