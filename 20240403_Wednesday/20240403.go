@@ -70,7 +70,7 @@ func tr(i, j, iW int) bool {
 	defer unuse(i, j)
 	// Create new positions.
 	pos := [][]int{[]int{i + 1, j}, []int{i - 1, j}, []int{i, j + 1}, []int{i, j - 1}}
-	// Iterate over possition. Find a word.
+	// Iterate over the possitions. Find the word.
 	for _, v := range pos {
 		ii, jj := v[0], v[1]
 		if tr(ii, jj, iW+1) {
