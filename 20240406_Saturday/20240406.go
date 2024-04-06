@@ -25,7 +25,7 @@ func minRemoveToMakeValid(s string) string {
 	// Aggregate answer and return.
 	moveLeftRight()
 	moveRightLeft()
-	agregate()
+	aggregate()
 	return string(ans)
 }
 
@@ -70,7 +70,7 @@ func moveRightLeft() {
 		}
 	}
 }
-func agregate() {
+func aggregate() {
 	for i, v := range b {
 		if u[i] {
 			continue
