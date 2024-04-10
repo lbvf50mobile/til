@@ -1,0 +1,97 @@
+// Leetcode: 950. Reveal Cards In Increasing Order.
+// https://leetcode.com/problems/reveal-cards-in-increasing-order/
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 3 ms, faster than 86.96% of Go online submissions for Reveal Cards
+// In Increasing Order.
+// Memory Usage: 3.3 MB, less than 73.91% of Go online submissions for Reveal
+// Cards In Increasing Order.
+// 2024.04.10 Daily Challenge.
+
+package main
+
+import "sort"
+
+type task struct {
+	i    int
+	j    int
+	time int
+	size int
+	q    []int // queue
+	// m[i] stores on what index of the deck save card with index i from
+	// sorted deck.
+	m   []int // indices map.
+	d   []int // Sorted deck.
+	ans []int // answer.
+}
+
+// Removed cards create a map of indices.
+func createTask(deck []int) *task {
+	n := len(deck)
+
+	q := make([]int, n)
+	d := make([]int, n)    // Sorted deck.
+	a := make([]int, n)    // Answer.
+	m := make([]int, 0, n) // Map for indices. ans[m[i]] = d[i]
+	for i, _ := range q {
+		q[i] = i
+	}
+	copy(d, deck)
+	sort.Ints(d)
+	i, j := 0, n-1
+	return &task{
+		i:    i,
+		j:    j,
+		time: 0,
+		size: n,
+		q:    q, // Queue.
+		m:    m, // Map sotres indes of discarted cards in order.
+		d:    d, // Sorted deck.
+		ans:  a} // Answer to return.
+}
+
+// Return false if nothing to do.
+func (tsk *task) tick() bool {
+	if 0 == tsk.size {
+		return false
+	}
+	if 0 == tsk.time%2 {
+		i := tsk.exit()
+		tsk.m = append(tsk.m, i)
+	} else {
+		tsk.back()
+	}
+	tsk.time += 1
+	return true
+}
+func (tsk *task) exit() int {
+	ans := tsk.q[tsk.i]
+	tsk.i = (tsk.i + 1) % len(tsk.d)
+	tsk.size -= 1
+	return ans
+}
+func (tsk *task) back() {
+	old := tsk.i
+	tsk.i = (tsk.i + 1) % len(tsk.d)
+	tsk.j = (tsk.j + 1) % len(tsk.d)
+	tsk.q[tsk.j] = tsk.q[old]
+}
+func (tsk *task) fillAns() {
+	for i, v := range tsk.m {
+		tsk.ans[v] = tsk.d[i]
+	}
+}
+
+// Run the Queue simulation and save order of indices.
+func deckRevealedIncreasing(deck []int) []int {
+	tsk := createTask(deck)
+	for {
+		if !tsk.tick() {
+			break
+		}
+	}
+	tsk.fillAns()
+	return tsk.ans
+}
