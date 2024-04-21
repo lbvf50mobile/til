@@ -1,7 +1,6 @@
 // Leetcode: 1992. Find All Groups of Farmland.
 // https://leetcode.com/problems/find-all-groups-of-farmland/
 // = = = = = = = = = = = = = =
-// Accepted.
 // Thanks God, Jesus Christ!
 // = = = = = = = = = = = = = =
 // Runtime: 127 ms, faster than 36.36% of Go online submissions for Find All
