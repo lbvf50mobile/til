@@ -8,7 +8,7 @@
 // Perimeter.
 // Memory Usage: 7.6 MB, less than 20.24% of Go online submissions for Island
 // Perimeter.
-// Task for 2024.04.17 Daily Challenge.
+// Task for 2024.04.18 Daily Challenge.
 // Updated 2024.04.21.
 
 package main
