@@ -50,7 +50,7 @@ func islandPerimeter(grid [][]int) int {
 
 // Need to create a factory to fill all data redated to the task.
 func islandTaskFacotry(grid [][]int) *islandTask {
-	// The matric itself.
+	// The matrix itself.
 	g := grid
 	// The Size of the matrix.
 	m, n := len(g), len(g[0])
