@@ -1,9 +1,3 @@
-
-- https://gist.github.com/lbvf50mobile/11ba31eb5574113eeeeadec68907e5cf
-
-
-Go code (straightforward):
-```Go
 // Leetcode: 1992. Find All Groups of Farmland.
 // https://leetcode.com/problems/find-all-groups-of-farmland/
 // = = = = = = = = = = = = = =
@@ -86,4 +80,3 @@ func inLand(i, j int) bool {
 	}
 	return true
 }
-```
