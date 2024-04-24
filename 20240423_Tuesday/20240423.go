@@ -27,6 +27,8 @@ type mhTrees struct {
 	ans         []int   // The answer itself.
 }
 
+// Based on the DBabichev's solution.
+// https://leetcode.com/problems/minimum-height-trees/discuss/923071/Python-Find-diameter-using-2-dfs-explained
 func findMinHeightTrees(n int, edges [][]int) []int {
 	tsk := mhTreesFactory(n, edges)
 	// Find farthest leaf from the tree when root is 0.
