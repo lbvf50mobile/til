@@ -12,10 +12,10 @@
 
 package main
 
-// The range of possbile absolute values is small. From 1 till 1000. Thus it
-// is possbile to create an aslice and fill it. Or it is possible to create to
-// slices positive and negative. A bool slices. Fill them if the number is
-// meet. Then start moving from right to left and return the first occurance
+// The range of the possible absolute values is small. From 1 till 1000. Thus
+// it is possible to create a slice and fill it. Or it is possible to create
+// two slices positive and negative. A bool slices. Fill them if the number is
+// meet. Then start moving from right to left and return the first occurrence
 // where positive and negative indices store true.
 
 func findMaxK(nums []int) int {
