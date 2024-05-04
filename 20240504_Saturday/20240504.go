@@ -1,9 +1,14 @@
 // Leetcode: 881. Boats to Save People.
 // https://leetcode.com/problems/boats-to-save-people/
-// Error: 
-// [3,2,3,2,2]
-// 6
-
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thank God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 54 ms, faster than 80.23% of Go online submissions for Boats to
+// Save People.
+// Memory Usage: 7.1 MB, less than 63.95% of Go online submissions for Boats
+// to Save People.
+// 2024.05.04 Daily Challenge.
 
 package main
 
@@ -11,38 +16,27 @@ import (
 	"sort"
 )
 
-// 1. Nested loop.
-// 2. Outer counts boats.
-// 3. Inner selects men.
-// 4. The input is sorted.
-// 5. Two pointers for fat and lean people.
+// Need to read an description more carrefully!
+// Each boat carries at most two people at the same time.
+// Each boat carries at most two people at the same time
+// Each boat carries at most two people at the same time
+// 1. Sort.
+// 2. Save a pair (big+small) or only big.
 
 func numRescueBoats(people []int, limit int) int {
 	ppl := people
 	sort.Ints(ppl)
-	j, i := len(ppl)-1, 0
-	n := len(ppl)
-	// Counter for Boats, counter fo the saved people.
-	cBoats, cSaved := 0, 0
-	// Outer loop fills one boat.
-	for cSaved < n {
-		plc := limit // Place left in the current boat.
-		// Inner loop for fat.
-		// j: Take fat ones first.
-		for i <= j && plc >= ppl[j] {
-			plc -= ppl[j]
-			cSaved += 1
-			j -= 1
+	small, big := 0, len(ppl)-1
+	ans := 0
+	for small <= big {
+		if limit >= (ppl[small] + ppl[big]) {
+			big -= 1
+			small += 1
+
+		} else {
+			big -= 1
 		}
-		// Inner loop for slim.
-		// i: Take slim ones second.
-		for i <= j && plc >= ppl[i] {
-			plc -= ppl[i]
-			cSaved += 1
-			i += 1
-		}
-		// One more boat is filled.
-		cBoats += 1
+		ans += 1
 	}
-	return cBoats
+	return ans
 }
