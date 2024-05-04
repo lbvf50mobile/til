@@ -16,7 +16,7 @@ import (
 	"sort"
 )
 
-// Need to read an description more carrefully!
+// Need to read a description more carrefully!
 // Each boat carries at most two people at the same time.
 // Each boat carries at most two people at the same time
 // Each boat carries at most two people at the same time
