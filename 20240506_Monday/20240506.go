@@ -21,7 +21,7 @@ package main
  */
 
 // 1. Save list into the slice.
-// 2. Nill all pointers.
+// 2. Nil all pointers.
 // 3. Move that slice right to left, mark elements to delete.
 // 4. Create a fake head and select unmarked elements.
 func removeNodes(head *ListNode) *ListNode {
