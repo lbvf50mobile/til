@@ -1,0 +1,76 @@
+// Leetcode: 2054. Two Best Non-Overlapping Events
+// https://leetcode.com/problems/two-best-non-overlapping-events/
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 80 ms, faster than 36.36% of Go online submissions for Two Best
+// Non-Overlapping Events.
+// Memory Usage: 28.5 MB, less than 18.18% of Go online submissions for Two
+// Best Non-Overlapping Events.
+// 2024.12.08 Daily Challenge.
+// Translated from the Leetcode solution.
+package main
+
+import (
+	"container/heap"
+	"sort"
+)
+
+type MinHeap [][]int
+
+func (h MinHeap) Less(i, j int) bool {
+	if h[i][0] == h[j][0] {
+		return h[i][1] < h[j][1]
+	}
+	return h[i][0] < h[j][0]
+}
+func (h MinHeap) Swap(i, j int) {
+	h[i], h[j] = h[j], h[i]
+}
+func (h MinHeap) Len() int { return len(h) }
+func (h *MinHeap) Push(x interface{}) {
+	*h = append(*h, x.([]int))
+}
+func (h *MinHeap) Pop() interface{} {
+	old := *h
+	n := len(old)
+	x := old[n-1]
+	*h = old[0 : n-1]
+	return x
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+func maxTwoEvents(events [][]int) int {
+	// Create a list to storethe pair (end time, value for events)
+	pq := &MinHeap{}
+	heap.Init(pq)
+
+	// Sort the event by their start time
+	sort.Slice(events, func(i, j int) bool {
+		return events[i][0] < events[j][0]
+	})
+	maxVal, maxSum := 0, 0
+
+	for _, event := range events {
+		// Pop all valid event from the priority queueand take their maximum
+		// Here was a mess! With *pq, tmp, and swap.
+		for 0 < (*pq).Len() && (*pq)[0][0] < event[0] {
+			maxVal = max((*pq)[0][1], maxVal)
+			heap.Pop(pq)
+		}
+		// Calculate the maximum sum by adding current event's value and the
+		// best previous event's value
+		maxSum = max(maxSum, maxVal+event[2])
+		// Push the current event's end time and value into the heap
+		heap.Push(pq, []int{event[1], event[2]})
+
+	}
+	return maxSum
+}
