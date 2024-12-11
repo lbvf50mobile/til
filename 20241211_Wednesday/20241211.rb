@@ -13,6 +13,7 @@
 # @param {Integer} k
 # @return {Integer}
 def maximum_beauty(nums, k)
+  # Translation of the Leetcode's solution.
   nums.sort!
   left = 0
   max_beauty = 0
