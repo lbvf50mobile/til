@@ -1,15 +1,23 @@
 // Leetcode: 2593. Find Score of an Array After Marking All Elements
 // https://leetcode.com/problems/find-score-of-an-array-after-marking-all-elements/
-// fails
-// [10,44,10,8,48,30,17,38,41,27,16,33,45,45,34,30,22,3,42,42]
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 195 ms, faster than 45.45% of Go online submissions for Find Score
+// of an Array After Marking All Elements.
+// Memory Usage: 12.3 MB, less than 90.91% of Go online submissions for Find
+// Score of an Array After Marking All Elements.
+// 2024.12.13 Daily Challenge.
 package main
 
 import (
+	// "sort"
 	"container/heap"
-	"fmt"
+	// "fmt"
 )
 
-var p = fmt.Println
+// var p = fmt.Println
 
 type Pair struct {
 	v int
@@ -51,12 +59,18 @@ func findScore(nums []int) int64 {
 		pq[i] = &Pair{v, i}
 	}
 	heap.Init(&pq)
-	for marked < n {
+	// sort.Ints(nums) 
+	// p(nums)
+	for j := 0; j < n; j += 1 { // <= Here.
 		value := heap.Pop(&pq).(*Pair)
 		i, v := value.i, value.v
+		// p("value", v, "index", i)
 		if !marks[i] {
+			// p(j,i, "unmarked")
 			marked = mark(i, marked, marks)
 			score += int64(v)
+		} else {
+			// p(j,i, "marked skip")
 		}
 	}
 	return score
