@@ -1,10 +1,15 @@
 // Leetcode: 2593. Find Score of an Array After Marking All Elements
 // https://leetcode.com/problems/find-score-of-an-array-after-marking-all-elements/
+// fails
+// [10,44,10,8,48,30,17,38,41,27,16,33,45,45,34,30,22,3,42,42]
 package main
 
 import (
 	"container/heap"
+	"fmt"
 )
+
+var p = fmt.Println
 
 type Pair struct {
 	v int
@@ -24,7 +29,6 @@ func (pq Pq) Swap(i, j int) {
 	pq[i], pq[j] = pq[j], pq[i]
 }
 func (pq *Pq) Push(x any) {
-	n := len(*pq)
 	item := x.(*Pair)
 	*pq = append(*pq, item)
 }
@@ -33,7 +37,7 @@ func (pq *Pq) Pop() any {
 	n := len(old)
 	item := old[n-1]
 	old[n-1] = nil
-	*pd = old[0 : n-1]
+	*pq = old[0 : n-1]
 	return item
 }
 
@@ -50,8 +54,8 @@ func findScore(nums []int) int64 {
 	for marked < n {
 		value := heap.Pop(&pq).(*Pair)
 		i, v := value.i, value.v
-		if !marked[i] {
-			makred = mark(i, marked, marks)
+		if !marks[i] {
+			marked = mark(i, marked, marks)
 			score += int64(v)
 		}
 	}
