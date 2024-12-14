@@ -12,7 +12,7 @@
 # @param {Integer[]} nums
 # @return {Integer}
 def continuous_subarrays(nums)
-  # based on Leetcode's solution
+  # based on the Leetcode's solution.
   f = {}
   f.default = 0
   l, r = 0, 0
