@@ -18,7 +18,7 @@ import (
 )
 // var p = fmt.Println
 
-// Bomba is max heap.
+// Bomba is a max heap.
 type Bomba [][]int
 
 func (h Bomba) Len() int { return len(h) }
