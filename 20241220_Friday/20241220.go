@@ -1,10 +1,22 @@
 // Leetcode: 2415. Reverse Odd Levels of Binary Tree
 // https://leetcode.com/problems/reverse-odd-levels-of-binary-tree/
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 63 ms, faster than 6.67% of Go online submissions for Reverse Odd
+// Levels of Binary Tree.
+// Memory Usage: 10.7 MB, less than 6.67% of Go online submissions for Reverse
+// Odd Levels of Binary Tree.
+// 2024.12.20 Daily Challenge.
+
 package main
 
 import (
 // "fmt"
 )
+
+// var p = fmt.Println
 
 /**
  * Definition for a binary tree node.
@@ -35,7 +47,7 @@ func (s *Slab) Zero() {
 func (s *Slab) ReverseValues() {
 	i := 0
 	j := s.n - 1
-	for i < j{
+	for i < j {
 		a, b := s.row[i], s.row[j]
 		a.Val, b.Val = b.Val, a.Val
 		i += 1
@@ -53,7 +65,7 @@ func reverseOddLevels(root *TreeNode) *TreeNode {
 	cur.Push(root) // Add root.
 	for cur.n > 0 {
 		// reverse values in the slab
-		if 1 == cur.n%2 {
+		if 1 == level%2 { // <== Here was an error.
 			cur.ReverseValues()
 		}
 		// Fill nxt slab.
