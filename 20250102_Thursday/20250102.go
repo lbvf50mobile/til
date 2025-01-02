@@ -7,6 +7,7 @@
 // Runtime: 0 ms Beats 100.00%
 // Memory: 22.75 MB Beats 25.00%
 // 2025.01.02 Daily Challenge.
+// https://gist.github.com/lbvf50mobile/e471d5cdca1536eb17817ad01ce19826
 
 package main
 
@@ -22,7 +23,7 @@ func vowelStrings(words []string, queries [][]int) []int {
 	v := []byte{'a', 'e', 'i', 'o', 'u'} // Vowels.
 	sum := 0
 	for i, cw := range words {
-		f, l := cw[0], cw[len(cw)-1] //first, last
+		f, l := cw[0], cw[len(cw)-1] // first, last
 		a := in(v, f)
 		b := in(v, l)
 		if a && b {
