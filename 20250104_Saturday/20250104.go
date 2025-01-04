@@ -7,6 +7,7 @@
 // Runtime: 564 ms Beats 38.46%
 // Memory: 17.84 MB Beats 23.08%
 // 2025.01.04 Daily Challenge.
+// https://gist.github.com/lbvf50mobile/0e760ac5467821a604d54f9a0a8d96cc
 
 package main
 
@@ -28,7 +29,7 @@ func countPalindromicSubsequence(s string) int {
 			// Get from previous.
 			lPs[i][j] += lPs[i-1][j]
 		}
-		// Increase curernt
+		// Increase current
 		lPs[i][s[i]-'a'] += 1
 	}
 
