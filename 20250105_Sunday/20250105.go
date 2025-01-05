@@ -7,6 +7,7 @@
 // Runtime: 1 ms Beats 80.00%
 // Memory: 12.76 MB Beats 100.00%
 // 2025.01.05 Daily Challenge.
+// https://gist.github.com/lbvf50mobile/0f47e8daf4ac0eb8ea29f6eca4b300e2
 
 package main
 
