@@ -1,5 +1,12 @@
 // Leetcode: 916. Word Subset
 // https://leetcode.com/problems/word-subsets/?envType=daily-question&envId=2025-01-10
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
+// Runtime: 47 ms Beats 14.29%
+// Memory: 15.67 MB Beats 9.52%
+// 2025.01.10 Daiy Challenge.
 
 package main
 
@@ -19,15 +26,12 @@ type row struct {
 }
 
 func wordSubsets(words1 []string, words2 []string) []string {
-	row2 := makeRow(words2)
+	row1, row2 := makeRow(words1), makeRow(words2)
+	extract := extractRow(row2)
 	ans := []string{}
-	for _, v := range words1 {
-		if len(v) < row2.maxLen {
-			continue
-		}
-		tmp := makeInfo(v)
-		if isUniversal(tmp, row2) {
-			ans = append(ans, v)
+	for i, v := range row1.infos {
+		if isSuper(v, extract) {
+			ans = append(ans, words1[i])
 		}
 	}
 	return ans
@@ -63,22 +67,23 @@ func makeRow(words []string) *row {
 	return ans
 }
 
-func isSub(sub, main *info) bool {
-	if sub.size > main.size {
-		return false
-	}
+func isSuper(super, sub *info) bool {
 	for i := 0; i < 26; i += 1 {
-		if sub.cntr[i] > main.cntr[i] {
+		if sub.cntr[i] > super.cntr[i] {
 			return false
 		}
 	}
 	return true
 }
-func isUniversal(un *info, line *row) bool {
-	for _, sub := range line.infos {
-		if !isSub(sub, un) {
-			return false
+func extractRow(line *row) *info {
+	// Save max values for each symbol.
+	ans := new(info)
+	for _, v := range line.infos {
+		for i := 0; i < 26; i += 1 {
+			if v.cntr[i] > ans.cntr[i] {
+				ans.cntr[i] = v.cntr[i]
+			}
 		}
 	}
-	return true
+	return ans
 }
