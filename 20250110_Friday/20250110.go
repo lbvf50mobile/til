@@ -7,48 +7,76 @@ import (
 // "fmt"
 )
 
-type cntr [26]int
+type info struct {
+	cntr [26]int
+	size int
+}
+
+type row struct {
+	infos  []*info
+	minLen int
+	maxLen int
+}
 
 func wordSubsets(words1 []string, words2 []string) []string {
-	c1, c2 := strs2Cntrs(words1), strs2Cntrs(words2)
+	row2 := makeRow(words2)
 	ans := []string{}
-	for i, v := range c1 {
-		if isUniversal(v, c2) {
-			ans = append(ans, words1[i])
+	for _, v := range words1 {
+		if len(v) < row2.maxLen {
+			continue
+		}
+		tmp := makeInfo(v)
+		if isUniversal(tmp, row2) {
+			ans = append(ans, v)
 		}
 	}
 	return ans
 }
 
-func makeCntr(w string) cntr {
-	var ans cntr
+func makeInfo(w string) *info {
+	ans := new(info)
+	ans.size = len(w)
 	for _, v := range w {
 		i := int(v) - int('a')
-		ans[i] += 1
+		ans.cntr[i] += 1
 	}
 	return ans
 }
 
-func strs2Cntrs(words []string) []cntr {
-	ans := make([]cntr, len(words))
+func makeRow(words []string) *row {
+	ans := &row{}
+	ans.infos = make([]*info, len(words))
 	for i, v := range words {
-		ans[i] = makeCntr(v)
+		if 0 == i {
+			ans.minLen = len(v)
+			ans.maxLen = len(v)
+		} else {
+			if len(v) > ans.maxLen {
+				ans.maxLen = len(v)
+			}
+			if len(v) < ans.minLen {
+				ans.minLen = len(v)
+			}
+		}
+		ans.infos[i] = makeInfo(v)
 	}
 	return ans
 }
 
-func isSub(sub, main cntr) bool {
+func isSub(sub, main *info) bool {
+	if sub.size > main.size {
+		return false
+	}
 	for i := 0; i < 26; i += 1 {
-		if sub[i] > main[i] {
+		if sub.cntr[i] > main.cntr[i] {
 			return false
 		}
 	}
 	return true
 }
-
-func isUniversal(un cntr, all []cntr) bool {
-	for _, v := range all {
-		if !isSub(v, un) {
+func isUniversal(un *info, line *row) bool {
+	for _, sub := range line.infos {
+		if !isSub(sub, un) {
 			return false
 		}
 	}
