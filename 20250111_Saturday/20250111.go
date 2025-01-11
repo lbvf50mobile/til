@@ -1,4 +1,4 @@
-// Leecode: 1400. Construct K Palindrome Strings
+// Leetcode: 1400. Construct K Palindrome Strings
 // https://leetcode.com/problems/construct-k-palindrome-strings/description/?envType=daily-question&envId=2025-01-11
 // = = = = = = = = = = = = = =
 // Accepted.
@@ -7,6 +7,7 @@
 // Runtime: 0 ms Beats 100.00%
 // Memory: 8.14 MB Beats 25.00%
 // 2025.01.11 Daily Challenge.
+// https://gist.github.com/lbvf50mobile/2f48dfda59daef4563cbc7f84561a16d
 
 package main
 
