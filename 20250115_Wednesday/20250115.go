@@ -4,8 +4,10 @@
 package main
 
 import (
-// "fmt"
+ "fmt"
 )
+var p = fmt.Println
+
 
 func minimizeXor(num1 int, num2 int) int {
 	xArr := [32]int{}
@@ -15,6 +17,7 @@ func minimizeXor(num1 int, num2 int) int {
 	if amount2 == amount1 {
 		return num1
 	}
+	p(num1Arr, "num 1 arr to XOR")
 	// Fill ones for most significant bits.
 	for i := 31; i >= 0 && amount2 > 0; i -= 1 {
 		if 1 == num1Arr[i] {
@@ -29,6 +32,7 @@ func minimizeXor(num1 int, num2 int) int {
 			amount2 -= 1
 		}
 	}
+	p(xArr, "answer arr")
 	return arr2Int(&xArr)
 }
 
@@ -44,11 +48,11 @@ func AmountSetBits(n int) int {
 }
 
 func bin2Arr(n int, arr *[32]int) int {
-	tmp := *arr
 	count := 0
-	for i := 0; i < 32; i += 1 {
+	for i := 0; i < 32; i += 1 { 
 		if 1 == n%2 {
-			tmp[i] = 1
+			p(n)
+			arr[i] = 1 // <= Here was an error! I used tmp.
 			count += 1
 		}
 		n /= 2
