@@ -4,8 +4,8 @@
 // Accepted.
 // Thanks God, Jesus Christ!
 // = = = = = = = = = = = = = =
-// Memory: 1 ms Beats 82.81%
-// Runtime: 7.07 MB Beats 90.63%
+// Runtime: 1 ms Beats 82.81%
+// Memory: 7.07 MB Beats 90.63%
 
 package main
 
