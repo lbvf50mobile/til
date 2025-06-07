@@ -1,4 +1,9 @@
+// Leeetcode: 1298. Maximum Candies You Can Get from Boxes
+// https://leetcode.com/problems/maximum-candies-you-can-get-from-boxes/description/?envType=daily-question&envId=2025-06-03
 package main
+
+import "fmt"
+var p = fmt.Println
 
 func maxCandies(status []int, candies []int, keys [][]int, containedBoxes [][]int, initialBoxes []int) int {
 	// Idea:
@@ -41,7 +46,8 @@ func maxCandies(status []int, candies []int, keys [][]int, containedBoxes [][]in
 					currentBoxes = append(currentBoxes, bv)
 				}
 			}
-		} else {
+		} 
+		if 0 == status[v] {
 			currentBoxes = append(currentBoxes, v)
 		}
 	}
@@ -69,8 +75,13 @@ func maxCandies(status []int, candies []int, keys [][]int, containedBoxes [][]in
 	openA, openB = openB, openA
 	openB = openB[:1]
 
-	for len(openA) >= 1 {
+	for i := 1; len(openA) >= 1; i += 1 {
+		p(i, len(openA))
+		p(openA)
 		for _, v := range openA {
+			if 1 != status[v] {
+				continue
+			}
 			// Change Status
 			status[v] = 2
 			// Grab Candies:
@@ -85,7 +96,8 @@ func maxCandies(status []int, candies []int, keys [][]int, containedBoxes [][]in
 				myBoxes[bv] = true
 				if 1 == status[bv] {
 					openB = append(openB, bv)
-				} else {
+				}  
+				if 0 == status[bv] {
 					currentBoxes = append(currentBoxes, bv)
 				}
 			}
