@@ -1,131 +1,53 @@
 // Leeetcode: 1298. Maximum Candies You Can Get from Boxes
 // https://leetcode.com/problems/maximum-candies-you-can-get-from-boxes/description/?envType=daily-question&envId=2025-06-03
+// = = = = = = = = = = = = = =
+// Accepted.
+// Thanks God, Jesus Christ!
+// = = = = = = = = = = = = = =
 package main
 
 import "fmt"
+
 var p = fmt.Println
 
 func maxCandies(status []int, candies []int, keys [][]int, containedBoxes [][]int, initialBoxes []int) int {
-	// Idea:
-	// Layerd BFS. On each step iterate over open boxes and fill new open box
-	// slice.
-
-	candiesCounter := 0
-	n := len(status)
-
-	openA := make([]int, 0, n)
-	openB := make([]int, 0, n)
+	// Idea just pure BFS.
+	// When to exit?
+	// Where no open boxes after iterations.
 	myKeys := make(map[int]bool)
-	myBoxes := make(map[int]bool)
-	currentKeys := make([]int, 0, n)
-	currentBoxes := make([]int, 0, n)
-
-	// Preparations iterate over all boxes fill keys.
-	// What am I doing during preparations?
-	// Iterate over all inital boxes.
-	// Open what is open. Save keys. Save closed.
-	// Then try to use new keys, and new boxes.
-	for _, v := range initialBoxes {
-		myBoxes[v] = true
-		// If box if open
-		if 1 == status[v] {
-			status[v] = 2 // Chage status.
-			// Grap Candies
-			candiesCounter += candies[v]
-			// Add keys:
-			for _, kv := range keys[v] {
-				myKeys[kv] = true
-				currentKeys = append(currentKeys, kv)
-			}
-			// Add boxes:
-			for _, bv := range containedBoxes[v] {
-				myBoxes[bv] = true
-				if 1 == status[bv] {
-					openB = append(openB, bv)
-				} else {
-					currentBoxes = append(currentBoxes, bv)
-				}
-			}
-		} 
-		if 0 == status[v] {
-			currentBoxes = append(currentBoxes, v)
-		}
-	}
-	// Now iterate over new currentKeys
-	// Open box check is key exists for a box.
-	for _, box := range currentKeys {
-		if _, ok := myBoxes[box]; ok {
-			if 0 == status[box] {
-				status[box] = 1
-				openB = append(openB, box)
-			}
-		}
-	}
-	// Now iterate ove new CurrentBox
-	for _, box := range currentBoxes {
-		if _, ok := myKeys[box]; ok {
-			if 0 == status[box] {
-				status[box] = 1
-				openB = append(openB, box)
-			}
-		}
-	}
-	currentBoxes = currentBoxes[:1]
-	currentKeys = currentKeys[:1]
-	openA, openB = openB, openA
-	openB = openB[:1]
-
-	for i := 1; len(openA) >= 1; i += 1 {
-		p(i, len(openA))
-		p(openA)
-		for _, v := range openA {
-			if 1 != status[v] {
+	n := len(status)
+	ib := make([]int, 0, n)
+	candiesCounter := 0
+	for {
+		openCounter := 0
+		for _, box := range initialBoxes {
+			if 2 == status[box] {
 				continue
 			}
-			// Change Status
-			status[v] = 2
-			// Grab Candies:
-			candiesCounter += candies[v]
-			// Add keys:
-			for _, kv := range keys[v] {
-				myKeys[kv] = true
-				currentKeys = append(currentKeys, kv)
-			}
-			// Add boxes:
-			for _, bv := range containedBoxes[v] {
-				myBoxes[bv] = true
-				if 1 == status[bv] {
-					openB = append(openB, bv)
-				}  
-				if 0 == status[bv] {
-					currentBoxes = append(currentBoxes, bv)
+			_, ok := myKeys[box]
+			if 1 == status[box] || (0 == status[box] && ok) {
+				status[box] = 2
+				openCounter += 1
+				candiesCounter += candies[box]
+				// Add keys:
+				for _, key := range keys[box] {
+					myKeys[key] = true
 				}
+				// Add boxes:
+				for _, newBox := range containedBoxes[box] {
+					ib = append(ib, newBox)
+				}
+				continue
+			}
+			if 0 == status[box] && (!ok) {
+				ib = append(ib, box)
 			}
 		}
-		// Iterange ove new obtained keys.
-		// Try to open existed boxes.
-		for _, box := range currentKeys {
-			if _, ok := myBoxes[box]; ok {
-				if 0 == status[box] {
-					status[box] = 1
-					openB = append(openB, box)
-				}
-			}
+		if 0 == openCounter {
+			break
 		}
-		// Iterate over newClosed box, and check do them possible to open.
-		for _, box := range currentBoxes {
-			if _, ok := myKeys[box]; ok {
-				if 0 == status[box] {
-					status[box] = 1
-					openB = append(openB, box)
-				}
-			}
-		}
-		currentBoxes = currentBoxes[:1]
-		currentKeys = currentKeys[:1]
-		openA, openB = openB, openA
-		openB = openB[:1]
+		initialBoxes, ib = ib, initialBoxes
+		ib = ib[:1]
 	}
-
 	return candiesCounter
 }
