@@ -20,7 +20,7 @@ func maxCandies(status []int, candies []int, keys [][]int, containedBoxes [][]in
 	// 2. Loops while queue.
 	// 3. Take candied.
 	// 4. Take keys. Try to open.
-	// 5. Take boxes. Tye to open.
+	// 5. Take boxes. Q open! Try to open.
 	// - - -
 	// Mark opened as '2'.
 	n := len(status)
