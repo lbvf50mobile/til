@@ -1,8 +1,10 @@
 // Leetcode: 440. K-th Smallest in Lexicographical Order
 // https://leetcode.com/problems/k-th-smallest-in-lexicographical-order/description/?envType=daily-question&envId=2025-06-09
-// error in 100, 90
-
+// tle 
 package main
+
+import "fmt"
+
 
 func findKthNumber(n int, k int) int {
 	// Very similar to backtracking,
@@ -51,5 +53,5 @@ func rec(parent int, step *int, n int, k int) (int, bool) {
 			return val, true
 		}
 	}
-	panic("cannot find answer")
+	return 0, false
 }
