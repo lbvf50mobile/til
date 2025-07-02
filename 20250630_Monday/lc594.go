@@ -11,39 +11,21 @@ import (
 )
 
 func findLHS(nums []int) int {
-	// Ok. It could be a one dijig or a pair as maximum.
-	// The flow.
-	// Create a Couner. Value:Amount.
-	// Counter to a Slice.
-	// Sort slice by a Value increasinly.
-	// Fly over the slice, and find maximum.
+	// I found this solution at the top Leetcode's Golang solutions. The
+	// fastes one for lc594.
+	sort.Ints(nums)
+	ans := 0
+	for l, r := 0, 0; r < len(nums); r += 1 {
+		// Jump to first 1 difference or just the same.
+		for ; nums[r]-nums[l] > 1; l += 1 {
+		}
 
-	// Create a counter.
-	m := make(map[int]int)
-	for _, v := range nums {
-		m[v] += 1
-	}
-
-	// Convert map => slice of pairs
-
-	s := make([][2]int, 0, len(m))
-	for k, v := range m {
-		s = append(s, [2]int{k, v})
-	}
-
-	// Sort by key
-	sort.Slice(s, func(i, j int) bool { return s[i][0] < s[j][0] })
-
-	// Fly over the sortes slice find an answer.
-	max := 0
-	for i := 1; i < len(s); i += 1 {
-		// Select ONLY a pair. Fixed error.
-		if s[i-1][0]+1 == s[i][0] {
-			tmp := s[i-1][1] + s[i][1]
-			if max < tmp {
-				max = tmp
-			}
+		// now just calculate
+		// And this is imporant: Only if the difference is 1. Fixed.
+		if 1 == nums[r]-nums[l] {
+			// Hey! This is indices, not values. Fixed.
+			ans = max(ans, r-l+1) // calculate length.
 		}
 	}
-	return max
+	return ans
 }
