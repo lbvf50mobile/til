@@ -8,15 +8,16 @@ package main
 
 func maximumDifference(nums []int) int {
 	ans := -1
-	// Use nestd loop
-	for i := 0; i < len(nums); i += 1 {
-		for j := i + 1; j < len(nums); j += 1 {
-			a := nums[i]
-			b := nums[j]
-			tmp := b - a
-			if a < b && ans < tmp {
-				ans = tmp
-			}
+	premin := nums[0]
+	for j := 1; j < len(nums); j += 1 {
+		tmp := nums[j] - premin
+		// tmp > 0 becaue nums[i] < nums[j]
+		// Here was an error and it is fixed.
+		if tmp > 0 && ans < tmp {
+			ans = tmp
+		}
+		if premin > nums[j] {
+			premin = nums[j]
 		}
 	}
 	return ans
