@@ -10,7 +10,7 @@ func isThree(n int) bool {
 	// In other words: Is not Prime?
 	// and what about 9?
 	// 1, 3, 9
-	// but 12 is not ans answer.
+	// but 12 is not an answer.
 
 	count := 1
 

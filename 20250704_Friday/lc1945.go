@@ -10,7 +10,7 @@ func getLucky(s string, k int) int {
 	// Combine first transfrom with sum.
 	sum := s2sum(s)
 
-	// First summing of digits was in s2sum, that's wy k-1.
+	// First summing of digits was in s2sum, that's why k-1.
 	for i := 0; i < k-1; i += 1 {
 		sum = reSum(sum)
 	}
