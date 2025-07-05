@@ -10,12 +10,11 @@ func isPrefixString(s string, words []string) bool {
 	i := 0
 	j := 0
 	k := 0
-	
+
 	// Value of string pointer must be equal number of sum elements of prefix
 	// of the words. I.e. a , ["aa"] is false, because we need to reach the
 	// end of array element.
 	aku := 0
-
 
 	for ; i < len(s); i, k = i+1, k+1 {
 		// Calucalate j and k
@@ -34,5 +33,5 @@ func isPrefixString(s string, words []string) bool {
 			return false
 		}
 	}
-	return i == aku 
+	return i == aku
 }
