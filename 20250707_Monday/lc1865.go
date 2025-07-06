@@ -1,5 +1,8 @@
 // Leetcode: 1865. Finding Pairs With a Certain Sum
 // https://leetcode.com/problems/finding-pairs-with-a-certain-sum/description/?envType=daily-question&envId=2025-07-06
+// - - -
+// Accepted.
+// Thanks God, Jesus Christ!
 
 package main
 
@@ -38,21 +41,22 @@ func (this *FindSumPairs) Add(index int, val int) {
 	this.m2[oldVal] -= 1
 	this.m2[newVal] += 1
 	this.n2[index] = newVal
-	if 0 == this.m2[oldVal] {
-		delete(this.m2, oldVal)
-	}
+	// No needed because 0 is used in adding..
+	// if 0 == this.m2[oldVal] {
+	// 	delete(this.m2, oldVal)
+	// }
 
 }
 
 func (this *FindSumPairs) Count(tot int) int {
 	ans := 0
-	for v2, amount2 := range this.m2 {
-		// v1 = tot - v2
-		v1 := tot - v2
-		if v1 <= 0 {
+	for v1, amount1 := range this.m1 {
+		// v2 = tot - v1
+		v2 := tot - v1
+		if v2 <= 0 {
 			continue
 		}
-		amount1, ok := this.m1[v1]
+		amount2, ok := this.m2[v2]
 		if ok {
 			ans += amount1 * amount2
 		}
