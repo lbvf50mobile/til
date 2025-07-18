@@ -1,0 +1,53 @@
+lc3440
+2025-07-16 Wed 13:33
+English + Algorithms. And Algorithm + English. Both in one. Let's go.
+
+- - - -
+
+2025-07-17 Thu 16:29
+I got it the answer is not some kind of sum, but the maximum gap.
+That makes the deal quite simple.
+
+
+- - - -
+lc3440
+
+My explanation of solution.
+There is an even with time border from 0 to eventTime.
+During this even there are meetins with boreds described in arrays.
+
+The task is relocate a meeting to get maximum gap. Mently to sove this problem
+need to imagen meetings as a bricks - that could be moved.
+
+So there are two way for increasing the gap.
+
+1) Lifting.
+
+It this case a meeting-brick is lifted up and moved to a new postion amont
+other bricks. A new time is
+`left_adjacent_gap+brick_length+right_adjacent_gap`.
+
+
+2) Moving.
+We can move a brick during the current gap (withoub lifting). A new free time
+lenght will be `right_gap_end - left_gap_start - brick_length`.
+
+So the solution is to iterate over all meetings and select maxtimum from
+lifting and moving of each meating. But first thing is to define where is it
+possible to use lifting. To use lifting a boolean array is used. If a
+corresponing meeting is marked thus it can be used as lifting. And
+l_gap+lengh-r_gap could be calculated. Is not it amazing, I suppose so.
+
+Next. How to fullfill ad q - boolean array. Very simle with two loops. Defind
+max_gap before the loop. And at the each iteration of the loop calculate new
+max_gap, and mark q if it could be so.
+
+Eventually in the last loop find maxgap value from all liftings and moving.
+
+The solution is in three loops.
+
+1) Move Left ot Right fill boolean array for all lefts gaps. Could we lift and put left.
+2) Move Right to left fill boolean array for all rifth gapws. could we lfit and
+put right.
+3) And the third one iterate ovel all meetings and calculate maximum between
+iftsing and movings.

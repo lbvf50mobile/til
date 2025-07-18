@@ -1,0 +1,10 @@
+2025-07-10 Thu 13:29
+
+Todays plan:
+01 lc3440 https://leetcode.com/problems/reschedule-meetings-for-maximum-free-time-ii/description/?envType=daily-question&envId=2025-07-10
+02 lc3439 https://leetcode.com/problems/reschedule-meetings-for-maximum-free-time-i/?envType=daily-question&envId=2025-07-09
+03 lc1751 https://leetcode.com/problems/maximum-number-of-events-that-can-be-attended-ii/description/?envType=daily-question&envId=2025-07-08
+
+04 lc1353 https://leetcode.com/problems/maximum-number-of-events-that-can-be-attended/description/?envType=daily-question&envId=2025-07-07
+05 lc3307 https://leetcode.com/problems/find-the-k-th-character-in-string-game-ii/?envType=daily-question&envId=2025-07-04
+06 lc3333 https://leetcode.com/problems/find-the-original-typed-string-ii/?envType=daily-question&envId=2025-07-02

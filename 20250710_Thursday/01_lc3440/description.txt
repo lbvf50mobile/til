@@ -1,0 +1,54 @@
+2025-07-11 Fri 15:26
+Two aims: Algo+Eng.
+
+Leetcode: Reschedule Meetings for Maximum Free Time II
+
+You are given an Integer eventTime denoting the duration of an event.
+You are give an Integer eventTime denoting the duration of an event.
+You are give an Integer evenTime denoting the duration of an event.
+
+You are also given two integers arrays startTime and EndTime, each of Length
+n. 
+Yo are also given two integers arrays statTime and EndTime, each of Lenght n.
+Your are also given two integers arrays startTime and Endtim, each of length
+n.
+
+These represent the start and ends times of n non-overlaping meetings that
+occur during the event between time t=0 and time t=ementTime, where ith
+meeting occurs durring the time [strartTime[i], endTime[j]].
+
+You can reschedule at most one meeting by moving its start time whil
+maintiainign the same duration, such that meetings remain non-ovelaping, to
+maximize the longest continious period of free time during the event.
+
+Return the maximum amount of free time possible after rearranging the
+meetings.
+
+- - - - -
+
+You can reschedule at most one meating by moving its start time while
+maintaining the same duration, such that the meetings remains non-overlaping,
+to maximize the longest continious period of free time during the event.
+
+- - - - -
+
+Return the maximum amount of free time possible after rearranging the
+meatings.
+
+Note: that the meating can NOT be rescheduled to a time outside the event and
+they should remain non-overlaping.
+
+Note: in this version, it is valid for the relative ordering of the meetings
+to change after rescheduling one meeting.
+
+
+- - - -
+2025-07-16 Wed 13:27
+
+If reschedule a meeting whe need to find a gap at least
+endTime[i]-startTime[i]. Try maintaining gaps in some sorted data structures.
+
+If reschadule a meeting early or later, we need to find a gap of lenght at
+least endTime[i] - startTime[i], Try Mainteining the gaps in some sorte data
+structure.
+
