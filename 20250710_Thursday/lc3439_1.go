@@ -3,6 +3,9 @@
 
 package main
 
+import "fmt"
+var p = fmt.Println
+
 func maxFreeTime(eventTime int, k int, startTime []int, endTime []int) int {
 	// It is a sliding window of fixed size.
 	// Main Ideas: As many blocks you push one side, as many freespace would
@@ -34,6 +37,7 @@ func maxFreeTime(eventTime int, k int, startTime []int, endTime []int) int {
 	sum := sizeB(0)
 	l, r := 0, 0
 	maxFree := rightB(r) - leftB(l) - sum
+	p("size 0", maxFree)
 	// 1) Grow sliding widnows.
 	// Only right border moves.
 	for i := 1; i < k && i < n; i += 1 {
@@ -41,15 +45,25 @@ func maxFreeTime(eventTime int, k int, startTime []int, endTime []int) int {
 		r += 1
 		free := rightB(r) - leftB(l) - sum
 		maxFree = max(free, maxFree)
+		p("Grow", free)
 	}
 	// 2) Move sliding window.
 	// Rigth and left border moves.
 	for i := k; i < n; i += 1 {
+		p("------")
+		p("Begin sum", sum)
+		p("Sum to delete", sizeB(l))
+		p("Sum to add", sizeB(i))
 		sum -= sizeB(l)
 		sum += sizeB(i)
+		p("Result sum", sum)
 		l, r := l+1, r+1
+		p("l,r",l,r)
+		p("leftB", leftB(l))
+		p("rightB", rightB(r))
 		free := rightB(r) - leftB(l) - sum
 		maxFree = max(free, maxFree)
+		p("Move", free)
 	}
 	return maxFree
 }
