@@ -1,0 +1,61 @@
+2025-08-01 Fri 18:49
+
+Approach 1: Top-down Dynamic Programming + Binary Search
+
+Let dee eff ess of current index represent the maximum value obtained by attending events optimally in the range from events at position current index to events at position n minus one.
+
+For event at current index, we have two options:
+
+Attend the current event and gain a value of events at position current index, element two.
+Then we need to find the nearest event that we can attend after event at current index.
+Recall that we have sorted events by start time.
+We can apply binary search to find the index where we should insert the end time of the current event at current index in the sorted list of start times.
+Let's say the nearest one is event at next index.
+Thus, dee eff ess of current index is the larger value between the two options:
+
+Option one: attend the current event and obtain a value of events at position current index, element two, plus dee eff ess of next index.
+
+Option two: skip the current event, move on to the next event, and gain a value of dee eff ess of current index plus one.
+
+Which is denoted as:
+
+dee eff ess of current index equals maximum of
+dee eff ess of current index plus one
+and
+dee eff ess of next index plus events at position current index, element two.
+
+As shown in the picture below, we find the insertion index is three,
+which indicates that the nearest available event after event zero is event three.
+
+Therefore, we can update dee eff ess of zero as the larger value obtained by attending or skipping event zero.
+
+Attend event zero and get a value of events at position zero, element two, plus dee eff ess of three.
+Skip event zero and get a value of dee eff ess of one.
+
+Given the restriction that we can attend a maximum of k events, we also need to keep track of count, the number of events we have attended so far.
+Therefore, we will redefine this function as dee eff ess of current index and count.
+
+Additionally, we use memoization to store the maximum value obtained by each state — that is, the pair of current index and count.
+This helps us avoid re-solving the same subproblems multiple times and significantly reduces the time complexity of the algorithm.
+
+Algorithm
+
+Sort events by start time.
+
+Build a two-dimensional array called dee pee of size k plus one by n as memory.
+
+Define dee eff ess of current index and count as the maximum value obtained by attending a maximum of count events in the range from events at position current index to events at position n minus one.
+
+If the pair of count and current index is already stored in dee pee at position count, current index, return that value.
+
+Return zero if count equals zero or current index equals n.
+
+Skip this event and get the value of dee eff ess of current index plus one, and count.
+
+Find the index of the nearest available event — call it next index — after the current event at current index, using binary search.
+
+Attend this event and get the value of dee eff ess of next index and count minus one, plus the value of this event, which is events at position current index, element two.
+
+Store the larger one of the two values above in dee pee at position count, current index, and return that same value.
+
+Return dee eff ess of zero and k.

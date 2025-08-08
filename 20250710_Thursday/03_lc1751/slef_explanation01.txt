@@ -1,0 +1,11 @@
+2025-07-25 Fri 19:55
+lc1751
+Self explanation overview.
+The main thin that we cat attend in the event if its start time is strictly
+bigger than the end time of the previous event. Thus we have to sort the input
+events array by the star time ascendently.
+
+
+2025-07-25 Fri 20:19
+We can only attend in event that's start time is bigger that end time of the
+last attended event. So we have to sort evenat by start time.
