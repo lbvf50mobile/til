@@ -1,0 +1,35 @@
+2025-07-24 Thu 18:48
+lc1751
+
+01
+lc1751. Maximum number of events that could be attened II
+
+You are given array of events where enents[i] = [StartDayI, EndDayI, valueI].
+The ith events tstart at the StatDayI, ends at the EndDayI and if you atengs
+you get valueI. You also given an integer k wich repesents number of events
+you can attend.
+
+You can attend only one event at a time. If you chose to attend event, you
+must attend the entire event. Note that the end day is enclusive, that is, you
+cannot attend two events whrer on of them statrats and the on other ends on
+the same day.
+
+Return the maximum sum of values that you can recieve by attending events.
+
+
+Constrains:
+
+1 <= k <= events.length
+1 <= k * events.lenght <= 10**6
+1 <= StartDay_i <= EndDay_i <= 10**9
+1 <= value_i <= 10**6
+
+- - -
+Hints
+Sort Events by it's StartTime.
+
+For every event you can either choose it and consider the next event
+available, or you can igonr it. You can eficiently find next even available
+using binary search.
+
+

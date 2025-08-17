@@ -1,0 +1,42 @@
+2025-08-02 Sat 11:07
+func Search
+func Search(n int, f func(int) bool) int
+
+Search uses binary search to find and return the smallest index i in the range from zero to n, excluding n, at which function f of i is true, assuming that on this range, f of i equals true implies f of i plus one is also true. That is, Search requires that f is false for some, possibly empty, prefix of the input range, and then true for the, possibly empty, remainder. Search returns the first index at which f is true. If there is no such index, Search returns n.
+Note that the "not found" return value is not minus one as in, for instance, strings dot Index.
+Search calls f of i only for i in the range from zero to n, excluding n.
+
+A common use of Search is to find the index i for a value x in a sorted, indexable data structure such as an array or slice. In this case, the argument f, typically a closure, captures the value to be searched for, and how the data structure is indexed and ordered.
+
+For instance, given a slice called data, sorted in ascending order, the call
+
+Search of length of data, and a function of i that returns whether data at position i is greater than or equal to twenty-three
+
+returns the smallest index i such that data at position i is greater than or equal to twenty-three.
+If the caller wants to find whether twenty-three is in the slice, it must test whether data at position i equals twenty-three separately.
+
+Searching data sorted in descending order would use the less than or equal to operator instead of the greater than or equal to operator.
+
+To complete the example above, the following code tries to find the value x in an integer slice data sorted in ascending order:
+
+x becomes twenty-three
+i is assigned the result of sort dot Search of length of data, and a function of i that returns whether data at position i is greater than or equal to x
+
+Then:
+
+if i is less than length of data and data at position i equals x, then x is present at data at position i
+Otherwise, x is not present in data, but i is the index where it would be inserted
+
+Function GuessingGame
+Declare variable s as a string
+Print: Pick an integer from zero to one hundred.
+
+Set answer to the result of sort dot Search over the number one hundred, and a function of i that:
+
+    Prints: Is your number less than or equal to i?
+
+    Then scans user input into string s
+
+    Returns true if string s is not empty, and the first character of string s is the letter 'y'
+
+Finally, print: Your number is equal to answer.

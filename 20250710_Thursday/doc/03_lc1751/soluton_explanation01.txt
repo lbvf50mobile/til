@@ -1,0 +1,25 @@
+2025-07-25 Fri 19:47
+lc1751 Maximum number of events that can be attended II.
+
+Overview
+
+We can only attend an event if the start day of it is greater than the end day
+of the previously attended event. This implies that we should sort events by
+their start time. As showing in the following figure, we sort
+events =
+[
+[1,2,4],
+[3,4,3],
+[2,3,1],
+[4,6,5],
+[2,4,8],
+]
+Sort
+events =
+[
+[1,2,4],
+[2,3,1],
+[2,4,8],
+[3,4,3],
+[4,6,5,]
+]
