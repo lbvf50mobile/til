@@ -1,0 +1,28 @@
+2025-08-18 Mon 09:59
+
+Approach: Greedy
+
+Intuition
+
+According to the problem statement, meeting i starts on start day i and ends on end day i.
+You are allowed to attend a meeting on any day within the interval from start day i to end day i.
+
+Since only one meeting can be attended per day, we apply a greedy strategy: if it is possible to attend both meetings i and j on day k, we should prioritize the one with the earlier end time, that is, the minimum of end day i and end day j.
+This ensures we leave more room to accommodate other meetings later.
+
+Following this principle, we assume that the latest any meeting ends is max day.
+We can then iterate through each day from 1 to max day and greedily choose which meeting to attend on each day.
+To do this efficiently, we use a min heap to keep track of the end times of currently available meetings.
+We also sort all meetings by their start time in advance.
+
+Let the current day be i. At each day, we perform the following steps:
+
+Add to the candidate queue, which is the min heap, all meetings whose start day is less than or equal to i.
+At this point, the heap contains all meetings available to attend on day i or earlier.
+
+Remove from the heap all meetings whose end day is less than i, as they can no longer be attended.
+
+If the heap is not empty, we attend the meeting with the earliest end time, which is at the top of the heap.
+We increment the count of attended meetings by one, and remove it from the heap.
+
+Finally, return the total number of meetings attended.

@@ -3,6 +3,8 @@
 
 // fails
 // [[1,2],[1,2],[3,3],[1,5],[1,5]]
+// This is because when sort, there would not be catched someting in center,
+// like with [3,3], will be four steps from [1,2] to [1,5] missing [3,3].
 
 package main
 
