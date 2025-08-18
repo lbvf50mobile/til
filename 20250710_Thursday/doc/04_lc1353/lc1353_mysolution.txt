@@ -1,0 +1,17 @@
+2025-08-18 Mon 19:49
+
+Core Idea: Spend one interation of main loop on each day from 1 to the
+last_day of last event. 
+
+During that iteration, a Heap would be used, first all untouched events that
+started before current day would be added to the heap, than in second
+sub-loop, all events that finished before "today" would be poped.
+
+And at the very and of the main iteration, would be select one event, that
+will end sooner than all others in a heap, and this event will increase the
+counter. And poped. From heap.
+
+Short:
+Iterate over each day.
+Keep all available days for "today" in heap (by two loops).
+Select one that will finished sooner, and pop it increasing answer counter.

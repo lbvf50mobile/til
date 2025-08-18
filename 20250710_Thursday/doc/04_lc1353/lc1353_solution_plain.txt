@@ -26,3 +26,39 @@ If the heap is not empty, we attend the meeting with the earliest end time, whic
 We increment the count of attended meetings by one, and remove it from the heap.
 
 Finally, return the total number of meetings attended.
+
+- - -
+https://cs.stackexchange.com/questions/109370/are-of-the-order-of-n-and-big-o-the-same-thing
+
+the professor mentioned two methods used to measure asymptotic complexity.
+Θ(n)
+is the order of n.
+O(n)
+is big O of n.
+the professor explained
+Θ(n)
+    gives you both the lower bound and an upper bound.
+O(n)
+    is just upper bound.
+- - -
+
+Complexity analysis
+
+Let n be the number of meetings in the given array events, and let T be the maximum value of any end time in events.
+
+Time complexity: Big O of (T plus n) log n.
+
+Sorting the array events takes Big O of n log n time.
+After sorting, we iterate over each day from 1 to T, giving us T time points to process.
+
+For each day, we may add or remove meetings from the priority queue, which maintains at most n elements.
+Each insertion or deletion operation in the heap takes Big O of log n time.
+
+Therefore, the total cost of heap operations across all days is Big O of T log n.
+Combining both steps, the overall time complexity becomes Big O of (T plus n) log n.
+
+Space complexity: Big O of n.
+
+We use a priority queue, that is a min heap, to store the end times of meetings that are available to attend.
+Since there are at most n meetings, the heap will contain at most n elements at any given time.
+Thus, the space complexity is Big O of n.
