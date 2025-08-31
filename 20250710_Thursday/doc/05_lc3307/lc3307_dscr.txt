@@ -1,0 +1,28 @@
+2025-08-20 Wed 11:51
+3307. Find the K-th Character in String Game II
+
+Alice and Bob are playing a game. Initially, Alice has a string word equal to "a".
+
+You are given a positive integer k.
+You are also given an integer array called operations, where operations of i represents the type of the i-th operation.
+
+Now Bob will ask Alice to perform all operations in sequence:
+
+If operations of i equals zero, append a copy of word to itself.
+
+If operations of i equals one, generate a new string by changing each character in word to its next character in the English alphabet, and append this new string to the original word.
+For example:
+
+Performing the operation on "c" generates "cd".
+
+Performing the operation on "zb" generates "zbac".
+
+Return the value of the k-th character in word after performing all the operations.
+
+Note: In the second type of operation, the character "z" is changed to "a".
+
+Hint 1:
+Try to replay the operations that the k-th character was part of.
+
+Hint 2:
+The k-th character is only affected if it is present in the first half of the string.

@@ -15,3 +15,8 @@ Short:
 Iterate over each day.
 Keep all available days for "today" in heap (by two loops).
 Select one that will finished sooner, and pop it increasing answer counter.
+
+2025-08-19 Tue 10:23
+One more explanation: For each day for each day find all events could be
+attended (by two steps start and end time), put them in heap, select one that
+ends sooner than others.

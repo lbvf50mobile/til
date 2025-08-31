@@ -1,0 +1,13 @@
+2025-08-21 Thu 11:22
+
+Intuition
+The general idea of this problem is the same as that of “Find the K-th Character in String Game I,” with the only difference being that we need to determine which operation the current k is located in.
+
+Let k equal two to the power of t plus a.
+If a equals zero, then the current k is in the (t minus one)-th operation;
+if a is not equal to zero, then the current k is in the t-th operation.
+
+This conclusion can be easily derived by simulating with small amounts of data.
+
+After determining the number of operations corresponding to the current k, we can decide whether to accumulate the answer using the operations array provided in the problem.
+If operations at index t equals one, we perform the accumulation; otherwise, we do not.
